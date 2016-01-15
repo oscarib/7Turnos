@@ -13,16 +13,30 @@
 <form:form commandName="prayer">
     <table>
         <tr>
-            <td>First Name:</td>
-            <td><form:input path="name"/></td>
+            <td><fmt:message key="prayer.name"/>:</td>
+            <td><form:input path="name"/>
+            	<form:errors path="name" cssClass="style.css" />
+            </td>
         </tr>
         <tr>
-            <td>Last Name:</td>
+            <td><fmt:message key="prayer.email"/>:</td>
             <td><form:input path="email"/></td>
         </tr>
         <tr>
+            <td><fmt:message key="prayer.phone"/>:</td>
+            <td><form:input path="phone"/></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="prayer.notes"/>:</td>
+            <td><form:input path="notes"/></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="prayer.pseudonym"/>:</td>
+            <td><form:input path="pseudonym"/></td>
+        </tr>
+        <tr>
             <td colspan="2">
-                <input type="submit" value="Save Changes"/>
+                <input type="submit" value="<fmt:message key="form.createPrayer.submmit"/>"/>
             </td>
         </tr>
     </table>
