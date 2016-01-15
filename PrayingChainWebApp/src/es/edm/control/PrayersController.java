@@ -16,7 +16,7 @@ public class PrayersController {
 	@RequestMapping("/showPrayers")
 	public ModelAndView searchPrayers(String name, String email) {
 		//TODO: Write Controller searchPrayers()
-		return new ModelAndView("/web/UnderDevelopment.jsp");
+		return new ModelAndView("/web/showPrayers.jsp");
 	}
 	
 	@RequestMapping("/deletePrayer")
