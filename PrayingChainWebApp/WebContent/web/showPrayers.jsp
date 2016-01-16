@@ -60,16 +60,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label><fmt:message key="prayer.pseudonym" /></label></td>
-					<td>
-						<form:input path="pseudonym"/><br>
-						<form:errors path="pseudonym"/>
+					<td colspan="2">
+						<input type="submit" value="<fmt:message key='form.submmit'/>">
+						<input type="submit" value="<fmt:message key='form.reset'/>" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="<fmt:message key='form.submmit'/>">
-						<input type="submit" value="<fmt:message key='form.reset'/>" />
+						<form:errors></form:errors>
 					</td>
 				</tr>
 			</table>
@@ -77,7 +75,7 @@
 	</div>
 
 	<div id="searchResults">
-
+		<fmt:message key="list.prayers.size" />: ${response.size}
 		<table width="200" border="1" cellspacing="5" cellpadding="5">
 			<tr>
 				<th scope="col"><label>UID</label></th>
@@ -102,7 +100,7 @@
 					<td>${nextPrayer.notes}</td>
 					<td>${nextPrayer.hidden}</td>
 					<td>${nextPrayer.pseudonym}</td>
-					<td>Add Turn, Delete Prayer</td>
+					<td>Modify, Delete, Turns</td>
 				</tr>
 			</c:forEach>
 		</table>

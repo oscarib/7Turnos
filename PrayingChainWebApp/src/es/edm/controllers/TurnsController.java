@@ -1,4 +1,4 @@
-package es.edm.control;
+package es.edm.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -67,7 +67,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	</bean>
 
 	<!-- Spring MVC Auto-Controller scanning -->
-	<context:component-scan base-package="es.edm.control"/>
+	<context:component-scan base-package="es.edm.controllers"/>
+	<context:component-scan base-package="es.edm.validators"/>
 	
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

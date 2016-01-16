@@ -1,4 +1,4 @@
-package es.edm.control;
+package es.edm.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +16,16 @@ import es.edm.exceptions.EmptyParameterException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.model.Prayer;
 import es.edm.services.MainService;
+import es.edm.validators.SearchingPrayerValidator;
 
 @Controller
 public class PrayersController {
 
 	@Autowired
 	private MainService main;
+	
+	@Autowired
+	private SearchingPrayerValidator searchingPrayervalidator;
 
 	@RequestMapping(path="/showPrayers", method=RequestMethod.GET)
 	public ModelAndView searchPrayers() {
@@ -29,12 +33,15 @@ public class PrayersController {
 		return new ModelAndView("/web/showPrayers.jsp", "prayer", new Prayer());
 	}
 	
-	/* SEARCHPRAYERS. PROCCESSING OF THE FORM
-	 * Search for prayers into the DDBB, dpendending on the search fields.
+	/* SEARCH PRAYERS. PROCCESSING OF THE FORM
+	 * Search for prayers into the DDBB, dependending on the search fields.
 	 * If two parameters are set, then a mixed list is returned, with an AND method
 	 */
 	@RequestMapping(path="/showPrayers", method=RequestMethod.POST)
 	public ModelAndView searchPrayers(Prayer prayerSearched, Errors errors) {
+		
+		//Validate that form entries
+		searchingPrayervalidator.validate(prayerSearched, errors);
 		
 		//If there were any errors, return back to the initial form
 		if (errors.hasErrors()){
@@ -81,7 +88,7 @@ public class PrayersController {
 					List<Prayer> previousList = (List<Prayer>)response.get("prayers");
 					//mix the two lists (and method)
 					List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
-					//put the newe mixed list on the response
+					//put the new mixed list on the response
 					response.put("prayers", mixedListOfPrayers);
 					
 				//if the provided phone string is empty
@@ -91,6 +98,41 @@ public class PrayersController {
 			}
 		}
 		
+		//Filter isHidden condition
+		try {
+			List<Prayer> newList;
+			if (prayerSearched.isHidden()) {
+				newList = main.getHiddenPrayers();
+				@SuppressWarnings("unchecked")
+				List<Prayer> previousList = (List<Prayer>)response.get("prayers");
+				//mix the two lists (and method)
+				List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
+				//put the newe mixed list on the response
+				response.put("prayers", mixedListOfPrayers);
+			}
+		} catch (PrayerNotFoundException e) {
+		}
+		
+		//Filter OwnCountry condition
+		try {
+			List<Prayer> newList;
+			if (prayerSearched.isOwnCountry()) {
+				newList = main.getLocalPrayers();
+				@SuppressWarnings("unchecked")
+				List<Prayer> previousList = (List<Prayer>)response.get("prayers");
+				//mix the two lists (and method)
+				List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
+				//put the newe mixed list on the response
+				response.put("prayers", mixedListOfPrayers);
+			}
+		} catch (PrayerNotFoundException e) {
+		}
+		
+		//Provide number of rows returned
+		@SuppressWarnings("unchecked")
+		List<Prayer> finalList = (List<Prayer>)response.get("prayers");
+		response.put("size", finalList.size());
+
 		//TODO-1-End: Finish Controller searchPrayersPOST()
 		return new ModelAndView("/web/showPrayers.jsp", "response", response);
 	}
