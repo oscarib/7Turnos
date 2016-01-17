@@ -18,7 +18,8 @@ public class SearchingPrayerValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Prayer prayer = (Prayer)target;
 		if (prayer.getEmail().trim().equals("") && prayer.getName().trim().equals("") && 
-			prayer.getPhone().trim().equals("") && !prayer.isHidden() && !prayer.isOwnCountry()) {
+			prayer.getPhone().trim().equals("") && prayer.getNotes().trim().equals("") &&
+			!prayer.isHidden() && !prayer.isOwnCountry()) {
 			errors.reject("NoParameterSpecified");
 		}
 	}

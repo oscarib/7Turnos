@@ -54,6 +54,7 @@ public class PrayersController {
 		//Takes the backing Object form the Form
 		response.put("prayer", prayerSearched);
 
+		//NAME
 		//Try to get all prayers by Name
 		try {
 			List<Prayer> prayers = main.getPrayersByName(prayerSearched.getName());
@@ -61,7 +62,8 @@ public class PrayersController {
 		} catch (PrayerNotFoundException e) {
 		}
 		
-		/* If email was provided, take the prayer, and reset the previous lists of prayers, as it cannot be
+		//EMAIL
+		/* If EMAIL was provided, take the prayer, and reset the previous lists of prayers, as it cannot be
 		 * found no more than a single match for a given email
 		 */
 		if (prayerSearched.getEmail()!=null){
@@ -74,7 +76,8 @@ public class PrayersController {
 			}
 		}
 		
-		/* if phone was provided, ask for such prayers, and mix the result with the 
+		//PHONE
+		/* if PHONE was provided, ask for such prayers, and mix the result with the 
 		 * actual results on previous searches
 		 */
 		if (prayerSearched.getPhone()!=null && !prayerSearched.getPhone().trim().equals("")){
@@ -98,33 +101,58 @@ public class PrayersController {
 			}
 		}
 		
-		//Filter isHidden condition
+		//NOTES MASK
+		/* if a NOTES MASK was provided, ask for such prayers, and mix the result with the 
+		 * actual results on previous searches
+		 */
+		if (prayerSearched.getNotes()!=null && !prayerSearched.getNotes().trim().equals("")){
+			try {
+				//Take the list of Prayer by Phone
+				List<Prayer> newList;
+				newList = main.getPrayersByNotes(prayerSearched.getNotes());
+				@SuppressWarnings("unchecked")
+				//Take the previous list of prayers already set on the response
+				List<Prayer> previousList = (List<Prayer>)response.get("prayers");
+				//mix the two lists (and method)
+				List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
+				//put the new mixed list on the response
+				response.put("prayers", mixedListOfPrayers);
+				//if the provided phone string is empty
+			} catch (PrayerNotFoundException e) {
+			}
+		}
+		
+		//ISHIDDEN
 		try {
 			List<Prayer> newList;
 			if (prayerSearched.isHidden()) {
 				newList = main.getHiddenPrayers();
-				@SuppressWarnings("unchecked")
-				List<Prayer> previousList = (List<Prayer>)response.get("prayers");
-				//mix the two lists (and method)
-				List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
-				//put the newe mixed list on the response
-				response.put("prayers", mixedListOfPrayers);
+			} else {
+				newList = main.getPublicPrayers();
 			}
+			@SuppressWarnings("unchecked")
+			List<Prayer> previousList = (List<Prayer>)response.get("prayers");
+			//mix the two lists (and method)
+			List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
+			//put the newe mixed list on the response
+			response.put("prayers", mixedListOfPrayers);
 		} catch (PrayerNotFoundException e) {
 		}
 		
-		//Filter OwnCountry condition
+		//OWNCOUNTRY
 		try {
 			List<Prayer> newList;
 			if (prayerSearched.isOwnCountry()) {
 				newList = main.getLocalPrayers();
+			} else {
+				newList = main.getForeignPrayers();
+			}
 				@SuppressWarnings("unchecked")
 				List<Prayer> previousList = (List<Prayer>)response.get("prayers");
 				//mix the two lists (and method)
 				List<Prayer> mixedListOfPrayers = main.andMixingOfLists(previousList, newList);
 				//put the newe mixed list on the response
 				response.put("prayers", mixedListOfPrayers);
-			}
 		} catch (PrayerNotFoundException e) {
 		}
 		
@@ -159,5 +187,5 @@ public class PrayersController {
 	public ModelAndView addPrayer2Turn(){
 		//TODO: Write Controller addPrayer2Turn()
 		return new ModelAndView("/web/UnderDevelopment.jsp");
-	}	
+	}
 }

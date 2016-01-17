@@ -46,6 +46,12 @@
 					</td>
 				</tr>
 				<tr>
+					<td><label><fmt:message key="prayer.notes" /></label></td>
+					<td>
+						<form:input path="notes"/><br>
+						<form:errors path="notes"/>
+					</td>
+				<tr>
 					<td><label><fmt:message key="prayer.ownCountry" /></label></td>
 					<td>
 						<form:checkbox path="ownCountry"/><br>
@@ -100,7 +106,20 @@
 					<td>${nextPrayer.notes}</td>
 					<td>${nextPrayer.hidden}</td>
 					<td>${nextPrayer.pseudonym}</td>
-					<td>Modify, Delete, Turns</td>
+					<td>
+						<form action="/deletePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
+							<input type="submit" value="<fmt:message key='form.delete'/>">
+						</form>
+						<form action="/changePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
+							<input type="submit" value="<fmt:message key='form.modify'/>">
+						</form>
+						<form action="/showTurns4Prayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
+							<input type="submit" value="<fmt:message key='turns.turns'/>">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
