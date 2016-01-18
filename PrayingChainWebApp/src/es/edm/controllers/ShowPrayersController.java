@@ -23,9 +23,9 @@ import es.edm.validators.SearchingPrayerValidator;
  * - Presents a searching form and perform searches into the ddbb
  * - Adds links for creating and deleting prayers for the returned prayers
  * - Also, adds links for browsing turns of a particular prayer
- * - TODO: If there are prayers with no turns on the ddbb, it also present them to the user
- * 		   in order to let know about it. It doesn't matter if such prayer is within the
- * 		   defined filter or not: it would be shown	
+ * - If there are prayers with no turns on the ddbb, it also present them to the user
+ *	 in order to let know about it. It doesn't matter if such prayer is within the
+ * 	 defined filter or not: it would be shown	
  */
 @Controller
 public class showPrayersController {
