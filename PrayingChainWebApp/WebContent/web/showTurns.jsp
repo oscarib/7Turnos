@@ -16,13 +16,13 @@
 	<!-- DIV for presenting ddbb fields for searching -->
 	<div id="searchFields">
 		<h1>
-			<label><fmt:message key="form.searchBy"/></label>:
+			<label><fmt:message key="turn.searchBy"/></label>
 		</h1>
-		<form:form commandName="SimpleTurn">
+		<form:form commandName="simpleTurn">
 			<table width="200" border="1" cellspacing="5" cellpadding="5">
 				<tr>
-					<td><label><fmt:message key="form.searchBy"/></label></td>
-					<td><label><fmt:message key="form.enterValue"/></label></td>
+					<th><label><fmt:message key="form.field"/></label></th>
+					<th><label><fmt:message key="form.value"/></label></th>
 				</tr>
 				<tr>
 					<td><label><fmt:message key="turn.prayer_id" /></label></td>
@@ -32,18 +32,99 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label><fmt:message key="prayer.email" /></label></td>
+					<td><label><fmt:message key="turn.dow" /></label></td>
 					<td>
-						<form:select path="dow" >
-							<option value="monday"><fmt:message key="day.monday" /></option>
-							<option value="tuesday"><fmt:message key="day.tuesday" /></option>
-							<option value="wednesday"><fmt:message key="day.wednesday" /></option>
-							<option value="thursday"><fmt:message key="day.thursday" /></option>
-							<option value="friday"><fmt:message key="day.friday" /></option>
-							<option value="saturday"><fmt:message key="day.saturday" /></option>
-							<option value="Sunday"><fmt:message key="day.sunday" /></option>
-						</form:select> <br>
+						<form:select path="dow">
+							<form:option value="monday"><fmt:message key="day.monday" /></form:option>
+							<form:option value="tuesday"><fmt:message key="day.tuesday" /></form:option>
+							<form:option value="wednesday"><fmt:message key="day.wednesday" /></form:option>
+							<form:option value="thursday"><fmt:message key="day.thursday" /></form:option>
+							<form:option value="friday"><fmt:message key="day.friday" /></form:option>
+							<form:option value="saturday"><fmt:message key="day.saturday" /></form:option>
+							<form:option value="sunday"><fmt:message key="day.sunday" /></form:option>
+						</form:select>
 					<form:errors path="dow" /></td>
+				</tr>
+				<tr>
+					<td><label><fmt:message key="turn.hour" /></label></td>
+					<td>
+						<form:select path="turn">
+							<form:option value="0">00:00am</form:option>
+							<form:option value="1">00:30am</form:option>
+							<form:option value="2">01:00am</form:option>
+							<form:option value="3">01:30am</form:option>
+							<form:option value="4">02:00am</form:option>
+							<form:option value="5">02:30am</form:option>
+							<form:option value="6">03:00am</form:option>
+							<form:option value="7">03:30am</form:option>
+							<form:option value="8">04:00am</form:option>
+							<form:option value="9">04:30am</form:option>
+							<form:option value="10">05:00am</form:option>
+							<form:option value="11">05:30am</form:option>
+							<form:option value="12">06:00am</form:option>
+							<form:option value="13">06:30am</form:option>
+							<form:option value="14">07:00am</form:option>
+							<form:option value="15">07:30am</form:option>
+							<form:option value="16">08:00am</form:option>
+							<form:option value="17">08:30am</form:option>
+							<form:option value="18">09:00am</form:option>
+							<form:option value="19">09:30am</form:option>
+							<form:option value="20">10:00am</form:option>
+							<form:option value="21">10:30am</form:option>
+							<form:option value="22">11:00am</form:option>
+							<form:option value="23">11:30am</form:option>
+							<form:option value="24">12:00pm</form:option>
+							<form:option value="25">12:30pm</form:option>
+							<form:option value="26">13:00pm</form:option>
+							<form:option value="27">13:30pm</form:option>
+							<form:option value="28">14:00pm</form:option>
+							<form:option value="29">14:30pm</form:option>
+							<form:option value="30">15:00pm</form:option>
+							<form:option value="31">15:30pm</form:option>
+							<form:option value="32">16:00pm</form:option>
+							<form:option value="33">16:30pm</form:option>
+							<form:option value="34">17:00pm</form:option>
+							<form:option value="35">17:30pm</form:option>
+							<form:option value="36">18:00pm</form:option>
+							<form:option value="37">18:30pm</form:option>
+							<form:option value="38">19:00pm</form:option>
+							<form:option value="39">19:30pm</form:option>
+							<form:option value="40">20:00pm</form:option>
+							<form:option value="41">20:30pm</form:option>
+							<form:option value="42">21:00pm</form:option>
+							<form:option value="43">21:30pm</form:option>
+							<form:option value="44">22:00pm</form:option>
+							<form:option value="45">22:30pm</form:option>
+							<form:option value="46">23:00pm</form:option>
+							<form:option value="47">23:30pm</form:option>
+						</form:select>
+					<form:errors path="turn" /></td>
+				</tr>
+				<tr>
+					<td><label><fmt:message key="turn.status" /></label></td>
+					<td>
+						<form:select path="status">
+							<form:option value="received"><fmt:message key="status.received" /></form:option>
+							<form:option value="accepted"><fmt:message key="status.accepted" /></form:option>
+							<form:option value="rejected"><fmt:message key="status.rejected" /></form:option>
+							<form:option value="NotCommitted"><fmt:message key="status.NotCommitted" /></form:option>
+						</form:select>
+						<form:errors path="status"/>
+					</td>
+				</tr>
+				<tr>
+					<td><label><fmt:message key="turn.notes" /></label></td>
+					<td>
+						<form:input path="notes"/><br>
+						<form:errors path="notes"/>
+					</td>
+				</tr>
+				<tr>
+					<td><label><fmt:message key="turn.pax" /></label></td>
+					<td>
+						<form:input path="pax"/><br>
+						<form:errors path="pax"/>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -114,37 +195,33 @@
 			</table>
 		</div>
 	</c:if>
+-->
 
 	<div id="searchResults">
 		<h2>
-			<fmt:message key="prayer.searchResults.prefix" />
-			${response.prayersSize}
-			<fmt:message key="prayer.searchResults.postfix" />:
+			<fmt:message key="turn.searchResults.prefix" />
+			<!-- ${response.prayersSize}  -->
+			<fmt:message key="turn.searchResults.postfix" />:
 		</h2>
 		<table width="200" border="1" cellspacing="5" cellpadding="5">
 			<tr>
-				<th scope="col"><label>UID</label></th>
-				<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.email" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.phone" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.ownCountry" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.optinDate" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.notes" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.hidden" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.pseudonym" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.actions" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.uid" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.prayer_id" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.dow" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.hour" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.status" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.notes" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.pax" /></label></th>
 			</tr>
-			<c:forEach items="${response.prayers}" var="nextPrayer">
+			<c:forEach items="${response.turns}" var="nextTurn">
 				<tr>
-					<td>${nextPrayer.uid}</td>
-					<td>${nextPrayer.name}</td>
-					<td>${nextPrayer.email}</td>
-					<td>${nextPrayer.phone}</td>
-					<td>${nextPrayer.ownCountry}</td>
-					<td>${nextPrayer.optinDate}</td>
-					<td>${nextPrayer.notes}</td>
-					<td>${nextPrayer.hidden}</td>
-					<td>${nextPrayer.pseudonym}</td>
+					<td>${nextTurn.uid}</td>
+					<td>${nextTurn.prayer_id}</td>
+					<td>${nextTurn.dow}</td>
+					<td>${nextTurn.turn}</td>
+					<td>${nextTurn.status}</td>
+					<td>${nextTurn.notes}</td>
+					<td>${nextTurn.pax}</td>
 					<td>
 						<form action="/deletePrayer.html" method="POST">
 							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
@@ -162,6 +239,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div>-->
+	</div>
 </body>
 </html>

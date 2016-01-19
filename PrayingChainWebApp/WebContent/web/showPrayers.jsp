@@ -16,13 +16,13 @@
 	<!-- DIV for presenting ddbb fields for searching -->
 	<div id="searchFields">
 		<h1>
-			<label><fmt:message key="form.searchBy"/></label>:
+			<label><fmt:message key="prayer.searchBy"/></label>
 		</h1>
 		<form:form commandName="prayer">
 			<table width="200" border="1" cellspacing="5" cellpadding="5">
 				<tr>
-					<td><label><fmt:message key="form.searchBy"/></label></td>
-					<td><label><fmt:message key="form.enterValue"/></label></td>
+					<th><label><fmt:message key="form.field"/></label></th>
+					<th><label><fmt:message key="form.value"/></label></th>
 				</tr>
 				<tr>
 					<td><label><fmt:message key="prayer.name" /></label></td>
@@ -135,53 +135,61 @@
 		</div>
 	</c:if>
 
-	<div id="searchResults">
-		<h2>
-			<fmt:message key="prayer.searchResults.prefix" />
-			${response.prayersSize}
-			<fmt:message key="prayer.searchResults.postfix" />:
-		</h2>
-		<table width="200" border="1" cellspacing="5" cellpadding="5">
-			<tr>
-				<th scope="col"><label>UID</label></th>
-				<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.email" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.phone" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.ownCountry" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.optinDate" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.notes" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.hidden" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.pseudonym" /></label></th>
-				<th scope="col"><label><fmt:message key="prayer.actions" /></label></th>
-			</tr>
-			<c:forEach items="${response.prayers}" var="nextPrayer">
+	<c:if test="${response.prayersSize > 0}">
+		<div id="searchResults">
+			<h2>
+				<fmt:message key="prayer.searchResults.prefix" />
+				${response.prayersSize}
+				<fmt:message key="prayer.searchResults.postfix" />
+				:
+			</h2>
+			<table width="200" border="1" cellspacing="5" cellpadding="5">
 				<tr>
-					<td>${nextPrayer.uid}</td>
-					<td>${nextPrayer.name}</td>
-					<td>${nextPrayer.email}</td>
-					<td>${nextPrayer.phone}</td>
-					<td>${nextPrayer.ownCountry}</td>
-					<td>${nextPrayer.optinDate}</td>
-					<td>${nextPrayer.notes}</td>
-					<td>${nextPrayer.hidden}</td>
-					<td>${nextPrayer.pseudonym}</td>
-					<td>
-						<form action="./deletePrayer.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
-							<input type="submit" value="<fmt:message key='form.delete'/>">
-						</form>
-						<form action="./changePrayer.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
-							<input type="submit" value="<fmt:message key='form.modify'/>">
-						</form>
-						<form action="./showTurns.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
-							<input type="submit" value="<fmt:message key='turns.turns'/>">
-						</form>
-					</td>
+					<th scope="col"><label>UID</label></th>
+					<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
+					<th scope="col"><label><fmt:message key="prayer.email" /></label></th>
+					<th scope="col"><label><fmt:message key="prayer.phone" /></label></th>
+					<th scope="col"><label><fmt:message
+								key="prayer.ownCountry" /></label></th>
+					<th scope="col"><label><fmt:message
+								key="prayer.optinDate" /></label></th>
+					<th scope="col"><label><fmt:message key="prayer.notes" /></label></th>
+					<th scope="col"><label><fmt:message
+								key="prayer.hidden" /></label></th>
+					<th scope="col"><label><fmt:message
+								key="prayer.pseudonym" /></label></th>
+					<th scope="col"><label><fmt:message
+								key="prayer.actions" /></label></th>
 				</tr>
-			</c:forEach>
-		</table>
-	</div>
+				<c:forEach items="${response.prayers}" var="nextPrayer">
+					<tr>
+						<td>${nextPrayer.uid}</td>
+						<td>${nextPrayer.name}</td>
+						<td>${nextPrayer.email}</td>
+						<td>${nextPrayer.phone}</td>
+						<td>${nextPrayer.ownCountry}</td>
+						<td>${nextPrayer.optinDate}</td>
+						<td>${nextPrayer.notes}</td>
+						<td>${nextPrayer.hidden}</td>
+						<td>${nextPrayer.pseudonym}</td>
+						<td>
+							<form action="./deletePrayer.html" method="POST">
+								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+								<input type="submit" value="<fmt:message key='form.delete'/>">
+							</form>
+							<form action="./changePrayer.html" method="POST">
+								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+								<input type="submit" value="<fmt:message key='form.modify'/>">
+							</form>
+							<form action="./showTurns.html" method="POST">
+								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+								<input type="submit" value="<fmt:message key='turns.turns'/>">
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</c:if>
 </body>
 </html>

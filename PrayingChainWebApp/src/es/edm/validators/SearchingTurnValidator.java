@@ -5,7 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import es.edm.model.Prayer;
-import es.edm.model.SimpleTurn;
 
 @Component
 public class SearchingTurnValidator implements Validator {
