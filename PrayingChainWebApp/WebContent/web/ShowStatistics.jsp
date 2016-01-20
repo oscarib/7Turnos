@@ -9,9 +9,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Buscar Orador</title>
+<title><fmt:message key="statistics.title"/></title>
 </head>
 <body>
-<h1>This is still under development</h1>
+	<div id="Statistics">
+		<table width="545" border="1" cellspacing="5" cellpadding="5">
+			<tr>
+				<td width="261">Total Turns</td>
+				<td width="243">${response.TotalTurns}</td>
+			</tr>
+			<tr>
+				<td>Turns Covered</td>
+				<td>${response.TurnsCovered} (${response.TurnsUsedPercentage}%)</td>
+			</tr>
+			<tr>
+				<td>Available Turns</td>
+				<td>${response.AvailableTurns} (${response.FreeTurnsPercentage}%)</td>
+			</tr>
+			<tr>
+				<td>Empty Turns</td>
+				<td>${response.EmptyTurns} (${response.EmptyTurnsPercentage}%)</td>
+			</tr>
+			<tr>
+				<td>Committed Prayers</td>
+				<td>${response.CommittedPrayers}</td>
+			</tr>
+			<tr>
+				<td>Non Committed Prayers</td>
+				<td>${response.NonCommittedPrayers}</td>
+			</tr>
+			<tr>
+				<td>Total Prayers</td>
+				<td>${response.TotalPrayers}</td>
+			</tr>
+			<tr>
+				<td>Redundancy (Committed / Used Turns)</td>
+				<td>${response.CommittedRedundancy}%</td>
+			</tr>
+			<tr>
+				<td>Redundancy (Total Prayers / Used Turns)</td>
+				<td>${response.TotalRedundancy}%</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
