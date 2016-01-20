@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page import="es.edm.model.SimpleTurn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +24,13 @@
 				<tr>
 					<th><label><fmt:message key="form.field"/></label></th>
 					<th><label><fmt:message key="form.value"/></label></th>
+				</tr>
+				<tr>
+					<td><label><fmt:message key="turn.uid" /></label></td>
+					<td>
+						<form:input path="uid"/><br>
+						<form:errors path="uid"/>
+					</td>
 				</tr>
 				<tr>
 					<td><label><fmt:message key="turn.prayer_id" /></label></td>
@@ -45,6 +53,8 @@
 						</form:select>
 					<form:errors path="dow" /></td>
 				</tr>
+				
+<!-- TODO: Include filters on start and finishing turns
 				<tr>
 					<td><label><fmt:message key="turn.hour" /></label></td>
 					<td>
@@ -100,13 +110,14 @@
 						</form:select>
 					<form:errors path="turn" /></td>
 				</tr>
+ -->				
+
 				<tr>
 					<td><label><fmt:message key="turn.status" /></label></td>
 					<td>
 						<form:select path="status">
-							<form:option value="received"><fmt:message key="status.received" /></form:option>
-							<form:option value="accepted"><fmt:message key="status.accepted" /></form:option>
-							<form:option value="rejected"><fmt:message key="status.rejected" /></form:option>
+							<form:option value="accepted" ><fmt:message key="status.accepted" /></form:option>
+							<form:option value="cancelled" ><fmt:message key="status.cancelled" /></form:option>
 							<form:option value="NotCommitted"><fmt:message key="status.NotCommitted" /></form:option>
 						</form:select>
 						<form:errors path="status"/>
@@ -120,16 +131,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label><fmt:message key="turn.pax" /></label></td>
-					<td>
-						<form:input path="pax"/><br>
-						<form:errors path="pax"/>
-					</td>
-				</tr>
-				<tr>
 					<td colspan="2">
-						<input type="submit" value="<fmt:message key='form.submmit'/>">
-						<input type="submit" value="<fmt:message key='form.reset'/>" />
+						<input type="submit" value="<fmt:message key='form.search'/>">
 					</td>
 				</tr>
 				<tr>
@@ -200,7 +203,7 @@
 	<div id="searchResults">
 		<h2>
 			<fmt:message key="turn.searchResults.prefix" />
-			<!-- ${response.prayersSize}  -->
+			${response.turnsSize}
 			<fmt:message key="turn.searchResults.postfix" />:
 		</h2>
 		<table width="200" border="1" cellspacing="5" cellpadding="5">
@@ -223,17 +226,17 @@
 					<td>${nextTurn.notes}</td>
 					<td>${nextTurn.pax}</td>
 					<td>
-						<form action="/deletePrayer.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
+						<form action="./deletePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.uid}"/>
 							<input type="submit" value="<fmt:message key='form.delete'/>">
 						</form>
-						<form action="/changePrayer.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
+						<form action="./changePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.uid}"/>
 							<input type="submit" value="<fmt:message key='form.modify'/>">
 						</form>
-						<form action="/showTurns4Prayer.html" method="POST">
-							<input type="hidden" name="prayer_id" value="${nextPrayer.uid}"/>
-							<input type="submit" value="<fmt:message key='turns.turns'/>">
+						<form action="./showPrayers.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}"/>
+							<input type="submit" value="<fmt:message key='prayer.prayer'/>">
 						</form>
 					</td>
 				</tr>
