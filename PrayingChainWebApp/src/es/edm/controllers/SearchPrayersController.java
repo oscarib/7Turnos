@@ -18,18 +18,8 @@ import es.edm.model.Prayer;
 import es.edm.services.MainService;
 import es.edm.validators.SearchingPrayerValidator;
 
-
-/* Controls the user request for showPrayer.html
- * - Presents a searching form and perform searches into the ddbb
- * - Adds links for creating and deleting prayers for the returned prayers
- * - Also, adds links for browsing turns of a particular prayer
- * - If there are prayers with no turns on the ddbb, it also present them to the user
- *	 in order to let know about it. It doesn't matter if such prayer is within the
- * 	 defined filter or not: it would be shown	
- */
 @Controller
-public class showPrayersController {
-
+public class SearchPrayersController {
 	@Autowired
 	private MainService main;
 	
@@ -39,7 +29,7 @@ public class showPrayersController {
 	//For saving data to show on the View (JSP)
 	private Map<String, Object> response;
 	
-	public showPrayersController(){
+	public SearchPrayersController(){
 		//To hold all the data that should be returned back to the view
 		response = new HashMap<String, Object>();
 	}
