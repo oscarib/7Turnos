@@ -143,63 +143,54 @@
 			</table>
 		</form:form>
 	</div>
-<!-- 
+ 
 	<c:if test="${response.errorsSize > 0}">
 		<div id="errorResults">
-			<h2>
-				<fmt:message key="prayer.orphanPrayers" />
-				(${response.errorsSize})
-			</h2>
-			<table width="200" border="1" cellspacing="5" cellpadding="5">
+		<h2>
+			<fmt:message key="other.warning" /> 
+			${response.errorsSize}
+			<fmt:message key="prayer.orphanTurns" />
+		</h2>
+		<table width="200" border="1" cellspacing="5" cellpadding="5">
+			<tr>
+				<th scope="col"><label><fmt:message key="turn.uid" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.prayer_id" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.dow" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.hour" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.status" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.notes" /></label></th>
+				<th scope="col"><label><fmt:message key="turn.pax" /></label></th>
+			</tr>
+			<c:forEach items="${response.orphanTurns}" var="nextTurn">
 				<tr>
-					<th scope="col"><label>UID</label></th>
-					<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
-					<th scope="col"><label><fmt:message key="prayer.email" /></label></th>
-					<th scope="col"><label><fmt:message key="prayer.phone" /></label></th>
-					<th scope="col"><label><fmt:message
-								key="prayer.ownCountry" /></label></th>
-					<th scope="col"><label><fmt:message
-								key="prayer.optinDate" /></label></th>
-					<th scope="col"><label><fmt:message key="prayer.notes" /></label></th>
-					<th scope="col"><label><fmt:message
-								key="prayer.hidden" /></label></th>
-					<th scope="col"><label><fmt:message
-								key="prayer.pseudonym" /></label></th>
-					<th scope="col"><label><fmt:message
-								key="prayer.actions" /></label></th>
+					<td>${nextTurn.uid}</td>
+					<td>${nextTurn.prayer_id}</td>
+					<td>${nextTurn.dow}</td>
+					<td>${nextTurn.turn}</td>
+					<td>${nextTurn.status}</td>
+					<td>${nextTurn.notes}</td>
+					<td>${nextTurn.pax}</td>
+					<td>
+						<form action="./deletePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.uid}"/>
+							<input type="submit" value="<fmt:message key='form.delete'/>">
+						</form>
+						<form action="./changePrayer.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.uid}"/>
+							<input type="submit" value="<fmt:message key='form.modify'/>">
+						</form>
+						<form action="./showPrayers.html" method="POST">
+							<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}"/>
+							<input type="submit" value="<fmt:message key='prayer.prayer'/>">
+						</form>
+					</td>
 				</tr>
-				<c:forEach items="${response.orphanPrayers}" var="nextPrayer">
-					<tr>
-						<td>${nextPrayer.uid}</td>
-						<td>${nextPrayer.name}</td>
-						<td>${nextPrayer.email}</td>
-						<td>${nextPrayer.phone}</td>
-						<td>${nextPrayer.ownCountry}</td>
-						<td>${nextPrayer.optinDate}</td>
-						<td>${nextPrayer.notes}</td>
-						<td>${nextPrayer.hidden}</td>
-						<td>${nextPrayer.pseudonym}</td>
-						<td>
-							<form action="/deletePrayer.html" method="POST">
-								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-								<input type="submit" value="<fmt:message key='form.delete'/>">
-							</form>
-							<form action="/changePrayer.html" method="POST">
-								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-								<input type="submit" value="<fmt:message key='form.modify'/>">
-							</form>
-							<form action="/showTurns4Prayer.html" method="POST">
-								<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-								<input type="submit" value="<fmt:message key='turns.turns'/>">
-							</form>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+			</c:forEach>
+		</table>
 		</div>
 	</c:if>
--->
 
+<c:if test="${response.turnsSize > 0}">
 	<div id="searchResults">
 		<h2>
 			<fmt:message key="turn.searchResults.prefix" />
@@ -243,5 +234,6 @@
 			</c:forEach>
 		</table>
 	</div>
+</c:if>
 </body>
 </html>

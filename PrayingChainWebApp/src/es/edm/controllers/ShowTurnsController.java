@@ -74,6 +74,7 @@ public class ShowTurnsController {
 				SimpleTurn turn = main.getTurnByID(turnSearched.getUid());
 				turns.add(turn);
 				response.put("turns", getJSPSimpleTurns(turns));
+				response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
 				return new ModelAndView("/web/showTurns.jsp", "response", response);
 			} catch (TurnException e) {
 			}
@@ -87,6 +88,7 @@ public class ShowTurnsController {
 			try {
 				List<SimpleTurn> turns = main.getPrayerTurns(turnSearched.getPrayer_id());
 				response.put("turns", getJSPSimpleTurns(turns));
+				response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
 				return new ModelAndView("/web/showTurns.jsp", "response", response);
 			} catch (PrayerNotFoundException e) {
 			}
@@ -130,8 +132,13 @@ public class ShowTurnsController {
 			}
 			mixOfLists(dowTurns);
 		}
+		
+		//Adds orphan turns to the result
+		List<SimpleTurn> orphanTurns = main.getOrphanTurns();
+		response.put("orphanTurns", getJSPSimpleTurns(orphanTurns));
+		response.put("errorsSize", orphanTurns.size());
 
-		response.put("turnsSize", ((ArrayList<SimpleTurn>)response.get("turns")).size());
+		response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
 		return new ModelAndView("/web/showTurns.jsp", "response", response);
 	}
 	
