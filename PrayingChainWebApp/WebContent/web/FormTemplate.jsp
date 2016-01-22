@@ -31,12 +31,32 @@
 
 		<%@include file="./header.jsp"%>
 
-		<!-- Here add the content of the page -->
-		<div class="jumbotron">
-			<h1>Calendario Actualizado</h1>
-			<p>El calendario ha sido correctamente actualizado en la web</p>
+		<!-- Search form -->
+		<div class="row">
+				<div class="table-responsive">
+
+				</div>
 		</div>
 
+		<!-- Errors -->
+		<c:if test="${response.errorsSize > 0}">
+			<div class="row">
+				<div class="table-responsive">
+
+				</div>
+			</div>
+		</c:if>
+
+		<!-- Results -->
+		<c:if test="${response.prayersSize > 0}">
+
+			<div class="row">
+
+				<div class="table-responsive">
+
+				</div>
+			</div>
+		</c:if>
 
 		<%@include file="./footer.jsp"%>
 
