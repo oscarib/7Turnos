@@ -31,12 +31,13 @@
 
 		<%@include file="./header.jsp"%>
 
-		<!-- Here add the content of the page -->
+		<!-- Main component for a primary marketing message or call to action -->
 		<div class="jumbotron">
-			<h1>Calendario Actualizado</h1>
-			<p>El calendario ha sido correctamente actualizado en la web</p>
+			<h1>Panel de Control</h1>
+			<p>Panel de control para la aplicación de gestión de "Cadena de Oración". Desde aquí podrán
+			gestionarse parámetros de configuración, actualizaciones del calendario, y todo lo relativo
+			a los oradores y turnos que después se verán en el sitio principal de la cadena</p>
 		</div>
-
 
 		<%@include file="./footer.jsp"%>
 

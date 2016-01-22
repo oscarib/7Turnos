@@ -32,11 +32,6 @@
 		<%@include file="./header.jsp"%>
 
 		<!-- Here add the content of the page -->
-		<div class="jumbotron">
-			<h1>Calendario Actualizado</h1>
-			<p>El calendario ha sido correctamente actualizado en la web</p>
-		</div>
-
 
 		<%@include file="./footer.jsp"%>
 
