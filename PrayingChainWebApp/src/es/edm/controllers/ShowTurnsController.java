@@ -1,10 +1,11 @@
 package es.edm.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
@@ -104,6 +104,7 @@ public class ShowTurnsController {
 					dowTurns.add(new JSPSimpleTurn(nextTurn));
 				}
 			}
+			orderList(dowTurns);
 			response.put("turns", dowTurns);
 		}
 
@@ -116,6 +117,7 @@ public class ShowTurnsController {
 					dowTurns.add(new JSPSimpleTurn(nextTurn));
 				}
 			}
+			orderList(dowTurns);
 			mixOfLists(dowTurns);
 		}
 
@@ -130,6 +132,7 @@ public class ShowTurnsController {
 					}
 				}
 			}
+			orderList(dowTurns);
 			mixOfLists(dowTurns);
 		}
 		
@@ -137,7 +140,7 @@ public class ShowTurnsController {
 		List<SimpleTurn> orphanTurns = main.getOrphanTurns();
 		response.put("orphanTurns", getJSPSimpleTurns(orphanTurns));
 		response.put("errorsSize", orphanTurns.size());
-
+		
 		response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
 		return new ModelAndView("/web/showTurns.jsp", "response", response);
 	}
@@ -171,4 +174,37 @@ public class ShowTurnsController {
 		//put the new mixed list on the response
 		response.put("turns", mixedListOfTurns);
 	}
+	
+	private void orderList(List<JSPSimpleTurn> listOfTurns2Order){
+		Collections.sort(listOfTurns2Order, new SimpleTurnComparator());
+	}
+}
+
+class SimpleTurnComparator implements Comparator<JSPSimpleTurn>{
+
+	@Override
+	public int compare(JSPSimpleTurn turn1, JSPSimpleTurn turn2) {
+		try {
+			int turn1int = SimpleTurn.getTurnByHour(turn1.getTurn());
+			int turn2int = SimpleTurn.getTurnByHour(turn2.getTurn());
+			if (turn1.getDow().compareTo(turn2.getDow())<0){
+				return -1;
+			} else {
+				if (turn1.getDow().compareTo(turn2.getDow())==0){
+					if (turn1int<turn2int){
+						return -1;
+					} else {
+						if (turn1int==turn2int){
+							return 0;
+						} else return 1;
+					}
+				} else {
+					return 1;
+				}
+			}
+		} catch (TurnException e) {
+			throw new RuntimeException("Something is gone really wrong");
+		}
+	}
+
 }
