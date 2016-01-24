@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Navbar Template for Bootstrap</title>
+<title><fmt:message key="prayer.searchResults.postfix" /></title>
 
 <!-- Bootstrap core CSS -->
 <link href="./web/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +32,8 @@
 		<%@include file="./header.jsp"%>
 
 		<div class="jumbotron">
-			<h1>Oradores</h1>
-			<p>Busqueda de oradores por distintos filtros</p>
+			<h1><fmt:message key="prayer.showPrayers.title" /></h1>
+			<p><fmt:message key="prayer.description"/></p>
 		</div>
 
 		<!-- Search form -->
