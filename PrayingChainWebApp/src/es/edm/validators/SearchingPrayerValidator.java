@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import es.edm.model.JSPPrayer;
 import es.edm.model.Prayer;
 
 @Component
@@ -16,10 +17,9 @@ public class SearchingPrayerValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Prayer prayer = (Prayer)target;
-		if (prayer.getEmail().trim().equals("") && prayer.getName().trim().equals("") && 
-			prayer.getPhone().trim().equals("") && prayer.getNotes().trim().equals("") &&
-			!prayer.isHidden() && !prayer.isOwnCountry()) {
+		JSPPrayer prayer = (JSPPrayer)target;
+		if (prayer.getName().equals("") && prayer.getEmail().equals("") && prayer.getHidden().equals("NotSelected") && prayer.getNotes().equals("") && 
+			prayer.getOwnCountry().equals("NotSelected") && prayer.getPhone().equals("")){
 			errors.reject("NoParameterSpecified");
 		}
 	}

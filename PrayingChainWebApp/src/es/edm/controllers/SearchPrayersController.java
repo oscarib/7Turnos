@@ -1,25 +1,28 @@
 package es.edm.controllers;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.edm.exceptions.EmptyParameterException;
 import es.edm.exceptions.PrayerNotFoundException;
+import es.edm.model.JSPPrayer;
 import es.edm.model.Prayer;
 import es.edm.services.MainService;
 import es.edm.validators.SearchingPrayerValidator;
 
 @Controller
+@RequestMapping(value = "/showPrayers")
 public class SearchPrayersController {
 	@Autowired
 	private MainService main;
@@ -31,21 +34,20 @@ public class SearchPrayersController {
 	private Map<String, Object> response;
 	
 	public SearchPrayersController(){
-		//To hold all the data that should be returned back to the view
-		response = new HashMap<String, Object>();
+		resetForm();
 	}
 
 //CONTROLLER METHODS // CONTROLLER METHODS // CONTROLLER METHODS
 	
 	//Presents the form
-	@RequestMapping(path="/showPrayers", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView searchPrayers() {
-		return new ModelAndView("/web/showPrayers.jsp", "prayer", new Prayer());
+		return new ModelAndView("/web/showPrayers.jsp", response);
 	}
 	
 	//Processes the form
-	@RequestMapping(path="/showPrayers", method=RequestMethod.POST)
-	public ModelAndView searchPrayers(Prayer prayerSearched, Errors errors) {
+	@RequestMapping(method=RequestMethod.POST)
+	public ModelAndView searchPrayers(@ModelAttribute("prayer") JSPPrayer prayerSearched, Errors errors) {
 		
 	//Constructs the prayer list
 		
@@ -54,11 +56,9 @@ public class SearchPrayersController {
 		
 		//If there were any errors, return back to the initial form
 		if (errors.hasErrors()){
-			return new ModelAndView("/web/showPrayers.jsp", "prayer", prayerSearched);
+			resetForm();
+			return new ModelAndView("/web/showPrayers.jsp", response);
 		}
-		
-		//Takes the backing Object form the Form
-		response.put("prayer", prayerSearched);
 
 		//NAME
 		//Try to get all prayers by Name
@@ -108,24 +108,30 @@ public class SearchPrayersController {
 		//ISHIDDEN
 		try {
 			List<Prayer> newList;
-			if (prayerSearched.isHidden()) {
+			if (prayerSearched.getHidden().equals("Hidden")) {
 				newList = main.getHiddenPrayers();
+				mixOfLists(newList);
 			} else {
-				newList = main.getPublicPrayers();
+				if (prayerSearched.getHidden().equals("Public")) {
+					newList = main.getPublicPrayers();
+					mixOfLists(newList);
+				}
 			}
-			mixOfLists(newList);
 		} catch (PrayerNotFoundException e) {
 		}
 		
 		//OWNCOUNTRY
 		try {
 			List<Prayer> newList;
-			if (prayerSearched.isOwnCountry()) {
+			if (prayerSearched.getOwnCountry().equals("Spain")) {
 				newList = main.getLocalPrayers();
+				mixOfLists(newList);
 			} else {
-				newList = main.getForeignPrayers();
+				if (prayerSearched.getOwnCountry().equals("Other")) {
+					newList = main.getForeignPrayers();
+					mixOfLists(newList);
+				}
 			}
-			mixOfLists(newList);
 		} catch (PrayerNotFoundException e) {
 		}
 		
@@ -134,12 +140,12 @@ public class SearchPrayersController {
 		List<Prayer> finalList = (List<Prayer>)response.get("prayers");
 		response.put("prayersSize", finalList.size());
 		
-	//Construct the errors lists
+		//Construct the errors lists
 		List<Prayer> orphanPrayers = main.getOrphanPrayers();
 		response.put("orphanPrayers", orphanPrayers);
 		response.put("errorsSize", orphanPrayers.size());
 
-		return new ModelAndView("/web/showPrayers.jsp", "response", response);
+		return new ModelAndView("/web/showPrayers.jsp", response);
 	}
 	
 
@@ -157,5 +163,27 @@ public class SearchPrayersController {
 			response.put("prayers", mixedListOfPrayers);
 		} catch (EmptyParameterException e) {
 		}
+	}
+	
+	private void resetForm(){
+		//To hold all the data that should be returned back to the view
+		response = new HashMap<String, Object>();
+		
+		//Inject the backing Object
+		response.put("prayer", new JSPPrayer());
+		
+		//Inject hidden values
+		Map<String, String> hiddenList = new LinkedHashMap<String, String>();
+		hiddenList.put("NotSelected", "Filtrar por Visibilidad");
+		hiddenList.put("Hidden", "Oculto");
+		hiddenList.put("Public", "Publico");
+        response.put("hiddenList", hiddenList);
+        
+		//Inject OwnCountry values
+		Map<String, String> ownCountryList = new LinkedHashMap<String, String>();
+		ownCountryList.put("NotSelected", "Filtrar por Pais");
+		ownCountryList.put("Spain", "España");
+		ownCountryList.put("Other", "Otro País");
+        response.put("ownCountryList", ownCountryList);
 	}
 }

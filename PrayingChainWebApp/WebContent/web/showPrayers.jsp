@@ -69,13 +69,13 @@
 						<td><form:input class="form-control" path="notes" /><br>
 						<form:errors path="notes" /></td>
 					<tr>
-						<td><label><fmt:message key="prayer.ownCountry" /></label></td>
-						<td><form:checkbox class="checkbox" path="ownCountry" /><br>
-						<form:errors path="ownCountry" /></td>
+						<td><label><fmt:message key="prayer.hidden" /></label></td>
+						<td><form:select path="hidden" items="${hiddenList}" /><br>
+						<form:errors path="hidden" /></td>
 					</tr>
 					<tr>
-						<td><label><fmt:message key="prayer.hidden" /></label></td>
-						<td><form:checkbox path="hidden" /><br>
+						<td><label><fmt:message key="prayer.ownCountry" /></label></td>
+						<td><form:select path="ownCountry" items="${ownCountryList}" /><br>
 						<form:errors path="hidden" /></td>
 					</tr>
 					<tr>
@@ -90,10 +90,10 @@
 		</form:form>
 
 		<!-- Errors -->
-		<c:if test="${response.errorsSize > 0}">
+		<c:if test="${errorsSize > 0}">
 			<h2>
 				<fmt:message key="prayer.orphanPrayers" />
-				(${response.errorsSize})
+				(${errorsSize})
 			</h2>
 
 			<div class="table-responsive">
@@ -119,7 +119,7 @@
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
-					<c:forEach items="${response.orphanPrayers}" var="nextPrayer">
+					<c:forEach items="${orphanPrayers}" var="nextPrayer">
 						<tr>
 							<td>${nextPrayer.uid}</td>
 							<td>${nextPrayer.name}</td>
@@ -158,11 +158,11 @@
 		</c:if>
 
 		<!-- Results -->
-		<c:if test="${response.prayersSize > 0}">
+		<c:if test="${prayersSize > 0}">
 
 			<h2>
 				<fmt:message key="prayer.searchResults.prefix" />
-				${response.prayersSize}
+				${prayersSize}
 				<fmt:message key="prayer.searchResults.postfix" />
 				:
 			</h2>
@@ -189,7 +189,7 @@
 						<th scope="col" colspan=3><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
-					<c:forEach items="${response.prayers}" var="nextPrayer">
+					<c:forEach items="${prayers}" var="nextPrayer">
 						<tr>
 							<td>${nextPrayer.uid}</td>
 							<td>${nextPrayer.name}</td>
