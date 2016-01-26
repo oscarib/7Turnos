@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
@@ -22,6 +26,7 @@ import es.edm.services.MainService;
 import es.edm.validators.SearchingTurnValidator;
 
 @Controller
+@RequestMapping(path="/showTurns")
 public class ShowTurnsController {
 
 	@Autowired
@@ -36,46 +41,54 @@ public class ShowTurnsController {
 	//For saving data to show on the View (JSP)
 	private Map<String, Object> response;
 	
+	//List of days
+	private Map<String, String> dowList;
+	
+	//List of status
+	private Map<String, String> statusList;
+	
 	public ShowTurnsController(){
-		//To hold all the data that should be returned back to the view
-		response = new HashMap<String, Object>();
+		resetForm();
 	}
 
 //CONTROLLER METHODS // CONTROLLER METHODS // CONTROLLER METHODS
 	
 	//Presents the form
-	@RequestMapping(path="/showTurns", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView searchTurns() {
-		return new ModelAndView("/web/showTurns.jsp", "simpleTurn", new SimpleTurn());
+		resetForm();
+		return new ModelAndView("/web/showTurns.jsp", response);
 	}
 	
 	//Processes the form
 	@SuppressWarnings("unchecked")
-	@RequestMapping(path="/showTurns", method=RequestMethod.POST)
-	public ModelAndView searchTurns(SimpleTurn turnSearched, Errors errors) throws DDBBException, TurnException {
+	@RequestMapping(method=RequestMethod.POST)
+	public ModelAndView searchTurns(@ModelAttribute("simpleTurn") JSPSimpleTurn turnSearched, Errors errors) throws DDBBException, TurnException {
 		//Validate that form entries
 		searchingTurnvalidator.validate(turnSearched, errors);
-
-		//Gets the backing Object form the Form
-		response.put("simpleTurn", turnSearched);
 		
 		//If there were any errors, return back to the initial form
 		if (errors.hasErrors()){
-			return new ModelAndView("/web/showTurns.jsp", "response", response);
+			resetForm();
+			return new ModelAndView("/web/showTurns.jsp", response);
 		}
+		
+		//Reset response, in order to construct a new fresh one
+		resetForm();
 		
 		//UID
 		/* If UID was specified, there is no need to mix no list at all, 
 		 * as it should be returned just one turn
 		 */
-		if (turnSearched.getUid()!=0){
+		if (!turnSearched.getUid().equals("")){
 			List<SimpleTurn> turns = new ArrayList<SimpleTurn>();
 			try {
-				SimpleTurn turn = main.getTurnByID(turnSearched.getUid());
+				SimpleTurn turn = main.getTurnByID(Integer.parseInt(turnSearched.getUid()));
 				turns.add(turn);
 				response.put("turns", getJSPSimpleTurns(turns));
-				response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
-				return new ModelAndView("/web/showTurns.jsp", "response", response);
+				orderList();
+				addColateralData();
+				return new ModelAndView("/web/showTurns.jsp", response);
 			} catch (TurnException e) {
 			}
 		}
@@ -84,40 +97,38 @@ public class ShowTurnsController {
 		/* If prayer_id was provided, take the turns and render the result without
 		 * having to process any more fields, as there are no need to do
 		 */
-		if (turnSearched.getPrayer_id()!=0){
+		if (!turnSearched.getPrayer_id().equals("")){
 			try {
-				List<SimpleTurn> turns = main.getPrayerTurns(turnSearched.getPrayer_id());
+				List<SimpleTurn> turns = main.getPrayerTurns(Integer.parseInt(turnSearched.getPrayer_id()));
 				response.put("turns", getJSPSimpleTurns(turns));
-				response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
-				return new ModelAndView("/web/showTurns.jsp", "response", response);
+				addColateralData();
+				orderList();
+				return new ModelAndView("/web/showTurns.jsp", response);
 			} catch (PrayerNotFoundException e) {
 			}
 		}
 		
 		//DOW
-		if (turnSearched.getDow()!=null){
-			//TODO: Change getAllTurns to include ordering by at least turn
+		if (!turnSearched.getDow().equals("NotSelected")){
 			List<SimpleTurn> turns = main.getAllTurns();
 			List<JSPSimpleTurn> dowTurns = new ArrayList<JSPSimpleTurn>();
 			for (SimpleTurn nextTurn : turns){
-				if (nextTurn.getDow().equals(turnSearched.getDow())){
+				if (nextTurn.getDow().toString().equals(turnSearched.getDow())){
 					dowTurns.add(new JSPSimpleTurn(nextTurn));
 				}
 			}
-			orderList(dowTurns);
-			response.put("turns", dowTurns);
+			mixOfLists(dowTurns);
 		}
 
 		//STATUS
-		if (turnSearched.getStatus()!=null){
+		if (!turnSearched.getStatus().equals("NotSelected")){
 			List<SimpleTurn> turns = main.getAllTurns();
 			List<JSPSimpleTurn> dowTurns = new ArrayList<JSPSimpleTurn>();
 			for (SimpleTurn nextTurn : turns){
-				if (nextTurn.getStatus().toString().equals(turnSearched.getStatus().toString())){
+				if (nextTurn.getStatus().toString().equals(turnSearched.getStatus())){
 					dowTurns.add(new JSPSimpleTurn(nextTurn));
 				}
 			}
-			orderList(dowTurns);
 			mixOfLists(dowTurns);
 		}
 
@@ -132,17 +143,13 @@ public class ShowTurnsController {
 					}
 				}
 			}
-			orderList(dowTurns);
 			mixOfLists(dowTurns);
 		}
 		
-		//Adds orphan turns to the result
-		List<SimpleTurn> orphanTurns = main.getOrphanTurns();
-		response.put("orphanTurns", getJSPSimpleTurns(orphanTurns));
-		response.put("errorsSize", orphanTurns.size());
+		addColateralData();
 		
-		response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
-		return new ModelAndView("/web/showTurns.jsp", "response", response);
+		//Adds orphan turns to the result
+		return new ModelAndView("/web/showTurns.jsp", response);
 	}
 	
 	/* Takes a list of simple turns, and convert each turn in the list to 
@@ -157,6 +164,14 @@ public class ShowTurnsController {
 		return resultListOfTurns;
 	}
 	
+	@SuppressWarnings("unchecked")
+	private void addColateralData() throws TurnException{
+		List<SimpleTurn> orphanTurns = main.getOrphanTurns();
+		response.put("orphanTurns", getJSPSimpleTurns(orphanTurns));
+		response.put("errorsSize", orphanTurns.size());
+		response.put("turnsSize", ((ArrayList<JSPSimpleTurn>)response.get("turns")).size());
+	}
+	
 	/* Makes a mix of the actual List of Turns to be displayed, and 
 	 * the new one, in order to see the matches
 	 */
@@ -164,19 +179,50 @@ public class ShowTurnsController {
 		//Take the previous list of prayers already set on the response
 		@SuppressWarnings("unchecked")
 		List<JSPSimpleTurn> previousList = (List<JSPSimpleTurn>)response.get("turns");
-		//mix the two lists (and method)
-		List<JSPSimpleTurn> mixedListOfTurns = new ArrayList<JSPSimpleTurn>();
-		for (JSPSimpleTurn nextTurn : previousList){
-			if (newList.contains(nextTurn)){
-				mixedListOfTurns.add(nextTurn);
+		if (previousList==null || previousList.size()==0) {
+			response.put("turns", newList);
+		} else {
+			//mix the two lists (and method)
+			List<JSPSimpleTurn> mixedListOfTurns = new ArrayList<JSPSimpleTurn>();
+			for (JSPSimpleTurn nextTurn : previousList){
+				if (newList.contains(nextTurn)){
+					mixedListOfTurns.add(nextTurn);
+				}
 			}
+			//put the new mixed list on the response
+			response.put("turns", mixedListOfTurns);
 		}
-		//put the new mixed list on the response
-		response.put("turns", mixedListOfTurns);
+		orderList();
 	}
 	
-	private void orderList(List<JSPSimpleTurn> listOfTurns2Order){
-		Collections.sort(listOfTurns2Order, new SimpleTurnComparator());
+	@SuppressWarnings("unchecked")
+	private void orderList(){
+		Collections.sort((ArrayList<JSPSimpleTurn>)response.get("turns"), new SimpleTurnComparator());
+	}
+
+	private void resetForm(){
+		//To hold all the data that should be returned back to the view
+		response = new HashMap<String, Object>();
+		response.put("simpleTurn", new JSPSimpleTurn());
+		response.put("turns", new ArrayList<JSPSimpleTurn>());
+		
+		dowList = new LinkedHashMap<String, String>();
+		dowList.put("NotSelected", "Filtrar por día");
+		dowList.put("monday", "Lunes");
+		dowList.put("tuesday", "Martes");
+		dowList.put("wednesday", "Miércoles");
+		dowList.put("thursday", "Jueves");
+		dowList.put("friday", "Viernes");
+		dowList.put("saturday", "Sábado");
+		dowList.put("sunday", "Domingo");
+		response.put("dowList", dowList);
+
+		statusList = new LinkedHashMap<String, String>();
+		statusList.put("NotSelected", "Filtrar por día");
+		statusList.put("accepted", "Aceptado");
+		statusList.put("cancelled", "Cancelado");
+		statusList.put("NotCommitted", "No Comprometido");
+		response.put("statusList", statusList);
 	}
 }
 
@@ -206,5 +252,4 @@ class SimpleTurnComparator implements Comparator<JSPSimpleTurn>{
 			throw new RuntimeException("Something is gone really wrong");
 		}
 	}
-
 }

@@ -3,38 +3,41 @@ package es.edm.model;
 import es.edm.exceptions.TurnException;
 
 public class JSPSimpleTurn {
-	public int uid;
-	public int prayer_id;
+	public String uid;
+	public String prayer_id;
 	public String dow;
 	public String turn;
 	public String status;
 	public String notes;
-	public int pax;
+	public String pax;
 
 	public JSPSimpleTurn(SimpleTurn turn) throws TurnException{
-		this.uid = turn.getUid();
-		this.prayer_id = turn.getPrayer_id();
+		this.uid = Integer.toString(turn.getUid());
+		this.prayer_id = Integer.toString(turn.getPrayer_id());
 		this.dow = turn.getDow().toString();
 		//TODO: Substitute the turn String by and internationalized one
 		this.turn = SimpleTurn.getHourByTurn(turn.getTurn());
 		this.status = turn.getStatus().toString();
 		this.notes = turn.getNotes();
-		this.pax = turn.getPax();
+		this.pax = Integer.toString(turn.getPax());
+	}
+	
+	public JSPSimpleTurn(){
 	}
 
-	public int getUid() {
+	public String getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 
-	public int getPrayer_id() {
+	public String getPrayer_id() {
 		return prayer_id;
 	}
 
-	public void setPrayer_id(int prayer_id) {
+	public void setPrayer_id(String prayer_id) {
 		this.prayer_id = prayer_id;
 	}
 
@@ -70,11 +73,11 @@ public class JSPSimpleTurn {
 		this.notes = notes;
 	}
 
-	public int getPax() {
+	public String getPax() {
 		return pax;
 	}
 
-	public void setPax(int pax) {
+	public void setPax(String pax) {
 		this.pax = pax;
 	}
 
@@ -87,7 +90,7 @@ public class JSPSimpleTurn {
 		if (getClass() != obj.getClass())
 			return false;
 		JSPSimpleTurn other = (JSPSimpleTurn) obj;
-		if (uid != other.uid)
+		if (!uid.equals(other.getUid()))
 			return false;
 		return true;
 	}

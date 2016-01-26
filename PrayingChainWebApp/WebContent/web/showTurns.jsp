@@ -61,29 +61,10 @@
 					</tr>
 					<tr>
 						<td><label><fmt:message key="turn.dow" /></label></td>
-						<td><form:select path="dow">
-								<form:option value="monday">
-									<fmt:message key="day.monday" />
-								</form:option>
-								<form:option value="tuesday">
-									<fmt:message key="day.tuesday" />
-								</form:option>
-								<form:option value="wednesday">
-									<fmt:message key="day.wednesday" />
-								</form:option>
-								<form:option value="thursday">
-									<fmt:message key="day.thursday" />
-								</form:option>
-								<form:option value="friday">
-									<fmt:message key="day.friday" />
-								</form:option>
-								<form:option value="saturday">
-									<fmt:message key="day.saturday" />
-								</form:option>
-								<form:option value="sunday">
-									<fmt:message key="day.sunday" />
-								</form:option>
-							</form:select> <form:errors path="dow" /></td>
+						<td>
+							<form:select path="dow" items="${dowList}" /><br>
+							<form:errors path="dow" />
+						</td>
 					</tr>
 
 					<!-- TODO: Include filters on start and finishing turns
@@ -143,20 +124,12 @@
 					<form:errors path="turn" /></td>
 				</tr>
  -->
-
 					<tr>
 						<td><label><fmt:message key="turn.status" /></label></td>
-						<td><form:select path="status">
-								<form:option value="accepted">
-									<fmt:message key="status.accepted" />
-								</form:option>
-								<form:option value="cancelled">
-									<fmt:message key="status.cancelled" />
-								</form:option>
-								<form:option value="NotCommitted">
-									<fmt:message key="status.NotCommitted" />
-								</form:option>
-							</form:select> <form:errors path="status" /></td>
+						<td>
+							<form:select path="status" items="${statusList}" /><br>
+							<form:errors path="status" />
+						</td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="turn.notes" /></label></td>
@@ -168,17 +141,17 @@
 							value="<fmt:message key='form.search'/>"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><form:errors></form:errors></td>
+						<td colspan="2"><form:errors/></td>
 					</tr>
 				</table>
 			</div>
 		</form:form>
 
 		<!-- Errors -->
-		<c:if test="${response.errorsSize > 0}">
+		<c:if test="${errorsSize > 0}">
 			<h2>
 				<fmt:message key="other.warning" />
-				${response.errorsSize}
+				${errorsSize}
 				<fmt:message key="prayer.orphanTurns" />
 			</h2>
 
@@ -197,7 +170,7 @@
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
-					<c:forEach items="${response.orphanTurns}" var="nextTurn">
+					<c:forEach items="${orphanTurns}" var="nextTurn">
 						<tr>
 							<td>${nextTurn.uid}</td>
 							<td>${nextTurn.prayer_id}</td>
@@ -231,11 +204,11 @@
 		</c:if>
 
 		<!-- Results -->
-		<c:if test="${response.turnsSize > 0}">
+		<c:if test="${turnsSize > 0}">
 
 			<h2>
 				<fmt:message key="turn.searchResults.prefix" />
-				${response.turnsSize}
+				${turnsSize}
 				<fmt:message key="turn.searchResults.postfix" />
 				:
 			</h2>
@@ -255,7 +228,7 @@
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
-					<c:forEach items="${response.turns}" var="nextTurn">
+					<c:forEach items="${turns}" var="nextTurn">
 						<tr>
 							<td>${nextTurn.uid}</td>
 							<td>${nextTurn.prayer_id}</td>
