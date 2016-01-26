@@ -35,9 +35,66 @@
 			<h1><fmt:message key="actions.create" /> <fmt:message key="other.new" /> <fmt:message key="prayer.prayer" /></h1>
 		</div>
 
+			<form:form commandName="newPrayer">
+
+				<div class="table-responsive">
+					<table class="table table-striped" width="100%" border="1"
+						cellspacing="5" cellpadding="5">
+						<tr>
+							<th width="10%"><label>Campo</label></th>
+							<th width="90%"><label>Valor</label></th>
+						</tr>
+						<tr>
+							<td><label>Nombre</label></td>
+							<td><form:input class="form-control" path="name" />
+							<p class="text-danger bg-danger"><form:errors path="name" /></p></td>
+						</tr>
+						<tr>
+							<td><label>Email</label></td>
+							<td><form:input class="form-control" path="email" />
+							<p class="text-danger bg-danger"><form:errors path="email" /></p></td>
+						</tr>
+						<tr>
+							<td><label>Teléfono</label></td>
+							<td><form:input class="form-control" path="phone" />
+							<p class="text-danger bg-danger"><form:errors path="phone" /></p></td>
+						</tr>
+						<tr>
+							<td><label>País</label></td>
+							<td><form:select path="ownCountry" items="${ownCountryList}" />
+							<p class="text-danger bg-danger"><form:errors path="ownCountry" /></p></td>
+						</tr>
+						<tr>
+							<td><label>Fecha de alta:</label></td>
+							<td><form:input class="form-control" path="optinDate" />
+							<p class="text-danger bg-danger"><form:errors path="optinDate" /></p></td>
+						</tr>
+						<tr>
+							<td><label>Notes</label></td>
+							<td><form:input class="form-control" path="notes" />
+							<p class="text-danger bg-danger"><form:errors path="notes" /></p></td>
+						<tr>
+							<td><label>Oculto:</label></td>
+							<td><form:select path="hidden" items="${hiddenList}" />
+							<p class="text-danger bg-danger"><form:errors path="hidden" /></p></td>
+						</tr>
+						<tr>
+							<td><label>Seudónimo:</label></td>
+							<td><form:input class="form-control" path="pseudonym" />
+							<p class="text-danger bg-danger"><form:errors path="pseudonym" /></p></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input class="btn btn-default" type="submit"
+								value="<fmt:message key='form.submmit'/>"></td>
+						</tr>
+						<tr>
+							<p class="text-danger bg-danger"><td colspan="2"><form:errors></form:errors></</td>
+						</tr>
+					</table>
+				</div>
+			</form:form>
+
 		<%@include file="./footer.jsp"%>
-
-
 	</div>
 	<!-- /container -->
 
