@@ -218,7 +218,7 @@ public class ShowTurnsController {
 		response.put("dowList", dowList);
 
 		statusList = new LinkedHashMap<String, String>();
-		statusList.put("NotSelected", "Filtrar por día");
+		statusList.put("NotSelected", "Filtrar por Estado");
 		statusList.put("accepted", "Aceptado");
 		statusList.put("cancelled", "Cancelado");
 		statusList.put("NotCommitted", "No Comprometido");

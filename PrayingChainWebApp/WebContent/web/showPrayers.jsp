@@ -50,6 +50,11 @@
 						<th><label><fmt:message key="form.value" /></label></th>
 					</tr>
 					<tr>
+						<td><label><fmt:message key="prayer.uid" /></label></td>
+						<td><form:input class="form-control" path="uid" /><br>
+						<form:errors path="uid" /></td>
+					</tr>
+					<tr>
 						<td><label><fmt:message key="prayer.name" /></label></td>
 						<td><form:input class="form-control" path="name" /><br>
 						<form:errors path="name" /></td>

@@ -42,6 +42,7 @@ public class SearchPrayersController {
 	//Presents the form
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView searchPrayers() {
+		resetForm();
 		return new ModelAndView("/web/showPrayers.jsp", response);
 	}
 	
@@ -54,12 +55,31 @@ public class SearchPrayersController {
 		//Validate that form entries
 		searchingPrayervalidator.validate(prayerSearched, errors);
 		
+		resetForm();
+		
 		//If there were any errors, return back to the initial form
 		if (errors.hasErrors()){
 			resetForm();
 			return new ModelAndView("/web/showPrayers.jsp", response);
 		}
+		
+		//UID
+		if (!prayerSearched.getUid().equals("")){
+			try {
+				Prayer prayer = main.getPrayerByID(Integer.parseInt(prayerSearched.getUid()));
+				List<Prayer> prayers = new ArrayList<Prayer>();
+				prayers.add(prayer);
+				response.put("prayers", prayers);
 
+				processForm();
+				return new ModelAndView("/web/showPrayers.jsp", response);
+				
+			} catch (PrayerNotFoundException e) {
+				processForm();
+				return new ModelAndView("/web/showPrayers.jsp", response);
+			} 
+		}
+		
 		//NAME
 		//Try to get all prayers by Name
 		try {
@@ -72,13 +92,18 @@ public class SearchPrayersController {
 		/* If EMAIL was provided, take the prayer, and reset the previous lists of prayers, 
 		 * as it cannot be found no more than a single match for a given email
 		 */
-		if (prayerSearched.getEmail()!=null){
+		if (!prayerSearched.getEmail().equals("")){
 			try {
+				resetForm();
 				Prayer prayer = main.getPrayerByEmail(prayerSearched.getEmail());
 				List<Prayer> prayers = new ArrayList<Prayer>();
 				prayers.add(prayer);
 				response.put("prayers", prayers);
+				processForm();
+				return new ModelAndView("/web/showPrayers.jsp", response);
 			} catch (PrayerNotFoundException e) {
+				processForm();
+				return new ModelAndView("/web/showPrayers.jsp", response);
 			}
 		}
 		
@@ -86,7 +111,7 @@ public class SearchPrayersController {
 		/* if PHONE was provided, ask for such prayers, and mix the result with the 
 		 * actual results on previous searches
 		 */
-		if (prayerSearched.getPhone()!=null && !prayerSearched.getPhone().trim().equals("")){
+		if (!prayerSearched.getPhone().trim().equals("")){
 			try {
 				mixOfLists(main.getPrayersByPhone(prayerSearched.getPhone()));
 			} catch (PrayerNotFoundException e) {
@@ -98,7 +123,7 @@ public class SearchPrayersController {
 		/* if a NOTES MASK was provided, ask for such prayers, and mix the result with the 
 		 * actual results on previous searches
 		 */
-		if (prayerSearched.getNotes()!=null && !prayerSearched.getNotes().trim().equals("")){
+		if (!prayerSearched.getNotes().trim().equals("")){
 			try {
 				mixOfLists(main.getPrayersByNotes(prayerSearched.getNotes()));
 			} catch (PrayerNotFoundException e) {
@@ -135,22 +160,26 @@ public class SearchPrayersController {
 		} catch (PrayerNotFoundException e) {
 		}
 		
-		//Provide number of rows returned
-		@SuppressWarnings("unchecked")
-		List<Prayer> finalList = (List<Prayer>)response.get("prayers");
-		response.put("prayersSize", finalList.size());
-		
-		//Construct the errors lists
-		List<Prayer> orphanPrayers = main.getOrphanPrayers();
-		response.put("orphanPrayers", orphanPrayers);
-		response.put("errorsSize", orphanPrayers.size());
-
+		processForm();
 		return new ModelAndView("/web/showPrayers.jsp", response);
 	}
 	
 
 //PRIVATE METHODS // PRIVATE METHODS // PRIVATE METHODS
 
+	private void processForm(){
+		@SuppressWarnings("unchecked")
+		List<Prayer> finalList = (List<Prayer>)response.get("prayers");
+		if (finalList!=null){
+			response.put("prayersSize", finalList.size());
+		}
+
+		//Construct the errors lists
+		List<Prayer> orphanPrayers = main.getOrphanPrayers();
+		response.put("orphanPrayers", orphanPrayers);
+		response.put("errorsSize", orphanPrayers.size());
+	}
+	
 	private void mixOfLists(List<Prayer> newList){
 		//Take the previous list of prayers already set on the response
 		@SuppressWarnings("unchecked")

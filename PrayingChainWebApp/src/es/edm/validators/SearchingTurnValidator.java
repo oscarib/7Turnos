@@ -19,6 +19,14 @@ public class SearchingTurnValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		JSPSimpleTurn turn = (JSPSimpleTurn)target;
 		
+		if (turn.getDow()==null) turn.setDow("NotSelected");
+		if (turn.getNotes()==null) turn.setNotes("");
+		if (turn.getPax()==null) turn.setPax("");
+		if (turn.prayer_id==null) turn.setPrayer_id("");
+		if (turn.getStatus()==null) turn.setStatus("NotSelected");
+		if (turn.getTurn()==null) turn.setTurn("");
+		if (turn.getUid()==null) turn.setUid("");
+
 		//No data specified
 		if (turn.getDow().equals("NotSelected") && turn.getStatus().equals("NotSelected") && turn.getNotes().equals("") &&
 			turn.getPrayer_id().equals("") && turn.getUid().equals("")){

@@ -181,17 +181,17 @@
 							<td>${nextTurn.pax}</td>
 							<td>
 								<form action="./deletePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextTurn.uid}" />
+									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
 								<form action="./changePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextTurn.uid}" />
+									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
 								<form action="./showPrayers.html" method="POST">
-									<input type="hidden" name="prayer_id"
+									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
 										class="btn btn-default" type="submit"
 										value="<fmt:message key='prayer.prayer'/>">
@@ -239,17 +239,17 @@
 							<td>${nextTurn.pax}</td>
 							<td>
 								<form action="./deletePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextTurn.uid}" />
+									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
 								<form action="./changePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextTurn.uid}" />
+									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
 								<form action="./showPrayers.html" method="POST">
-									<input type="hidden" name="prayer_id"
+									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
 										class="btn btn-default" type="submit"
 										value="<fmt:message key='prayer.prayer'/>">
