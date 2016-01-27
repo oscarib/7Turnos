@@ -32,8 +32,7 @@
 		<%@include file="./header.jsp"%>
 
 		<div class="jumbotron">
-			<h1><fmt:message key="turns.turns"/></h1>
-			<p><fmt:message key="turn.showTurns.title"/></p>
+			<h1><fmt:message key="form.search"/> <fmt:message key="turns.turns"/></h1>
 		</div>
 
 		<!-- Search form -->

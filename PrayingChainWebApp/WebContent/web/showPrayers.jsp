@@ -36,6 +36,12 @@
 			<p><fmt:message key="prayer.description"/></p>
 		</div>
 
+		<div>
+				<a href="./createPrayer.html" class="btn btn-primary btn-lg active" role="button">
+					<fmt:message key="actions.create" /> <fmt:message key="other.new" /> <fmt:message key="prayer.prayer" />
+				</a>
+		</div>
+
 		<!-- Search form -->
 		<h1>
 			<label><fmt:message key="prayer.searchBy" /></label>
@@ -43,7 +49,7 @@
 		<form:form commandName="prayer">
 
 			<div class="table-responsive">
-				<table class="table table-striped" width="200" border="1"
+				<table class="table table-striped"  border="1"
 					cellspacing="5" cellpadding="5">
 					<tr>
 						<th><label><fmt:message key="form.field" /></label></th>
@@ -51,44 +57,44 @@
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.uid" /></label></td>
-						<td><form:input class="form-control" path="uid" /><br>
-						<form:errors path="uid" /></td>
+						<td><form:input class="form-control" path="uid" />
+						<p class="text-danger bg-danger"><form:errors path="uid" /></p></td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.name" /></label></td>
-						<td><form:input class="form-control" path="name" /><br>
-						<form:errors path="name" /></td>
+						<td><form:input class="form-control" path="name" />
+						<p class="text-danger bg-danger"><form:errors path="name" /></p></td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.email" /></label></td>
-						<td><form:input class="form-control" path="email" /><br>
-						<form:errors path="email" /></td>
+						<td><form:input class="form-control" path="email" />
+						<p class="text-danger bg-danger"><form:errors path="email" /></p></td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.phone" /></label></td>
-						<td><form:input class="form-control" path="phone" /><br>
-						<form:errors path="phone" /></td>
+						<td><form:input class="form-control" path="phone" />
+						<p class="text-danger bg-danger"><form:errors path="phone" /></p></td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.notes" /></label></td>
-						<td><form:input class="form-control" path="notes" /><br>
-						<form:errors path="notes" /></td>
+						<td><form:input class="form-control" path="notes" />
+						<p class="text-danger bg-danger"><form:errors path="notes" /></p></td>
 					<tr>
 						<td><label><fmt:message key="prayer.hidden" /></label></td>
-						<td><form:select path="hidden" items="${hiddenList}" /><br>
-						<form:errors path="hidden" /></td>
+						<td><form:select path="hidden" items="${hiddenList}" />
+						<p class="text-danger bg-danger"><form:errors path="hidden" /></p></td>
 					</tr>
 					<tr>
 						<td><label><fmt:message key="prayer.ownCountry" /></label></td>
-						<td><form:select path="ownCountry" items="${ownCountryList}" /><br>
-						<form:errors path="hidden" /></td>
+						<td><form:select path="ownCountry" items="${ownCountryList}" />
+						<p class="text-danger bg-danger"><form:errors path="hidden" /></p></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input class="btn btn-default" type="submit"
+						<td colspan="2"><input class="btn btn-primary btn-lg" type="submit"
 							value="<fmt:message key='form.submmit'/>"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><form:errors></form:errors></td>
+						<td colspan="2"><p class="text-danger bg-danger"><form:errors></form:errors></p></td>
 					</tr>
 				</table>
 			</div>
@@ -138,21 +144,17 @@
 							<td>
 								<form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
-							</td>
-							<td>
 								<form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
-							</td>
-							<td>
 								<form action="./showTurns.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='turns.turns'/>">
 								</form>
 							</td>
@@ -172,7 +174,7 @@
 				:
 			</h2>
 
-			<div class="table-responsive">
+			<div class="container-fluid table-responsive">
 				<table class="table table-striped table-hover">
 					<tr>
 						<th scope="col"><label>UID</label></th>
@@ -208,21 +210,17 @@
 							<td>
 								<form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
-							</td>
-							<td>
 								<form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
-							</td>
-							<td>
 								<form action="./showTurns.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='turns.turns'/>">
 								</form>
 							</td>
