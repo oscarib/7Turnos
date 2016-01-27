@@ -181,19 +181,19 @@
 							<td>
 								<form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
 								<form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
 								<form action="./showPrayers.html" method="POST">
 									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default" type="submit"
-										value="<fmt:message key='prayer.prayer'/>">
+										class="btn btn-default btn-xs" type="submit"
+										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
 								</form>
 							</td>
 						</tr>
@@ -239,19 +239,19 @@
 							<td>
 								<form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
 								<form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default" type="submit"
+									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
 								<form action="./showPrayers.html" method="POST">
 									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default" type="submit"
-										value="<fmt:message key='prayer.prayer'/>">
+										class="btn btn-default btn-xs" type="submit"
+										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
 								</form>
 							</td>
 						</tr>
