@@ -1,5 +1,6 @@
 package es.edm.controllers;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.edm.exceptions.PrayerAlreadyExistsException;
 import es.edm.model.JSPPrayer;
+import es.edm.model.Prayer;
+import es.edm.services.MainService;
 import es.edm.validators.CreatingPrayerValidator;
 
 @Controller
@@ -23,6 +27,9 @@ public class CreatePrayerController {
 	
 	@Autowired
 	private CreatingPrayerValidator validator;
+	
+	@Autowired
+	private MainService main;
 	
 	//Combo Lists
 	private Map<String, String> ownCountryList;
@@ -61,8 +68,35 @@ public class CreatePrayerController {
 			return new ModelAndView("/web/createPrayer.jsp", model);
 		}
 
+		//Let's create a new prayer!
+		//Prayer ID is needed, but it would be recreated by the service
+		String name = prayerSearched.getName();
+		String email = prayerSearched.getEmail();
+		String phone = prayerSearched.getPhone();
+		boolean ownCountry;
+		if (prayerSearched.getOwnCountry().equals("Spain")) {
+			ownCountry = true;
+		} else {
+			ownCountry = false;
+		}
+		Date date = new Date(prayerSearched.getOptinDate());
+		String notes = prayerSearched.getNotes();
+		boolean hidden;
+		if (prayerSearched.getHidden().equals("Public")) {
+			hidden = false;
+		} else {
+			hidden = true;
+		}
+		String pseudonym = prayerSearched.getPseudonym();
 		
-		return new ModelAndView("/web/createPrayer.jsp", model);
+		Prayer newPrayer = new Prayer(10000, name, email, phone, ownCountry, date, notes, hidden, pseudonym);
+
+		try {
+			main.addNewPrayer(newPrayer);
+			return new ModelAndView("/web/newPrayerCreated.jsp", model);
+		} catch (PrayerAlreadyExistsException e) {
+			throw new RuntimeException("Something really bad has happen, as it shouldn't be raised a PrayerAlreadyExistsException... but it was");
+		}
 	}
 	
 	private void loadComboOwnCountry(){

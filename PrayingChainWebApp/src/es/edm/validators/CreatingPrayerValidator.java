@@ -1,8 +1,6 @@
 package es.edm.validators;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,8 +8,11 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import es.edm.exceptions.EmptyParameterException;
+import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.model.JSPPrayer;
 import es.edm.model.Prayer;
+import es.edm.services.MainService;
 
 @Component
 public class CreatingPrayerValidator implements Validator {
@@ -21,6 +22,9 @@ public class CreatingPrayerValidator implements Validator {
 	
 	@Autowired
 	private DateValidator dateValidator;
+	
+	@Autowired
+	private MainService main;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -44,9 +48,6 @@ public class CreatingPrayerValidator implements Validator {
 		if (prayer.getPhone()==null) prayer.setPhone("");
 		if (prayer.getPseudonym()==null) prayer.setPseudonym("");
 		if (prayer.getUid()==null) prayer.setUid("");
-		
-		//Validation of email: not empty
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "EmailEmpty");
 		
 		//Validation of name: not empty
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NameEmpty");
@@ -74,9 +75,61 @@ public class CreatingPrayerValidator implements Validator {
 			errors.rejectValue("pseudonym", "PseudonymIsNotEmpty");
 		}
 		
-		//Validation of Email: Should have a valid format
-		if (!prayer.getEmail().equals("") && !emailValidator.validate(prayer.getEmail())){
-			errors.rejectValue("email", "EmailNotValid");
+		//Validation of Email: Should have a valid format and should not be already present into the ddbb
+		if (!prayer.getEmail().equals("")){
+			if (!emailValidator.validate(prayer.getEmail())){
+				errors.rejectValue("email", "EmailNotValid");
+			} else {
+				try {
+					//Try to find that email in the ddbb
+					@SuppressWarnings("unused")
+					Prayer emailFoundPrayer = main.getPrayerByEmail(prayer.getEmail());
+					
+					//If this is run, it seems that that email was found, and then an error should be raised
+					errors.rejectValue("email", "EmailAlreadyExists");
+				} catch (PrayerNotFoundException e) {
+				}
+			}
+		}
+		
+		//Validation of phone, in case email is not set, and to check if that phone already exists in the ddbb
+		if (prayer.getEmail().equals("")){
+			//If phone was provided...
+			if (!prayer.getPhone().equals("")){
+				try {
+					//Try to get all prayers by that phone
+					@SuppressWarnings("unused")
+					List<Prayer> foundPrayersByPhone = main.getPrayersByPhone(prayer.getPhone());
+					
+					//If this is reached, then an error should be raised, as it was prayers with the same phone into the ddbb
+					errors.rejectValue("phone", "PhoneAlreadyExists");
+				} catch (PrayerNotFoundException e) {
+				} catch (EmptyParameterException e) {
+				}
+			}
+		}
+		
+		//Validation of name, in case neither email nor phone were provided
+		if (prayer.getEmail().equals("") && prayer.getPhone().equals("")){
+			boolean foundError = false;
+			if (!prayer.getName().equals("")){
+				try {
+					//Try to find other prayers with the same email
+					@SuppressWarnings("unused")
+					List<Prayer> foundPrayersByName = main.getPrayersByName(prayer.getName());
+					for (Prayer nextPrayer: foundPrayersByName){
+						if (nextPrayer.getEmail()==null || nextPrayer.getEmail().equals("")){
+							if (nextPrayer.getPhone()==null || nextPrayer.getPhone().equals("")){
+								foundError = true;
+							}
+						}
+					}
+					
+					//If this is reached, then an error should be raised
+					if (foundError) errors.rejectValue("name", "NameAlreadyExists");
+				} catch (PrayerNotFoundException e) {
+				}
+			}
 		}
 		
 		//Validation of Optin Date: Should have a valid format

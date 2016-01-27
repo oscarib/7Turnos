@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><fmt:message key="prayer.searchResults.postfix" /></title>
+<title><fmt:message key="actions.create" /> <fmt:message key="other.new" /> <fmt:message key="prayer.prayer" /></title>
 
 <!-- Bootstrap core CSS -->
 <link href="./web/css/bootstrap.min.css" rel="stylesheet">
