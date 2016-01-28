@@ -157,11 +157,10 @@
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
 								</form>
-								<form action="./createTurn2Prayer.html" method="POST">
-									<input type="hidden" name="uid"
-										value="${nextPrayer.uid}" /> <input
-										class="btn btn-default btn-xs" type="submit"
-										value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+								<form action="./createTurn.html" method="POST">
+									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+									<input type="hidden" name="firstCall" value="true" />  
+									<input class="btn btn-default btn-xs" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
 								</form>
 							</td>
 						</tr>
@@ -229,11 +228,10 @@
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
 								</form>
-								<form action="./createTurn2Prayer.html" method="POST">
-									<input type="hidden" name="uid"
-										value="${nextPrayer.uid}" /> <input
-										class="btn btn-default btn-xs" type="submit"
-										value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+								<form action="./createTurn.html" method="POST">
+									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+									<input type="hidden" name="firstCall" value="true" />  
+									<input class="btn btn-default btn-xs" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
 								</form>
 							</td>
 						</tr>

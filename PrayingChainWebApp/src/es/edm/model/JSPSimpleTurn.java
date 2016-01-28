@@ -9,6 +9,7 @@ public class JSPSimpleTurn {
 	public String turn;
 	public String status;
 	public String notes;
+	public boolean firstCall;
 	public String pax;
 
 	public JSPSimpleTurn(SimpleTurn turn) throws TurnException{
@@ -20,8 +21,18 @@ public class JSPSimpleTurn {
 		this.status = turn.getStatus().toString();
 		this.notes = turn.getNotes();
 		this.pax = Integer.toString(turn.getPax());
+		this.firstCall = true;
 	}
 	
+	
+	public boolean isFirstCall() {
+		return firstCall;
+	}
+
+	public void setFirstCall(boolean firstCall) {
+		this.firstCall = firstCall;
+	}
+
 	public JSPSimpleTurn(){
 	}
 
