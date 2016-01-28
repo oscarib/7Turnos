@@ -1,6 +1,7 @@
 package es.edm.controllers;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,14 @@ public class UploadCalendarController {
 
 	@RequestMapping(path="/uploadCalendar", method=RequestMethod.GET)
 	public ModelAndView UploadCalendar() throws IOException, DDBBException{
-		fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
-		fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
-		fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
-		fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+		try{
+			fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
+			fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
+			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
+			fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+		} catch (UnknownHostException e){
+			return new ModelAndView("/web/HostNotReacheable.jsp");
+		}
 		return new ModelAndView("/web/UploadCalendar.jsp");
 	}
 }

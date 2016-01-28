@@ -7,6 +7,8 @@ public class JSPSimpleTurn {
 	public String prayer_id;
 	public String dow;
 	public String turn;
+	//For managing turns by its number counterpart
+	public int turnInt;
 	public String status;
 	public String notes;
 	public boolean firstCall;
@@ -18,13 +20,17 @@ public class JSPSimpleTurn {
 		this.dow = turn.getDow().toString();
 		//TODO: Substitute the turn String by and internationalized one
 		this.turn = SimpleTurn.getHourByTurn(turn.getTurn());
+		this.turnInt = turn.getTurn();
 		this.status = turn.getStatus().toString();
 		this.notes = turn.getNotes();
 		this.pax = Integer.toString(turn.getPax());
 		this.firstCall = true;
 	}
 	
-	
+	public int getTurnInt() {
+		return turnInt;
+	}
+
 	public boolean isFirstCall() {
 		return firstCall;
 	}
@@ -66,6 +72,9 @@ public class JSPSimpleTurn {
 
 	public void setTurn(String turn) {
 		this.turn = turn;
+		if (!turn.equals("")){
+			this.turnInt = Integer.parseInt(turn);
+		}
 	}
 
 	public String getStatus() {

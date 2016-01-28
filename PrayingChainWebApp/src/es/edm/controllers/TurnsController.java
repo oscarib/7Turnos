@@ -19,12 +19,6 @@ public class TurnsController {
 		return new ModelAndView("/web/UnderDevelopment.jsp");
 	}
 	
-	@RequestMapping("/changeTurn")
-	public ModelAndView changeTurn(){
-		//TODO: Write Controller changeTurn()
-		return new ModelAndView("/web/UnderDevelopment.jsp");
-	}
-	
 	@RequestMapping("/addTurn2Prayer")
 	public ModelAndView addTurn2Prayer(){
 		//TODO: Write Controller addTurn2Prayer()

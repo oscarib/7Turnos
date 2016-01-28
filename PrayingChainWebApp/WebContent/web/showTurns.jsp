@@ -179,13 +179,19 @@
 							<td>${nextTurn.notes}</td>
 							<td>${nextTurn.pax}</td>
 							<td>
-								<form action="./deletePrayer.html" method="POST">
+								<form action="./deleteTurn.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
-								<form action="./changePrayer.html" method="POST">
+								<form action="./changeTurn.html" method="POST">
+									<input type="hidden" name="firstCall" value="true" />
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
+									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
+									<input type="hidden" name="dow" value="${nextTurn.dow}" />
+									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
+									<input type="hidden" name="status" value="${nextTurn.status}" />
+									<input type="hidden" name="notes" value="${nextTurn.notes}" />
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
@@ -237,13 +243,19 @@
 							<td>${nextTurn.notes}</td>
 							<td>${nextTurn.pax}</td>
 							<td>
-								<form action="./deletePrayer.html" method="POST">
+								<form action="./deleteTurn.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.delete'/>">
 								</form>
-								<form action="./changePrayer.html" method="POST">
+								<form action="./changeTurn.html" method="POST">
+									<input type="hidden" name="firstCall" value="true" />
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
+									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
+									<input type="hidden" name="dow" value="${nextTurn.dow}" />
+									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
+									<input type="hidden" name="status" value="${nextTurn.status}" />
+									<input type="hidden" name="notes" value="${nextTurn.notes}" />
 									<input class="btn btn-default btn-xs" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form>
