@@ -111,57 +111,43 @@
 				<table class="table table-striped" width="200" border="1"
 					cellspacing="5" cellpadding="5">
 					<tr>
-						<th scope="col"><label>UID</label></th>
-						<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.email" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.phone" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.ownCountry" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.optinDate" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.notes" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.hidden" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.pseudonym" /></label></th>
+						<th scope="col"><label><fmt:message key="other.data" /></label></th>
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
 					<c:forEach items="${orphanPrayers}" var="nextPrayer">
 						<tr>
-							<td>${nextPrayer.uid}</td>
-							<td>${nextPrayer.name}</td>
-							<td>${nextPrayer.email}</td>
-							<td>${nextPrayer.phone}</td>
-							<td>${nextPrayer.ownCountry}</td>
-							<td>${nextPrayer.optinDate}</td>
-							<td>${nextPrayer.notes}</td>
-							<td>${nextPrayer.hidden}</td>
-							<td>${nextPrayer.pseudonym}</td>
 							<td>
-								<form action="./deletePrayer.html" method="POST">
+								<label><fmt:message key="other.ID" /></label>: ${nextPrayer.uid}<br>
+								${nextPrayer.name} -${nextPrayer.email}-<br>
+								<label><fmt:message key="prayer.phone" /></label>: ${nextPrayer.phone}<br>
+								<label><fmt:message key="prayer.ownCountry" /></label>: ${nextPrayer.ownCountry}<br>
+								<label><fmt:message key="prayer.optinDate" /></label>: ${nextPrayer.optinDate}</br>
+								<label><fmt:message key="prayer.notes" /></label>: ${nextPrayer.notes}</br>
+								<label><fmt:message key="prayer.hidden" /></label>: ${nextPrayer.hidden}<br>
+								<label><fmt:message key="prayer.pseudonym" /></label>: ${nextPrayer.pseudonym}
+							</td>
+							<td>
+								<p><form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-danger" type="submit"
 										value="<fmt:message key='form.delete'/>">
-								</form>
-								<form action="./changePrayer.html" method="POST">
+								</form></p>
+								<p><form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
-								</form>
-								<form action="./showTurns.html" method="POST">
+								</form></p>
+								<p><form action="./showTurns.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
-								</form>
-								<form action="./createTurn.html" method="POST">
+								</form></p>
+								<p><form action="./createTurn.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
 									<input type="hidden" name="firstCall" value="true" />  
-									<input class="btn btn-default btn-xs" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
-								</form>
+									<input class="btn btn-success" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+								</form></p>
 							</td>
 						</tr>
 					</c:forEach>
@@ -182,57 +168,43 @@
 			<div class="container-fluid table-responsive">
 				<table class="table table-striped table-hover">
 					<tr>
-						<th scope="col"><label>UID</label></th>
-						<th scope="col"><label><fmt:message key="prayer.name" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.email" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.phone" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.ownCountry" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.optinDate" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.notes" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.hidden" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.pseudonym" /></label></th>
+						<th scope="col"><label><fmt:message key="other.data" /></label></th>
 						<th scope="col" colspan=3><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
 					<c:forEach items="${prayers}" var="nextPrayer">
 						<tr>
-							<td>${nextPrayer.uid}</td>
-							<td>${nextPrayer.name}</td>
-							<td>${nextPrayer.email}</td>
-							<td>${nextPrayer.phone}</td>
-							<td>${nextPrayer.ownCountry}</td>
-							<td>${nextPrayer.optinDate}</td>
-							<td>${nextPrayer.notes}</td>
-							<td>${nextPrayer.hidden}</td>
-							<td>${nextPrayer.pseudonym}</td>
 							<td>
-								<form action="./deletePrayer.html" method="POST">
+								<label><fmt:message key="other.ID" /></label>: ${nextPrayer.uid}<br>
+								${nextPrayer.name} -${nextPrayer.email}-<br>
+								<label><fmt:message key="prayer.phone" /></label>: ${nextPrayer.phone}<br>
+								<label><fmt:message key="prayer.ownCountry" /></label>: ${nextPrayer.ownCountry}<br>
+								<label><fmt:message key="prayer.optinDate" /></label>: ${nextPrayer.optinDate}</br>
+								<label><fmt:message key="prayer.notes" /></label>: ${nextPrayer.notes}</br>
+								<label><fmt:message key="prayer.hidden" /></label>: ${nextPrayer.hidden}<br>
+								<label><fmt:message key="prayer.pseudonym" /></label>: ${nextPrayer.pseudonym}
+							</td>
+							<td>
+								<p><form action="./deletePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-danger" type="submit"
 										value="<fmt:message key='form.delete'/>">
-								</form>
-								<form action="./changePrayer.html" method="POST">
+								</form></p>
+								<p><form action="./changePrayer.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
-								</form>
-								<form action="./showTurns.html" method="POST">
+								</form></p>
+								<p><form action="./showTurns.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-default" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
-								</form>
-								<form action="./createTurn.html" method="POST">
+								</form></p>
+								<p><form action="./createTurn.html" method="POST">
 									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
 									<input type="hidden" name="firstCall" value="true" />  
-									<input class="btn btn-default btn-xs" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
-								</form>
+									<input class="btn btn-success" type="submit" value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+								</form></p>
 							</td>
 						</tr>
 					</c:forEach>

@@ -158,33 +158,26 @@
 				<table class="table table-striped" width="200" border="1"
 					cellspacing="5" cellpadding="5">
 					<tr>
-						<th scope="col"><label><fmt:message key="turn.uid" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="turn.prayer_id" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.dow" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.hour" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.status" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.notes" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.pax" /></label></th>
+						<th scope="col"><label><fmt:message key="other.data" /></label></th>
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
 					<c:forEach items="${orphanTurns}" var="nextTurn">
 						<tr>
-							<td>${nextTurn.uid}</td>
-							<td>${nextTurn.prayer_id}</td>
-							<td>${nextTurn.dow}</td>
-							<td>${nextTurn.turn}</td>
-							<td>${nextTurn.status}</td>
-							<td>${nextTurn.notes}</td>
-							<td>${nextTurn.pax}</td>
 							<td>
-								<form action="./deleteTurn.html" method="POST">
+								<label><fmt:message key="other.ID" /></label>: ${nextTurn.uid}.${nextTurn.prayer_id}<br>
+								${nextTurn.dow} (${nextTurn.turn}). ${nextTurn.status}<br>
+								<label><fmt:message key="turn.notes"/></label>:<br>
+								${nextTurn.notes}
+							</td>
+							
+							<td>
+								<p><form action="./deleteTurn.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-danger" type="submit"
 										value="<fmt:message key='form.delete'/>">
-								</form>
-								<form action="./changeTurn.html" method="POST">
+								</form></p>
+								<p><form action="./changeTurn.html" method="POST">
 									<input type="hidden" name="firstCall" value="true" />
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
@@ -192,15 +185,15 @@
 									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
 									<input type="hidden" name="status" value="${nextTurn.status}" />
 									<input type="hidden" name="notes" value="${nextTurn.notes}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
-								</form>
-								<form action="./showPrayers.html" method="POST">
+								</form></p>
+								<p><form action="./showPrayers.html" method="POST">
 									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default btn-xs" type="submit"
+										class="btn btn-default" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
-								</form>
+								</form></p>
 							</td>
 						</tr>
 					</c:forEach>
@@ -222,33 +215,26 @@
 				<table class="table table-striped" width="200" border="1"
 					cellspacing="5" cellpadding="5">
 					<tr>
-						<th scope="col"><label><fmt:message key="turn.uid" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="turn.prayer_id" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.dow" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.hour" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.status" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.notes" /></label></th>
-						<th scope="col"><label><fmt:message key="turn.pax" /></label></th>
+						<th scope="col"><label><fmt:message key="other.data" /></label></th>
 						<th scope="col"><label><fmt:message
 									key="prayer.actions" /></label></th>
 					</tr>
 					<c:forEach items="${turns}" var="nextTurn">
 						<tr>
-							<td>${nextTurn.uid}</td>
-							<td>${nextTurn.prayer_id}</td>
-							<td>${nextTurn.dow}</td>
-							<td>${nextTurn.turn}</td>
-							<td>${nextTurn.status}</td>
-							<td>${nextTurn.notes}</td>
-							<td>${nextTurn.pax}</td>
 							<td>
-								<form action="./deleteTurn.html" method="POST">
+								<label><fmt:message key="other.ID" /></label>: ${nextTurn.uid}.${nextTurn.prayer_id}<br>
+								${nextTurn.dow} (${nextTurn.turn}). <br>
+								${nextTurn.status}<br>
+								<label><fmt:message key="turn.notes"/></label>:<br>
+								${nextTurn.notes}
+							</td>
+							<td>
+								<p><form action="./deleteTurn.html" method="POST">
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-danger" type="submit"
 										value="<fmt:message key='form.delete'/>">
-								</form>
-								<form action="./changeTurn.html" method="POST">
+								</form></p>
+								<p><form action="./changeTurn.html" method="POST">
 									<input type="hidden" name="firstCall" value="true" />
 									<input type="hidden" name="uid" value="${nextTurn.uid}" />
 									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
@@ -256,15 +242,15 @@
 									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
 									<input type="hidden" name="status" value="${nextTurn.status}" />
 									<input type="hidden" name="notes" value="${nextTurn.notes}" />
-									<input class="btn btn-default btn-xs" type="submit"
+									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
-								</form>
-								<form action="./showPrayers.html" method="POST">
+								</form></p>
+								<p><form action="./showPrayers.html" method="POST">
 									<input type="hidden" name="uid"
 										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default btn-xs" type="submit"
+										class="btn btn-default" type="submit"
 										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
-								</form>
+								</form></p>
 							</td>
 						</tr>
 					</c:forEach>
