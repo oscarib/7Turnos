@@ -33,7 +33,7 @@
 
 		<div class="jumbotron">
 			<h1><fmt:message key="error.title"/></h1>
-			<p><fmt:message key="error.hotNotReacheable"/></p>
+			<p><fmt:message key="error.hostNotReacheable"/>. <fmt:message key="error.maybeInternetIsDown"/></p>
 		</div>
 
 		<%@include file="./footer.jsp"%>

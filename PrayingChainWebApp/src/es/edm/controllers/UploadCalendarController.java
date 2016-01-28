@@ -1,6 +1,7 @@
 package es.edm.controllers;
 
 import java.io.IOException;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class UploadCalendarController {
 			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
 			fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
 		} catch (UnknownHostException e){
+			e.printStackTrace();
+			return new ModelAndView("/web/HostNotReacheable.jsp");
+		} catch (SocketException e) {
+			e.printStackTrace();
 			return new ModelAndView("/web/HostNotReacheable.jsp");
 		}
 		return new ModelAndView("/web/UploadCalendar.jsp");
