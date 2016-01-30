@@ -43,7 +43,6 @@ public class CreatingPrayerValidator implements Validator {
 		if (prayer.getHidden()==null) prayer.setHidden("NotSelected");
 		if (prayer.getName()==null) prayer.setName("");
 		if (prayer.getNotes()==null) prayer.setNotes("");
-		if (prayer.getOptinDate()==null) prayer.setOptinDate("");
 		if (prayer.getOwnCountry()==null) prayer.setOwnCountry("NotSelected");
 		if (prayer.getPhone()==null) prayer.setPhone("");
 		if (prayer.getPseudonym()==null) prayer.setPseudonym("");
@@ -51,9 +50,6 @@ public class CreatingPrayerValidator implements Validator {
 		
 		//Validation of name: not empty
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NameEmpty");
-		
-		//Validation of OptinDate: not empty
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "optinDate", "OptinDateEmpty");
 		
 		//Validation of Country: not empty
 		if (prayer.getOwnCountry().equals("NotSelected")){
@@ -129,13 +125,6 @@ public class CreatingPrayerValidator implements Validator {
 					if (foundError) errors.rejectValue("name", "NameAlreadyExists");
 				} catch (PrayerNotFoundException e) {
 				}
-			}
-		}
-		
-		//Validation of Optin Date: Should have a valid format
-		if (!prayer.getOptinDate().equals("")){
-			if (!dateValidator.isThisDateValid(prayer.getOptinDate(), "dd/MM/yyyy")){
-				errors.rejectValue("optinDate", "DateNotValid");
 			}
 		}
 	}

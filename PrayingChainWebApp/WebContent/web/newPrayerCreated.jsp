@@ -32,8 +32,22 @@
 		<%@include file="./header.jsp"%>
 
 		<div class="jumbotron">
-			<h1>Orador creado</h1>
-			<p>El nuevo orador ha sido creado</p>
+			<h1>
+				<fmt:message key="other.success" />
+			</h1>
+			<h2>
+				<fmt:message key="info.PrayerCreated" />
+			</h2>
+		</div>
+		
+		<div>
+			<form action="./showPrayers.html" method="POST">
+				<input type="hidden" name="uid" value="${newPrayer.uid}" />
+				<input type="hidden" name="email" value="${newPrayer.email}" />
+				<input type="hidden" name="phone" value="${newPrayer.phone}" />
+				<input type="hidden" name="name" value="${newPrayer.name}" />
+				<input class="btn btn-primary btn-lg active" type="submit" value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+			</form>
 		</div>
 
 		<%@include file="./footer.jsp"%>

@@ -65,11 +65,6 @@
 							<p class="text-danger bg-danger"><form:errors path="ownCountry" /></p></td>
 						</tr>
 						<tr>
-							<td><label>Fecha de alta:</label></td>
-							<td><form:input class="form-control" path="optinDate" />
-							<p class="text-danger bg-danger"><form:errors path="optinDate" /></p></td>
-						</tr>
-						<tr>
 							<td><label>Notes</label></td>
 							<td><form:input class="form-control" path="notes" />
 							<p class="text-danger bg-danger"><form:errors path="notes" /></p></td>

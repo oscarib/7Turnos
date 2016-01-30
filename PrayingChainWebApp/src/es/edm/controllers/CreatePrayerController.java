@@ -79,7 +79,7 @@ public class CreatePrayerController {
 		} else {
 			ownCountry = false;
 		}
-		Date date = new Date(prayerSearched.getOptinDate());
+		Date date = new Date();
 		String notes = prayerSearched.getNotes();
 		boolean hidden;
 		if (prayerSearched.getHidden().equals("Public")) {
@@ -93,6 +93,17 @@ public class CreatePrayerController {
 
 		try {
 			main.addNewPrayer(newPrayer);
+			
+			//In order to avoid its own validator restrictions, let's remove no needed filters...
+			if (!prayerSearched.getEmail().equals("")){
+				prayerSearched.setName("");
+				prayerSearched.setPhone("");
+			} else {
+				if (!prayerSearched.getPhone().equals("")){
+					prayerSearched.setName("");
+				}
+			}
+			
 			return new ModelAndView("/web/newPrayerCreated.jsp", model);
 		} catch (PrayerAlreadyExistsException e) {
 			throw new RuntimeException("Something really bad has happen, as it shouldn't be raised a PrayerAlreadyExistsException... but it was");
