@@ -11,6 +11,25 @@ public class JSPPrayer{
 	private String notes;
 	private String hidden;
 	private String pseudonym;
+	private boolean firstCall;
+	private String originalEmail;
+	
+	public String getOriginalEmail() {
+		return originalEmail;
+	}
+
+	public void setOriginalEmail(String originalEmail) {
+		this.originalEmail = originalEmail;
+	}
+
+	public boolean isFirstCall() {
+		return firstCall;
+	}
+
+	public void setFirstCall(boolean firstCall) {
+		this.firstCall = firstCall;
+	}
+	
 	public String getUid() {
 		return uid;
 	}
