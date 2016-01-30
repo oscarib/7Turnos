@@ -47,6 +47,9 @@ public class ShowTurnsController {
 	//List of status
 	private Map<String, String> statusList;
 	
+	//List of turns
+	private Map<String, String> turnList;
+	
 	public ShowTurnsController(){
 		resetForm();
 	}
@@ -61,7 +64,6 @@ public class ShowTurnsController {
 	}
 	
 	//Processes the form
-	@SuppressWarnings("unchecked")
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView searchTurns(@ModelAttribute("simpleTurn") JSPSimpleTurn turnSearched, Errors errors) throws DDBBException, TurnException {
 		//Validate that form entries
@@ -114,6 +116,19 @@ public class ShowTurnsController {
 			List<JSPSimpleTurn> dowTurns = new ArrayList<JSPSimpleTurn>();
 			for (SimpleTurn nextTurn : turns){
 				if (nextTurn.getDow().toString().equals(turnSearched.getDow())){
+					dowTurns.add(new JSPSimpleTurn(nextTurn));
+				}
+			}
+			mixOfLists(dowTurns);
+		}
+
+		//TURN
+		if (!turnSearched.getTurn().equals("NotSelected")){
+			List<SimpleTurn> turns = main.getAllTurns();
+			List<JSPSimpleTurn> dowTurns = new ArrayList<JSPSimpleTurn>();
+			for (SimpleTurn nextTurn : turns){
+				int turn2Int = Integer.parseInt(turnSearched.getTurn());
+				if (nextTurn.getTurn() == turn2Int){
 					dowTurns.add(new JSPSimpleTurn(nextTurn));
 				}
 			}
@@ -223,6 +238,58 @@ public class ShowTurnsController {
 		statusList.put("cancelled", "Cancelado");
 		statusList.put("NotCommitted", "No Comprometido");
 		response.put("statusList", statusList);
+		
+		turnList = new LinkedHashMap<String, String>();
+		turnList.put("NotSelected", "Seleciona un turno");
+		turnList.put("0", "00:00am");
+		turnList.put("1", "00:30am");
+		turnList.put("2", "01:00am");
+		turnList.put("3", "01:30am");
+		turnList.put("4", "02:00am");
+		turnList.put("5", "02:30am");
+		turnList.put("6", "03:00am");
+		turnList.put("7", "03:30am");
+		turnList.put("8", "04:00am");
+		turnList.put("9", "04:30am");
+		turnList.put("10", "05:00am");
+		turnList.put("11", "05:30am");
+		turnList.put("12", "06:00am");
+		turnList.put("13", "06:30am");
+		turnList.put("14", "07:00am");
+		turnList.put("15", "07:30am");
+		turnList.put("16", "08:00am");
+		turnList.put("17", "08:30am");
+		turnList.put("18", "09:00am");
+		turnList.put("19", "09:30am");
+		turnList.put("20", "10:00am");
+		turnList.put("21", "10:30am");
+		turnList.put("22", "11:00am");
+		turnList.put("23", "11:30am");
+		turnList.put("24", "12:00am");
+		turnList.put("25", "12:30pm");
+		turnList.put("26", "13:00pm");
+		turnList.put("27", "13:30pm");
+		turnList.put("28", "14:00pm");
+		turnList.put("29", "14:30pm");
+		turnList.put("30", "15:00pm");
+		turnList.put("31", "15:30pm");
+		turnList.put("32", "16:00pm");
+		turnList.put("33", "16:30pm");
+		turnList.put("34", "17:00pm");
+		turnList.put("35", "17:30pm");
+		turnList.put("36", "18:00pm");
+		turnList.put("37", "18:30pm");
+		turnList.put("38", "19:00pm");
+		turnList.put("39", "19:30pm");
+		turnList.put("40", "20:00pm");
+		turnList.put("41", "20:30pm");
+		turnList.put("42", "21:00pm");
+		turnList.put("43", "21:30pm");
+		turnList.put("44", "22:00pm");
+		turnList.put("45", "22:30pm");
+		turnList.put("46", "23:00pm");
+		turnList.put("47", "23:30pm");
+		response.put("turnList", turnList);
 	}
 }
 

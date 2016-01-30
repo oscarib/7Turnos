@@ -24,12 +24,12 @@ public class SearchingTurnValidator implements Validator {
 		if (turn.getPax()==null) turn.setPax("");
 		if (turn.prayer_id==null) turn.setPrayer_id("");
 		if (turn.getStatus()==null) turn.setStatus("NotSelected");
-		if (turn.getTurn()==null) turn.setTurn("");
+		if (turn.getTurn()==null) turn.setTurn("NotSelected");
 		if (turn.getUid()==null) turn.setUid("");
 
 		//No data specified
 		if (turn.getDow().equals("NotSelected") && turn.getStatus().equals("NotSelected") && turn.getNotes().equals("") &&
-			turn.getPrayer_id().equals("") && turn.getUid().equals("")){
+			turn.getPrayer_id().equals("") && turn.getUid().equals("") && turn.getTurn().equals("NotSelected")){
 			errors.reject("NoParameterSpecified");
 		}
 		

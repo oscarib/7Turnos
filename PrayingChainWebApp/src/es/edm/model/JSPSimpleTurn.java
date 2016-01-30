@@ -72,7 +72,7 @@ public class JSPSimpleTurn {
 
 	public void setTurn(String turn) {
 		this.turn = turn;
-		if (!turn.equals("")){
+		if (!turn.equals("") && !turn.equals("NotSelected")){
 			this.turnInt = Integer.parseInt(turn);
 		}
 	}
