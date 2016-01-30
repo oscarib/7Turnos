@@ -172,7 +172,7 @@
 									${nextPrayer.ownCountry}<br>
 								<label><fmt:message key="prayer.optinDate" /></label>:
 									${nextPrayer.optinDate}</br> <label><fmt:message
-											key="prayer.notes" /></label>: ${nextPrayer.notes}</br> <label><fmt:message
+											key="prayer.notes" /></label>:<br> ${nextPrayer.notes}</br> <label><fmt:message
 											key="prayer.hidden" /></label>: ${nextPrayer.hidden}<br>
 								<label><fmt:message key="prayer.pseudonym" /></label>:
 									${nextPrayer.pseudonym}</td>
@@ -255,7 +255,7 @@
 									${nextPrayer.ownCountry}<br>
 								<label><fmt:message key="prayer.optinDate" /></label>:
 									${nextPrayer.optinDate}</br> <label><fmt:message
-											key="prayer.notes" /></label>: ${nextPrayer.notes}</br> <label><fmt:message
+											key="prayer.notes" /></label>:<br> ${nextPrayer.notes}</br> <label><fmt:message
 											key="prayer.hidden" /></label>: ${nextPrayer.hidden}<br>
 								<label><fmt:message key="prayer.pseudonym" /></label>:
 									${nextPrayer.pseudonym}</td>
