@@ -27,241 +27,220 @@
 
 <body>
 
+	<!--  Main Container -->
 	<div class="container">
-
-		<%@include file="./header.jsp"%>
-
-		<div class="jumbotron">
-			<h1><fmt:message key="form.search"/> <fmt:message key="turns.turns"/></h1>
+	
+		<!-- Header Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<%@include file="./header.jsp"%>
+			</div>
 		</div>
-
-		<!-- Search form -->
-		<h1>
-			<label><fmt:message key="turn.searchBy" /></label>
-		</h1>
-		<form:form commandName="simpleTurn">
-
-			<div class="table-responsive">
-				<table class="table table-striped" width="200" border="1"
-					cellspacing="5" cellpadding="5">
-					<tr>
-						<th><label><fmt:message key="form.field" /></label></th>
-						<th><label><fmt:message key="form.value" /></label></th>
-					</tr>
-					<tr>
-						<td><label><fmt:message key="turn.uid" /></label></td>
-						<td><form:input path="uid" /><br>
-						<form:errors path="uid" /></td>
-					</tr>
-					<tr>
-						<td><label><fmt:message key="turn.prayer_id" /></label></td>
-						<td><form:input path="prayer_id" /><br>
-						<form:errors path="prayer_id" /></td>
-					</tr>
-					<tr>
-						<td><label><fmt:message key="turn.dow" /></label></td>
-						<td>
-							<form:select path="dow" items="${dowList}" /><br>
-							<form:errors path="dow" />
-						</td>
-					</tr>
-
-					<!-- TODO: Include filters on start and finishing turns
-				<tr>
-					<td><label><fmt:message key="turn.hour" /></label></td>
-					<td>
-						<form:select path="turn">
-							<form:option value="0">00:00am</form:option>
-							<form:option value="1">00:30am</form:option>
-							<form:option value="2">01:00am</form:option>
-							<form:option value="3">01:30am</form:option>
-							<form:option value="4">02:00am</form:option>
-							<form:option value="5">02:30am</form:option>
-							<form:option value="6">03:00am</form:option>
-							<form:option value="7">03:30am</form:option>
-							<form:option value="8">04:00am</form:option>
-							<form:option value="9">04:30am</form:option>
-							<form:option value="10">05:00am</form:option>
-							<form:option value="11">05:30am</form:option>
-							<form:option value="12">06:00am</form:option>
-							<form:option value="13">06:30am</form:option>
-							<form:option value="14">07:00am</form:option>
-							<form:option value="15">07:30am</form:option>
-							<form:option value="16">08:00am</form:option>
-							<form:option value="17">08:30am</form:option>
-							<form:option value="18">09:00am</form:option>
-							<form:option value="19">09:30am</form:option>
-							<form:option value="20">10:00am</form:option>
-							<form:option value="21">10:30am</form:option>
-							<form:option value="22">11:00am</form:option>
-							<form:option value="23">11:30am</form:option>
-							<form:option value="24">12:00pm</form:option>
-							<form:option value="25">12:30pm</form:option>
-							<form:option value="26">13:00pm</form:option>
-							<form:option value="27">13:30pm</form:option>
-							<form:option value="28">14:00pm</form:option>
-							<form:option value="29">14:30pm</form:option>
-							<form:option value="30">15:00pm</form:option>
-							<form:option value="31">15:30pm</form:option>
-							<form:option value="32">16:00pm</form:option>
-							<form:option value="33">16:30pm</form:option>
-							<form:option value="34">17:00pm</form:option>
-							<form:option value="35">17:30pm</form:option>
-							<form:option value="36">18:00pm</form:option>
-							<form:option value="37">18:30pm</form:option>
-							<form:option value="38">19:00pm</form:option>
-							<form:option value="39">19:30pm</form:option>
-							<form:option value="40">20:00pm</form:option>
-							<form:option value="41">20:30pm</form:option>
-							<form:option value="42">21:00pm</form:option>
-							<form:option value="43">21:30pm</form:option>
-							<form:option value="44">22:00pm</form:option>
-							<form:option value="45">22:30pm</form:option>
-							<form:option value="46">23:00pm</form:option>
-							<form:option value="47">23:30pm</form:option>
-						</form:select>
-					<form:errors path="turn" /></td>
-				</tr>
- -->
-					<tr>
-						<td><label><fmt:message key="turn.status" /></label></td>
-						<td>
-							<form:select path="status" items="${statusList}" /><br>
-							<form:errors path="status" />
-						</td>
-					</tr>
-					<tr>
-						<td><label><fmt:message key="turn.notes" /></label></td>
-						<td><form:input path="notes" /><br>
-						<form:errors path="notes" /></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input class="btn btn-default" type="submit"
-							value="<fmt:message key='form.search'/>"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><form:errors/></td>
-					</tr>
-				</table>
+		<!-- End of Header Section -->
+	
+		<!-- Jumbotron Section (Page Title) -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="jumbotron">
+					<h1><fmt:message key="form.search"/> <fmt:message key="turns.turns"/></h1>
+				</div>
 			</div>
-		</form:form>
+		</div>
+		<!-- End of Jumbotron Section (Page Title) -->
 
-		<!-- Errors -->
-		<c:if test="${errorsSize > 0}">
-			<h2>
-				<fmt:message key="other.warning" />
-				${errorsSize}
-				<fmt:message key="prayer.orphanTurns" />
-			</h2>
+		<!-- Data Section -->
+		<div class="row">
+		
+			<!-- Search Form -->
+			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+				<h1>
+					<label><fmt:message key="turn.searchBy" /></label>
+				</h1>
+				<form:form commandName="simpleTurn">
 
-			<div class="table-responsive">
-				<table class="table table-striped" width="200" border="1"
-					cellspacing="5" cellpadding="5">
-					<tr>
-						<th scope="col"><label><fmt:message key="other.data" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.actions" /></label></th>
-					</tr>
-					<c:forEach items="${orphanTurns}" var="nextTurn">
+					<table class="table table-striped" width="200" border="1"
+						cellspacing="5" cellpadding="5">
 						<tr>
-							<td>
-								<label><fmt:message key="other.ID" /></label>: ${nextTurn.uid}.${nextTurn.prayer_id}<br>
-								${nextTurn.dow} (${nextTurn.turn}). ${nextTurn.status}<br>
-								<label><fmt:message key="turn.notes"/></label>:<br>
-								${nextTurn.notes}
-							</td>
-							
-							<td>
-								<p><form action="./deleteTurn.html" method="POST">
-									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-danger" type="submit"
-										value="<fmt:message key='form.delete'/>">
-								</form></p>
-								<p><form action="./changeTurn.html" method="POST">
-									<input type="hidden" name="firstCall" value="true" />
-									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
-									<input type="hidden" name="dow" value="${nextTurn.dow}" />
-									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
-									<input type="hidden" name="status" value="${nextTurn.status}" />
-									<input type="hidden" name="notes" value="${nextTurn.notes}" />
-									<input class="btn btn-warning" type="submit"
-										value="<fmt:message key='form.modify'/>">
-								</form></p>
-								<p><form action="./showPrayers.html" method="POST">
-									<input type="hidden" name="uid"
-										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default" type="submit"
-										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
-								</form></p>
-							</td>
+							<th><label><fmt:message key="form.field" /></label></th>
+							<th><label><fmt:message key="form.value" /></label></th>
 						</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</c:if>
-
-		<!-- Results -->
-		<c:if test="${turnsSize > 0}">
-
-			<h2>
-				<fmt:message key="turn.searchResults.prefix" />
-				${turnsSize}
-				<fmt:message key="turn.searchResults.postfix" />
-				:
-			</h2>
-
-			<div class="table-responsive">
-				<table class="table table-striped" width="200" border="1"
-					cellspacing="5" cellpadding="5">
-					<tr>
-						<th scope="col"><label><fmt:message key="other.data" /></label></th>
-						<th scope="col"><label><fmt:message
-									key="prayer.actions" /></label></th>
-					</tr>
-					<c:forEach items="${turns}" var="nextTurn">
 						<tr>
-							<td>
-								<label><fmt:message key="other.ID" /></label>: ${nextTurn.uid}.${nextTurn.prayer_id}<br>
-								${nextTurn.dow} (${nextTurn.turn}). <br>
-								${nextTurn.status}<br>
-								<label><fmt:message key="turn.notes"/></label>:<br>
-								${nextTurn.notes}
-							</td>
-							<td>
-								<p><form action="./deleteTurn.html" method="POST">
-									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input class="btn btn-danger" type="submit"
-										value="<fmt:message key='form.delete'/>">
-								</form></p>
-								<p><form action="./changeTurn.html" method="POST">
-									<input type="hidden" name="firstCall" value="true" />
-									<input type="hidden" name="uid" value="${nextTurn.uid}" />
-									<input type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
-									<input type="hidden" name="dow" value="${nextTurn.dow}" />
-									<input type="hidden" name="turn" value="${nextTurn.turnInt}" />
-									<input type="hidden" name="status" value="${nextTurn.status}" />
-									<input type="hidden" name="notes" value="${nextTurn.notes}" />
-									<input class="btn btn-warning" type="submit"
-										value="<fmt:message key='form.modify'/>">
-								</form></p>
-								<p><form action="./showPrayers.html" method="POST">
-									<input type="hidden" name="uid"
-										value="${nextTurn.prayer_id}" /> <input
-										class="btn btn-default" type="submit"
-										value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
-								</form></p>
-							</td>
+							<td><label><fmt:message key="turn.uid" /></label></td>
+							<td><form:input path="uid" /><br>
+							<form:errors path="uid" /></td>
 						</tr>
-					</c:forEach>
-				</table>
+						<tr>
+							<td><label><fmt:message key="turn.prayer_id" /></label></td>
+							<td><form:input path="prayer_id" /><br>
+							<form:errors path="prayer_id" /></td>
+						</tr>
+						<tr>
+							<td><label><fmt:message key="turn.dow" /></label></td>
+							<td><form:select path="dow" items="${dowList}" /><br>
+							<form:errors path="dow" /></td>
+						</tr>
+						<tr>
+							<td><label><fmt:message key="turn.turn" /></label></td>
+							<td><form:select path="turn" items="${turnList}" /><br>
+							<form:errors path="turn" /></td>
+						</tr>
+						<tr>
+							<td><label><fmt:message key="turn.status" /></label></td>
+							<td><form:select path="status" items="${statusList}" /><br>
+							<form:errors path="status" /></td>
+						</tr>
+						<tr>
+							<td><label><fmt:message key="turn.notes" /></label></td>
+							<td><form:input path="notes" /><br>
+							<form:errors path="notes" /></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input class="btn btn-primary" type="submit"
+								value="<fmt:message key='form.search'/>"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><form:errors /></td>
+						</tr>
+					</table>
+				</form:form>
 			</div>
-		</c:if>
+			<!-- End of Search Form -->
 
-		<%@include file="./footer.jsp"%>
+			<!-- Error Section -->
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+				<c:if test="${errorsSize > 0}">
+					<h2>
+						<fmt:message key="other.warning" />
+						${errorsSize}
+						<fmt:message key="prayer.orphanTurns" />
+					</h2>
+
+					<table class="table table-striped" width="200" border="1"
+						cellspacing="5" cellpadding="5">
+						<tr>
+							<th scope="col"><label><fmt:message key="other.data" /></label></th>
+							<th scope="col"><label><fmt:message
+										key="prayer.actions" /></label></th>
+						</tr>
+						<c:forEach items="${orphanTurns}" var="nextTurn">
+							<tr>
+								<td><label><fmt:message key="other.ID" /></label>:
+									${nextTurn.uid}.${nextTurn.prayer_id}<br> ${nextTurn.dow}
+										(${nextTurn.turn}). ${nextTurn.status}
+								<br>
+								<label><fmt:message key="turn.notes" /></label>:<br>
+										${nextTurn.notes} </td>
+
+								<td>
+									<p>
+									<form action="./deleteTurn.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											class="btn btn-danger" type="submit"
+											value="<fmt:message key='form.delete'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./changeTurn.html" method="POST">
+										<input type="hidden" name="firstCall" value="true" /> <input
+											type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
+										<input type="hidden" name="dow" value="${nextTurn.dow}" /> <input
+											type="hidden" name="turn" value="${nextTurn.turnInt}" /> <input
+											type="hidden" name="status" value="${nextTurn.status}" /> <input
+											type="hidden" name="notes" value="${nextTurn.notes}" /> <input
+											class="btn btn-warning" type="submit"
+											value="<fmt:message key='form.modify'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./showPrayers.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
+										<input class="btn btn-default" type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+									</form>
+									</p>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+			</div>
+			<!-- End of Error Section -->
+
+			<!-- Results Section -->
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+				<c:if test="${turnsSize > 0}">
+					<h1>
+						${turnsSize}
+						<fmt:message key="turn.searchResults.postfix" />
+						:
+					</h1>
+					<table class="table table-striped" width="200" border="1"
+						cellspacing="5" cellpadding="5">
+						<tr>
+							<th scope="col"><label><fmt:message key="other.data" /></label></th>
+							<th scope="col"><label><fmt:message
+										key="prayer.actions" /></label></th>
+						</tr>
+						<c:forEach items="${turns}" var="nextTurn">
+							<tr>
+								<td><label><fmt:message key="other.ID" /></label>:
+									${nextTurn.uid}.${nextTurn.prayer_id}<br> ${nextTurn.dow}
+										(${nextTurn.turn}). 
+								<br> ${nextTurn.status}
+								<br>
+								<label><fmt:message key="turn.notes" /></label>:<br>
+										${nextTurn.notes} </td>
+								<td>
+									<p>
+									<form action="./deleteTurn.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											class="btn btn-danger" type="submit"
+											value="<fmt:message key='form.delete'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./changeTurn.html" method="POST">
+										<input type="hidden" name="firstCall" value="true" /> <input
+											type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											type="hidden" name="prayer_id" value="${nextTurn.prayer_id}" />
+										<input type="hidden" name="dow" value="${nextTurn.dow}" /> <input
+											type="hidden" name="turn" value="${nextTurn.turnInt}" /> <input
+											type="hidden" name="status" value="${nextTurn.status}" /> <input
+											type="hidden" name="notes" value="${nextTurn.notes}" /> <input
+											class="btn btn-warning" type="submit"
+											value="<fmt:message key='form.modify'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./showPrayers.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
+										<input class="btn btn-default" type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+									</form>
+									</p>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+
+			</div>
+			<!-- End of Results Section -->
+
+		</div>
+		<!-- End Data Section -->
+
+		<!-- Footer Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<%@include file="./footer.jsp"%>
+			</div>
+		</div>
+		<!-- End of Footer Section -->
 
 	</div>
-	<!-- /container -->
+	<!--  End of Main Container -->
 
 </body>
 </html>
