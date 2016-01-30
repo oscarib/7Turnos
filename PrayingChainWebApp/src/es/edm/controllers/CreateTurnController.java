@@ -80,7 +80,7 @@ public class CreateTurnController {
 		try {
 			status = SimpleTurn.getTurnStatus(newTurn.getStatus());
 		} catch (TurnException e) {
-			throw new RuntimeException("Turn convertion failed. Form value received that failed to be converted: " + newTurn.getTurn());
+			throw new RuntimeException("Status convertion failed. Form value received that failed to be converted: " + newTurn.getStatus());
 		}
 
 		//ID is not needed, as it is automatically created by the ddbb server

@@ -37,7 +37,7 @@
 		</div>
 
 		<div>
-				<a href="./createPrayer.html" class="btn btn-primary btn-lg active" role="button">
+				<a href="./createPrayer.html" class="btn btn-primary active" role="button">
 					<fmt:message key="actions.create" /> <fmt:message key="other.new" /> <fmt:message key="prayer.prayer" />
 				</a>
 		</div>
@@ -90,7 +90,7 @@
 						<p class="text-danger bg-danger"><form:errors path="hidden" /></p></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input class="btn btn-primary btn-lg" type="submit"
+						<td colspan="2"><input class="btn btn-primary" type="submit"
 							value="<fmt:message key='form.submmit'/>"></td>
 					</tr>
 					<tr>
@@ -134,7 +134,15 @@
 										value="<fmt:message key='form.delete'/>">
 								</form></p>
 								<p><form action="./changePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+									<input type="hidden" name="firstCall" value="true" />
+									<input type="hidden" name="uid" value="${nextPrayer.uid}" />
+									<input type="hidden" name="name" value="${nextPrayer.name}" />
+									<input type="hidden" name="phone" value="${nextPrayer.phone}" />
+									<input type="hidden" name="email" value="${nextPrayer.email}" />
+									<input type="hidden" name="ownCountry" value="${nextPrayer.ownCountry}" />
+									<input type="hidden" name="notes" value="${nextPrayer.notes}" />
+									<input type="hidden" name="hidden" value="${nextPrayer.hidden}" />
+									<input type="hidden" name="pseudonym" value="${nextPrayer.pseudonym}" />
 									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form></p>
@@ -191,7 +199,15 @@
 										value="<fmt:message key='form.delete'/>">
 								</form></p>
 								<p><form action="./changePrayer.html" method="POST">
-									<input type="hidden" name="prayer_id" value="${nextPrayer.uid}" />
+									<input type="hidden" name="firstCall" value="true" />
+									<input type="hidden" name="uid" value="${nextPrayer.uid}" />
+									<input type="hidden" name="name" value="${nextPrayer.name}" />
+									<input type="hidden" name="phone" value="${nextPrayer.phone}" />
+									<input type="hidden" name="email" value="${nextPrayer.email}" />
+									<input type="hidden" name="ownCountry" value="${nextPrayer.ownCountry}" />
+									<input type="hidden" name="notes" value="${nextPrayer.notes}" />
+									<input type="hidden" name="hidden" value="${nextPrayer.hidden}" />
+									<input type="hidden" name="pseudonym" value="${nextPrayer.pseudonym}" />
 									<input class="btn btn-warning" type="submit"
 										value="<fmt:message key='form.modify'/>">
 								</form></p>

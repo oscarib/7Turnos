@@ -32,7 +32,20 @@
 		<%@include file="./header.jsp"%>
 
 		<div class="jumbotron">
-			<h2><fmt:message key="info.TurnModified"/></h2>
+			<h1>
+				<fmt:message key="other.success" />
+			</h1>
+			<h2>
+				<fmt:message key="info.TurnModified" />
+			</h2>
+		</div>
+		
+		<div>
+			<form action="./showTurns.html" method="POST">
+				<input type="hidden" name="uid" value="${turn2Change.uid}" /> <input
+					class="btn btn-primary btn-lg active" type="submit"
+					value="<fmt:message key='other.see'/> <fmt:message key='turn.turn'/>">
+			</form>
 		</div>
 
 		<%@include file="./footer.jsp"%>

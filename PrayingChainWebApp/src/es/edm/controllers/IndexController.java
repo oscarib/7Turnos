@@ -10,6 +10,12 @@ public class IndexController {
 
 	@RequestMapping(path="/index", method=RequestMethod.GET)
 	public ModelAndView showBootstrap(){
+		Runtime runtime = Runtime.getRuntime();
+		double usedMemory = runtime.totalMemory()-runtime.freeMemory();
+		System.out.println("Used Memory before calling the Garbage Collector: " + usedMemory/(1024*1024));
+		runtime.gc();
+		usedMemory = runtime.totalMemory()-runtime.freeMemory();
+		System.out.println("Used Memory AFTER calling the Garbage Collector: " + usedMemory/(1024*1024));
 		return new ModelAndView("/web/index.jsp");
 	}
 }
