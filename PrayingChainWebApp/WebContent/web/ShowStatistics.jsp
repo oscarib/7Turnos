@@ -27,70 +27,94 @@
 
 <body>
 
+	<!-- starts container -->
 	<div class="container">
 
+		<!-- Header Section -->
+		<div class="row">
+			<div class="col-xs-12">
 		<%@include file="./header.jsp"%>
-
-		<div class="jumbotron">
-			<h1>Estadísticas</h1>
-			<p>Estadísticas de la cadena de oración en el momento presente</p>
+			</div>
 		</div>
+		<!-- End of Header Section -->
 
-		<!-- Here add the content of the page -->
-		<div class="table-responsive">
-			<table class="table table-striped" width="545" border="1"
-				cellspacing="5" cellpadding="5">
-				<tr>
-					<td width="261"><label><fmt:message
-								key="statistics.turns.total" /></label></td>
-					<td width="243">${response.TotalTurns}</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message key="statistics.turns.covered" /></label></td>
-					<td>${response.TurnsCovered}
-						(${response.TurnsUsedPercentage}%)</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message
-								key="statistics.turns.available" /></label></td>
-					<td>${response.AvailableTurns}
-						(${response.FreeTurnsPercentage}%)</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message key="statistics.turns.empty" /></label></td>
-					<td>${response.EmptyTurns}(${response.EmptyTurnsPercentage}%)</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message
-								key="statistics.prayers.committed" /></label></td>
-					<td>${response.CommittedPrayers}</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message
-								key="statistics.prayers.noncommitted" /></label></td>
-					<td>${response.NonCommittedPrayers}</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message key="statistics.prayers.total" /></label></td>
-					<td>${response.TotalPrayers}</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message
-								key="statistics.redundancy.committed" /></label></td>
-					<td>${response.CommittedRedundancy}%</td>
-				</tr>
-				<tr>
-					<td><label><fmt:message
-								key="statistics.redundancy.total" /></label></td>
-					<td>${response.TotalRedundancy}%</td>
-				</tr>
-			</table>
+		<!-- Jumbotron (Page Title) -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="jumbotron">
+					<h1>Estadísticas</h1>
+					<p>Estadísticas de la cadena de oración en el momento presente</p>
+				</div>
+			</div>
 		</div>
+		<!-- End of Jumbotron (Page Title) -->
 
-		<%@include file="./footer.jsp"%>
+		<!-- Data Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<table class="table table-striped" width="545" border="1"
+					cellspacing="5" cellpadding="5">
+					<tr>
+						<td width="261"><label><fmt:message
+									key="statistics.turns.total" /></label></td>
+						<td width="243">${response.TotalTurns}</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.turns.covered" /></label></td>
+						<td>${response.TurnsCovered}
+							(${response.TurnsUsedPercentage}%)</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.turns.available" /></label></td>
+						<td>${response.AvailableTurns}
+							(${response.FreeTurnsPercentage}%)</td>
+					</tr>
+					<tr class="danger">
+						<td><label><fmt:message key="statistics.turns.empty" /></label></td>
+						<td>${response.EmptyTurns} (${response.EmptyTurnsPercentage}%)</td>
+					</tr>
+					<tr class="success">
+						<td><label><fmt:message
+									key="statistics.prayers.committed" /></label></td>
+						<td>${response.CommittedPrayers}</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.prayers.noncommitted" /></label></td>
+						<td>${response.NonCommittedPrayers}</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.prayers.total" /></label></td>
+						<td>${response.TotalPrayers}</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.redundancy.committed" /></label></td>
+						<td>${response.CommittedRedundancy}%</td>
+					</tr>
+					<tr>
+						<td><label><fmt:message
+									key="statistics.redundancy.total" /></label></td>
+						<td>${response.TotalRedundancy}%</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- End of Data Section -->
+
+		<!-- Footer Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<%@include file="./footer.jsp"%>
+			</div>
+		</div>
+		<!-- End of Footer Section -->
 
 	</div>
-	<!-- /container -->
+	<!-- Ends container -->
 
 </body>
 </html>

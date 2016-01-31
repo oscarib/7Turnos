@@ -91,6 +91,7 @@ public class ShowTurnsController {
 				response.put("turns", getJSPSimpleTurns(turns));
 				orderList();
 				addColateralData();
+				addPrayerNames();
 				return new ModelAndView("/web/showTurns.jsp", response);
 			} catch (TurnException e) {
 			}
@@ -106,6 +107,7 @@ public class ShowTurnsController {
 				response.put("turns", getJSPSimpleTurns(turns));
 				addColateralData();
 				orderList();
+				addPrayerNames();
 				return new ModelAndView("/web/showTurns.jsp", response);
 			} catch (PrayerNotFoundException e) {
 			}
@@ -183,6 +185,7 @@ public class ShowTurnsController {
 	}
 	
 	private void addPrayerNames(){
+		@SuppressWarnings("unchecked")
 		List<JSPSimpleTurn> dowTurns = (List<JSPSimpleTurn>)response.get("turns");
 		for (JSPSimpleTurn nextTurn : dowTurns){
 			try {

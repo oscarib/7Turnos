@@ -76,7 +76,7 @@
 				</h1>
 				<form:form commandName="prayer">
 
-					<table class="table table-striped" cellspacing="5"
+					<table class="table table-striped" cellspacing="5" border="1" 
 						cellpadding="5">
 						<tr>
 							<th><label><fmt:message key="form.field" /></label></th>
@@ -178,10 +178,20 @@
 									${nextPrayer.pseudonym}</td>
 								<td>
 									<p>
-									<form action="./deletePrayer.html" method="POST">
+									<form action="./showTurns.html" method="POST">
 										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
-											type="submit" value="<fmt:message key='form.delete'/>">
+											value="${nextPrayer.uid}" /> <input class="btn btn-primary"
+											type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./createTurn.html" method="POST">
+										<input type="hidden" name="prayer_id"
+											value="${nextPrayer.uid}" /> <input type="hidden"
+											name="firstCall" value="true" /> <input
+											class="btn btn-success" type="submit"
+											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
 									</form>
 									</p>
 									<p>
@@ -202,20 +212,10 @@
 									</form>
 									</p>
 									<p>
-									<form action="./showTurns.html" method="POST">
+									<form action="./deletePrayer.html" method="POST">
 										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input class="btn btn-default"
-											type="submit"
-											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
-									</form>
-									</p>
-									<p>
-									<form action="./createTurn.html" method="POST">
-										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input type="hidden"
-											name="firstCall" value="true" /> <input
-											class="btn btn-success" type="submit"
-											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
+											type="submit" value="<fmt:message key='form.delete'/>">
 									</form>
 									</p>
 								</td>
@@ -261,10 +261,20 @@
 									${nextPrayer.pseudonym}</td>
 								<td>
 									<p>
-									<form action="./deletePrayer.html" method="POST">
+									<form action="./showTurns.html" method="POST">
 										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
-											type="submit" value="<fmt:message key='form.delete'/>">
+											value="${nextPrayer.uid}" /> <input class="btn btn-primary"
+											type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
+									</form>
+									</p>
+									<p>
+									<form action="./createTurn.html" method="POST">
+										<input type="hidden" name="prayer_id"
+											value="${nextPrayer.uid}" /> <input type="hidden"
+											name="firstCall" value="true" /> <input
+											class="btn btn-success" type="submit"
+											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
 									</form>
 									</p>
 									<p>
@@ -285,20 +295,10 @@
 									</form>
 									</p>
 									<p>
-									<form action="./showTurns.html" method="POST">
+									<form action="./deletePrayer.html" method="POST">
 										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input class="btn btn-default"
-											type="submit"
-											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
-									</form>
-									</p>
-									<p>
-									<form action="./createTurn.html" method="POST">
-										<input type="hidden" name="prayer_id"
-											value="${nextPrayer.uid}" /> <input type="hidden"
-											name="firstCall" value="true" /> <input
-											class="btn btn-success" type="submit"
-											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
+											type="submit" value="<fmt:message key='form.delete'/>">
 									</form>
 									</p>
 								</td>

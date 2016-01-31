@@ -136,10 +136,10 @@
 
 								<td>
 									<p>
-									<form action="./deleteTurn.html" method="POST">
-										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
-											class="btn btn-danger" type="submit"
-											value="<fmt:message key='form.delete'/>">
+									<form action="./showPrayers.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
+										<input class="btn btn-primary" type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
 									</form>
 									</p>
 									<p>
@@ -156,10 +156,10 @@
 									</form>
 									</p>
 									<p>
-									<form action="./showPrayers.html" method="POST">
-										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
-										<input class="btn btn-default" type="submit"
-											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+									<form action="./deleteTurn.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											class="btn btn-danger" type="submit"
+											value="<fmt:message key='form.delete'/>">
 									</form>
 									</p>
 								</td>
@@ -198,10 +198,10 @@
 								</td>
 								<td>
 									<p>
-									<form action="./deleteTurn.html" method="POST">
-										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
-											class="btn btn-danger" type="submit"
-											value="<fmt:message key='form.delete'/>">
+									<form action="./showPrayers.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
+										<input class="btn btn-primary" type="submit"
+											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
 									</form>
 									</p>
 									<p>
@@ -218,10 +218,10 @@
 									</form>
 									</p>
 									<p>
-									<form action="./showPrayers.html" method="POST">
-										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
-										<input class="btn btn-default" type="submit"
-											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+									<form action="./deleteTurn.html" method="POST">
+										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
+											class="btn btn-danger" type="submit"
+											value="<fmt:message key='form.delete'/>">
 									</form>
 									</p>
 								</td>
