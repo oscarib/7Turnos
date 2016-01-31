@@ -12,6 +12,7 @@ public class JSPSimpleTurn {
 	public String status;
 	public String notes;
 	public boolean firstCall;
+	public String prayerName;
 	public String pax;
 
 	public JSPSimpleTurn(SimpleTurn turn) throws TurnException{
@@ -27,6 +28,14 @@ public class JSPSimpleTurn {
 		this.firstCall = true;
 	}
 	
+	public String getPrayerName() {
+		return prayerName;
+	}
+
+	public void setPrayerName(String prayerName) {
+		this.prayerName = prayerName;
+	}
+
 	public int getTurnInt() {
 		return turnInt;
 	}

@@ -99,7 +99,7 @@
 								value="<fmt:message key='form.search'/>"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><form:errors /></td>
+							<td colspan="2" class="text-danger bg-danger"><form:errors /></td>
 						</tr>
 					</table>
 				</form:form>
@@ -125,11 +125,14 @@
 						<c:forEach items="${orphanTurns}" var="nextTurn">
 							<tr>
 								<td><label><fmt:message key="other.ID" /></label>:
-									${nextTurn.uid}.${nextTurn.prayer_id}<br> ${nextTurn.dow}
-										(${nextTurn.turn}). ${nextTurn.status}
-								<br>
-								<label><fmt:message key="turn.notes" /></label>:<br>
-										${nextTurn.notes} </td>
+									${nextTurn.uid}.${nextTurn.prayer_id}<br>
+									${nextTurn.dow}
+									(${nextTurn.turn}). ${nextTurn.status}<br>
+									<label><fmt:message key="turn.notes" /></label>:<br>
+									${nextTurn.notes}<br>
+									<label><fmt:message key="prayer.prayer" />:</label><br>
+									${nextTurn.prayerName}<br>
+								</td>
 
 								<td>
 									<p>
@@ -185,12 +188,14 @@
 						<c:forEach items="${turns}" var="nextTurn">
 							<tr>
 								<td><label><fmt:message key="other.ID" /></label>:
-									${nextTurn.uid}.${nextTurn.prayer_id}<br> ${nextTurn.dow}
-										(${nextTurn.turn}). 
-								<br> ${nextTurn.status}
-								<br>
-								<label><fmt:message key="turn.notes" /></label>:<br>
-										${nextTurn.notes} </td>
+									${nextTurn.uid}.${nextTurn.prayer_id}<br>
+									${nextTurn.dow}
+									(${nextTurn.turn}). ${nextTurn.status}<br>
+									<label><fmt:message key="turn.notes" /></label>:<br>
+									${nextTurn.notes}<br>
+									<label><fmt:message key="prayer.prayer" />:</label><br>
+									${nextTurn.prayerName}<br>
+								</td>
 								<td>
 									<p>
 									<form action="./deleteTurn.html" method="POST">

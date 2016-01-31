@@ -21,6 +21,7 @@ import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
 import es.edm.model.JSPSimpleTurn;
+import es.edm.model.Prayer;
 import es.edm.model.SimpleTurn;
 import es.edm.services.MainService;
 import es.edm.validators.SearchingTurnValidator;
@@ -163,6 +164,8 @@ public class ShowTurnsController {
 		
 		addColateralData();
 		
+		addPrayerNames();
+		
 		//Adds orphan turns to the result
 		return new ModelAndView("/web/showTurns.jsp", response);
 	}
@@ -177,6 +180,20 @@ public class ShowTurnsController {
 			resultListOfTurns.add(new JSPSimpleTurn(nextTurn));
 		}
 		return resultListOfTurns;
+	}
+	
+	private void addPrayerNames(){
+		List<JSPSimpleTurn> dowTurns = (List<JSPSimpleTurn>)response.get("turns");
+		for (JSPSimpleTurn nextTurn : dowTurns){
+			try {
+				Prayer prayer = main.getPrayerByID(Integer.parseInt(nextTurn.getPrayer_id()));
+				nextTurn.setPrayerName(prayer.getName());
+			} catch (NumberFormatException e) {
+				throw new RuntimeException("Something went really wrong while trying to convert ID " + nextTurn.getPrayer_id());
+			} catch (PrayerNotFoundException e) {
+				throw new RuntimeException("Something went really wrong while trying to search for prayer ID " + nextTurn.getPrayer_id());
+			}
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
