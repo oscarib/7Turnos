@@ -66,6 +66,11 @@
 							<td>Contraseña:</td>
 							<td><input type='password' name='edmPwd' /></td>
 						</tr>
+						<c:if test="${param.error != null}">
+						<tr>
+							<td class="text-danger bg-danger" colspan='2'>Con esas credenciales, no vas a ninguna parte...</td>
+						</tr>
+						</c:if>
 						<tr>
 							<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
 						</tr>

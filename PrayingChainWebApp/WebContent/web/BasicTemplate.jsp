@@ -29,14 +29,48 @@
 
 	<div class="container">
 
-		<%@include file="./header.jsp"%>
+		<!-- Header Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<%@include file="./header.jsp"%>
+			</div>
+		</div>
+		<!-- End Header Section -->
 
-		<!-- Here add the content of the page -->
+		<!-- Jumbotron: Page general title -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="jumbotron">
+					<h1>
+						<!-- Localized Title -->
+						<fmt:message key="prayer.showPrayers.title" />
+					</h1>
+					<p>
+						<!-- Localized Description of the page -->
+						<fmt:message key="prayer.description" />
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End of Jumbotron: Page general title -->
 
-		<%@include file="./footer.jsp"%>
+<!-- Place your content here -->
+		<div class="row">
+			<div class="col-xs-12">
+			</div>
+		</div>
+<!-- Place your content here -->
+
+		<!-- Footer Section -->
+		<div class="row">
+			<div class="col-xs-12">
+				<%@include file="./footer.jsp"%>
+			</div>
+		</div>
+		<!-- End Footer Section -->
 
 	</div>
-	<!-- /container -->
+	<!-- End of container -->
 
 </body>
 </html>
