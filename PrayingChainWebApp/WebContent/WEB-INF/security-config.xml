@@ -32,7 +32,9 @@
 	<!-- Authentication rules -->
 	<authentication-manager>
 		<authentication-provider>
-			<jdbc-user-service data-source-ref="DataSource"/>
+			<jdbc-user-service data-source-ref="DataSource" users-by-username-query="select username,password,enabled from users where username = ?"
+							   authorities-by-username-query="select username, authority from authorities where username = ?"
+							   role-prefix="ROLE_"/>
 		</authentication-provider>
 	</authentication-manager>
 
