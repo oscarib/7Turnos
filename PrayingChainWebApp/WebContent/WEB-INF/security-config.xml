@@ -32,10 +32,7 @@
 	<!-- Authentication rules -->
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="oscarib" password="corolario" authorities="ROLE_USER,ROLE_ADMIN"/>
-				<user name="joe" password="password" authorities="ROLE_USER"/>
-			</user-service>
+			<jdbc-user-service data-source-ref="DataSource"/>
 		</authentication-provider>
 	</authentication-manager>
 
