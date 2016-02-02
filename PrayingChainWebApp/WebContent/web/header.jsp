@@ -28,6 +28,8 @@
 							<li class="dropdown-header"><fmt:message key="other.ddbb" /></li>
 							<li><a href="./showPrayers.html"><fmt:message key="prayer.searchResults.postfix" /></a></li>
 							<li><a href="./showTurns.html"><fmt:message key="turns.turns" /></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href='logout'><fmt:message key="other.logout" /></a></li>
 						</ul></li>
 				</ul>
 			</div>

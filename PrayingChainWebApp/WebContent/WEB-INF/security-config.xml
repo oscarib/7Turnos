@@ -1,0 +1,41 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"   
+	 
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/web/css/**" security="none"/>
+	<http pattern="/web/fonts/**" security="none"/>
+	<http pattern="/web/js/**" security="none"/>
+
+	<!-- Authorization rules -->
+	<http>
+		<!-- This should be removed to improve security!!!! -->
+		<csrf disabled="true"/>
+		
+		<intercept-url pattern="/web/Login.jsp" access="permitAll"/>
+		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/changePrayer.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/changeTurn.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/createPrayer.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/uploadCalendar.html" access="hasRole('ROLE_ADMIN')"/>
+		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
+					login-page="/web/Login.jsp" authentication-failure-url="/web/Login.jsp?error" />
+		<logout logout-success-url="/index.html"/> <!-- /logout; automatically logout -->
+	</http>
+	
+	<!-- Authentication rules -->
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="DataSource" users-by-username-query="select username,password,enabled from users where username = ?"
+							   authorities-by-username-query="select username, authority from authorities where username = ?"
+							   role-prefix="ROLE_"/>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>	

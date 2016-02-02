@@ -13,10 +13,10 @@
 <title>Navbar Template for Bootstrap</title>
 
 <!-- Bootstrap core CSS -->
-<link href="./web/css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-<link href="./web/css/navbar.css" rel="stylesheet">
+<link href="./css/navbar.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -25,14 +25,14 @@
     <![endif]-->
 </head>
 
-<body>
+<body onload='document.f.edmUser.focus();'>
 
 	<div class="container">
 
 		<!-- Header Section -->
 		<div class="row">
 			<div class="col-xs-12">
-				<%@include file="./header.jsp"%>
+			<p> </p>
 			</div>
 		</div>
 		<!-- End Header Section -->
@@ -41,25 +41,46 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="jumbotron">
-					<h1>
-						<!-- Localized Title -->
-						<fmt:message key="prayer.showPrayers.title" />
-					</h1>
-					<p>
-						<!-- Localized Description of the page -->
-						<fmt:message key="prayer.description" />
-					</p>
+					<h1>Acceder</h1>
+					<p>Introduce tu usuario y contraseña para acceder a esta página, por favor</p>
 				</div>
 			</div>
 		</div>
 		<!-- End of Jumbotron: Page general title -->
 
-<!-- Place your content here -->
+		<!-- Login Form -->
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
+			<div class="col-xs-10 col-sm-8 col-md-6 col-lg-6">
+
+				<!-- Login form -->
+				<c:url value="/performLogin" var="loginUrl"/>
+				<form name='f' action='${loginUrl}' method='POST'>
+					<table class="table table-striped" cellspacing="5" border="1" 
+						cellpadding="5">
+						<tr>
+							<td>Usuario:</td>
+							<td><input type='text' name='edmUser' value=''></td>
+						</tr>
+						<tr>
+							<td>Contraseña:</td>
+							<td><input type='password' name='edmPwd' /></td>
+						</tr>
+						<c:if test="${param.error != null}">
+						<tr>
+							<td class="text-danger bg-danger" colspan='2'>Con esas credenciales, no vas a ninguna parte...</td>
+						</tr>
+						</c:if>
+						<tr>
+							<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
+						</tr>
+					</table>
+				</form>
+				<!-- End of Login form -->
+
 			</div>
 		</div>
-<!-- Place your content here -->
+		<!-- End of Login Form -->
 
 		<!-- Footer Section -->
 		<div class="row">
