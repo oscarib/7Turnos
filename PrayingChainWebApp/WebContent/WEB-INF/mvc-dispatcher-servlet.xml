@@ -76,4 +76,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="basename" value="es/edm/resources/messages"/>
 	</bean>
 
+	<!-- Advices -->
+	<bean id="MemoryAuditingAdvice" class="es.edm.aop.MemoryAuditingAdvice"/>
+	
+	<aop:config>
+		<aop:pointcut expression="execution ( org.springframework.web.servlet.ModelAndView es.edm.controllers.*.* (..) ) " id="allMVCControllers"/>
+		<aop:aspect ref="MemoryAuditingAdvice">
+          <aop:around method="auditMemory" pointcut-ref="allMVCControllers" />
+		</aop:aspect>
+	</aop:config>
+
+
 </beans>
