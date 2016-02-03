@@ -46,7 +46,7 @@ public class MemoryAuditingAdvice{
 			double totalMemoryAfterGC = runtime.totalMemory();
 			double usedMemoryAfterGC = (totalMemoryAfterGC-freeMemoryAfterGC)/(1024*1024);
 			String usedMemoryAfterGCSt = new DecimalFormat("#.##").format(usedMemoryAfterGC) + "Mb";
-			System.out.println("Memory Used AfterGC calling " + method.getSignature().getName() + ": " + usedMemoryAfterGCSt);
+			System.out.println("Memory Used After calling Garbage Collector: " + usedMemoryAfterGCSt);
 		}
 	}
 	

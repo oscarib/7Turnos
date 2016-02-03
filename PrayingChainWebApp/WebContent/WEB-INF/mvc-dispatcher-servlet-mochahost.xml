@@ -17,13 +17,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="statisticsFileName" value="Statistics.html"/> <!-- Name of the file with the code to generate the statistics on the web -->
 		<property name="ddbbClassName" value="com.mysql.jdbc.Driver"/>
 
-		<!-- SQL Server -->
-		<property name="mySqlServerHostName" value="localhost"/>
+		<!-- Remote server --> 
+		<property name="mySqlServerHostName" value="mysql3000.mochahost.com"/>
 		<property name="mySqlServerPortNumber" value="3306"/>
-		<property name="mySqlServerDDBBName" value="edm"/>
-		<property name="mySqlServerUser" value="root"/>
-		<property name="mySqlServerUserPwd" value="root"/>
-		
+		<property name="mySqlServerDDBBName" value="tvpct6mw_edm"/>
+		<property name="mySqlServerUser" value="tvpct6mw_edm"/>
+		<property name="mySqlServerUserPwd" value="pI5hDfMHFXzz"/>
+		<property name="displaySaturedTurns" value="false"/>
+
 		<property name="detailedNotesOnSaturedTurns" value="false"/>
 		<property name="enoughPrayersForWhatsappGroupWarning" value="true"/>
 		<property name="minimumNumberOfPrayersForWhatsappGroups" value="5"/>
@@ -40,11 +41,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- Datasources -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/edm?autoReconnect=true"/>
-        <property name="user" value="root"/>
-        <property name="password" value="root"/>
+        <property name="jdbcUrl" value="jdbc:mysql://mysql3000.mochahost.com:3306/tvpct6mw_edm?autoReconnect=true"/>
+        <property name="user" value="tvpct6mw_edm"/>
+        <property name="password" value="pI5hDfMHFXzz"/>
 		
-
     </bean>
 
 	<!-- Templates -->
