@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.edm.domain.JSPSimpleTurn;
+import es.edm.domain.Prayer;
+import es.edm.domain.SimpleTurn;
 import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
-import es.edm.model.JSPSimpleTurn;
-import es.edm.model.Prayer;
-import es.edm.model.SimpleTurn;
 import es.edm.services.MainService;
 import es.edm.validators.SearchingTurnValidator;
 

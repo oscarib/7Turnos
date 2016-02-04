@@ -10,7 +10,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- General Configuration -->
-	<bean id="Configuration" class="es.edm.services.helpers.Impl.Configuration_XML_Impl">
+	<bean id="Configuration" class="es.edm.services.Impl.Configuration_XML_Impl">
 		<property name="remoteFilePath" value="./clickandbuilds/EspaadeMara/PrayingPlan/"/>
 		<property name="localFilePath" value="../webapps/PrayingChainWebApp/WEB-INF/"/>
 		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
@@ -52,11 +52,11 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <constructor-arg ref="DataSource"/>
     </bean>
 
-    <bean id="DAOSqlSt" class="es.edm.services.helpers.Impl.DAOSqlSt_Impl"/>
+    <bean id="DAOSqlSt" class="es.edm.services.Impl.DAOSqlSt_Impl"/>
 
     <!-- Services -->
 
-	<bean id="DAO" class="es.edm.services.helpers.Impl.DAO_MySql_JDBCTemplate_Impl">
+	<bean id="DAO" class="es.edm.services.Impl.DAO_MySql_JDBCTemplate_Impl">
 		<constructor-arg ref="JdbcTemplate"/>
 		<constructor-arg ref="DAOSqlSt"/>
 	</bean>

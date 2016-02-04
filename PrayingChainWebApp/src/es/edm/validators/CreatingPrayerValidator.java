@@ -8,10 +8,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import es.edm.domain.JSPPrayer;
+import es.edm.domain.Prayer;
 import es.edm.exceptions.EmptyParameterException;
 import es.edm.exceptions.PrayerNotFoundException;
-import es.edm.model.JSPPrayer;
-import es.edm.model.Prayer;
 import es.edm.services.MainService;
 
 @Component

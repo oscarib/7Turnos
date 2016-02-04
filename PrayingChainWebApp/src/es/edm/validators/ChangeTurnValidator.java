@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import es.edm.domain.JSPSimpleTurn;
+import es.edm.domain.SimpleTurn;
 import es.edm.exceptions.DayOfWeekException;
 import es.edm.exceptions.TurnException;
-import es.edm.model.JSPSimpleTurn;
-import es.edm.model.SimpleTurn;
 import es.edm.services.MainService;
 import es.edm.util.DayOfWeek;
 

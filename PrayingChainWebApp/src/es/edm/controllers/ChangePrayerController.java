@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.edm.domain.JSPPrayer;
+import es.edm.domain.Prayer;
 import es.edm.exceptions.PrayerException;
 import es.edm.exceptions.PrayerNotFoundException;
-import es.edm.model.JSPPrayer;
-import es.edm.model.Prayer;
 import es.edm.services.MainService;
 import es.edm.validators.ChangePrayerValidator;
 

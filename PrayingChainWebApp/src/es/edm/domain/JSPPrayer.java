@@ -1,4 +1,4 @@
-package es.edm.model;
+package es.edm.domain;
 
 public class JSPPrayer{
 	

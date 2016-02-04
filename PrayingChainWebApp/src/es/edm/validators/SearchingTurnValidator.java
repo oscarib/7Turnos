@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import es.edm.model.JSPSimpleTurn;
-import es.edm.model.Prayer;
+import es.edm.domain.JSPSimpleTurn;
+import es.edm.domain.Prayer;
 
 @Component
 public class SearchingTurnValidator implements Validator {

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.edm.exceptions.DDBBException;
+import es.edm.services.Configuration;
 import es.edm.services.FileService;
 import es.edm.services.MainService;
-import es.edm.services.helpers.Configuration;
 
 @Controller
 public class UploadCalendarController {
