@@ -43,8 +43,11 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/edm?autoReconnect=true"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
-		
-
+        <property name="testConnectionOnCheckout" value="true"/>
+        <!-- This is for testing connections only in MySQL or Postgree -->
+        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="checkoutTimeout" value="60000"/>
+        <property name="idleConnectionTestPeriod" value="300"></property>
     </bean>
 
 	<!-- Templates -->
