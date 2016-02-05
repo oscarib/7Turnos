@@ -12,7 +12,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- General Configuration -->
 	<bean id="Configuration" class="es.edm.services.Impl.Configuration_XML_Impl">
 		<property name="remoteFilePath" value="./clickandbuilds/EspaadeMara/PrayingPlan/"/>
-		<property name="localFilePath" value="../webapps/PrayingChainWebApp/WEB-INF/"/>
+		<property name="localFilePath" value="./"/>
 		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
 		<property name="statisticsFileName" value="Statistics.html"/> <!-- Name of the file with the code to generate the statistics on the web -->
 		<property name="ddbbClassName" value="com.mysql.jdbc.Driver"/>
