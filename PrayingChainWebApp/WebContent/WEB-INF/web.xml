@@ -51,5 +51,10 @@
 	    <error-code>403</error-code>
 	    <location>/Forbidden.html</location>
 	</error-page>
+	
+	<!-- Session expiration max time (in minutes) -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 </web-app>
