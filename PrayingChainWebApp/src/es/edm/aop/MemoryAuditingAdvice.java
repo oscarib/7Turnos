@@ -34,7 +34,7 @@ public class MemoryAuditingAdvice{
 			System.out.println("Memory Used After calling " + method.getSignature().getName() + ": " + usedMemoryAfterSt);
 			
 			//Showing totao used memory by the proxied method
-			double usedMemory = (usedMemoryAfter-usedMemoryBefore)/(1024*1024);
+			double usedMemory = (usedMemoryAfter-usedMemoryBefore);
 			String usedMemorySt = new DecimalFormat("#.##").format(usedMemory) + "Mb";
 			System.out.println("Total Memory Used by " + method.getSignature().getName() + ": " + usedMemorySt);
 
