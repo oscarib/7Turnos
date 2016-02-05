@@ -52,4 +52,8 @@
 	    <location>/Forbidden.html</location>
 	</error-page>
 
+	<session-config>
+		<session-timeout>30</session-timeout>    <!-- 30 minutes -->
+	</session-config>
+	
 </web-app>
