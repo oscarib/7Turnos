@@ -5,8 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import es.edm.domain.backingobjects.UserAccount;
-
 @Component
 public class UserAccountValidator implements Validator {
 
@@ -18,7 +16,6 @@ public class UserAccountValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		UserAccount newUser = (UserAccount)target;
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userAccount", "UserEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "PwdEmpty");

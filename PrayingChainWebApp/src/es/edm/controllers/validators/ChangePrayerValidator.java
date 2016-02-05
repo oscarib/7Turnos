@@ -21,9 +21,6 @@ public class ChangePrayerValidator implements Validator {
 	EmailValidator emailValidator;
 	
 	@Autowired
-	private DateValidator dateValidator;
-	
-	@Autowired
 	private MainService main;
 	
 	@Override
@@ -38,7 +35,6 @@ public class ChangePrayerValidator implements Validator {
 		JSPPrayer prayer2Change = (JSPPrayer)target;
 		
 		emailValidator = new EmailValidator();
-		dateValidator = new DateValidator();
 		
 		//Validation of name: not empty
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NameEmpty");

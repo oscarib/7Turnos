@@ -1,3 +1,4 @@
+<%@include file="./TagLibraryHeader.jsp"%>
 
 <!-- Common header for main pages -->
 <div class="header">

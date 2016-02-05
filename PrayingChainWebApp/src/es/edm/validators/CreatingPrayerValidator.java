@@ -8,7 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import es.edm.controllers.validators.DateValidator;
 import es.edm.controllers.validators.EmailValidator;
 import es.edm.domain.JSPPrayer;
 import es.edm.domain.Prayer;
@@ -23,9 +22,6 @@ public class CreatingPrayerValidator implements Validator {
 	EmailValidator emailValidator;
 	
 	@Autowired
-	private DateValidator dateValidator;
-	
-	@Autowired
 	private MainService main;
 	
 	@Override
@@ -37,8 +33,6 @@ public class CreatingPrayerValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		
 		JSPPrayer prayer = (JSPPrayer)target;
-		emailValidator = new EmailValidator();
-		dateValidator = new DateValidator();
 
 		//Initialitiation of fields when comming from another page
 		if (prayer.getEmail()==null) prayer.setEmail("");
@@ -113,7 +107,6 @@ public class CreatingPrayerValidator implements Validator {
 			if (!prayer.getName().equals("")){
 				try {
 					//Try to find other prayers with the same email
-					@SuppressWarnings("unused")
 					List<Prayer> foundPrayersByName = main.getPrayersByName(prayer.getName());
 					for (Prayer nextPrayer: foundPrayersByName){
 						if (nextPrayer.getEmail()==null || nextPrayer.getEmail().equals("")){

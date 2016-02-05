@@ -52,8 +52,7 @@
 				</h1>
 				<form:form commandName="simpleTurn">
 
-					<table class="table table-striped" width="200" border="1"
-						cellspacing="5" cellpadding="5">
+					<table class="table table-striped" border="1">
 						<tr>
 							<th><label><fmt:message key="form.field" /></label></th>
 							<th><label><fmt:message key="form.value" /></label></th>
@@ -109,8 +108,7 @@
 						<fmt:message key="prayer.orphanTurns" />
 					</h2>
 
-					<table class="table table-striped" width="200" border="1"
-						cellspacing="5" cellpadding="5">
+					<table class="table table-striped" border="1">
 						<tr>
 							<th scope="col"><label><fmt:message key="other.data" /></label></th>
 							<th scope="col"><label><fmt:message
@@ -133,8 +131,8 @@
 									<form action="./showPrayers.html" method="POST">
 										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
 										<input class="btn btn-primary" type="submit"
-											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
-											<sec:csrfInput/>
+											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>"/>
+										<sec:csrfInput />
 									</form>
 									</p>
 									<p>
@@ -175,8 +173,7 @@
 						<fmt:message key="turn.searchResults.postfix" />
 						:
 					</h1>
-					<table class="table table-striped" width="200" border="1"
-						cellspacing="5" cellpadding="5">
+					<table class="table table-striped"  border="1">
 						<tr>
 							<th scope="col"><label><fmt:message key="other.data" /></label></th>
 							<th scope="col"><label><fmt:message

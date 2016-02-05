@@ -78,7 +78,7 @@
 								value="<fmt:message key='form.submmit'/>"></td>
 						</tr>
 						<tr>
-							<p class="text-danger bg-danger"><td colspan="2"><form:errors></form:errors></</td>
+							<td class="text-danger bg-danger"colspan="2"><form:errors></form:errors></td>
 						</tr>
 					</table>
 				</div>

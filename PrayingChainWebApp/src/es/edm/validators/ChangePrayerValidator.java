@@ -8,7 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import es.edm.controllers.validators.DateValidator;
 import es.edm.controllers.validators.EmailValidator;
 import es.edm.domain.JSPPrayer;
 import es.edm.domain.Prayer;
@@ -21,9 +20,6 @@ public class ChangePrayerValidator implements Validator {
 	
 	@Autowired 
 	EmailValidator emailValidator;
-	
-	@Autowired
-	private DateValidator dateValidator;
 	
 	@Autowired
 	private MainService main;
@@ -40,7 +36,6 @@ public class ChangePrayerValidator implements Validator {
 		JSPPrayer prayer2Change = (JSPPrayer)target;
 		
 		emailValidator = new EmailValidator();
-		dateValidator = new DateValidator();
 		
 		//Validation of name: not empty
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NameEmpty");
