@@ -66,7 +66,7 @@
 						</tr>
 						<tr>
 							<td><label>Notes</label></td>
-							<td><form:input class="form-control" path="notes" />
+							<td><form:textarea rows="5" cols="30" class="form-control" path="notes" />
 							<p class="text-danger bg-danger"><form:errors path="notes" /></p></td>
 						<tr>
 							<td><label>Oculto:</label></td>
