@@ -42,6 +42,7 @@
 				<input type="hidden" name="phone" value="${newPrayer.phone}" />
 				<input type="hidden" name="name" value="${newPrayer.name}" />
 				<input class="btn btn-primary btn-lg active" type="submit" value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+				<sec:csrfInput/>
 			</form>
 		</div>
 

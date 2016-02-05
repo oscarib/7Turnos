@@ -178,6 +178,7 @@
 											value="${nextPrayer.uid}" /> <input class="btn btn-primary"
 											type="submit"
 											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -187,6 +188,7 @@
 											name="firstCall" value="true" /> <input
 											class="btn btn-success" type="submit"
 											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -204,6 +206,7 @@
 											value="${nextPrayer.pseudonym}" /> <input
 											class="btn btn-warning" type="submit"
 											value="<fmt:message key='form.modify'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -211,6 +214,7 @@
 										<input type="hidden" name="prayer_id"
 											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
 											type="submit" value="<fmt:message key='form.delete'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 								</td>
@@ -261,6 +265,7 @@
 											value="${nextPrayer.uid}" /> <input class="btn btn-primary"
 											type="submit"
 											value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -270,6 +275,7 @@
 											name="firstCall" value="true" /> <input
 											class="btn btn-success" type="submit"
 											value="<fmt:message key='actions.create'/> <fmt:message key='turn.turn'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -287,6 +293,7 @@
 											value="${nextPrayer.pseudonym}" /> <input
 											class="btn btn-warning" type="submit"
 											value="<fmt:message key='form.modify'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -294,6 +301,7 @@
 										<input type="hidden" name="prayer_id"
 											value="${nextPrayer.uid}" /> <input class="btn btn-danger"
 											type="submit" value="<fmt:message key='form.delete'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 								</td>

@@ -40,6 +40,7 @@
 				<input type="hidden" name="uid" value="${turn2Change.uid}" /> <input
 					class="btn btn-primary btn-lg active" type="submit"
 					value="<fmt:message key='other.see'/> <fmt:message key='turn.turn'/>">
+				<sec:csrfInput/>
 			</form>
 		</div>
 

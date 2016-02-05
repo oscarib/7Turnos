@@ -134,6 +134,7 @@
 										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
 										<input class="btn btn-primary" type="submit"
 											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -147,6 +148,7 @@
 											type="hidden" name="notes" value="${nextTurn.notes}" /> <input
 											class="btn btn-warning" type="submit"
 											value="<fmt:message key='form.modify'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -154,7 +156,8 @@
 										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
 											class="btn btn-danger" type="submit"
 											value="<fmt:message key='form.delete'/>">
-									</form>
+											<sec:csrfInput/>
+								 	</form>
 									</p>
 								</td>
 							</tr>
@@ -196,6 +199,7 @@
 										<input type="hidden" name="uid" value="${nextTurn.prayer_id}" />
 										<input class="btn btn-primary" type="submit"
 											value="<fmt:message key='other.see'/> <fmt:message key='prayer.prayer'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -209,6 +213,7 @@
 											type="hidden" name="notes" value="${nextTurn.notes}" /> <input
 											class="btn btn-warning" type="submit"
 											value="<fmt:message key='form.modify'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 									<p>
@@ -216,6 +221,7 @@
 										<input type="hidden" name="uid" value="${nextTurn.uid}" /> <input
 											class="btn btn-danger" type="submit"
 											value="<fmt:message key='form.delete'/>">
+											<sec:csrfInput/>
 									</form>
 									</p>
 								</td>

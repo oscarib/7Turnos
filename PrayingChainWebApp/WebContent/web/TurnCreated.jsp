@@ -33,6 +33,7 @@
 									<input class="btn btn-primary btn-lg active" type="submit"
 					value="<fmt:message key='other.see'/> <fmt:message key='turns.turns'/>">
 								
+				<sec:csrfInput/>
 			</form>
 			
 		</div>
