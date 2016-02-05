@@ -23,22 +23,7 @@
 
 	<servlet-mapping>
  		<servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>*.htm</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
- 		<servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>*.html</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
- 		<servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>*.h</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
- 		<servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 	<!--  Load up all spring xml files as part of the loading of the webapp -->

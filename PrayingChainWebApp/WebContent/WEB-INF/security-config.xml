@@ -9,30 +9,38 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http pattern="/web/css/**" security="none"/>
+	<http pattern="/web/web/css/**" security="none"/>
 	<http pattern="/web/fonts/**" security="none"/>
+	<http pattern="/web/web/fonts/**" security="none"/>
 	<http pattern="/web/js/**" security="none"/>
+	<http pattern="/web/web/js/**" security="none"/>
 
 	<!-- Authorization rules -->
 	<http>
 		<!-- This should be removed to improve security!!!! -->
-		<csrf disabled="true"/>
+		<csrf disabled="false"/>
 		
 		<intercept-url pattern="/web/Login.jsp" access="permitAll"/>
+		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
 		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/changePrayer.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/changeTurn.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/createPrayer.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/uploadCalendar.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/**" access="isFullyAuthenticated()" />
 		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
 					login-page="/web/Login.jsp" authentication-failure-url="/web/Login.jsp?error" />
 		<logout logout-success-url="/index.html"/> <!-- /logout; automatically logout -->
 	</http>
 	
+	<beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
 	<!-- Authentication rules -->
-	<authentication-manager>
+	<authentication-manager alias="edmAuthenticator">
 		<authentication-provider>
-			<jdbc-user-service data-source-ref="DataSource" users-by-username-query="select username, password, enabled from USERS where username = ?"
-							   authorities-by-username-query="select username, authority from authorities where username = ?"
+			<password-encoder ref="bcryptEncoder"/>  
+			<jdbc-user-service data-source-ref="DataSource" 
+							   users-by-username-query="select username,password,enabled from users where username = ?"
 							   role-prefix="ROLE_"/>
 		</authentication-provider>
 	</authentication-manager>

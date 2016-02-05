@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@include file="./TagLibraryHeader.jsp"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,12 +50,12 @@
 							<p class="text-danger bg-danger"><form:errors path="email" /></p></td>
 						</tr>
 						<tr>
-							<td><label>TelÃ©fono</label></td>
+							<td><label>Teléfono</label></td>
 							<td><form:input class="form-control" path="phone" />
 							<p class="text-danger bg-danger"><form:errors path="phone" /></p></td>
 						</tr>
 						<tr>
-							<td><label>PaÃ­s</label></td>
+							<td><label>País</label></td>
 							<td><form:select path="ownCountry" items="${ownCountryList}" />
 							<p class="text-danger bg-danger"><form:errors path="ownCountry" /></p></td>
 						</tr>
@@ -74,7 +69,7 @@
 							<p class="text-danger bg-danger"><form:errors path="hidden" /></p></td>
 						</tr>
 						<tr>
-							<td><label>SeudÃ³nimo:</label></td>
+							<td><label>Seudónimo:</label></td>
 							<td><form:input class="form-control" path="pseudonym" />
 							<p class="text-danger bg-danger"><form:errors path="pseudonym" /></p></td>
 						</tr>

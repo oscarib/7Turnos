@@ -3,7 +3,6 @@ package es.edm.controllers;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import es.edm.controllers.validators.CreatingPrayerValidator;
 import es.edm.domain.JSPPrayer;
 import es.edm.domain.Prayer;
 import es.edm.exceptions.PrayerAlreadyExistsException;
 import es.edm.services.MainService;
-import es.edm.validators.CreatingPrayerValidator;
 
 @Controller
 @RequestMapping(path="/createPrayer")

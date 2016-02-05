@@ -1,4 +1,4 @@
-package es.edm.validators;
+package es.edm.controllers.validators;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

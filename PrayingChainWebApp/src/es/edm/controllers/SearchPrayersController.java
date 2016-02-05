@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.edm.controllers.validators.SearchingPrayerValidator;
 import es.edm.domain.JSPPrayer;
 import es.edm.domain.Prayer;
 import es.edm.exceptions.EmptyParameterException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.services.MainService;
-import es.edm.validators.SearchingPrayerValidator;
 
 @Controller
 @RequestMapping(value = "/showPrayers")

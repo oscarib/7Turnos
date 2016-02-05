@@ -1,16 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@include file="./TagLibraryHeader.jsp"%>	
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Navbar Template for Bootstrap</title>
+<title>Login</title>
 
 <!-- Bootstrap core CSS -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +36,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="jumbotron">
-					<h1>Acceder</h1>
-					<p>Introduce tu usuario y contrase√±a para acceder a esta p√°gina, por favor</p>
+					<h1>Login</h1>
+					<p>Por favor, proporciona tu informaciÛn de acceso para entrar en esta p·gina</p>
 				</div>
 			</div>
 		</div>
@@ -63,7 +58,7 @@
 							<td><input type='text' name='edmUser' value=''></td>
 						</tr>
 						<tr>
-							<td>Contrase√±a:</td>
+							<td>ContraseÒa:</td>
 							<td><input type='password' name='edmPwd' /></td>
 						</tr>
 						<c:if test="${param.error != null}">
@@ -75,6 +70,7 @@
 							<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
 						</tr>
 					</table>
+					<sec:csrfInput/>
 				</form>
 				<!-- End of Login form -->
 

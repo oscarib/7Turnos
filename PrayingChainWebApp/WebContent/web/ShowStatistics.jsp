@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@include file="./TagLibraryHeader.jsp"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,8 +37,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="jumbotron">
-					<h1>EstadÃ­sticas</h1>
-					<p>EstadÃ­sticas de la cadena de oraciÃ³n en el momento presente</p>
+					<h1>Estadísticas</h1>
+					<p>Estadísticas de la cadena de oración en el momento presente</p>
 				</div>
 			</div>
 		</div>

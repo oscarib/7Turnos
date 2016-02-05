@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import es.edm.domain.JSPPrayer;
+import es.edm.controllers.validators.NewTurnValidator;
 import es.edm.domain.JSPSimpleTurn;
 import es.edm.domain.SimpleTurn;
 import es.edm.exceptions.DayOfWeekException;
@@ -21,7 +20,6 @@ import es.edm.exceptions.TurnException;
 import es.edm.services.MainService;
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
-import es.edm.validators.NewTurnValidator;
 
 @Controller
 @RequestMapping(path="/createTurn")

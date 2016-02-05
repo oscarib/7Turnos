@@ -1,4 +1,4 @@
-package es.edm.validators;
+package es.edm.controllers.validators;
 
 import java.util.List;
 
@@ -8,8 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import es.edm.controllers.validators.DateValidator;
-import es.edm.controllers.validators.EmailValidator;
 import es.edm.domain.JSPPrayer;
 import es.edm.domain.Prayer;
 import es.edm.exceptions.EmptyParameterException;

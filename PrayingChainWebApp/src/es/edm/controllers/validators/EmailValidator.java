@@ -1,4 +1,4 @@
-package es.edm.validators;
+package es.edm.controllers.validators;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@include file="./TagLibraryHeader.jsp"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,9 +29,9 @@
 		<!-- Main component for a primary marketing message or call to action -->
 		<div class="jumbotron">
 			<h1>Panel de Control</h1>
-			<p>Panel de control para la aplicaci√≥n de gesti√≥n de "Cadena de Oraci√≥n". Desde aqu√≠ podr√°n
-			gestionarse par√°metros de configuraci√≥n, actualizaciones del calendario, y todo lo relativo
-			a los oradores y turnos que despu√©s se ver√°n en el sitio principal de la cadena</p>
+			<p>Panel de control para la aplicaciÛn de gestiÛn de "Cadena de OraciÛn". Desde aquÌ podr·n
+			gestionarse par·metros de configuraciÛn, actualizaciones del calendario, y todo lo relativo
+			a los oradores y turnos que despuÈs se ver·n en el sitio principal de la cadena</p>
 		</div>
 
 		<%@include file="./footer.jsp"%>

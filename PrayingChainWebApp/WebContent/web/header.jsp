@@ -28,9 +28,33 @@
 							<li class="dropdown-header"><fmt:message key="other.ddbb" /></li>
 							<li><a href="./showPrayers.html"><fmt:message key="prayer.searchResults.postfix" /></a></li>
 							<li><a href="./showTurns.html"><fmt:message key="turns.turns" /></a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href='logout'><fmt:message key="other.logout" /></a></li>
-						</ul></li>
+							<sec:authorize access="isAuthenticated()">
+								<li role="separator" class="divider"></li>
+								<li>
+									<c:url value="/logout" var="logoutUrl"/>
+									<form method="post" action="${logoutUrl}">
+										<input class="submitLink" type="submit" value="<fmt:message key="other.logout" />">
+										<sec:csrfInput/>
+									</form>
+								</li>
+							</sec:authorize>
+						</ul>
+					</li>
+					<sec:authorize access="hasRole('ROLE_SU')">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"><fmt:message key="other.users" /><span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="./createUserAccount.html"> <fmt:message
+											key="actions.create" /> <fmt:message key="other.new" /> <fmt:message
+											key="other.user" />
+									</a>
+								</li>
+							</ul>
+						</li>
+					</sec:authorize>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
