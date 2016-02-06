@@ -44,10 +44,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="user" value="root"/>
         <property name="password" value="root"/>
         <property name="testConnectionOnCheckout" value="true"/>
-        <!-- This is for testing connections only in MySQL or Postgree -->
+        <!-- This is for testing connections only in MySQL or PostgreSQL -->
         <property name="preferredTestQuery" value="SELECT 1"/>
         <property name="checkoutTimeout" value="60000"/>
-        <property name="idleConnectionTestPeriod" value="300"></property>
+        <property name="acquireRetryDelay" value="5000"></property>
+        <property name="acquireRetryAttempts" value="5"/>
+        <property name="breakAfterAcquireFailure" value="true"/>
+        <property name="idleConnectionTestPeriod" value="300"/>
     </bean>
 
 	<!-- Templates -->

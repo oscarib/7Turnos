@@ -52,6 +52,11 @@
 	    <location>/Forbidden.html</location>
 	</error-page>
 	
+ 	<error-page>
+	  <exception-type>org.springframework.web.util.NestedServletException</exception-type>
+	  <location>/JDBCException.html</location>
+	</error-page> 	
+
 	<!-- Session expiration max time (in minutes) -->
 	<session-config>
 		<session-timeout>30</session-timeout>
