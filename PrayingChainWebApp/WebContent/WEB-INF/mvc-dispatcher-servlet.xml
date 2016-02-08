@@ -12,7 +12,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- General Configuration -->
 	<bean id="Configuration" class="es.edm.services.Impl.Configuration_XML_Impl">
 		<property name="remoteFilePath" value="./clickandbuilds/EspaadeMara/PrayingPlan/"/>
-		<property name="localFilePath" value="../webapps/PrayingChainWebApp/WEB-INF/"/>
+		<property name="localFilePath" value="."/>
 		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
 		<property name="statisticsFileName" value="Statistics.html"/> <!-- Name of the file with the code to generate the statistics on the web -->
 		<property name="ddbbClassName" value="com.mysql.jdbc.Driver"/>
@@ -40,9 +40,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- Datasources -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/edm?autoReconnect=true"/>
+        <property name="jdbcUrl" value="jdbc:mysql://mysql3161-prayingchain.jelastic.cloudhosted.es/edm"/>
         <property name="user" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="AQGgfv58951"/>
         <property name="testConnectionOnCheckout" value="true"/>
         <!-- This is for testing connections only in MySQL or Postgree -->
         <property name="preferredTestQuery" value="SELECT 1"/>
