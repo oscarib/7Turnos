@@ -17,7 +17,6 @@ public class MemoryAuditingAdvice{
 		String usedMemoryBeforeSt = new DecimalFormat("#.##").format(usedMemoryBefore) + "Mb";
 		System.out.println("");
 		System.out.println("Memory Used before calling " + method.getSignature().getName() + ": " + usedMemoryBeforeSt);
-
 		try {
 
 			Object returnValue = method.proceed();

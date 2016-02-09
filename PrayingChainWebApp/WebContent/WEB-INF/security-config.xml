@@ -18,15 +18,17 @@
 	<!-- Authorization rules -->
 	<http>
 		<!-- This should be removed to improve security!!!! -->
-		<csrf disabled="false"/>
+		<csrf disabled="true"/>
 		
-		<intercept-url pattern="/web/Login.jsp" access="permitAll"/>
+ 		<intercept-url pattern="/web/Login.jsp" access="permitAll"/>
 		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
 		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/changePrayer.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/changeTurn.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/createPrayer.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/uploadCalendar.html" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/webhook.html*" access="permitAll" />
+		<intercept-url pattern="/web/MailchimpAnswer.jsp" access="permitAll" />
 		<intercept-url pattern="/**" access="isFullyAuthenticated()" />
 		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
 					login-page="/web/Login.jsp" authentication-failure-url="/web/Login.jsp?error" />
