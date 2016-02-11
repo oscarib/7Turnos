@@ -19,4 +19,6 @@ public interface Configuration {
 	public boolean isDetailedInfoActivatedForSaturedTurns();
 	public int getMinimumNumberOfPrayersForWhatsappGroups();
 	public boolean isEnoughPrayersForWhatsappGroupWarningActive();
+	public String getMailingListSecretPassword();
+	public void setMailingListSecretPassword(String mailingListSecretPassword);
 }

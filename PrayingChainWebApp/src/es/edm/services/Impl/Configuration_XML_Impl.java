@@ -25,6 +25,21 @@ public class Configuration_XML_Impl implements Configuration{
 	int prayersPerTurn;
 	boolean showPrayerNamesOnCalendar;
 	
+	/* For MailingList Configuration
+	 * 
+	 */
+	String mailingListSecretPassword;
+	
+	@Override
+	public String getMailingListSecretPassword() {
+		return mailingListSecretPassword;
+	}
+
+	@Override
+	public void setMailingListSecretPassword(String mailingListSecretPassword) {
+		this.mailingListSecretPassword = mailingListSecretPassword;
+	}
+
 	public String getLocalFilePath() {
 		return localFilePath;
 	}

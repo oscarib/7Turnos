@@ -34,6 +34,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="ftpPwd" value="EbYi4n8zB9FC"/>
 		<property name="printFtpUpladingMessages" value="true"/>
 		<property name="prayersPerTurn" value="3"/>
+		<property name="mailingListSecretPassword" value="arkanoid"/>
 	</bean>
 
 
@@ -80,6 +81,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<context:component-scan base-package="es.edm.controllers"/>
 	<context:component-scan base-package="es.edm.controllers.validators"/>
 	<context:component-scan base-package="es.edm.resources"/>
+	<context:component-scan base-package="es.edm.services.Impl"/>
 	
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -88,13 +90,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<!-- Advices -->
 	<bean id="MemoryAuditingAdvice" class="es.edm.aop.MemoryAuditingAdvice"/>
-	
+
+<!-- AOP Is off	
 	<aop:config>
 		<aop:pointcut expression="execution ( org.springframework.web.servlet.ModelAndView es.edm.controllers.*.* (..) ) " id="allMVCControllers"/>
 		<aop:aspect ref="MemoryAuditingAdvice">
           <aop:around method="auditMemory" pointcut-ref="allMVCControllers" />
 		</aop:aspect>
 	</aop:config>
-
+ -->
 
 </beans>
