@@ -35,6 +35,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="printFtpUpladingMessages" value="true"/>
 		<property name="prayersPerTurn" value="3"/>
 		<property name="mailingListSecretPassword" value="arkanoid"/>
+		
 	</bean>
 
 
@@ -82,6 +83,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<context:component-scan base-package="es.edm.controllers.validators"/>
 	<context:component-scan base-package="es.edm.resources"/>
 	<context:component-scan base-package="es.edm.services.Impl"/>
+
+	<!-- EmailSender -->
+	<bean id="EmailSender" class="es.edm.util.EmailSender">
+		<constructor-arg name="userName" value="oscar.ibafer@gmail.com"/>
+		<constructor-arg name="hostName" value="smtp.googlemail.com"/>
+		<constructor-arg name="password" value="nxsymoimpdhxulcd"/>
+		<constructor-arg name="smtpPort" value="465"/>
+		<constructor-arg name="ssl" value="true"/>
+	</bean>
 	
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

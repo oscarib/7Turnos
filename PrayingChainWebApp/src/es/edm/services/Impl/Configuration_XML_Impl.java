@@ -25,11 +25,32 @@ public class Configuration_XML_Impl implements Configuration{
 	int prayersPerTurn;
 	boolean showPrayerNamesOnCalendar;
 	
-	/* For MailingList Configuration
-	 * 
-	 */
+	// For MailingList Configuration
 	String mailingListSecretPassword;
 	
+	// For Mail Service
+	String EmailServiceUserName;
+	String EmailServiceUserPassword;
+	String EmailServiceHostName;
+	int EmailServiceSmtpPort;
+	boolean EmailServiceIsSSL;
+
+	public void setEmailServiceUserName(String emailServiceUserName) {
+		EmailServiceUserName = emailServiceUserName;
+	}
+
+	public void setEmailServiceUserPassword(String emailServiceUserPassword) {
+		EmailServiceUserPassword = emailServiceUserPassword;
+	}
+
+	public void setEmailServiceHostName(String emailServiceHostName) {
+		EmailServiceHostName = emailServiceHostName;
+	}
+
+	public void setEmailServiceSmtpPort(int emailServiceSmtpPort) {
+		EmailServiceSmtpPort = emailServiceSmtpPort;
+	}
+
 	@Override
 	public String getMailingListSecretPassword() {
 		return mailingListSecretPassword;
@@ -277,4 +298,39 @@ public class Configuration_XML_Impl implements Configuration{
 	public boolean isEnoughPrayersForWhatsappGroupWarningActive(){
 		return enoughPrayersForWhatsappGroupWarning;
 	}
+
+	@Override
+	public String getEmailServiceUserName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getEmailServiceUserPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getEmailServiceHostName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getEmailServiceSmtpPort() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isEmailServiceSSL() {
+		return EmailServiceIsSSL;
+	}
+	
+	@Override
+	public void setEmailServiceSSL(boolean emailServiceIsSSL) {
+		EmailServiceIsSSL = emailServiceIsSSL;
+	}
+
 }

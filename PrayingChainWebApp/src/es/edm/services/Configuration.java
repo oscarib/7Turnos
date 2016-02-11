@@ -21,4 +21,10 @@ public interface Configuration {
 	public boolean isEnoughPrayersForWhatsappGroupWarningActive();
 	public String getMailingListSecretPassword();
 	public void setMailingListSecretPassword(String mailingListSecretPassword);
+	public String getEmailServiceUserName();
+	public String getEmailServiceUserPassword();
+	public String getEmailServiceHostName();
+	public boolean isEmailServiceSSL();
+	public void setEmailServiceSSL(boolean emailServiceIsSSL);
+	public int getEmailServiceSmtpPort();
 }
