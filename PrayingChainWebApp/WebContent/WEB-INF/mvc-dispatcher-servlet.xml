@@ -42,9 +42,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- Datasources -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost/edm"/>
+        <property name="jdbcUrl" value="jdbc:mysql://mysql3161-prayingchain.jelastic.cloudhosted.es/edm"/>
         <property name="user" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="AQGgfv58951"/>
         <!-- This is for testing connections only in MySQL or PostgreSQL -->
         <property name="preferredTestQuery" value="SELECT 1"/>
         <property name="acquireRetryDelay" value="5000"></property>
