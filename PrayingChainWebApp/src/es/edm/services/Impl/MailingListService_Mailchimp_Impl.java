@@ -57,7 +57,9 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 
 	@Override
 	public void processProfile(WebRequest request) {
+		printHeader("Profile Update");
 		sendWarningEmail(request, "Profile Update");
+		printFooter();
 	}
 
 	@Override
@@ -67,12 +69,16 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 
 	@Override
 	public void processCleanedEmail(WebRequest request) {
+		printHeader("Email cleaning");
 		sendWarningEmail(request, "Cleaned Email");
+		printFooter();
 	}
 
 	@Override
 	public void processCampaign(WebRequest request) {
-		System.out.println(new Date() + ": Request type is 'Campaign sending'. The campaign called '" + request.getParameter("data[subject]") + "' nas now been sent to " + request.getParameter("data[merges][EMAIL]"));
+		printHeader("Campaign sending");
+		System.out.println(new Date() + ": The campaign called '" + request.getParameter("data[subject]") + "' has now been sent to " + request.getParameter("data[merges][EMAIL]"));
+		printFooter();
 	}
 	
 	// Sends a warning email to a predefined email address.
@@ -80,7 +86,7 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 	private void sendWarningEmail(WebRequest request, String requestType){
 		
 		//Logs the reuqest type to System.out
-		System.out.println(new Date() + ": Request type is " + requestType + ". Requester is " + request.getParameter("data[merges][EMAIL]"));
+		System.out.println(new Date() + ": Requester is " + request.getParameter("data[merges][EMAIL]"));
 		
 		//Sets the email subject
 		String subject = "A new profile update has been made by " + request.getParameter("data[merges][FNAME]");
@@ -109,10 +115,19 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 				e.printStackTrace();
 				throw new RuntimeException ("Something went really wrong while trying to send an email");
 			}
-			System.out.println(new Date() + ": And email has been sent to " + sender.getAddress());
+			System.out.println(new Date() + ": And email has been sent to provided recipients");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			throw new RuntimeException ("Something went really wrong while trying to send an email");
 		}
+	}
+	
+	private void printHeader(String requestType){
+		System.out.println(new Date() + ": Received a MailChimp '" + requestType + "' advice. Processing...");
+	}
+	
+	private void printFooter(){
+		System.out.println(new Date() + ": Mailchimp advice has been succesfully processed.");
+		System.out.println("");
 	}
 }

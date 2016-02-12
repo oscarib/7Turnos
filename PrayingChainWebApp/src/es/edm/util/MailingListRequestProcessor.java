@@ -15,13 +15,11 @@ public class MailingListRequestProcessor implements Runnable {
 	public MailingListRequestProcessor(WebRequest request, MailingListService mailing){
 		this.request = request;
 		this.mailing = mailing;
-		System.out.println(new Date() + ": Received a MailChimp Request. Looking for request type...");
 	}
 	
 	@Override
 	public void run() {
 		mailing.processRequest(request);
-		System.out.println(new Date() + ": Mailchimp Request has been succesfully processed.");
 	}
 
 	public void start () {
