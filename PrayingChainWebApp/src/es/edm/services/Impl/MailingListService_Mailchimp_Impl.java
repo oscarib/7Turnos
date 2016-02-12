@@ -47,25 +47,62 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 
 	@Override
 	public void processSubscribe(WebRequest request) {
-		System.out.println("Received a subscribe request");
+		//Nothing is needed here, as Mailchimp already sends a warning email with this by its own
 	}
 
 	@Override
 	public void processUnsubscribe(WebRequest request) {
-		System.out.println("Received an unsubscribe request");
+		//Nothing is needed here, as Mailchimp already sends a warning email with this by its own
 	}
 
 	@Override
 	public void processProfile(WebRequest request) {
-		System.out.println("A profile update has been caught for " + request.getParameter("data[merges][FNAME]"));
+		sendWarningEmail(request, "Profile Update");
+	}
+
+	@Override
+	public void processEmailChange(WebRequest request) {
+		//Nothing is needed to be done, as this process is already caught by "profile change request" also.
+	}
+
+	@Override
+	public void processCleanedEmail(WebRequest request) {
+		sendWarningEmail(request, "Cleaned Email");
+	}
+
+	@Override
+	public void processCampaign(WebRequest request) {
+		System.out.println(new Date() + ": Request type is 'Campaign sending'. The campaign called '" + request.getParameter("data[subject]") + "' nas now been sent to " + request.getParameter("data[merges][EMAIL]"));
+	}
+	
+	// Sends a warning email to a predefined email address.
+	//TODO: Change hardcoded email addresses...
+	private void sendWarningEmail(WebRequest request, String requestType){
+		
+		//Logs the reuqest type to System.out
+		System.out.println(new Date() + ": Request type is " + requestType + ". Requester is " + request.getParameter("data[merges][EMAIL]"));
+		
+		//Sets the email subject
 		String subject = "A new profile update has been made by " + request.getParameter("data[merges][FNAME]");
+		
+		//Sets the message
 		String message  = new Date() + ": A new profile update has been made by " + request.getParameter("data[merges][FNAME]") + 
 						  " (Email: " + request.getParameter("data[merges][EMAIL]") + ")";
+		
 		InternetAddress sender;
+
+		//Something could go wrong while sending the email...
 		try {
-			sender = new InternetAddress("oscar.ibafer@gmail.com", "Oscar Ib");
+			//Sets the sender
+			sender = new InternetAddress("espanademaria@gmail.com", "Oscar Ib");
+			
+			//and the recipients...
 			List<InternetAddress> recipients = new ArrayList<InternetAddress>();
 			recipients.add(new InternetAddress("oscar.ibafer@gmail.com", "Oscar Ib"));
+
+			//Logging that we're gonna send an email...
+			System.out.println(new Date() + ": Sending a warning email to oscar.ibafer@gmail.com...");
+
 			try {
 				emailSender.sendEmail(subject, message, sender, recipients, null, null);
 			} catch (EmailException e) {
@@ -78,20 +115,4 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 			throw new RuntimeException ("Something went really wrong while trying to send an email");
 		}
 	}
-
-	@Override
-	public void processEmailChange(WebRequest request) {
-		System.out.println("Received an email changing request");
-	}
-
-	@Override
-	public void processCleanedEmail(WebRequest request) {
-		System.out.println("Received an email cleaning request");
-	}
-
-	@Override
-	public void processCampaign(WebRequest request) {
-		System.out.println("Mailchimp informs that a campaign called " + request.getParameter("data[subject]") + " has been sent to " + request.getParameter("data[merges][FNAME]"));
-	}
-
 }

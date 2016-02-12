@@ -3,6 +3,7 @@ package es.edm.util;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
+
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -25,7 +26,6 @@ public class EmailSender {
 		this.hostName = hostName;
 		this.smtpPort = smtpPort;
 		this.ssl = ssl;
-		this.email = new SimpleEmail();
 	}
 	
 	public void sendEmail(String subject, String message, 
@@ -34,6 +34,7 @@ public class EmailSender {
 						  List<InternetAddress> recipientsCC,
 						  List<InternetAddress> recipientsCCO) throws EmailException{
 
+		this.email = new SimpleEmail();
 		email.setHostName(hostName);
 		email.setSmtpPort(smtpPort);
 		email.setAuthenticator(new DefaultAuthenticator(userName, userPassword));

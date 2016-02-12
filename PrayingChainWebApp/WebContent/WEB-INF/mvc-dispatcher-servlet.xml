@@ -86,9 +86,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<!-- EmailSender -->
 	<bean id="EmailSender" class="es.edm.util.EmailSender">
-		<constructor-arg name="userName" value="oscar.ibafer@gmail.com"/>
+		<constructor-arg name="userName" value="espanademaria@gmail.com"/>
 		<constructor-arg name="hostName" value="smtp.googlemail.com"/>
-		<constructor-arg name="password" value="nxsymoimpdhxulcd"/>
+		<constructor-arg name="password" value="twjgP0sGY1xmxzF4"/>
 		<constructor-arg name="smtpPort" value="465"/>
 		<constructor-arg name="ssl" value="true"/>
 	</bean>

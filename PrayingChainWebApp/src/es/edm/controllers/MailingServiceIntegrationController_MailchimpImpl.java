@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import es.edm.services.MailingListService;
+import es.edm.util.MailingListRequestProcessor;
 
 @Controller
 @RequestMapping(path="/Webhook")
@@ -23,7 +23,8 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView postProcess(WebRequest request){
-		mailing.processRequest(request);
+		MailingListRequestProcessor processor = new MailingListRequestProcessor(request, mailing);
+		processor.start();
 		return new ModelAndView("/web/MailchimpAnswer.jsp");
 	}
 }
