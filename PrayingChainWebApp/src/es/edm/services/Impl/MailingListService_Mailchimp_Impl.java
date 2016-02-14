@@ -31,8 +31,9 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 	
 	@Override
 	public void processRequest(WebRequest request) {
-		if (request.getParameter("secret")!= null){
-			if (request.getParameter("secret").equals(conf.getMailingListSecretPassword())){
+		//To recover, once solved the problem with Jelastic and getParameters();
+//		if (request.getParameter("secret")!= null){
+//			if (request.getParameter("secret").equals(conf.getMailingListSecretPassword())){
 				switch (request.getParameter("type")){
 				case "subscribe": processSubscribe(request); break;
 				case "unsubscribe": processUnsubscribe(request); break;
@@ -41,8 +42,8 @@ public class MailingListService_Mailchimp_Impl implements MailingListService {
 				case "cleaned": processCleanedEmail(request); break;
 				case "campaign": processCampaign(request); break;
 				}
-			}
-		}
+//			}
+//		}
 	}
 
 	@Override

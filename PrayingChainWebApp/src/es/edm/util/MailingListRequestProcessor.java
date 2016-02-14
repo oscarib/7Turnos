@@ -1,7 +1,5 @@
 package es.edm.util;
 
-import java.util.Date;
-
 import org.springframework.web.context.request.WebRequest;
 
 import es.edm.services.MailingListService;
@@ -12,19 +10,15 @@ public class MailingListRequestProcessor implements Runnable {
 	private WebRequest request;
 	private MailingListService mailing;
 	
-	public MailingListRequestProcessor(WebRequest request, MailingListService mailing){
-		this.request = request;
-		this.mailing = mailing;
-	}
-	
 	@Override
 	public void run() {
 		mailing.processRequest(request);
 	}
 
-	public void start () {
-		if (t == null)
-		{
+	public void start (WebRequest request, MailingListService mailing) {
+		if (t == null){
+			this.request = request;
+			this.mailing = mailing;
 			t = new Thread (this, "MailchimpRequest");
 			t.start ();
 		}
