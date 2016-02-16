@@ -30,9 +30,6 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 	 */
 	
 	@Autowired
-	EmailSender emailSender;
-	
-	@Autowired
 	Configuration conf;
 	
 	@RequestMapping(method=RequestMethod.GET)
@@ -46,6 +43,16 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 
 		//Let's get the Mailchimp request Data
 		Map<String,String> mailchimpData = getMailchimpData(request);
+		
+		/* Creates a new instance of EmailSender
+		 * We do not use Spring dependency Injection here because we don't need it
+		 */
+		String userName = "espanademaria@gmail.com";
+		String hostName = "smtp.googlemail.com";
+		String password = "twjgP0sGY1xmxzF4";
+		int smtpPort = 465;
+		boolean ssl=true;
+		EmailSender emailSender = new EmailSender(userName, hostName, password, smtpPort, ssl);
 
 		if (request.getParameter("secret")!= null){
 			if (request.getParameter("secret").equals(conf.getMailingListSecretPassword())){
@@ -55,8 +62,8 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 					switch (request.getParameter("type")){
 					case "subscribe": processSubscribe(mailchimpData); break;
 					case "unsubscribe": processUnsubscribe(mailchimpData); break;
-					case "profile": processProfile(mailchimpData); break;
-					case "cleaned": processCleanedEmail(mailchimpData); break;
+					case "profile": processProfile(mailchimpData, emailSender); break;
+					case "cleaned": processCleanedEmail(mailchimpData, emailSender); break;
 					}
 				} catch (EmailException e){
 					System.out.println("Something went really wrong while trying to send an email...");
@@ -75,23 +82,23 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 		//Nothing is needed here, as Mailchimp already sends a warning email with this by its own
 	}
 
-	public void processProfile(Map<String,String> mailchimpData) throws EmailException {
+	public void processProfile(Map<String,String> mailchimpData, EmailSender emailSender) throws EmailException {
 		printHeader("Profile Update");
-		sendWarningEmail(mailchimpData);
+		sendWarningEmail(mailchimpData, emailSender);
 	}
 
 	public void processEmailChange(Map<String,String> mailchimpData) {
 		//Nothing is needed to be done, as this process is already caught by "profile change request" also.
 	}
 
-	public void processCleanedEmail(Map<String,String> mailchimpData) throws EmailException {
+	public void processCleanedEmail(Map<String,String> mailchimpData, EmailSender emailSender) throws EmailException {
 		printHeader("Email cleaning");
-		sendWarningEmail(mailchimpData);
+		sendWarningEmail(mailchimpData, emailSender);
 	}
 
 	// Sends a warning email to a predefined email address.
 	//TODO: Change hardcoded email addresses...
-	private void sendWarningEmail(Map<String,String> mailchimpData) throws EmailException{
+	private void sendWarningEmail(Map<String,String> mailchimpData, EmailSender emailSender) throws EmailException{
 		
 		//Logs the reuqest type to System.out
 		System.out.println(new Date() + ": Requester is " + mailchimpData.get("email"));

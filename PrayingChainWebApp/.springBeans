@@ -7,10 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-<<<<<<< HEAD
-=======
 		<config>WebContent/WEB-INF/mvc-dispatcher-servlet.xml</config>
->>>>>>> refs/heads/MVC-Test
+		<config>WebContent/WEB-INF/security-config.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

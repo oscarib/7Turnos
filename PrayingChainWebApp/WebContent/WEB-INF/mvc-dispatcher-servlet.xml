@@ -84,15 +84,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<context:component-scan base-package="es.edm.resources"/>
 	<context:component-scan base-package="es.edm.services.Impl"/>
 
-	<!-- EmailSender -->
-	<bean id="EmailSender" class="es.edm.util.EmailSender">
-		<constructor-arg name="userName" value="espanademaria@gmail.com"/>
-		<constructor-arg name="hostName" value="smtp.googlemail.com"/>
-		<constructor-arg name="password" value="twjgP0sGY1xmxzF4"/>
-		<constructor-arg name="smtpPort" value="465"/>
-		<constructor-arg name="ssl" value="true"/>
-	</bean>
-	
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="es/edm/resources/messages"/>
