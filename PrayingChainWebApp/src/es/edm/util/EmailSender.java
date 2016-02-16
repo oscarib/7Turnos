@@ -85,8 +85,12 @@ public class EmailSender extends Thread{
 			for (InternetAddress nextRecp: recipients){
 				System.out.print(nextRecp.getAddress() + ", ");
 			}
+			//Print a new line code to finish all recipients message
 			System.out.println("");
-			
+
+			//Print another line to isolate new requests from previous ones
+			System.out.println("");
+
 		} catch (EmailException e){
 			System.out.println(new Date() + ": Something went really wrong while trying to send an email. Stack trace is:");
 			e.printStackTrace();
