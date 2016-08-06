@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="PrayingChain">
 <head>
 <meta charset="UTF-8">
 <title>Dashboard</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
-<script src="../js/bootstrap.min.js"></script>
+<script src="../js/lib/jquery-2.2.4.min.js"></script>
+<script src="../js/lib/bootstrap.min.js"></script>
+<script src="../js/lib/angular.min.js"></script>
+<script src="../js/Controllers/dashboard.js"></script>
+
+
 </head>
-<body>
+<body ng-controller="dashboard as ctrl">
 	<div class="row">
 		<div id="sidebar-menu" class="col-xs-3">
 			<div id="UserHeader" class="row">
 				<div class="menu-item col-xs-12">
-					<span id="User">Óscar Ibáñez</span><br>
+					<span id="User">{{ctrl.firstName}}</span><br>
 					<span id="PrayingGroup">España De Maria</span>
 				</div>
 			</div>
