@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+#sidebar-menu {
+	background: #00B2D8;
+	/* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#00B2D8, #006C84);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#00B2D8, #006C84);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#00B2D8, #006C84);
+	/* For Firefox 3.6 to 15 */
+	background: linear-gradient(#00B2D8, #006C84);
+	/* Standard syntax */
+	height: 700px;
+	width: 200px;
+}
+.table-condensed {
+	height: ;
+	width: 212px !important;
+}
+.table.table-condensed tbody tr {
+	width: 147% !important;
+}
+.tablePrayers {
+	width: 656px;
+	border: 1px dashed #E3E7FF;
+}
+.tablePrayers tr:nth-child(even) {
+	background-color: #E7EBFF;
+}
+.tablePrayers th {
+	background-color: #00A6CA;
+	color: white;
+	border: 1px solid #FFFFFF;
+	padding-left: 5px;
+}
+.tablePrayers td {
+	padding-left: 5px;
+}
+#sidebar-menu.col-xs-3 {
+	padding-left: 30px;
+}
+.menu-item.col-xs-12.menu-group span {
+	font-size: 11px;
+	margin-left: -15px;
+}
+#PrayingGroup {
+	font-size: x-small !important;
+	/*+placement: 1px -53px !important;*/
+	position: relative !important;
+	left: 1px !important;
+	top: -53px !important;
+}
+span.NofPrayers {
+	font-size: 40px;
+	color: #54F404;
+}
+span.EmptyTurnsLabel {
+	font-size: 10px;
+}
+#EmptyTurns.col-xs-2 {
+	line-height: 0.8;
+	margin-top: 4px;
+	text-align: center;
+	padding-right: 30px;
+}
+span.EmptyTurnsNumber {
+	font-size: 41px;
+	line-height: 1.1;
+	background-image: url("../images/EmptyTurnRedFlag.gif");
+	background-size: 97px 44px;
+	background-repeat: no-repeat;
+	background-position: 2px 4px;
+	padding-right: 20px;
+	text-align: center;
+}
+div.widget-header {
+	background-color: #00A6CA;
+	color: white;
+	line-height: 2.1;
+	height: ;
+	width: 100%;
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-left: 5px;
+}
+.widget {
+	height: 150px;
+	width: 150px;
+	background-color: #EEF4FC;
+	margin-right: 10px;
+	margin: 10px;
+}
+span.labelNoPrayers {
+	font-size: 13px;
+}
+.NofPrayersDiv {
+	line-height: 0.9;
+	text-align: center;
+	margin-top: 6px;
+}
+#PrayerStatistics span {
+	font-size: 10px;
+}
+#PrayerStatistics {
+	line-height: 0.9;
+	margin-top: 4px;
+	margin-left: -25px;
+}
+#UserHeader {
+	margin-left: -26px;
+	margin-top: 44px;
+	border-bottom: 1px solid black;
+}
+.menu-item {
+	height: 20px;
+	width: ;
+	color: white;
+	line-height: 3;
+}
+#header.row {
+	background-color: #094156;
+	color: white;
+	line-height: 4;
+}
+div#header.row {
+	height: 65px;
+	width: ;
+}
+#Search.col-xs-4 {
+	/*+placement: float-right;*/
+	float: right;
+	position: relative;
+	left: 0;
+	top: 0;
+	margin-top: 13px;
+}
+input#searchText {
+	color: #CBCBCB;
+	font-size: 28px;
+	height: ;
+	width: 95%;
+	margin-left: -21px;
+	line-height: 0;
+	margin-top: 3px;
+}
+span {
+	font-family: verdana;
+	font-size: 15px;
+	padding-left: 5px;
+}
+img#magnifierIcon {
+	/*+placement: anchor-bottom-right;*/
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin-right: 10px;
+}
+img#magnifierIcon {
+	height: ;
+	width: ;
+}
+img#EmptyTurnsFlag {
+	height: 41px;
+	width: 96px;
+	margin-left: 10px;
+	margin-top: -50px;
+	/*+placement: ;*/
+	position: relative;
+	left: 0;
+	top: 0;
+	z-index: 1;
+}
+div.row.activeMenuItem {
+	background-color: #094156;
+}
+#UserHeader span {
+	font-size: 19px;
+	line-height: 0;
+	/*+placement: -1px -24px;*/
+	position: relative;
+	left: -1px;
+	top: -24px;
+}
+#warnings {
+	background-color: #006E9A;
+	color: white;
+	font-size: larger;
+	height: 38px;
+	line-height: 2.2;
+	text-align: left;
+}
+div.menu-item.col-xs-12 {
+	margin: 5px 0px 33px 10px;
+}
