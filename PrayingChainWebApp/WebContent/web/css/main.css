@@ -13,17 +13,30 @@
 	/* Standard syntax */
 	height: 700px;
 	width: 200px;
+	padding-left: 24px;
 }
-.table-condensed {
-	height: ;
-	width: 212px !important;
+.fadeAnimate.ng-enter {
+	transition: 1s linear all;
+	opacity: 0;
 }
-.table.table-condensed tbody tr {
-	width: 147% !important;
+/* The finishing CSS styles for the enter animation */
+.fadeAnimate.ng-enter.ng-enter-active {
+	opacity: 1;
+}
+#sidebar-menu .GroupOpener {
+	margin-top: -5px;
+	/*+placement: -3px 0px;*/
+	position: relative;
+	left: -3px;
+	top: 0px;
+	cursor: pointer;
 }
 .tablePrayers {
-	width: 656px;
 	border: 1px dashed #E3E7FF;
+	/*+placement: -10px 0px;*/
+	position: relative;
+	left: -10px;
+	top: 0px;
 }
 .tablePrayers tr:nth-child(even) {
 	background-color: #E7EBFF;
@@ -34,22 +47,15 @@
 	border: 1px solid #FFFFFF;
 	padding-left: 5px;
 }
+table.tablePrayers {
+	height: ;
+	width: 750px;
+}
 .tablePrayers td {
 	padding-left: 5px;
 }
-#sidebar-menu.col-xs-3 {
-	padding-left: 30px;
-}
-.menu-item.col-xs-12.menu-group span {
-	font-size: 11px;
-	margin-left: -15px;
-}
 #PrayingGroup {
 	font-size: x-small !important;
-	/*+placement: 1px -53px !important;*/
-	position: relative !important;
-	left: 1px !important;
-	top: -53px !important;
 }
 span.NofPrayers {
 	font-size: 40px;
@@ -71,27 +77,40 @@ span.EmptyTurnsNumber {
 	background-size: 97px 44px;
 	background-repeat: no-repeat;
 	background-position: 2px 4px;
-	padding-right: 20px;
+	padding-right: 17px;
 	text-align: center;
+	padding-left: 5px;
 }
 div.widget-header {
 	background-color: #00A6CA;
 	color: white;
-	line-height: 2.1;
-	height: ;
+	line-height: 2.4;
+	height: 40px;
 	width: 100%;
 	/*+placement: anchor-top-left;*/
 	position: absolute;
 	left: 0;
 	top: 0;
 	padding-left: 5px;
+	font-size: 16px;
+}
+div.widget-content {
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-left: 0px;
+	margin-top: 40px;
 }
 .widget {
-	height: 150px;
-	width: 150px;
+	height: 180px;
+	width: 180px;
 	background-color: #EEF4FC;
-	margin-right: 10px;
 	margin: 10px;
+}
+div.container-fluid {
+	height: ;
+	width: 800px;
 }
 span.labelNoPrayers {
 	font-size: 13px;
@@ -105,20 +124,15 @@ span.labelNoPrayers {
 	font-size: 10px;
 }
 #PrayerStatistics {
-	line-height: 0.9;
+	line-height: 0.8;
 	margin-top: 4px;
 	margin-left: -25px;
 }
-#UserHeader {
-	margin-left: -26px;
-	margin-top: 44px;
-	border-bottom: 1px solid black;
-}
 .menu-item {
-	height: 20px;
-	width: ;
 	color: white;
-	line-height: 3;
+	line-height: 2.8;
+	white-space: nowrap;
+	padding-left: 10px;
 }
 #header.row {
 	background-color: #094156;
@@ -127,7 +141,14 @@ span.labelNoPrayers {
 }
 div#header.row {
 	height: 65px;
-	width: ;
+	width: 800px;
+}
+.row.widgetRow {
+	height: ;
+	width: 800px;
+	margin-bottom: 0;
+	margin-left: -5px;
+	margin-top: 10px;
 }
 #Search.col-xs-4 {
 	/*+placement: float-right;*/
@@ -149,7 +170,10 @@ input#searchText {
 span {
 	font-family: verdana;
 	font-size: 15px;
-	padding-left: 5px;
+}
+span.menu-group {
+	color: white;
+	cursor: pointer;
 }
 img#magnifierIcon {
 	/*+placement: anchor-bottom-right;*/
@@ -176,14 +200,6 @@ img#EmptyTurnsFlag {
 div.row.activeMenuItem {
 	background-color: #094156;
 }
-#UserHeader span {
-	font-size: 19px;
-	line-height: 0;
-	/*+placement: -1px -24px;*/
-	position: relative;
-	left: -1px;
-	top: -24px;
-}
 #warnings {
 	background-color: #006E9A;
 	color: white;
@@ -191,7 +207,19 @@ div.row.activeMenuItem {
 	height: 38px;
 	line-height: 2.2;
 	text-align: left;
+	width: 800px;
 }
 div.menu-item.col-xs-12 {
 	margin: 5px 0px 33px 10px;
+}
+#UserGroup {
+	font-size: 9px;
+}
+#UserName {
+	font-size: 20px;
+}
+#UserInformation {
+	line-height: 0.9;
+	margin-bottom: 38px;
+	margin-top: 34px;
 }
