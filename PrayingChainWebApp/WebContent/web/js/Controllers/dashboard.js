@@ -25,7 +25,8 @@ app.controller("dashboard", function($scope) {
     	}
     };
     
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("chartCommitted");
+    var ctx2 = document.getElementById("chartCoverage");
     
     var data = {
         labels: ["Comprometidos", "No comprometidos"],
@@ -43,6 +44,22 @@ app.controller("dashboard", function($scope) {
         }]
     };
     
+    var data2 = {
+            labels: ["Cubiertos", "Disponibles"],
+            datasets: [{
+                data: [965, 715],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
     var options = {
     		scales: {
     			yAxes: [{
@@ -61,4 +78,11 @@ app.controller("dashboard", function($scope) {
         data: data,
         options: options
     });
+
+    var myDoughnutChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: data2,
+        options: options
+    });
+    
 });
