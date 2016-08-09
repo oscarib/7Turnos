@@ -10,6 +10,8 @@
 <script src="../js/lib/angular.min.js"></script>
 <script src="../js/lib/angular-animate.min.js"></script>
 <script src="../js/Controllers/dashboard.js"></script>
+<script src="../js/lib/Chart.min.js"></script>
+
 
 </head>
 <body ng-controller="dashboard as ctrl">
@@ -113,9 +115,9 @@
 					<div class="widget-content"><img src="../images/actualizarCalendario.jpg"></div>
 				</div>
 				<div class="col-xs-1 widget">
-					<div class="widget-header">Estadística</div>
+					<div class="widget-header">Comprometidos</div>
 					<div class="widget-content">
-						<canvas tc-chartjs-doughnut chart-data="ctrl.myData" width="350" height="350"></canvas>
+						<canvas class="widget-chart" id="myChart" width="160" height="120"></canvas>
 					</div>
 				</div>
 			</div>

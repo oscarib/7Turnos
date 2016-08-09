@@ -15,6 +15,12 @@
 	width: 200px;
 	padding-left: 24px;
 }
+.widget-chart {
+	/*+placement: 0px 10px;*/
+	position: relative;
+	left: 0px;
+	top: 10px;
+}
 .fadeAnimate.ng-enter {
 	transition: 1s linear all;
 	opacity: 0;
