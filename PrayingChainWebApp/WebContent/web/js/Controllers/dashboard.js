@@ -1,6 +1,6 @@
-var app = angular.module("PrayingChain", ['ngAnimate']);
+var PrayingChain = angular.module("PrayingChain", ['ngAnimate']);
 
-app.controller("dashboard", function($scope) {
+PrayingChain.controller("dashboard", ['chartService', function(chartService) {
 	var self = this;
     self.firstName = "John";
     self.lastName = "Doe";
@@ -24,65 +24,33 @@ app.controller("dashboard", function($scope) {
     		self.hideListings = true;
     	}
     };
-    
-    var ctx = document.getElementById("chartCommitted");
-    var ctx2 = document.getElementById("chartCoverage");
-    
-    var data = {
-        labels: ["Comprometidos", "No comprometidos"],
-        datasets: [{
-            data: [973, 116],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }]
-    };
-    
-    var data2 = {
-            labels: ["Cubiertos", "Disponibles"],
-            datasets: [{
-                data: [965, 715],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
 
-    var options = {
-    		scales: {
-    			yAxes: [{
-    				ticks: {
-    					beginAtZero:true
-    				}
-    			}]
-    		},
-    		legend: {
-    			display: false
-    		}
-    };
+    //Committed / Non committed pie chart
+    var labels= ["Comprometidos", "No Comprometidos"];
+    var pieChartData = [973,116];
+    var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
+    var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
+    chartService.setPieChart("chartCommitted", labels, pieChartData, backgroundColor, borderColor);
     
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: options
-    });
+    //Coverage pie chart
+    var labels= ["Cubiertos", "Vacíos"];
+    var pieChartData = [1680,1];
+    var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
+    var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
+    chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
 
-    var myDoughnutChart2 = new Chart(ctx2, {
-        type: 'doughnut',
-        data: data2,
-        options: options
-    });
+    //availables Vs Total pie chart
+    var labels= ["Totales", "Disponibles"];
+    var pieChartData = [1680,715];
+    var borderColor = ['rgba(80, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'];
+    var backgroundColor = ['rgba(80,99,132,1)','rgba(54, 162, 235, 1)'];
+    chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
     
-});
+    //Redundancy: overoccupied
+    var labels= ["Normales	", "Sobresaturados"];
+    var pieChartData = [100,13];
+    var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
+    var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
+    chartService.setPieChart("redundancePieChart", labels, pieChartData, backgroundColor, borderColor);
+    redundancePieChart
+}]);

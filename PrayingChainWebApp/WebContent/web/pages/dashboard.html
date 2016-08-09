@@ -11,6 +11,7 @@
 <script src="../js/lib/angular-animate.min.js"></script>
 <script src="../js/Controllers/dashboard.js"></script>
 <script src="../js/lib/Chart.min.js"></script>
+<script src="../js/util/chartServices.js"></script>
 
 
 </head>
@@ -108,12 +109,6 @@
 					<div class="widget-header">Búsqueda avanzada</div>
 					<div class="widget-content"><img src="../images/AdvancedSearch.jpg"></div>
 				</div>
-			</div>
-			<div class="row widgetRow" id="widgets-line-2">
-				<div class="col-xs-1 widget">
-					<div class="widget-header">Actualizar Cal.</div>
-					<div class="widget-content"><img src="../images/actualizarCalendario.jpg"></div>
-				</div>
 				<div class="col-xs-1 widget">
 					<div class="widget-header">Comprometidos</div>
 					<div class="widget-content">
@@ -121,9 +116,31 @@
 					</div>
 				</div>
 				<div class="col-xs-1 widget">
-					<div class="widget-header">Cobertura</div>
+					<div class="widget-header">Vacíos</div>
 					<div class="widget-content">
 						<canvas class="widget-chart" id="chartCoverage" width="160" height="120"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="row widgetRow" id="widgets-line-2">
+				<div class="col-xs-1 widget">
+					<div class="widget-header">Actualizar Cal.</div>
+					<div class="widget-content"><img src="../images/actualizarCalendario.jpg"></div>
+				</div>
+				<div class="col-xs-1 widget">
+					<div class="widget-header"></div>
+					<div class="widget-content"></div>
+				</div>
+				<div class="col-xs-1 widget">
+					<div class="widget-header">Disponibles</div>
+					<div class="widget-content">
+						<canvas class="widget-chart" id="availablePieChart" width="160" height="120"></canvas>
+					</div>
+				</div>
+				<div class="col-xs-1 widget">
+					<div class="widget-header">Redundancia</div>
+					<div class="widget-content">
+						<canvas class="widget-chart" id="redundancePieChart" width="160" height="120"></canvas>
 					</div>
 				</div>
 			</div>

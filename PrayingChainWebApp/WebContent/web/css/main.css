@@ -55,7 +55,8 @@
 }
 table.tablePrayers {
 	height: ;
-	width: 750px;
+	width: 780px;
+	margin-left: 5px;
 }
 .tablePrayers td {
 	padding-left: 5px;
