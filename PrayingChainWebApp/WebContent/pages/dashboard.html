@@ -33,12 +33,12 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="row">
-						<div class="col-xs-2">
-							<img id="openListing" ng-click="ctrl.openListings()" class="GroupOpener" src="./images/GroupOpener.gif">
-							<span ng-click="ctrl.openListings()" class="menu-group">Listados</span>
+						<div class="col-xs-2" ng-click="ctrl.openLists()">
+							<img id="openListing" class="GroupOpener" src="./images/GroupOpener.gif">
+							<span class="menu-group">Listados</span>
 						</div>
 					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideListings">
+					<div class="fadeAnimate" ng-if="!ctrl.hideLists">
 						<div class="row">
 							<div class="col-xs-2">
 								<span class="menu-item">Oradores</span>
