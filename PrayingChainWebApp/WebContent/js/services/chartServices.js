@@ -4,7 +4,7 @@
     angular.module('PrayingChain')
         .factory('chartService', chartService);
 
-    /* @ngInject */
+    /** @ngInject **/
     function chartService () {
         var self = this;
         
