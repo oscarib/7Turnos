@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain", ['ngAnimate']);
 
-PrayingChain.controller("dashboard", ['chartService', function(chartService) {
+PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function(chartService, prayerServices) {
 	var self = this;
     self.firstName = "John";
     self.lastName = "Doe";
