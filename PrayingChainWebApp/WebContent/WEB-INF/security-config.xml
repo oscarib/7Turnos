@@ -9,11 +9,11 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http pattern="/web/css/**" security="none"/>
-	<http pattern="/web/web/css/**" security="none"/>
 	<http pattern="/web/fonts/**" security="none"/>
-	<http pattern="/web/web/fonts/**" security="none"/>
+	<http pattern="/web/images/**" security="none"/>
 	<http pattern="/web/js/**" security="none"/>
-	<http pattern="/web/web/js/**" security="none"/>
+	<http pattern="/web/js/**/**" security="none"/>
+	<http pattern="/web/pages/**" security="none"/>
 
 	<!-- Authorization rules -->
 	<http>
