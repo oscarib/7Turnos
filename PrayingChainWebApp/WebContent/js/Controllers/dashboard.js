@@ -6,6 +6,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     self.lastName = "Doe";
     self.hideActions = true;
     self.hideLists = true;
+    self.hideLoading = true;
     
     self.openActions = function(){
     	if (self.hideActions){

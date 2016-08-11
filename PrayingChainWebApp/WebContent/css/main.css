@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+#Batidora {
+	height: 100%;
+	width: 100%;
+	background-color: #B3CBEA;
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	text-align: center;
+}
 #sidebar-menu {
 	background: #00B2D8;
 	/* For browsers that do not support gradients */
