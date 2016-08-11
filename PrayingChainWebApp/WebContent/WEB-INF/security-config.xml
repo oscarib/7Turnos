@@ -20,7 +20,8 @@
 		<!-- This should be removed to improve security!!!! -->
 		<csrf disabled="true"/>
 		
- 		<intercept-url pattern="/Login.jsp" access="permitAll"/>
+		<intercept-url pattern="**" access="permitAll"/>
+ <!--	<intercept-url pattern="/Login.jsp" access="permitAll"/>
 		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
 		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/changePrayer.html" access="hasRole('ROLE_ADMIN')"/>
@@ -30,9 +31,11 @@
 		<intercept-url pattern="/webhook.html*" access="permitAll" />
 		<intercept-url pattern="/MailchimpAnswer.jsp" access="permitAll" />
 		<intercept-url pattern="/**" access="isFullyAuthenticated()" />
+-->
 		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
 					login-page="/Login.jsp" authentication-failure-url="/Login.jsp?error" />
-		<logout logout-success-url="/index.html"/> <!-- /logout; automatically logout -->
+		<logout logout-success-url="/index.html"/> 
+
 	</http>
 	
 	<beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
