@@ -26,6 +26,21 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     };
     
     loadCharts();
+    
+    //Cargamos la lista de oradores
+    var prayerList = prayerServices.getPrayerList();
+    prayerList.then(function(dataOut){
+    	self.prayers = dataOut.data;
+    }).finally(function(){
+    	
+    	//cargamos las estadísticas principales
+    	var statistics = prayerServices.getChainStatistics();
+    	statistics.then(function(dataOut){
+    	}).finally(function(){
+    		self.hideLoading = false;
+    	});
+    });
+    
 
     
 //FUNCIONES PRIVADAS -->

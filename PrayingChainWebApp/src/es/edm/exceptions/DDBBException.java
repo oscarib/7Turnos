@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class DDBBException extends Exception {
+public class DDBBException extends RuntimeException {
 
 
 	public DDBBException() {

@@ -16,7 +16,7 @@
     			url: url,
     			dataType: 'json',
     			method: 'POST',
-    			data: JSON.stringify(requestData),
+    			data: requestData,
     			headers: {
     				"Content-Type": "application/json"
     			}

@@ -153,43 +153,19 @@
 							<th>ID</th>
 							<th>Nombre</th>
 							<th>Email</th>
-							<th>Dia</th>
-							<th>Turno</th>
+							<th>Local</th>
+							<th>Oculto</th>
+							<th>Teléfono</th>
+							<th>Seudónimo</th>
 						</tr>
-						<tr>
-							<td>ID</th>
-							<td>Nombre</th>
-							<td>Email</th>
-							<td>Dia</th>
-							<td>Turno</th>
-						</tr>
-						<tr>
-							<td>ID</th>
-							<td>Nombre</th>
-							<td>Email</th>
-							<td>Dia</th>
-							<td>Turno</th>
-						</tr>
-						<tr>
-							<td>ID</th>
-							<td>Nombre</th>
-							<td>Email</th>
-							<td>Dia</th>
-							<td>Turno</th>
-						</tr>
-						<tr>
-							<td>ID</th>
-							<td>Nombre</th>
-							<td>Email</th>
-							<td>Dia</th>
-							<td>Turno</th>
-						</tr>
-						<tr>
-							<td>ID</th>
-							<td>Nombre</th>
-							<td>Email</th>
-							<td>Dia</th>
-							<td>Turno</th>
+						<tr ng-repeat="prayer in ctrl.prayers">
+							<td>{{prayer.uid}}</th>
+							<td>{{prayer.name}}</th>
+							<td>{{prayer.email}}</th>
+							<td>{{prayer.ownCountry}}</th>
+							<td>{{prayer.hidden}}</th>
+							<td>{{prayer.phoneNumber}}</th>
+							<td>{{prayer.pseudonym}}</th>
 						</tr>
 					</table>
 				</div>
