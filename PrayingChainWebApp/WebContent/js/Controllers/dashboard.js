@@ -6,7 +6,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     self.lastName = "Doe";
     self.hideActions = true;
     self.hideLists = true;
-    self.hideLoading = false;
+    self.showLoading = false; //no necesitamos batidora por ahora...
     
     self.openActions = function(){
     	if (self.hideActions){
@@ -38,7 +38,6 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
     	}).finally(function(){
-    		self.hideLoading = true;
     	});
     });
     
