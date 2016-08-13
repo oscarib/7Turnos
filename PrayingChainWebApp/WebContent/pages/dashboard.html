@@ -19,7 +19,11 @@
 
 </head>
 <body ng-controller="dashboard as ctrl">
-	<div id="Batidora" ng-show="ctrl.showLoading">Loading</div>
+	<div class="row" ng-if="ctrl.showLoading">
+		<div id="sidebar-menu" class="col-lg-3 col-md-3 col-sm-3 menu-item">
+			<div id="Batidora">Loading</div>
+		</div>
+	</div>
 	<div class="row">
 		<div id="sidebar-menu" class="col-lg-3 col-md-3 col-sm-3 menu-item">
     			<div class="row">
@@ -77,6 +81,28 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-1">
+							<img ng-click="ctrl.openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif">
+							<span ng-click="ctrl.openMenu(3)" class="menu-group">Configuración</span>
+						</div>
+					</div>
+					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[3]">
+						<div class="row">
+							<div class="col-lg-2">
+								<span class="menu-item">Sitio FTP</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-2">
+								<span class="menu-item">MailChimp</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
 		</div>
 		<div class="col-lg-9 col-md-9 col-sm-9">
 			<div class="container-fluid">
