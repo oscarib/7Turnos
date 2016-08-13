@@ -4,25 +4,22 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
 	var self = this;
     self.firstName = "John";
     self.lastName = "Doe";
-    self.hideActions = true;
-    self.hideLists = true;
+    self.hideMenu = [];
+    self.hideMenu[1] = true;
+    self.hideMenu[2] = true;
+    self.hideMenu[3] = true;
     self.showLoading = false; //no necesitamos batidora por ahora...
     
-    self.openActions = function(){
-    	if (self.hideActions){
-	        self.hideActions = false;
-	        self.hideLists = true;
+    self.openMenu = function(menuItem){
+    	if (self.hideMenu[menuItem]){
+    		self.hideMenu[menuItem] = false;
+    		for (var i=0; i<self.hideMenu.length; i++){
+    			if (i!==menuItem){
+    				self.hideMenu[i] = true;
+    			}
+    		}
     	} else {
-	        self.hideActions = true;
-    	}
-    };
-
-    self.openLists = function(){
-    	if (self.hideLists){
-	        self.hideActions = true;
-	        self.hideLists = false;
-    	} else {
-    		self.hideLists = true;
+    		self.hideMenu[menuItem] = true;
     	}
     };
     

@@ -36,12 +36,12 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="row">
-						<div class="col-lg-2" ng-click="ctrl.openLists()">
-							<img id="openListing" class="GroupOpener" src="./images/GroupOpener.gif">
+						<div class="col-lg-2" ng-click="ctrl.openMenu(1)">
+							<img class="GroupOpener" src="./images/GroupOpener.gif">
 							<span class="menu-group">Listados</span>
 						</div>
 					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideLists">
+					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[1]">
 						<div class="row">
 							<div class="col-lg-2">
 								<span class="menu-item">Oradores</span>
@@ -59,11 +59,11 @@
 				<div class="col-lg-12">
 					<div class="row">
 						<div class="col-lg-1">
-							<img id="openActions" ng-click="ctrl.openActions()" class="GroupOpener" src="./images/GroupOpener.gif">
-							<span ng-click="ctrl.openActions()" class="menu-group">Acciones</span>
+							<img ng-click="ctrl.openMenu(2)" class="GroupOpener" src="./images/GroupOpener.gif">
+							<span ng-click="ctrl.openMenu(2)" class="menu-group">Acciones</span>
 						</div>
 					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideActions">
+					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[2]">
 						<div class="row">
 							<div class="col-lg-2">
 								<span class="menu-item">Crear Orador</span>
