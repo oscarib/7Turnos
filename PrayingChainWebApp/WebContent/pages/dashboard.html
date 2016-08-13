@@ -81,7 +81,7 @@
 		<div class="col-lg-9 col-md-9 col-sm-9">
 			<div class="container-fluid">
 				<div id="warnings" class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<span>Atención: Hay 1 orador sin turnos asignados, y 3
 							turnos huérfanos</span>
 					</div>
@@ -89,21 +89,21 @@
 			</div>
 			<div class="container-fluid">
 				<div id="header" class="row">
-					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 NofPrayersDiv">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 NofPrayersDiv">
 						<span class="NofPrayers">1275</span><br> <span
 							class="labelNoPrayers">oradores</span>
 					</div>
-					<div id="EmptyTurns" class="col-lg-2 col-md-3 col-sm-3 col-xs-3 ">
+					<div id="EmptyTurns" class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
 						<span class="EmptyTurnsNumber">002</span><br> <span
 							class="EmptyTurnsLabel">turnos vacios</span>
 					</div>
-					<div id="PrayerStatistics" class="col-lg-4 col-md-4 col-sm-4">
+					<div id="PrayerStatistics" class="col-lg-3 col-md-3 col-sm-4 col-xs-3">
 						<span>Turnos disponibles: 456</span><br> <span>Oradores
 							comprometidos: 1.090</span><br> <span>Oradores no
 							comprometidos: 90</span><br> <span>Oradores no
 							comprometidos: 90</span>
 					</div>
-					<div id="Search" class="col-lg-4 col-md-4 col-sm-4">
+					<div id="Search" class="col-lg-5 col-md-5 col-sm-3 col-xs-3">
 						<input type="text" class="form-control" id="searchText"> <img
 							id="magnifierIcon" src="./images/magnifier.gif" height="32"
 							width="32">
@@ -112,56 +112,57 @@
 			</div>
 			<div class="container-fluid">
 				<div class="row widgetRow" id="widgets-line-1">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<div class="widget-header"><img src="./images/createPrayer.jpg"></div>
+						<div class="widget-content">
+							<h4>Crear Orador</h4>
+							<span>Crear un orador y un turno en un sólo paso</span>
+						</div>
+						<div class="widget-links">Acceder</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<div class="widget-header"><img src=".	/images/actualizarCalendario.jpg"></div>
+						<div class="widget-content">
+							<h4>Calendario</h4>
+							<span>Actualizar y subir a la web el calendario de turnos</span>
+						</div>
+						<div class="widget-links">Actualizar</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<canvas class="widget-chart" width="160" height="120" id="chartCommitted"></canvas>
+						<div class="widget-links">Links to</div>
+					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<div class="widget-header">Crear Orador</div>
-						<div class="widget-content"></div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-4 widget">
-						<div class="widget-header">Búsqueda avanzada</div>
-						<div class="widget-content"></div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-xs-6 col-sm-3 widget">
-						<div class="widget-header">Comprometidos</div>
-						<div class="widget-content">
-							<canvas class="widget-chart" id="chartCommitted" width="160"
-								height="120"></canvas>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-xs-6 col-sm-3 widget">
-						<div class="widget-header">Comprometidos</div>
-						<div class="widget-content">
-							<canvas class="widget-chart" id="chartCommitted" width="160"
-								height="120"></canvas>
-						</div>
+							<canvas class="widget-chart" id="chartCoverage"  width="160" height="120" ></canvas>
+						<div class="widget-links">Widget Links</div>
 					</div>
 				</div>
 			</div>
 			<div class="container-fluid">
 				<div class="row widgetRow" id="widgets-line-2">
-					<div class="col-lg-3 col-md-3  col-sm-3 widget">
-						<div class="widget-header">Actualizar Cal.</div>
-						<div class="widget-content"></div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<div class="widget-header"><img src="./images/turnosvacios.jpg"></div>
+						<div class="widget-content">
+							<h4>Turnos vacíos</h4>
+							<span>Un informe rápido sobre huecos vacíos en la cadena</span>
+						</div>
+						<div class="widget-links">Mostrar</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<div class="widget-header"><img src="./images/AdvancedSearch.jpg"></div>
+						<div class="widget-content">
+							<h4>Busqueda avanzada</h4>
+							<span>Realizar una búsqueda avanzada por varios parámetros</span>
+						</div>
+						<div class="widget-links">Buscar</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<div class="widget-header">Vacíos</div>
-						<div class="widget-content">
-							<canvas class="widget-chart" id="chartCoverage" width="160"
-								height="120"></canvas>
-						</div>
+							<canvas class="widget-chart" id="availablePieChart" width="160" height="120" ></canvas>
+						<div class="widget-links"></div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<div class="widget-header">Disponibles</div>
-						<div class="widget-content">
-							<canvas class="widget-chart" id="availablePieChart" width="160"
-								height="120"></canvas>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<div class="widget-header">Redundancia</div>
-						<div class="widget-content">
-							<canvas class="widget-chart" id="redundancePieChart" width="160"
-								height="120"></canvas>
-						</div>
+							<canvas class="widget-chart" id="redundancePieChart" width="160" height="120" ></canvas>
+						<div class="widget-links"></div>
 					</div>
 				</div>
 			</div>

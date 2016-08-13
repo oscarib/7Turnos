@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+div#Search {
+	margin-top: 15px;
+	margin-left: 20px;
+}
 #Batidora {
 	height: 100%;
 	width: 100%;
@@ -42,12 +46,6 @@
 	line-height: 0.6;
 	padding-left: 5px;
 	padding-right: 5px;
-}
-.widget-chart {
-	/*+placement: 0px 10px;*/
-	position: relative;
-	left: 0px;
-	top: 10px;
 }
 .fadeAnimate.ng-enter {
 	transition: 1s linear all;
@@ -117,33 +115,71 @@ span.EmptyTurnsNumber {
 	padding-left: 5px;
 }
 div.widget-header {
-	background-color: #00A6CA;
 	color: white;
-	line-height: 2.4;
-	height: 40px;
+	height: 97px;
 	width: 100%;
 	/*+placement: anchor-top-left;*/
 	position: absolute;
 	left: 0;
 	top: 0;
-	padding-left: 5px;
-	font-size: 16px;
+	z-index: 1;
+	margin-left: 0px;
+	margin-top: 0px;
 }
-div.widget-content {
-	/*+placement: anchor-top-left;*/
+.widget-header img {
+	max-height: 97px;
+	border-radius: 5px 5px 0px 0px;
+	/*height: 100%;*/
+	object-fit: cover !important;
+	height: ;
+	width: 100%;
+}
+.widget-content {
+	margin-left: -13px;
+	margin-top: 97px;
+	max-height: 61px;
+	margin-right: -13px;
+	z-index: 2;
+	line-height: 0.8;
+	text-overflow: clip;
+	overflow: hidden;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+.widget-content span {
+	font-size: 11px;
+}
+.widget-content h4 {
+	margin-bottom: 5px;
+	margin-top: 2px;
+}
+div.widget-links {
+	/*+placement: anchor-bottom-left;*/
 	position: absolute;
 	left: 0;
-	top: 0;
+	bottom: 0;
 	margin-left: 0px;
-	margin-top: 40px;
+	max-height: 20px;
+	height: ;
+	width: 100%;
+	margin-bottom: 0px;
+	z-index: 3;
+	color: #0900B5;
+	border-radius: 0 0 5px 5px;
+	font-size: 12px;
+	background-color: rgba(235, 235, 235, 0.855);
+	padding-left: 2px;
+	padding-right: 2px;
 }
 .widget {
 	height: 180px;
-	background-color: #EEF4FC;
 	width: 23%;
 	margin-left: 1%;
 	margin-right: 1%;
 	margin-top: 10px;
+	border: 1px outset rgba(0, 0, 0, 0.034);
+	border-radius: 5px;
+	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
 }
 span.labelNoPrayers {
 	font-size: 13px;
@@ -152,6 +188,9 @@ span.labelNoPrayers {
 	line-height: 0.9;
 	text-align: center;
 	margin-top: 6px;
+}
+.widget-chart {
+	margin-top: 10px;
 }
 #PrayerStatistics span {
 	font-size: 10px;
