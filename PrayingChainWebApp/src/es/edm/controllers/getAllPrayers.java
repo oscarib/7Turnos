@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.edm.domain.Prayer;
-import es.edm.domain.SimpleTurn;
 import es.edm.services.MainService;
 
 @Controller
