@@ -23,6 +23,21 @@
     		return promise;
     	};
 
+    	self.getChainStatistics = function(requestData){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./getStatistics.do");
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
     	return self;
     }
 })();
