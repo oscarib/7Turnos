@@ -15,7 +15,6 @@
 <script src="./js/services/chartServices.js"></script>
 <script src="./js/services/prayerServices.js"></script>
 <script src="./js/services/pcUtils.js"></script>
-<script src="./js/lib/dirPagination.js"></script>
 
 
 </head>
@@ -209,7 +208,7 @@
 								<th>Teléfono</th>
 								<th>Seudónimo</th>
 							</tr>
-							<tr dir-paginate="prayer in ctrl.prayers | itemsPerPage: 5">
+							<tr ng-repeat="prayer in ctrl.prayers">
 								<td>{{prayer.uid}}
 								</th>
 								<td>{{prayer.name}}
@@ -224,11 +223,6 @@
 								</th>
 								<td>{{prayer.pseudonym}}
 								</th>
-							</tr>
-							<tr>
-								<td id="paginationControls" colspan="7"><dir-pagination-controls
-										template-url="./pages/dirPagination.tpl.html" max-size="20"
-										boundary-links="true"></dir-pagination-controls></td>
 							</tr>
 						</table>
 					</div>

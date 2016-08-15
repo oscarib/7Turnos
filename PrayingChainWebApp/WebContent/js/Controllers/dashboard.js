@@ -1,4 +1,4 @@
-var PrayingChain = angular.module("PrayingChain", ['ngAnimate','angularUtils.directives.dirPagination']);
+var PrayingChain = angular.module("PrayingChain", ['ngAnimate']);
 
 PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function(chartService, prayerServices) {
 	var self = this;
