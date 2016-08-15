@@ -1,23 +1,16 @@
 @charset "UTF-8";
 
-.container-fluid.loadingGif {
-	height: 100%;
-	width: 100%;
-	/*+placement: anchor-bottom-left;*/
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	/*background-color: #F5F5F5;*/
-	text-align: left;
-	padding-top: 5%;
-}
-.container-fluid img.loadingGif {
-	height: 50px;
-	width: ;
-}
 div#Search {
 	margin-top: 15px;
 	margin-left: 20px;
+}
+.loadingGifImg {
+	height: 50px;
+	width: 50px;
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 #Batidora {
 	height: 100%;
