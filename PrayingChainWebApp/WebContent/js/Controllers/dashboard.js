@@ -16,6 +16,9 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
 	self.NonCommittedPrayers = "";
 	self.Redundancy = "";
 	self.UsedTurnsPerc = "";
+	self.showLoadingStatistics = true;
+	self.showLoadingPrayersTable = true;
+	var errorWithServiceCall = false;
     self.showLoading = false; //no necesitamos batidora por ahora...
     
     self.openMenu = function(menuItem){
@@ -31,21 +34,18 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     	}
     };
     
-    loadCharts();
-    
     //Cargamos la lista de oradores
     var prayerList = prayerServices.getPrayerList();
     prayerList.then(function(dataOut){
     	self.prayers = dataOut.data;
-    }).finally(function(){
-    	
-    	//cargamos las estadísticas principales
-    	var statistics = prayerServices.getChainStatistics();
-    	statistics.then(function(dataOut){
-    	}).finally(function(){
-    	});
+    }, function(error) {
+    	if (!errorWithServiceCall){
+    		errorWithServiceCall = true;
+    		bootbox.alert({size:'small', message: 'Se produjo un error al solicitar la lista de oradores'});
+    	}
+	}).finally(function(){
+    	self.showLoadingPrayersTable = false;
     });
-    
 
 	var statistics = prayerServices.getChainStatistics();
 	statistics.then(function(dataOut){
@@ -59,6 +59,10 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
 		self.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
 	    loadCharts();
 	}, function(error) {
+		if (!errorWithServiceCall){
+			errorWithServiceCall = true;
+			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
+		}
 	}).finally(function(){
 			self.showLoadingStatistics = false;
 	});

@@ -7,6 +7,7 @@
 <link href="./css/main.css" rel="stylesheet">
 <script src="./js/lib/jquery-2.2.4.min.js"></script>
 <script src="./js/lib/bootstrap.min.js"></script>
+<script src="./js/lib/bootbox.min.js"></script>
 <script src="./js/lib/angular.min.js"></script>
 <script src="./js/lib/angular-animate.min.js"></script>
 <script src="./js/Controllers/dashboard.js"></script>
@@ -28,7 +29,7 @@
 		<div id="sidebar-menu" class="col-lg-3 col-md-3 col-sm-3 menu-item">
     			<div class="row">
 				<div id="UserInformation" class="col-lg-12">
-					<span id="UserName">{{ctrl.firstName}}</span><br>
+					<span id="UserName">{{ctrl.firstName}} {{ctrl.lastName}}</span><br>
 					<span id="UserGroup">España De Maria</span>
 				</div>
 			</div>
@@ -116,18 +117,27 @@
 			<div class="container-fluid">
 				<div id="header" class="row">
 					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
-						<span class="NofPrayers">1275</span><br> <span
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
+						<span class="NofPrayers">{{ctrl.TotalPrayers}}</span><br> <span
 							class="labelNoPrayers">oradores</span>
 					</div>
 					<div id="EmptyTurns" class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-						<span class="EmptyTurnsNumber">002</span><br> <span
-							class="EmptyTurnsLabel">turnos vacios</span>
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
+						<span class="EmptyTurnsNumber">{{ctrl.EmptyTurns}}</span><br>
+						<span class="EmptyTurnsLabel">turnos vacios</span>
 					</div>
 					<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
-						<span>Turnos disponibles: 456</span><br>
-						<span>Comprometidos: 1.090</span><br>
-						<span>No comprometidos: 90</span><br>
-						<span>Ratio: 90%</span>
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
+						<span>Turnos disponibles: {{ctrl.AvailableTurns}}</span><br>
+						<span>Turnos cubiertos: {{ctrl.UsedTurnsPerc}}%</span><br>
+						<span>Comprometidos: {{ctrl.CommittedPrayers}}</span><br>
+						<span>No comprometidos: {{ctrl.NonCommittedPrayers}}</span>
 					</div>
 					<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3">
 						<input type="text" class="form-control" id="searchText"> <img
@@ -149,18 +159,24 @@
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
 						<div class="widget-header"><img src=".	/images/actualizarCalendario.jpg"></div>
 						<div class="widget-content">
-							<h4>Calendario</h4>
+							<h4>Actualizar</h4>
 							<span>Actualizar y subir a la web el calendario de turnos</span>
 						</div>
 						<div class="widget-links">Actualizar</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
 						<canvas class="widget-chart" width="160" height="120" id="chartCommitted"></canvas>
-						<div class="widget-links">Links to</div>
+						<div class="widget-links">Comprometidos</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
 							<canvas class="widget-chart" id="chartCoverage"  width="160" height="120" ></canvas>
-						<div class="widget-links">Widget Links</div>
+						<div class="widget-links">Vacíos - Cubiertos</div>
 					</div>
 				</div>
 			</div>
@@ -183,18 +199,27 @@
 						<div class="widget-links">Buscar</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
 							<canvas class="widget-chart" id="availablePieChart" width="160" height="120" ></canvas>
-						<div class="widget-links"></div>
+						<div class="widget-links">Totales - Disponibles</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 widget">
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
+						</div>
 							<canvas class="widget-chart" id="redundancePieChart" width="160" height="120" ></canvas>
-						<div class="widget-links"></div>
+						<div class="widget-links">Saturación</div>
 					</div>
 				</div>
 			</div>
 			<div class="container-fluid">
 				<div class="row widgetRow" id="last-prayers">
 					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="container-fluid loadingGif">
+							<img class="loadingGif" ng-show="ctrl.showLoadingPrayersTable" src="./images/loadingGif.gif">
+						</div>
 						<table class="table table-hover table-condensed">
 							<tr>
 								<th>ID</th>
