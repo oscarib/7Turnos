@@ -1,0 +1,36 @@
+
+<div class="container-fluid">
+	<div id="warnings" class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<span>Atención: Hay 1 orador sin turnos asignados, y 3 turnos
+				huérfanos</span>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div id="header" class="row">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif"> <span class="NofPrayers">{{ctrl.TotalPrayers}}</span><br>
+			<span class="labelNoPrayers">oradores</span>
+		</div>
+		<div id="EmptyTurns" class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif"> <span class="EmptyTurnsNumber">{{ctrl.EmptyTurns}}</span><br>
+			<span class="EmptyTurnsLabel">turnos vacios</span>
+		</div>
+		<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif"> <span>Turnos
+				disponibles: {{ctrl.AvailableTurns}}</span><br> <span>Turnos
+				cubiertos: {{ctrl.UsedTurnsPerc}}%</span><br> <span>Comprometidos:
+				{{ctrl.CommittedPrayers}}</span><br> <span>No comprometidos:
+				{{ctrl.NonCommittedPrayers}}</span>
+		</div>
+		<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3">
+			<input type="text" class="form-control" id="searchText"> <img
+				id="magnifierIcon" src="./images/magnifier.gif" height="32"
+				width="32">
+		</div>
+	</div>
+</div>

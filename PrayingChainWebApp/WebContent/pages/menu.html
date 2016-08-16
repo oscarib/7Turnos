@@ -1,0 +1,80 @@
+
+<div class="row">
+	<div id="UserInformation" class="col-lg-12">
+		<span id="UserName">{{ctrl.firstName}} {{ctrl.lastName}}</span><br>
+		<span id="UserGroup">España De Maria</span>
+	</div>
+</div>
+<div class="row activeMenuItem">
+	<div class="col-lg-12">
+		<span>Dashboard</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-2" ng-click="ctrl.openMenu(1)">
+				<img class="GroupOpener" src="./images/GroupOpener.gif"> <span
+					class="menu-group">Listados</span>
+			</div>
+		</div>
+		<div class="fadeAnimate" ng-if="!ctrl.hideMenu[1]">
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">Oradores</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">Turnos</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-1">
+				<img ng-click="ctrl.openMenu(2)" class="GroupOpener"
+					src="./images/GroupOpener.gif"> <span
+					ng-click="ctrl.openMenu(2)" class="menu-group">Acciones</span>
+			</div>
+		</div>
+		<div class="fadeAnimate" ng-if="!ctrl.hideMenu[2]">
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">Crear Orador</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">Actualizar Cal.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-1">
+				<img ng-click="ctrl.openMenu(3)" class="GroupOpener"
+					src="./images/GroupOpener.gif"> <span
+					ng-click="ctrl.openMenu(3)" class="menu-group">Configuración</span>
+			</div>
+		</div>
+		<div class="fadeAnimate" ng-if="!ctrl.hideMenu[3]">
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">Sitio FTP</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<span class="menu-item">MailChimp</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

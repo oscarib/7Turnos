@@ -1,204 +1,77 @@
-<!DOCTYPE html>
-<html ng-app="PrayingChain">
-<head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
-<link href="./css/bootstrap.min.css" rel="stylesheet">
-<link href="./css/main.css" rel="stylesheet">
-<link rel="stylesheet" href="./css/lib/datatables.min.css"/>
-<link href="./css/lib/angular-datatables.min.css" rel="stylesheet">
-<script src="./js/lib/jquery-2.2.4.min.js"></script>
-<script src="./js/lib/datatables.min.js"></script>
-<script src="./js/lib/bootstrap.min.js"></script>
-<script src="./js/lib/bootbox.min.js"></script>
-<script src="./js/lib/angular.min.js"></script>
-<script src="./js/lib/angular-animate.min.js"></script>
-<script src="./js/Controllers/dashboard.js"></script>
-<script src="./js/lib/angular-datatables.min.js"></script>
-<script src="./js/lib/Chart.min.js"></script>
-<script src="./js/services/chartServices.js"></script>
-<script src="./js/services/prayerServices.js"></script>
-<script src="./js/services/pcUtils.js"></script>
 
-
-</head>
-<body ng-controller="dashboard as ctrl">
-	<div class="row">
-		<div id="sidebar-menu" class="col-lg-3 col-md-3 col-sm-3 menu-item">
-    			<div class="row">
-				<div id="UserInformation" class="col-lg-12">
-					<span id="UserName">{{ctrl.firstName}} {{ctrl.lastName}}</span><br>
-					<span id="UserGroup">España De Maria</span>
-				</div>
+<div class="container-fluid">
+	<div class="row widgetRow" id="widgets-line-1">
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/createPrayer.jpg">
 			</div>
-			<div class="row activeMenuItem">
-				<div class="col-lg-12">
-					<span>Dashboard</span>
-				</div>
+			<div class="widget-content">
+				<h4>Crear Orador</h4>
+				<span>Crear un orador y un turno en un sólo paso</span>
 			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row">
-						<div class="col-lg-2" ng-click="ctrl.openMenu(1)">
-							<img class="GroupOpener" src="./images/GroupOpener.gif">
-							<span class="menu-group">Listados</span>
-						</div>
-					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[1]">
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">Oradores</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">Turnos</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row">
-						<div class="col-lg-1">
-							<img ng-click="ctrl.openMenu(2)" class="GroupOpener" src="./images/GroupOpener.gif">
-							<span ng-click="ctrl.openMenu(2)" class="menu-group">Acciones</span>
-						</div>
-					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[2]">
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">Crear Orador</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">Actualizar Cal.</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row">
-						<div class="col-lg-1">
-							<img ng-click="ctrl.openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif">
-							<span ng-click="ctrl.openMenu(3)" class="menu-group">Configuración</span>
-						</div>
-					</div>
-					<div class="fadeAnimate" ng-if="!ctrl.hideMenu[3]">
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">Sitio FTP</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-2">
-								<span class="menu-item">MailChimp</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>			
+			<div class="widget-links">Acceder</div>
 		</div>
-		<div class="col-lg-9 col-md-9 col-sm-9">
-			<div class="container-fluid">
-				<div id="warnings" class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<span>Atención: Hay 1 orador sin turnos asignados, y 3
-							turnos huérfanos</span>
-					</div>
-				</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/actualizarCalendario.jpg">
 			</div>
-			<div class="container-fluid">
-				<div id="header" class="row">
-					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<span class="NofPrayers">{{ctrl.TotalPrayers}}</span><br> <span
-							class="labelNoPrayers">oradores</span>
-					</div>
-					<div id="EmptyTurns" class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<span class="EmptyTurnsNumber">{{ctrl.EmptyTurns}}</span><br>
-						<span class="EmptyTurnsLabel">turnos vacios</span>
-					</div>
-					<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<span>Turnos disponibles: {{ctrl.AvailableTurns}}</span><br>
-						<span>Turnos cubiertos: {{ctrl.UsedTurnsPerc}}%</span><br>
-						<span>Comprometidos: {{ctrl.CommittedPrayers}}</span><br>
-						<span>No comprometidos: {{ctrl.NonCommittedPrayers}}</span>
-					</div>
-					<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3">
-						<input type="text" class="form-control" id="searchText"> <img
-							id="magnifierIcon" src="./images/magnifier.gif" height="32"
-							width="32">
-					</div>
-				</div>
+			<div class="widget-content">
+				<h4>Actualizar</h4>
+				<span>Actualizar y subir a la web el calendario de turnos</span>
 			</div>
-			<div class="container-fluid">
-				<div class="row widgetRow" id="widgets-line-1">
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-						<div class="widget-header"><img src="./images/createPrayer.jpg"></div>
-						<div class="widget-content">
-							<h4>Crear Orador</h4>
-							<span>Crear un orador y un turno en un sólo paso</span>
-						</div>
-						<div class="widget-links">Acceder</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-						<div class="widget-header"><img src="./images/actualizarCalendario.jpg"></div>
-						<div class="widget-content">
-							<h4>Actualizar</h4>
-							<span>Actualizar y subir a la web el calendario de turnos</span>
-						</div>
-						<div class="widget-links">Actualizar</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<canvas class="widget-chart" width="160" height="120" id="chartCommitted"></canvas>
-						<div class="widget-links">Comprometidos</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<canvas class="widget-chart" id="chartCoverage"  width="160" height="120" ></canvas>
-						<div class="widget-links">Vacíos - Cubiertos</div>
-					</div>
-				</div>
-			</div>
-			<div class="container-fluid">
-				<div class="row widgetRow" id="widgets-line-2">
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-						<div class="widget-header"><img src="./images/turnosvacios.jpg"></div>
-						<div class="widget-content">
-							<h4>Turnos vacíos</h4>
-							<span>Un informe rápido sobre huecos vacíos en la cadena</span>
-						</div>
-						<div class="widget-links">Mostrar</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-						<div class="widget-header"><img src="./images/AdvancedSearch.jpg"></div>
-						<div class="widget-content">
-							<h4>Busqueda avanzada</h4>
-							<span>Realizar una búsqueda avanzada por varios parámetros</span>
-						</div>
-						<div class="widget-links">Buscar</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<canvas class="widget-chart" id="availablePieChart" width="160" height="120" ></canvas>
-						<div class="widget-links">Totales - Disponibles</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 widget">
-						<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics" src="./images/loadingGif.gif">
-						<canvas class="widget-chart" id="redundancePieChart" width="160" height="120" ></canvas>
-						<div class="widget-links">Saturación</div>
-					</div>
-				</div>
-			</div>
+			<div class="widget-links">Actualizar</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif">
+			<canvas class="widget-chart" width="160" height="120"
+				id="chartCommitted"></canvas>
+			<div class="widget-links">Comprometidos</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 widget">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif">
+			<canvas class="widget-chart" id="chartCoverage" width="160"
+				height="120"></canvas>
+			<div class="widget-links">Vacíos - Cubiertos</div>
 		</div>
 	</div>
-</body>
-</html>
+</div>
+<div class="container-fluid">
+	<div class="row widgetRow" id="widgets-line-2">
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/turnosvacios.jpg">
+			</div>
+			<div class="widget-content">
+				<h4>Turnos vacíos</h4>
+				<span>Un informe rápido sobre huecos vacíos en la cadena</span>
+			</div>
+			<div class="widget-links">Mostrar</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/AdvancedSearch.jpg">
+			</div>
+			<div class="widget-content">
+				<h4>Busqueda avanzada</h4>
+				<span>Realizar una búsqueda avanzada por varios parámetros</span>
+			</div>
+			<div class="widget-links">Buscar</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 widget">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif">
+			<canvas class="widget-chart" id="availablePieChart" width="160"
+				height="120"></canvas>
+			<div class="widget-links">Totales - Disponibles</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 widget">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif">
+			<canvas class="widget-chart" id="redundancePieChart" width="160"
+				height="120"></canvas>
+			<div class="widget-links">Saturación</div>
+		</div>
+	</div>
+</div>
