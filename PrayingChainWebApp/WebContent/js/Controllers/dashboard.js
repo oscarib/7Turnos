@@ -98,7 +98,13 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("redundancePieChart", labels, pieChartData, backgroundColor, borderColor);
-        redundancePieChart    		
+
+        //Hidden Vs Public Prayers
+        var labels= ["Públicos", "Anónimos"];
+        var pieChartData = [313, 790];
+        var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
+        var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
+        chartService.setPieChart("hiddenPublicRatio", labels, pieChartData, backgroundColor, borderColor);
     };
     
     function fillInEmptyTurns(emptyTurns){
