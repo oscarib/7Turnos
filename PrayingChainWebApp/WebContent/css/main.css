@@ -1,5 +1,27 @@
 @charset "UTF-8";
 
+#EmptyTurnsFlag {
+	/*+placement: float-left;*/
+	float: left;
+	position: relative;
+	left: 0;
+	top: 0;
+	z-index: 29 !important;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-color: #FF2626;
+	/*+border-radius: 10px;*/
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
+	margin-left: -5px;
+	height: 40px;
+	width: 40px;
+	padding-top: 9px;
+	margin-top: 10px;
+}
 #MainColumn {
 	height: ;
 	width: 100%;
