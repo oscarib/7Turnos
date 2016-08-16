@@ -5,12 +5,16 @@
 <title>Dashboard</title>
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/main.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/lib/datatables.min.css"/>
+<link href="./css/lib/angular-datatables.min.css" rel="stylesheet">
 <script src="./js/lib/jquery-2.2.4.min.js"></script>
+<script src="./js/lib/datatables.min.js"></script>
 <script src="./js/lib/bootstrap.min.js"></script>
 <script src="./js/lib/bootbox.min.js"></script>
 <script src="./js/lib/angular.min.js"></script>
 <script src="./js/lib/angular-animate.min.js"></script>
 <script src="./js/Controllers/dashboard.js"></script>
+<script src="./js/lib/angular-datatables.min.js"></script>
 <script src="./js/lib/Chart.min.js"></script>
 <script src="./js/services/chartServices.js"></script>
 <script src="./js/services/prayerServices.js"></script>
@@ -198,7 +202,8 @@
 				<div class="row widgetRow" id="last-prayers">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<img class="loadingGifImg" ng-show="ctrl.showLoadingPrayersTable" src="./images/loadingGif.gif">
-						<table class="table table-hover table-condensed">
+						<table datatable="ng" dt-options="ctrl.dtOptions" class="table table-hover table-condensed">
+							<thead>
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
@@ -208,6 +213,8 @@
 								<th>Teléfono</th>
 								<th>Seudónimo</th>
 							</tr>
+							</thead>
+							<tbody>
 							<tr ng-repeat="prayer in ctrl.prayers">
 								<td>{{prayer.uid}}
 								</th>
@@ -224,6 +231,7 @@
 								<td>{{prayer.pseudonym}}
 								</th>
 							</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>

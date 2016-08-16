@@ -1,6 +1,6 @@
-var PrayingChain = angular.module("PrayingChain", ['ngAnimate']);
+var PrayingChain = angular.module("PrayingChain", ['ngAnimate','datatables']);
 
-PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function(chartService, prayerServices) {
+PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptionsBuilder', function(chartService, prayerServices, DTOptionsBuilder) {
 	var self = this;
     self.firstName = "Óscar";
     self.lastName = "Ibáñez";
@@ -19,8 +19,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
 	self.showLoadingStatistics = true;
 	self.showLoadingPrayersTable = true;
 	var errorWithServiceCall = false;
-    self.showLoading = false; //no necesitamos batidora por ahora...
-    
+   
     self.openMenu = function(menuItem){
     	if (self.hideMenu[menuItem]){
     		self.hideMenu[menuItem] = false;
@@ -38,6 +37,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
     var prayerList = prayerServices.getPrayerList();
     prayerList.then(function(dataOut){
     	self.prayers = dataOut.data;
+    	setDatatableOptions();
     }, function(error) {
     	if (!errorWithServiceCall){
     		errorWithServiceCall = true;
@@ -110,5 +110,32 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', function
 		}
 		return filledString;
     };
+    
+    function setDatatableOptions(){
+    	self.dtOptions = DTOptionsBuilder.newOptions();
+    	self.dtOptions.withPaginationType('full_numbers').withDisplayLength(3).withDOM('ftpir').withLanguage({
+            "sEmptyTable":     "No hay datos disponibles",
+            "sInfo":           "Mostrando entradas de la _START_ a la _END_ de un total de _TOTAL_",
+            "sInfoEmpty":      "Mostrando entradas de la 0 a la 0 de un total de 0",
+            "sInfoFiltered":   "(filtradas de un total de _MAX_ entradas)",
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ".",
+            "sLengthMenu":     "Mostrar _MENU_ entradas",
+            "sLoadingRecords": "Cargando...",
+            "sProcessing":     "Procesando...",
+            "sSearch":         "Buscar:",
+            "sZeroRecords":    "No hay resultados que coincidan",
+            "oPaginate": {
+                "sFirst":    "Primera",
+                "sLast":     "Última",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": activar para ordenar ascendentemente",
+                "sSortDescending": ": activar para ordenar descendentemente"
+            }
+        });
+    }
 //<-- Fin de FUNCIONES PRIVADAS
 }]);
