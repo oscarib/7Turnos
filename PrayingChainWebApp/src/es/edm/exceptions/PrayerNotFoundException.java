@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class PrayerNotFoundException extends Exception {
+public class PrayerNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -2546719797482159682L;
 

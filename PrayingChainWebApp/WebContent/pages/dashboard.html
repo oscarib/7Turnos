@@ -16,10 +16,11 @@
 				<img src="./images/actualizarCalendario.jpg">
 			</div>
 			<div class="widget-content">
-				<h4>Actualizar</h4>
-				<span>Actualizar y subir a la web el calendario de turnos</span>
+				<h4>Ver Calendario</h4>
+				<span>Ver el calendario de la cadena, con los turnos que están cubiertos, 
+				los vacíos, y los saturados</span>
 			</div>
-			<div class="widget-links">Actualizar</div>
+			<div class="widget-links">Ver</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
 			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
@@ -41,16 +42,6 @@
 	<div class="row widgetRow" id="widgets-line-2">
 		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
 			<div class="widget-header">
-				<img src="./images/turnosvacios.jpg">
-			</div>
-			<div class="widget-content">
-				<h4>Turnos vacíos</h4>
-				<span>Un informe rápido sobre huecos vacíos en la cadena</span>
-			</div>
-			<div class="widget-links">Mostrar</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
-			<div class="widget-header">
 				<img src="./images/AdvancedSearch.jpg">
 			</div>
 			<div class="widget-content">
@@ -58,6 +49,16 @@
 				<span>Realizar una búsqueda avanzada por varios parámetros</span>
 			</div>
 			<div class="widget-links">Buscar</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/SendCalendar.jpg">
+			</div>
+			<div class="widget-content">
+				<h4>Enviar Calendario</h4>
+				<span>Actualizar el calendario web con los últimos oradores y turnos</span>
+			</div>
+			<div class="widget-links">Enviar</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7 widget">
 			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
@@ -88,8 +89,21 @@
 			<div class="widget-links">Mostrar</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7 widget">
+			<div class="widget-header">
+				<img src="./images/turnosvacios.jpg">
+			</div>
+			<div class="widget-content">
+				<h4>Turnos vacíos</h4>
+				<span>Un informe rápido sobre huecos vacíos en la cadena</span>
+			</div>
+			<div class="widget-links">Mostrar</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7 widget">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+				src="./images/loadingGif.gif">
+			<canvas class="widget-chart" id="localForeignRatio" width="160"
+				height="120"></canvas>
+			<div class="widget-links">Pais Local</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7 widget">
 			<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"

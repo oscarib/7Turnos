@@ -1,9 +1,17 @@
 
 <div class="container-fluid">
-	<div id="warnings" class="row">
+	<div id="warnings" class="row" ng-if="ctrl.OrphanPrayers>0 || ctrl.OrphanTurns>0">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<span>Atención: Hay 1 orador sin turnos asignados, y 3 turnos
-				huérfanos</span>
+			<span ng-if="ctrl.OrphanPrayers>0 && ctrl.OrphanTurns>0">
+				Atención: Hay {{ctrl.OrphanPrayers}} orador(es) sin turnos asignados, 
+				y {{ctrl.OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
+			</span>
+			<span ng-if="ctrl.OrphanPrayers>0 && ctrl.OrphanTurns==0">
+				Atención: Hay {{ctrl.OrphanPrayers}} orador(es) sin turnos asignados
+			</span>
+			<span ng-if="ctrl.OrphanPrayers==0 && ctrl.OrphanTurns>0">
+				Atención: Hay {{ctrl.OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
+			</span>
 		</div>
 	</div>
 </div>

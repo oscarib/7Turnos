@@ -39,6 +39,12 @@ public class getStatistics {
 		statistics.put("EmptyTurnsPercentage", main.getEmptyTurnsPercentage());
 		statistics.put("CommittedRedundancy", main.getCommittedRedundancy());
 		statistics.put("TotalRedundancy",  main.getTotalRedundancy());
+		statistics.put("HiddenPrayers", Integer.toString(main.getHiddenPrayers().size()));
+		statistics.put("PublicPrayers", Integer.toString(main.getPublicPrayers().size()));
+		statistics.put("ForeignPrayers", Integer.toString(main.getForeignPrayers().size()));
+		statistics.put("LocalPrayers", Integer.toString(main.getLocalPrayers().size()));
+		statistics.put("OrphanTurns", Integer.toString(main.getOrphanTurns().size()));
+		statistics.put("OrphanPrayers", Integer.toString(main.getOrphanPrayers().size()));
 		return statistics;
 	}
 }

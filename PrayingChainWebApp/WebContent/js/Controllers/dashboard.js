@@ -57,6 +57,12 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 		self.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
 		self.Redundancy = dataOut.data.TotalRedundancy-100;
 		self.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
+		self.HiddenPrayers = dataOut.data.HiddenPrayers;
+		self.PublicPrayers = dataOut.data.PublicPrayers;
+		self.ForeignPrayers = dataOut.data.ForeignPrayers;
+		self.LocalPrayers = dataOut.data.LocalPrayers;
+		self.OrphanTurns = dataOut.data.OrphanTurns;
+		self.OrphanPrayers = dataOut.data.OrphanPrayers;
 	    loadCharts();
 	}, function(error) {
 		if (!errorWithServiceCall){
@@ -101,10 +107,17 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 
         //Hidden Vs Public Prayers
         var labels= ["Públicos", "Anónimos"];
-        var pieChartData = [313, 790];
+        var pieChartData = [self.PublicPrayers, self.HiddenPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("hiddenPublicRatio", labels, pieChartData, backgroundColor, borderColor);
+
+        //Hidden Vs Public Prayers
+        var labels= ["Locales", "Extranjeros"];
+        var pieChartData = [self.LocalPrayers, self.ForeignPrayers];
+        var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
+        var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
+        chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
     };
     
     function fillInEmptyTurns(emptyTurns){
