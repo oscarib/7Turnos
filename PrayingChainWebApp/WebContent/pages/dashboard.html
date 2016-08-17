@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
 	<div class="row widgetRow" id="widgets-line-1">
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-header">
 					<img src="./images/createPrayer.jpg">
@@ -13,7 +13,7 @@
 				<div class="widget-links">Acceder</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-header">
 					<img src="./images/actualizarCalendario.jpg">
@@ -26,34 +26,8 @@
 				<div class="widget-links">Ver</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
-			<div class="widget">
-				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
-						src="./images/loadingGif.gif">
-					<canvas class="widget-chart" width="160" height="120"
-						id="chartCommitted"></canvas>
-				</div>
-				<div class="widget-links">Comprometidos</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
-			<div class="widget">
-				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
-						src="./images/loadingGif.gif">
-					<canvas class="widget-chart" id="chartCoverage" width="160"
-						height="120"></canvas>
-				</div>
-				<div class="widget-links">Vacíos - Cubiertos</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row widgetRow" id="widgets-line-2">
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
-			<div class="widget">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget" ng-click="ctrl.showPrayersTableLayer()">
 				<div class="widget-header">
 					<img src="./images/AdvancedSearch.jpg">
 				</div>
@@ -64,7 +38,7 @@
 				<div class="widget-links">Buscar</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-header">
 					<img src="./images/SendCalendar.jpg">
@@ -77,33 +51,7 @@
 				<div class="widget-links">Enviar</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7">
-			<div class="widget">
-				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
-						src="./images/loadingGif.gif">
-					<canvas class="widget-chart" id="availablePieChart" width="160"
-						height="120"></canvas>
-				</div>
-				<div class="widget-links">Totales - Disponibles</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7">
-			<div class="widget">
-				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
-						src="./images/loadingGif.gif">
-					<canvas class="widget-chart" id="redundancePieChart" width="160"
-						height="120"></canvas>
-				</div>
-				<div class="widget-links">Saturación</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row widgetRow" id="widgets-line-2">
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="WarningFlag" ng-if="ctrl.OrphanPrayers>0">
 					<span>{{ctrl.OrphanPrayers}}</span>
@@ -119,7 +67,7 @@
 				<div class="widget-links">Mostrar</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="WarningFlag" ng-if="ctrl.EmptyTurns>0">
 					<span>{{ctrl.EmptyTurns}}</span>
@@ -134,7 +82,7 @@
 				<div class="widget-links">Mostrar</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
 					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
@@ -145,7 +93,7 @@
 				<div class="widget-links">Pais Local</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3  col-xs-7">
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
 					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
@@ -154,6 +102,50 @@
 						height="120"></canvas>
 				</div>
 				<div class="widget-links">Anónimos</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget">
+				<div class="widget-Chart">
+					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+						src="./images/loadingGif.gif">
+					<canvas class="widget-chart" width="160" height="120"
+						id="chartCommitted"></canvas>
+				</div>
+				<div class="widget-links">Comprometidos</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget">
+				<div class="widget-Chart">
+					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+						src="./images/loadingGif.gif">
+					<canvas class="widget-chart" id="availablePieChart" width="160"
+						height="120"></canvas>
+				</div>
+				<div class="widget-links">Totales - Disponibles</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget">
+				<div class="widget-Chart">
+					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+						src="./images/loadingGif.gif">
+					<canvas class="widget-chart" id="chartCoverage" width="160"
+						height="120"></canvas>
+				</div>
+				<div class="widget-links">Vacíos - Cubiertos</div>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget">
+				<div class="widget-Chart">
+					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+						src="./images/loadingGif.gif">
+					<canvas class="widget-chart" id="redundancePieChart" width="160"
+						height="120"></canvas>
+				</div>
+				<div class="widget-links">Saturación</div>
 			</div>
 		</div>
 	</div>
