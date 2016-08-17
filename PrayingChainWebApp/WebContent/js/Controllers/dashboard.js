@@ -8,6 +8,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
     self.hideMenu[1] = true;
     self.hideMenu[2] = true;
     self.hideMenu[3] = true;
+    self.hideMenu[4] = true;
 	self.TotalPrayers = "";
 	self.EmptyTurns = "";
 	self.TotalTurns = "";
@@ -18,7 +19,23 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	self.UsedTurnsPerc = "";
 	self.showLoadingStatistics = true;
 	self.showLoadingPrayersTable = true;
+	self.showPrayersList = undefined;
+	self.showHead = "activeMenuItem";
+	self.showDashBoard = "activeMenuItem";
+	self.showHeaderSearch = true;
 	var errorWithServiceCall = false;
+	
+    self.showDashBoardLayer = function(){
+    	self.showPrayersList = undefined;
+    	self.showDashBoard = "activeMenuItem";
+    	self.showHeaderSearch = true;
+    };
+
+    self.showPrayersTableLayer = function(){
+    	self.showPrayersList = "activeMenuItem";
+    	self.showDashBoard = undefined;
+    	self.showHeaderSearch = false;
+    };
    
     self.openMenu = function(menuItem){
     	if (self.hideMenu[menuItem]){
@@ -51,6 +68,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	statistics.then(function(dataOut){
 		self.TotalPrayers = dataOut.data.TotalPrayers;
 		self.EmptyTurns = dataOut.data.EmptyTurns;
+		//self.EmptyTurns = 1700;
 		self.TotalTurns = dataOut.data.TotalTurns;
 		self.AvailableTurns = dataOut.data.TotalTurns - dataOut.data.TurnsCovered
 		self.CommittedPrayers = dataOut.data.CommittedPrayers;
@@ -63,7 +81,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 		self.LocalPrayers = dataOut.data.LocalPrayers;
 		self.OrphanTurns = dataOut.data.OrphanTurns;
 		self.OrphanPrayers = dataOut.data.OrphanPrayers;
-	    loadCharts();
+		loadCharts();
 	}, function(error) {
 		if (!errorWithServiceCall){
 			errorWithServiceCall = true;
@@ -72,9 +90,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	}).finally(function(){
 			self.showLoadingStatistics = false;
 	});
-
-
-    
+	
 //FUNCIONES PRIVADAS -->
     function loadCharts(){
         //Committed / Non committed pie chart
@@ -119,11 +135,10 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
     };
-
     
     function setDatatableOptions(){
     	self.dtOptions = DTOptionsBuilder.newOptions();
-    	self.dtOptions.withPaginationType('full_numbers').withDisplayLength(3).withDOM('ftpir').withLanguage({
+    	self.dtOptions.withPaginationType('full_numbers').withDisplayLength(10).withDOM('lftpir').withLanguage({
             "sEmptyTable":     "No hay datos disponibles",
             "sInfo":           "Mostrando entradas de la _START_ a la _END_ de un total de _TOTAL_",
             "sInfoEmpty":      "Mostrando entradas de la 0 a la 0 de un total de 0",
@@ -133,7 +148,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
             "sLengthMenu":     "Mostrar _MENU_ entradas",
             "sLoadingRecords": "Cargando...",
             "sProcessing":     "Procesando...",
-            "sSearch":         "Buscar:",
+            "sSearch":         "Filtrar:",
             "sZeroRecords":    "No hay resultados que coincidan",
             "oPaginate": {
                 "sFirst":    "Primera",
@@ -146,6 +161,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
                 "sSortDescending": ": activar para ordenar descendentemente"
             }
         });
-    }
+    };
+
 //<-- Fin de FUNCIONES PRIVADAS
 }]);

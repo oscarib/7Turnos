@@ -7,7 +7,7 @@
 	</div>
 </div>
 <div class="container-fluid">
-	<div class="row menuRow activeMenuItem">
+	<div class="row menuRow" ng-class="ctrl.showDashBoard" ng-click="ctrl.showDashBoardLayer();ctrl.openMenu(1)">
 		<div class="col-lg-12">
 			<span>Dashboard</span>
 		</div>
@@ -17,15 +17,15 @@
 	<div class="row menuRow">
 		<div class="col-lg-12">
 			<div class="row">
-				<div class="col-lg-2" ng-click="ctrl.openMenu(1)">
+				<div class="col-lg-2" ng-click="ctrl.openMenu(2)">
 					<img class="GroupOpener" src="./images/GroupOpener.gif"> <span
 						class="menu-group">Listados</span>
 				</div>
 			</div>
-			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[1]">
-				<div class="row">
-					<div class="col-lg-2">
-						<span class="menu-item">Oradores & Turnos</span>
+			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[2]">
+				<div class="row" ng-class="ctrl.showPrayersList">
+					<div class="col-lg-2" ng-click="ctrl.showPrayersTableLayer()">
+						<span class="menu-item">Oradores</span>
 					</div>
 				</div>
 				<div class="row">
@@ -42,12 +42,12 @@
 		<div class="col-lg-12">
 			<div class="row">
 				<div class="col-lg-1">
-					<img ng-click="ctrl.openMenu(2)" class="GroupOpener"
+					<img ng-click="ctrl.openMenu(3)" class="GroupOpener"
 						src="./images/GroupOpener.gif"> <span
-						ng-click="ctrl.openMenu(2)" class="menu-group">Acciones</span>
+						ng-click="ctrl.openMenu(3)" class="menu-group">Acciones</span>
 				</div>
 			</div>
-			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[2]">
+			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[3]">
 				<div class="row">
 					<div class="col-lg-2">
 						<span class="menu-item">Crear Orador</span>
@@ -67,12 +67,12 @@
 		<div class="col-lg-12">
 			<div class="row">
 				<div class="col-lg-1">
-					<img ng-click="ctrl.openMenu(3)" class="GroupOpener"
+					<img ng-click="ctrl.openMenu(4)" class="GroupOpener"
 						src="./images/GroupOpener.gif"> <span
-						ng-click="ctrl.openMenu(3)" class="menu-group">Configuración</span>
+						ng-click="ctrl.openMenu(4)" class="menu-group">Configuración</span>
 				</div>
 			</div>
-			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[3]">
+			<div class="fadeAnimate" ng-if="!ctrl.hideMenu[4]">
 				<div class="row">
 					<div class="col-lg-2">
 						<span class="menu-item">Sitio FTP</span>

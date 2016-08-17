@@ -1,5 +1,29 @@
 @charset "UTF-8";
 
+div#prayersTable .dataTables_filter {
+	/*+placement: float-left;*/
+	float: left;
+	position: relative;
+	left: 0;
+	top: 0;
+	height: ;
+	width: ;
+	margin-bottom: 15px;
+}
+div#prayersTable .dataTables_length {
+	/*+placement: float-right;*/
+	float: right;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+div#prayersTable .input-sm {
+	margin-left: 10px;
+	height: ;
+	width: 266px;
+	margin-top: 0;
+	font-size: 20px;
+}
 .WarningFlag {
 	/*+placement: float-left;*/
 	float: left;
@@ -246,6 +270,12 @@ div#header.row {
 	margin-bottom: 0px;
 	margin-left: -30px;
 	margin-top: 0px;
+}
+.row.tableRow {
+	height: 190px;
+	margin-bottom: 0px;
+	margin-left: -30px;
+	margin-top: 15px;
 }
 #Search.col-xs-4 {
 	/*+placement: float-right;*/

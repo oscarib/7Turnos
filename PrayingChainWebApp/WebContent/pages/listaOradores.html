@@ -1,0 +1,41 @@
+<div id="prayersTable" class="container-fluid">
+	<div class="row tableRow">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<img class="loadingGifImg" ng-show="ctrl.showLoadingPrayersTable"
+				src="./images/loadingGif.gif">
+			<table datatable="ng" dt-options="ctrl.dtOptions"
+				class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Email</th>
+						<th>Local</th>
+						<th>Oculto</th>
+						<th>Teléfono</th>
+						<th>Seudónimo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="prayer in ctrl.prayers">
+						<td>{{prayer.uid}}
+						</th>
+						<td>{{prayer.name}}
+						</th>
+						<td>{{prayer.email}}
+						</th>
+						<td>{{prayer.ownCountry}}
+						</th>
+						<td>{{prayer.hidden}}
+						</th>
+						<td>{{prayer.phoneNumber}}
+						</th>
+						<td>{{prayer.pseudonym}}
+						</th>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
