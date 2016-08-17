@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#EmptyTurnsFlag {
+.WarningFlag {
 	/*+placement: float-left;*/
 	float: left;
 	position: relative;
@@ -131,11 +131,9 @@ span.EmptyTurnsLabel {
 span.EmptyTurnsNumber {
 	font-size: 41px;
 	line-height: 1.1;
-	background-image: url("../images/EmptyTurnRedFlag.gif");
-	background-repeat: no-repeat;
-	background-position: 2px 4px;
 	padding-right: 60%;
 	padding-left: 5px;
+	color: #ffff00;
 	/*background-clip: content-box;*/
 	/*background-origin: padding-box;*/
 	background-size: 70% 90%;
@@ -286,17 +284,6 @@ img#magnifierIcon {
 img#magnifierIcon {
 	height: ;
 	width: ;
-}
-img#EmptyTurnsFlag {
-	height: 41px;
-	width: 96px;
-	margin-left: 10px;
-	margin-top: -50px;
-	/*+placement: ;*/
-	position: relative;
-	left: 0;
-	top: 0;
-	z-index: 1;
 }
 div.row.activeMenuItem {
 	background-color: #094156;
