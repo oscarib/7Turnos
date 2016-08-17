@@ -3,9 +3,9 @@
 .WarningFlag {
 	/*+placement: float-left;*/
 	float: left;
-	position: relative;
-	left: 0;
-	top: 0;
+	position: absolute;
+	left: 24px;
+	top: 10px;
 	z-index: 29 !important;
 	color: #FFFFFF;
 	font-weight: bold;
@@ -21,6 +21,12 @@
 	width: 40px;
 	padding-top: 9px;
 	margin-top: 10px;
+}
+.EmptyTurns{
+	line-height: 5px;
+}
+.widget-Chart{
+	height: 160px;
 }
 #MainColumn {
 	height: ;
@@ -143,7 +149,7 @@ div.widget-header {
 	height: 97px;
 	width: 100%;
 	/*+placement: anchor-top-left;*/
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	top: 0;
 	z-index: 1;
@@ -159,16 +165,17 @@ div.widget-header {
 	width: 100%;
 }
 .widget-content {
-	margin-left: -13px;
-	margin-top: 97px;
-	max-height: 61px;
-	margin-right: -13px;
+	/* margin-left: -13px; */
+	/* margin-top: 97px; */
+	/* max-height: 61px; */
+	/* margin-right: -13px; */
 	z-index: 2;
 	line-height: 0.8;
 	text-overflow: clip;
 	overflow: hidden;
 	padding-left: 5px;
 	padding-top: 2px;
+	height: 66px;
 }
 .widget-content span {
 	font-size: 11px;
@@ -179,12 +186,12 @@ div.widget-header {
 }
 div.widget-links {
 	/*+placement: anchor-bottom-left;*/
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	bottom: 0;
 	margin-left: 0px;
 	max-height: 20px;
-	height: ;
+	height:;
 	width: 100%;
 	margin-bottom: 0px;
 	z-index: 3;
@@ -197,14 +204,16 @@ div.widget-links {
 }
 .widget {
 	height: 180px;
-	width: 23%;
-	margin-left: 1%;
-	margin-right: 1%;
 	margin-top: 10px;
+	padding-left: 
 	border: 1px outset rgba(0, 0, 0, 0.034);
 	border-radius: 5px;
 	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
 	overflow: hidden;
+}
+.widgetRow > div{
+	padding-left: 10px;
+	padding-right: 0px;
 }
 span.labelNoPrayers {
 	font-size: 13px;

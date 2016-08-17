@@ -50,7 +50,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	var statistics = prayerServices.getChainStatistics();
 	statistics.then(function(dataOut){
 		self.TotalPrayers = dataOut.data.TotalPrayers;
-		self.EmptyTurns = fillInEmptyTurns(dataOut.data.EmptyTurns);
+		self.EmptyTurns = dataOut.data.EmptyTurns;
 		self.TotalTurns = dataOut.data.TotalTurns;
 		self.AvailableTurns = dataOut.data.TotalTurns - dataOut.data.TurnsCovered
 		self.CommittedPrayers = dataOut.data.CommittedPrayers;
@@ -119,16 +119,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
     };
-    
-    function fillInEmptyTurns(emptyTurns){
-    	var filledString = emptyTurns;
-		if (emptyTurns>0 && emptyTurns.length<3){
-			for (var i = 0; i<3-emptyTurns.length; i++){
-				filledString = "0"+filledString;
-			}
-		}
-		return filledString;
-    };
+
     
     function setDatatableOptions(){
     	self.dtOptions = DTOptionsBuilder.newOptions();
