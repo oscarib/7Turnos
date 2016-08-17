@@ -37,12 +37,12 @@
 				{{ctrl.CommittedPrayers}}</span><br> <span>No comprometidos:
 				{{ctrl.NonCommittedPrayers}}</span>
 		</div>
-		<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3" ng-show="ctrl.EmptyTurns>0">
+		<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3" ng-show="ctrl.EmptyTurns>0 && ctrl.showHeaderSearch">
 			<input type="text" class="form-control" id="searchText"> <img
 				id="magnifierIcon" src="./images/magnifier.gif" height="32"
 				width="32">
 		</div>
-		<div id="Search" class="col-lg-7 col-md-6 col-sm-6 col-xs-6" ng-show="ctrl.EmptyTurns==0">
+		<div id="Search" class="col-lg-7 col-md-6 col-sm-6 col-xs-6" ng-show="ctrl.EmptyTurns==0 && ctrl.showHeaderSearch">
 			<input type="text" class="form-control" id="searchText"> <img
 				id="magnifierIcon" src="./images/magnifier.gif" height="32"
 				width="32">

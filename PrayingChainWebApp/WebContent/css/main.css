@@ -18,7 +18,7 @@
 	text-align: center;
 	margin-left: -5px;
 	height: 40px;
-	width: 40px;
+	width: 50px;
 	padding-top: 9px;
 	margin-top: 10px;
 }
@@ -78,24 +78,8 @@ div.menuRow {
 	margin-right: -30px;
 	padding-left: 2px;
 }
-.pagination {
-	margin-top: 5px;
-	margin-bottom: 4px;
-	/*+placement: float-right;*/
-	float: right;
-	position: relative;
-	left: 0;
-	top: 0;
-	margin-right: 5px;
-	font-size: 12px;
-}
-.pagination li a {
-	line-height: 0.6;
-	padding-left: 5px;
-	padding-right: 5px;
-}
 .fadeAnimate.ng-enter {
-	transition: 1s linear all;
+	transition: 0.5s linear all;
 	opacity: 0;
 }
 /* The finishing CSS styles for the enter animation */
@@ -209,6 +193,13 @@ div.widget-links {
 	border-radius: 5px;
 	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
 	overflow: hidden;
+	cursor: pointer;
+}
+.widget-content:hover {
+	background-color: gainsboro;
+}
+.menuRow {
+	cursor: pointer;
 }
 .widgetRow > div {
 	padding-left: 10px;
@@ -255,7 +246,6 @@ div#header.row {
 	margin-bottom: 0px;
 	margin-left: -30px;
 	margin-top: 0px;
-	width: ;
 }
 #Search.col-xs-4 {
 	/*+placement: float-right;*/
