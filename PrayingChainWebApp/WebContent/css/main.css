@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+.GeneralWarning {
+	text-align: center;
+	margin-top: 226px;
+}
+div.GeneralWarning .loadingGifImg {
+	margin-top: 253px;
+	margin-left: 385px;
+}
 div#prayersTable .dataTables_filter {
 	/*+placement: float-left;*/
 	float: left;
@@ -46,10 +54,10 @@ div#prayersTable .input-sm {
 	padding-top: 9px;
 	margin-top: 10px;
 }
-.EmptyTurns{
+.EmptyTurns {
 	line-height: 5px;
 }
-.widget-Chart{
+.widget-Chart {
 	height: 160px;
 }
 #MainColumn {

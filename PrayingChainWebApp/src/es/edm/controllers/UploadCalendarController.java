@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
@@ -27,20 +27,19 @@ public class UploadCalendarController {
 	@Autowired
 	Configuration conf;
 
-	@RequestMapping(path="/uploadCalendar", method=RequestMethod.GET)
-	public ModelAndView UploadCalendar() throws IOException, DDBBException{
+	@RequestMapping(path="/uploadCalendar.do", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean UploadCalendar() throws IOException, DDBBException{
 		try{
 			fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
 			fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
 			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
 			fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
 		} catch (UnknownHostException e){
-			e.printStackTrace();
-			return new ModelAndView("/web/HostNotReacheable.jsp");
+			throw new RuntimeException("Error: " + e);
 		} catch (SocketException e) {
-			e.printStackTrace();
-			return new ModelAndView("/web/HostNotReacheable.jsp");
+			throw new RuntimeException("Error: " + e);
 		}
-		return new ModelAndView("/web/UploadCalendar.jsp");
+		return true;
 	}
 }
