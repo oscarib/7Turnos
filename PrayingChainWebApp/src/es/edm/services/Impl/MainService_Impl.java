@@ -131,22 +131,38 @@ public class MainService_Impl implements MainService {
 	@Override
 	//Returns a list of prayers that are set as own_country=0
 	public List<Prayer> getForeignPrayers() throws PrayerNotFoundException {
-		return dao.getForeignPrayers();
+		try {
+			return dao.getForeignPrayers();
+		} catch (PrayerNotFoundException e){
+			return new ArrayList<Prayer>();
+		}
 	}
 
 	@Override
 	public List<Prayer> getLocalPrayers() throws PrayerNotFoundException {
-		return dao.getLocalPrayers();
+		try {
+			return dao.getLocalPrayers();
+		} catch (PrayerNotFoundException e){
+			return new ArrayList<Prayer>();
+		}
 	}
 
 	@Override
-	public List<Prayer> getHiddenPrayers() throws PrayerNotFoundException {
-		return dao.getHiddenPrayers();
+	public List<Prayer> getHiddenPrayers(){
+		try {
+			return dao.getHiddenPrayers();
+		} catch (PrayerNotFoundException e){
+			return new ArrayList<Prayer>();
+		}
 	}
 
 	@Override
 	public List<Prayer> getPublicPrayers() throws PrayerNotFoundException {
-		return dao.getPublicPrayers();
+		try {
+			return dao.getPublicPrayers();
+		} catch (PrayerNotFoundException e){
+			return new ArrayList<Prayer>();
+		}
 	}
 
 	@Override

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="PrayingChain">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/main.css" rel="stylesheet">
+<script src="./js/lib/jquery-2.2.4.min.js"></script>
+<script src="./js/lib/datatables.min.js"></script>
+<script src="./js/lib/bootstrap.min.js"></script>
+<script src="./js/lib/bootbox.min.js"></script>
+<script src="./js/lib/angular.min.js"></script>
+<script src="./js/lib/angular-animate.min.js"></script>
+<script src="./js/Controllers/dashboard.js"></script>
+<script src="./js/lib/angular-datatables.min.js"></script>
+<script src="./js/lib/Chart.min.js"></script>
+<script src="./js/services/chartServices.js"></script>
+<script src="./js/services/prayerServices.js"></script>
+<script src="./js/services/pcUtils.js"></script>
+
+
+</head>
+<body ng-controller="dashboard as ctrl">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-item" id="sidebar-menu" ng-include="'./pages/menu.html'"></div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10	">
+				<div ng-show="ctrl.showHead" ng-include="'./pages/head.html'"></div>
+				<div ng-show="ctrl.showDashBoard" ng-include="'./pages/dashboard.html'"></div>
+				<div ng-show="ctrl.showPrayersList" ng-include="'./pages/listaOradores.html'"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

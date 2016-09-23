@@ -37,6 +37,21 @@
     		
     		return promise;
     	};
+    	
+    	self.uploadCalendar = function(){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./uploadCalendar.do");
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
 
     	return self;
     }

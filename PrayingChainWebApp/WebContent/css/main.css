@@ -1,8 +1,80 @@
 @charset "UTF-8";
 
+.GeneralWarning {
+	text-align: center;
+	margin-top: 226px;
+}
+div.GeneralWarning .loadingGifImg {
+	margin-top: 253px;
+	margin-left: 385px;
+}
+div#prayersTable .dataTables_filter {
+	/*+placement: float-left;*/
+	float: left;
+	position: relative;
+	left: 0;
+	top: 0;
+	height: ;
+	width: ;
+	margin-bottom: 15px;
+}
+div#prayersTable .dataTables_length {
+	/*+placement: float-right;*/
+	float: right;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+div#prayersTable .input-sm {
+	margin-left: 10px;
+	height: ;
+	width: 266px;
+	margin-top: 0;
+	font-size: 20px;
+}
+.WarningFlag {
+	/*+placement: float-left;*/
+	float: left;
+	position: absolute;
+	left: 24px;
+	top: 10px;
+	z-index: 29 !important;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-color: #FF2626;
+	/*+border-radius: 10px;*/
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
+	margin-left: -5px;
+	height: 40px;
+	width: 50px;
+	padding-top: 9px;
+	margin-top: 10px;
+}
+.EmptyTurns {
+	line-height: 5px;
+}
+.widget-Chart {
+	height: 160px;
+}
+#MainColumn {
+	height: ;
+	width: 100%;
+}
 div#Search {
 	margin-top: 15px;
 	margin-left: 20px;
+}
+.loadingGifImg {
+	height: 50px;
+	width: 50px;
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 #Batidora {
 	height: 100%;
@@ -27,28 +99,19 @@ div#Search {
 	/* For Firefox 3.6 to 15 */
 	background: linear-gradient(#00B2D8, #006C84);
 	/* Standard syntax */
-	height: 730px;
-	width: 200px;
-	padding-left: 24px;
-}
-.pagination {
-	margin-top: 5px;
-	margin-bottom: 4px;
-	/*+placement: float-right;*/
-	float: right;
+	height: 700px;
+	/*+placement: ;*/
 	position: relative;
 	left: 0;
 	top: 0;
-	margin-right: 5px;
-	font-size: 12px;
 }
-.pagination li a {
-	line-height: 0.6;
-	padding-left: 5px;
-	padding-right: 5px;
+div.menuRow {
+	margin-left: -40px;
+	margin-right: -30px;
+	padding-left: 2px;
 }
 .fadeAnimate.ng-enter {
-	transition: 1s linear all;
+	transition: 0.5s linear all;
 	opacity: 0;
 }
 /* The finishing CSS styles for the enter animation */
@@ -63,32 +126,15 @@ div#Search {
 	top: 0px;
 	cursor: pointer;
 }
-.tablePrayers {
-	border: 1px dashed #E3E7FF;
-	margin-top: 10px;
-	margin-left: -8px !important;
-	height: ;
-	width: 100% !important;
-}
-.tablePrayers tr:nth-child(even) {
-	background-color: #E7EBFF;
-}
-.tablePrayers th {
-	background-color: #00A6CA;
-	color: white;
-	border: 1px solid #FFFFFF;
-	padding-left: 5px;
-}
-table.tablePrayers {
-	height: ;
-	width: 780px;
-	margin-left: 5px;
-}
-.tablePrayers td {
-	padding-left: 5px;
-}
 #PrayingGroup {
 	font-size: x-small !important;
+}
+.table {
+	margin-top: 15px;
+	font-size: 14px;
+}
+table.table tbody tr {
+	line-height: 0.9 !important;
 }
 span.NofPrayers {
 	font-size: 40px;
@@ -96,6 +142,7 @@ span.NofPrayers {
 }
 span.EmptyTurnsLabel {
 	font-size: 10px;
+	margin-left: 8px;
 }
 #EmptyTurns.col-xs-2 {
 	line-height: 0.8;
@@ -106,20 +153,19 @@ span.EmptyTurnsLabel {
 span.EmptyTurnsNumber {
 	font-size: 41px;
 	line-height: 1.1;
-	background-image: url("../images/EmptyTurnRedFlag.gif");
-	background-size: 97px 44px;
-	background-repeat: no-repeat;
-	background-position: 2px 4px;
-	padding-right: 17px;
-	text-align: center;
+	padding-right: 60%;
 	padding-left: 5px;
+	color: #FFFF00;
+	/*background-clip: content-box;*/
+	/*background-origin: padding-box;*/
+	background-size: 70% 90%;
 }
 div.widget-header {
 	color: white;
 	height: 97px;
 	width: 100%;
 	/*+placement: anchor-top-left;*/
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	top: 0;
 	z-index: 1;
@@ -135,16 +181,17 @@ div.widget-header {
 	width: 100%;
 }
 .widget-content {
-	margin-left: -13px;
-	margin-top: 97px;
-	max-height: 61px;
-	margin-right: -13px;
+	/* margin-left: -13px; */
+	/* margin-top: 97px; */
+	/* max-height: 61px; */
+	/* margin-right: -13px; */
 	z-index: 2;
 	line-height: 0.8;
 	text-overflow: clip;
 	overflow: hidden;
 	padding-left: 5px;
 	padding-top: 2px;
+	height: 66px;
 }
 .widget-content span {
 	font-size: 11px;
@@ -155,7 +202,7 @@ div.widget-header {
 }
 div.widget-links {
 	/*+placement: anchor-bottom-left;*/
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	bottom: 0;
 	margin-left: 0px;
@@ -173,13 +220,22 @@ div.widget-links {
 }
 .widget {
 	height: 180px;
-	width: 23%;
-	margin-left: 1%;
-	margin-right: 1%;
 	margin-top: 10px;
-	border: 1px outset rgba(0, 0, 0, 0.034);
+	padding-left: border: 1px outset rgba(0, 0, 0, 0.034);
 	border-radius: 5px;
 	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
+	overflow: hidden;
+	cursor: pointer;
+}
+.widget-content:hover {
+	background-color: gainsboro;
+}
+.menuRow {
+	cursor: pointer;
+}
+.widgetRow > div {
+	padding-left: 10px;
+	padding-right: 0px;
 }
 span.labelNoPrayers {
 	font-size: 13px;
@@ -190,7 +246,10 @@ span.labelNoPrayers {
 	margin-top: 6px;
 }
 .widget-chart {
-	margin-top: 10px;
+	margin-top: 2px;
+	margin-left: 0px;
+	max-width: 190px;
+	max-height: 150px;
 }
 #PrayerStatistics span {
 	font-size: 10px;
@@ -204,7 +263,6 @@ span.labelNoPrayers {
 	color: white;
 	line-height: 2.8;
 	white-space: nowrap;
-	padding-left: 10px;
 }
 #header.row {
 	background-color: #094156;
@@ -220,10 +278,12 @@ div#header.row {
 	margin-bottom: 0px;
 	margin-left: -30px;
 	margin-top: 0px;
-	width: ;
 }
-div#last-prayers {
-	margin-right: -30px;
+.row.tableRow {
+	height: 190px;
+	margin-bottom: 0px;
+	margin-left: -30px;
+	margin-top: 15px;
 }
 #Search.col-xs-4 {
 	/*+placement: float-right;*/
@@ -260,17 +320,6 @@ img#magnifierIcon {
 img#magnifierIcon {
 	height: ;
 	width: ;
-}
-img#EmptyTurnsFlag {
-	height: 41px;
-	width: 96px;
-	margin-left: 10px;
-	margin-top: -50px;
-	/*+placement: ;*/
-	position: relative;
-	left: 0;
-	top: 0;
-	z-index: 1;
 }
 div.row.activeMenuItem {
 	background-color: #094156;
