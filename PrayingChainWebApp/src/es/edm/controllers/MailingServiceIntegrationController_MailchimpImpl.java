@@ -47,11 +47,11 @@ public class MailingServiceIntegrationController_MailchimpImpl {
 		/* Creates a new instance of EmailSender
 		 * We do not use Spring dependency Injection here because we don't need it
 		 */
-		String userName = "espanademaria@gmail.com";
-		String hostName = "smtp.googlemail.com";
-		String password = "twjgP0sGY1xmxzF4";
-		int smtpPort = 465;
-		boolean ssl=true;
+		String userName = conf.getEmailServiceUserName();
+		String hostName = conf.getEmailServiceHostName();
+		String password = conf.getEmailServiceUserPassword();
+		int smtpPort = conf.getEmailServiceSmtpPort();
+		boolean ssl=conf.isEmailServiceSSL();
 		EmailSender emailSender = new EmailSender(userName, hostName, password, smtpPort, ssl);
 
 		if (request.getParameter("secret")!= null){
