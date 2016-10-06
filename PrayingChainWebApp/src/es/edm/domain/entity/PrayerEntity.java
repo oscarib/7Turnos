@@ -1,11 +1,16 @@
 package es.edm.domain.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="edm_prayers")
@@ -38,6 +43,10 @@ public class PrayerEntity {
 	
 	@Column
 	private String pseudonym;
+	
+	@OneToMany(mappedBy="prayer")
+	@Fetch(FetchMode.JOIN)
+	List<TurnEntity> turns;
 
 	/**
 	 * @return the uid

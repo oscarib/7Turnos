@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -13,19 +14,22 @@ import org.hibernate.annotations.FetchMode;
 
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
+import es.edm.util.TurnsOfDay;
 
 @Entity
 @Table(name="edm_turns")
 public class TurnEntity {
 
+	@Id
 	@Column
 	private Integer uid;
 	
+	@Column(name="day")
 	@Enumerated(EnumType.STRING)
 	private DayOfWeek dow;
 	
-	@Column
-	private Integer turn;
+	@Column(name="hour")
+	private TurnsOfDay turn;
 	
 	@Enumerated(EnumType.STRING)
 	private TurnStatus status;
@@ -72,14 +76,14 @@ public class TurnEntity {
 	/**
 	 * @return the turn
 	 */
-	public Integer getTurn() {
+	public TurnsOfDay getTurn() {
 		return turn;
 	}
 
 	/**
 	 * @param turn the turn to set
 	 */
-	public void setTurn(Integer turn) {
+	public void setTurn(TurnsOfDay turn) {
 		this.turn = turn;
 	}
 
