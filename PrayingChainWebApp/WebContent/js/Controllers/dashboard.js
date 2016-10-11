@@ -22,6 +22,7 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	self.showPrayersList = undefined;
 	self.showHead = "activeMenuItem";
 	self.showDashBoard = "activeMenuItem";
+	self.showNewPrayer = false;
 	self.showLoadingGeneral = false;
 	self.showHeaderSearch = true;
 	var errorWithServiceCall = false;
@@ -29,12 +30,21 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
     self.showDashBoardLayer = function(){
     	self.showPrayersList = undefined;
     	self.showDashBoard = "activeMenuItem";
+    	self.showNewPrayer = false;
     	self.showHeaderSearch = true;
     };
 
     self.showPrayersTableLayer = function(){
     	self.showPrayersList = "activeMenuItem";
     	self.showDashBoard = undefined;
+    	self.showNewPrayer = false;
+    	self.showHeaderSearch = false;
+    };
+
+    self.showNewPrayerLayer = function(){
+    	self.showPrayersList = undefined;
+    	self.showDashBoard = undefined;
+    	self.showNewPrayer = true;
     	self.showHeaderSearch = false;
     };
     
