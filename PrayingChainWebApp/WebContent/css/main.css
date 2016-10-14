@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+#newPrayer label {
+	height: ;
+	width: 90px;
+}
+#newPrayer select {
+	height: ;
+	width: 50%;
+}
+#newPrayer input {
+	height: ;
+	width: 50%;
+}
+#newPrayer .row {
+	padding-bottom: 10px;
+}
 .GeneralWarning {
 	text-align: center;
 	margin-top: 226px;
@@ -305,6 +320,11 @@ input#searchText {
 span {
 	font-family: verdana;
 	font-size: 15px;
+}
+.error-messages span {
+	color: red;
+	font-size: 13px;
+	padding-left: 95px;
 }
 span.menu-group {
 	color: white;

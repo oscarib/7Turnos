@@ -1,32 +1,48 @@
 <div id="newPrayer" class="container-fluid" ng-controller="newPrayerController as ctrl">
 	<div class="row tableRow">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<form ng-submit="ctrl.crearOrador()" novalidate>
+			<form ng-submit="ctrl.crearOrador(newPrayerForm.$valid)" name="newPrayerForm" novalidate>
 				
 				<div class="container-fluid">
 				
 					<div class="row">
+						<h1>Crear un Orador</h1>
+					</div>
+
+					<div class="row">
 						<label>Nombre</label>
-						<input type="text" name="Nombre" ng-model="ctrl.nombre">
+						<input type="text" name="nombre" ng-model="ctrl.nombre" required><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.nombre.$touched">
+							<span ng-show="newPrayerForm.nombre.$error.required">Rellene este campo</span>
+						</span>
 					</div>
 					
 					<div class="row">
 						<label>Día</label>
-						<select ng-model="ctrl.dia">
+						<select ng-model="ctrl.dia" name="dia" required>
 							<option ng-repeat="day in ctrl.daysOfWeek" value="{{day}}">{{day}}</option>
-						</select> 
-					</div>
+						</select><br> 
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.dia.$touched">
+							<span ng-show="newPrayerForm.dia.$error.required">Rellene este campo</span>
+						</span>
+      					</div>
 					
 					<div class="row">
 						<label>Turno</label>
-						<select ng-model="ctrl.turno">
+						<select ng-model="ctrl.turno" name="turno">
 							<option ng-repeat="turno in ctrl.turnos" value="{{turno}}">{{turno}}</option>
 						</select>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.turno.$touched">
+							<span ng-show="newPrayerForm.turno.$error.required">Rellene este campo</span>
+						</span>
 					</div>
 					
 					<div class="row">
 						<label>Email</label>
-						<input type="text" name="email" ng-model="ctrl.email">
+						<input type="email" name="email" ng-model="ctrl.email"><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.email.$touched">
+							<span ng-show="newPrayerForm.email.$error.email">Formato de email incorrecto</span>
+						</span>
 					</div>
 					
 					<div class="row">
@@ -36,9 +52,12 @@
 					
 					<div class="row">
 						<label>País</label>
-						<select ng-model="ctrl.pais">
+						<select ng-model="ctrl.pais" name="pais" required>
 							<option ng-repeat="pais in ctrl.paises" value="{{pais}}">{{pais}}</option>
-						</select>
+						</select><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.pais.$touched">
+							<span ng-show="newPrayerForm.pais.$error.required">Rellene este campo</span>
+						</span>
 					</div>
 					
 					<div class="row">
@@ -48,18 +67,23 @@
 					
 					<div class="row">
 						<label>Visibilidad</label>
-						<select ng-model="ctrl.visibilidad">
+						<select ng-model="ctrl.visibilidad" name="visibilidad" required>
 							<option ng-repeat="visibilidad in ctrl.visibilidades"
 								value="{{visibilidad}}">{{visibilidad}}</option>
-						</select>
+						</select><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted || newPrayerForm.visibilidad.$touched">
+							<span ng-show="newPrayerForm.visibilidad.$error.required">Rellene este campo</span>
+						</span>
 					</div>
 					
 					<div class="row">
 						<label>Seudónimo</label>
-						<input type="text" name="seudonimo"
-							ng-model="ctrl.seudonimo" />
+						<input type="text" name="seudonimo" ng-model="ctrl.seudonimo" /><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.visibilidad.$touched && ctrl.visibilidad=='Público'">Rellene este campo</span>
+						</span>
 					</div>
-						
+
 					<div class="row">
 						<input type="submit" />
 					</div>
