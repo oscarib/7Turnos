@@ -5,6 +5,12 @@ PrayingChain.controller("newPrayerController", [function() {
 	
 	inicializarDatos();
 	
+	//FUNCIONES SCOPE
+	self.crearOrador = function (){
+		validarFormulario();
+		console.log("Se lanza la creación de un orador");
+	};
+	
 	//FUNCIONES PRIVADAS
 	function inicializarDatos(){
 		self.visibilidades = ["Oculto","Público"];
@@ -15,6 +21,10 @@ PrayingChain.controller("newPrayerController", [function() {
 		               "11:00am","11:30am","12:00pm","12:30pm","13:00pm","13:30pm","14:00pm","14:30pm","15:00pm","15:30pm",
 		               "16:00pm","16:30pm","17:00pm","17:30pm","18:00pm","18:30pm","19:00pm","19:30pm","20:00pm","20:30pm",
 		               "21:00pm","21:30pm","22:00pm","22:30pm","23:00pm","23:30pm"];
+	};
+	
+	function validarFormulario(){
+		console.log(self.dia);
 	};
 	
 }]);

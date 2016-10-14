@@ -2,30 +2,69 @@
 	<div class="row tableRow">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<form ng-submit="ctrl.crearOrador()" novalidate>
-				Nombre
-				<td><input type="text" name="Nombre" ng-model="ctrl.nombre"></td>
-				<td>Día</td> <select ng-model="ctrl.dia">
-					<option ng-repeat="day in ctrl.daysOfWeek" value="{{day}}">{{day}}</option>
-				</select> <select ng-model="ctrl.turno">
-					<option ng-repeat="turno in ctrl.turnos" value="{{turno}}">{{turno}}</option>
-				</select>
-				<td>Email</td>
-				<td><input type="text" name="email" ng-model="ctrl.email"></td>
-				<td>Teléfono</td>
-				<td><input type="text" name="telefono" ng-model="ctrl.telefono"></td>
-				<td>País</td> <select ng-model="ctrl.pais">
-					<option ng-repeat="pais in ctrl.paises" value="{{pais}}">{{pais}}</option>
-				</select>
-				<td>Notas</td>
-				<td><input type="text" name="notes" ng-model="ctrl.notas" /></td>
-				<td>Visibilidad</td> <select ng-model="ctrl.visibilidad">
-					<option ng-repeat="visibilidad in ctrl.visibilidades"
-						value="{{visibilidad}}">{{visibilidad}}</option>
-				</select>
-				<td>Seudónimo</td>
-				<td><input type="text" name="seudonimo"
-					ng-model="ctrl.seudonimo" /></td>
-				<td colspan="2"><input type="submit" /></td>
+				
+				<div class="container-fluid">
+				
+					<div class="row">
+						<label>Nombre</label>
+						<input type="text" name="Nombre" ng-model="ctrl.nombre">
+					</div>
+					
+					<div class="row">
+						<label>Día</label>
+						<select ng-model="ctrl.dia">
+							<option ng-repeat="day in ctrl.daysOfWeek" value="{{day}}">{{day}}</option>
+						</select> 
+					</div>
+					
+					<div class="row">
+						<label>Turno</label>
+						<select ng-model="ctrl.turno">
+							<option ng-repeat="turno in ctrl.turnos" value="{{turno}}">{{turno}}</option>
+						</select>
+					</div>
+					
+					<div class="row">
+						<label>Email</label>
+						<input type="text" name="email" ng-model="ctrl.email">
+					</div>
+					
+					<div class="row">
+						<label>Teléfono</label>
+						<input type="text" name="telefono" ng-model="ctrl.telefono">
+					</div>
+					
+					<div class="row">
+						<label>País</label>
+						<select ng-model="ctrl.pais">
+							<option ng-repeat="pais in ctrl.paises" value="{{pais}}">{{pais}}</option>
+						</select>
+					</div>
+					
+					<div class="row">
+						<label>Notas</label>
+						<input type="text" name="notes" ng-model="ctrl.notas" />
+					</div>
+					
+					<div class="row">
+						<label>Visibilidad</label>
+						<select ng-model="ctrl.visibilidad">
+							<option ng-repeat="visibilidad in ctrl.visibilidades"
+								value="{{visibilidad}}">{{visibilidad}}</option>
+						</select>
+					</div>
+					
+					<div class="row">
+						<label>Seudónimo</label>
+						<input type="text" name="seudonimo"
+							ng-model="ctrl.seudonimo" />
+					</div>
+						
+					<div class="row">
+						<input type="submit" />
+					</div>
+			
+				</div>
 			</form>
 		</div>
 	</div>
