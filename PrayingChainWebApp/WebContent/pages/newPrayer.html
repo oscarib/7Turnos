@@ -1,8 +1,31 @@
-<div id="prayersTable" class="container-fluid">
+<div id="newPrayer" class="container-fluid" ng-controller="newPrayerController as ctrl">
 	<div class="row tableRow">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<form>
-				<input type="text" name="Nombre">
+			<form ng-submit="ctrl.crearOrador()" novalidate>
+				Nombre
+				<td><input type="text" name="Nombre" ng-model="ctrl.nombre"></td>
+				<td>Día</td> <select ng-model="ctrl.dia">
+					<option ng-repeat="day in ctrl.daysOfWeek" value="{{day}}">{{day}}</option>
+				</select> <select ng-model="ctrl.turno">
+					<option ng-repeat="turno in ctrl.turnos" value="{{turno}}">{{turno}}</option>
+				</select>
+				<td>Email</td>
+				<td><input type="text" name="email" ng-model="ctrl.email"></td>
+				<td>Teléfono</td>
+				<td><input type="text" name="telefono" ng-model="ctrl.telefono"></td>
+				<td>País</td> <select ng-model="ctrl.pais">
+					<option ng-repeat="pais in ctrl.paises" value="{{pais}}">{{pais}}</option>
+				</select>
+				<td>Notas</td>
+				<td><input type="text" name="notes" ng-model="ctrl.notas" /></td>
+				<td>Visibilidad</td> <select ng-model="ctrl.visibilidad">
+					<option ng-repeat="visibilidad in ctrl.visibilidades"
+						value="{{visibilidad}}">{{visibilidad}}</option>
+				</select>
+				<td>Seudónimo</td>
+				<td><input type="text" name="seudonimo"
+					ng-model="ctrl.seudonimo" /></td>
+				<td colspan="2"><input type="submit" /></td>
 			</form>
 		</div>
 	</div>
