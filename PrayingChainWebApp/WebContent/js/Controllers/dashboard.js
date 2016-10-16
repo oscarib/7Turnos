@@ -78,47 +78,54 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	}
     };
     
-    //Cargamos la lista de oradores
-    var prayerList = prayerServices.getPrayerList();
-    prayerList.then(function(dataOut){
-    	self.prayers = dataOut.data;
-    	setDatatableOptions();
-    }, function(error) {
-    	if (!errorWithServiceCall){
-    		errorWithServiceCall = true;
-    		bootbox.alert({size:'small', message: 'Se produjo un error al solicitar la lista de oradores'});
-    	}
-	}).finally(function(){
-    	self.showLoadingPrayersTable = false;
-    });
-
-	var statistics = prayerServices.getChainStatistics();
-	statistics.then(function(dataOut){
-		self.TotalPrayers = dataOut.data.TotalPrayers;
-		self.EmptyTurns = dataOut.data.EmptyTurns;
-		//self.EmptyTurns = 1700;
-		self.TotalTurns = dataOut.data.TotalTurns;
-		self.AvailableTurns = dataOut.data.TotalTurns - dataOut.data.TurnsCovered
-		self.CommittedPrayers = dataOut.data.CommittedPrayers;
-		self.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
-		self.Redundancy = dataOut.data.TotalRedundancy-100;
-		self.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
-		self.HiddenPrayers = dataOut.data.HiddenPrayers;
-		self.PublicPrayers = dataOut.data.PublicPrayers;
-		self.ForeignPrayers = dataOut.data.ForeignPrayers;
-		self.LocalPrayers = dataOut.data.LocalPrayers;
-		self.OrphanTurns = dataOut.data.OrphanTurns;
-		self.OrphanPrayers = dataOut.data.OrphanPrayers;
-		loadCharts();
-	}, function(error) {
-		if (!errorWithServiceCall){
-			errorWithServiceCall = true;
-			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
-		}
-	}).finally(function(){
-			self.showLoadingStatistics = false;
-	});
-	
+    $rootScope.loadPrayerList = function(){
+        //Cargamos la lista de oradores
+        var prayerList = prayerServices.getPrayerList();
+        prayerList.then(function(dataOut){
+        	self.prayers = dataOut.data;
+        	setDatatableOptions();
+        }, function(error) {
+        	if (!errorWithServiceCall){
+        		errorWithServiceCall = true;
+        		bootbox.alert({size:'small', message: 'Se produjo un error al solicitar la lista de oradores'});
+        	}
+    	}).finally(function(){
+        	self.showLoadingPrayersTable = false;
+        });
+    };
+    
+    $rootScope.loadStatistics = function(){
+    	var statistics = prayerServices.getChainStatistics();
+    	statistics.then(function(dataOut){
+    		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
+    		self.EmptyTurns = dataOut.data.EmptyTurns;
+    		//self.EmptyTurns = 1700;
+    		self.TotalTurns = dataOut.data.TotalTurns;
+    		self.AvailableTurns = dataOut.data.TotalTurns - dataOut.data.TurnsCovered
+    		self.CommittedPrayers = dataOut.data.CommittedPrayers;
+    		self.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
+    		self.Redundancy = dataOut.data.TotalRedundancy-100;
+    		self.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
+    		self.HiddenPrayers = dataOut.data.HiddenPrayers;
+    		self.PublicPrayers = dataOut.data.PublicPrayers;
+    		self.ForeignPrayers = dataOut.data.ForeignPrayers;
+    		self.LocalPrayers = dataOut.data.LocalPrayers;
+    		self.OrphanTurns = dataOut.data.OrphanTurns;
+    		self.OrphanPrayers = dataOut.data.OrphanPrayers;
+    		loadCharts();
+    	}, function(error) {
+    		if (!errorWithServiceCall){
+    			errorWithServiceCall = true;
+    			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
+    		}
+    	}).finally(function(){
+    			self.showLoadingStatistics = false;
+    	});
+    };    
+    
+    $rootScope.loadPrayerList();
+    $rootScope.loadStatistics();
+    
 //FUNCIONES PRIVADAS -->
     function loadCharts(){
         //Committed / Non committed pie chart

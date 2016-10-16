@@ -29,9 +29,19 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 				newPrayer.visibilidad = self.visibilidad;
 				newPrayer.seudonimo = self.seudonimo;
 				self.phoneOrEmailError = false;
-				addNewPrayer(newPrayer);
-				$rootScope.resetNewPrayerForm();
-				$rootScope.showDashBoardLayer();
+				var promise = addNewPrayer(newPrayer);
+				promise.then(function(dataOut) {
+		    		bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
+					$rootScope.resetNewPrayerForm();
+					$rootScope.showDashBoardLayer();
+				    $rootScope.loadPrayerList();
+				    $rootScope.loadStatistics();
+				}, function(error) {
+		    		bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
+				}).finally(function(){
+				     //Aquí el código que deberá ejecutarse al finalizar la llamada, independientemente del resultado de la llamada
+
+				});
 			}
 		}
 	};
@@ -48,7 +58,7 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 		self.visibilidad = "";
 		self.seudonimo = "";
 		self.visibilidades = ["Oculto","Público"];
-		self.daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábados", "Domingos"];
+		self.daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 		self.paises = ["España", "Otro País"];
 		self.turnos = ["00:00am","00:30am","01:00am","01:30am","02:00am","02:30am","03:00am","03:30am","04:00am","04:30am",
 		               "05:00am","05:30am","06:00am","06:30am","07:00am","07:30am","08:00am","08:30am","10:00am","10:30am",
@@ -72,14 +82,7 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 	
 	function addNewPrayer(dataIn){
 		var promise = prayerServices.createNewPrayer(dataIn);
-		promise.then(function(dataOut) {
-    		bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
-		}, function(error) {
-    		bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
-		}).finally(function(){
-		     //Aquí el código que deberá ejecutarse al finalizar la llamada, independientemente del resultado de la llamada
-
-		});
+		return promise;
 	};
 	
 }]);
