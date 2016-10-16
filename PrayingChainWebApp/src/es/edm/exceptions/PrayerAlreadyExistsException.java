@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class PrayerAlreadyExistsException extends Exception {
+public class PrayerAlreadyExistsException extends RuntimeException {
 
 	public PrayerAlreadyExistsException() {
 		super();

@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class TurnAlreadyExistsException extends Exception {
+public class TurnAlreadyExistsException extends RuntimeException {
 
 	public TurnAlreadyExistsException() {
 		super();

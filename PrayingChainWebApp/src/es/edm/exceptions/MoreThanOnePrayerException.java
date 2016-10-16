@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class MoreThanOnePrayerException extends Exception {
+public class MoreThanOnePrayerException extends RuntimeException {
 
 
 	public MoreThanOnePrayerException() {

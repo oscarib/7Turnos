@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class DayOfWeekException extends Exception {
+public class DayOfWeekException extends RuntimeException {
 
 	/**
 	 * 
