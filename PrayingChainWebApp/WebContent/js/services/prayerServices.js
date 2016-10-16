@@ -52,6 +52,21 @@
     		
     		return promise;
     	};
+    	
+    	self.createNewPrayer = function(dataIn){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./createNewPrayer.do", dataIn);
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
 
     	return self;
     }

@@ -1,17 +1,52 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("newPrayerController", [function() {
+PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerServices', function($scope,$rootScope,prayerServices) {
 	var self = this;
 	
 	inicializarDatos();
 	
 	//FUNCIONES SCOPE
-	self.crearOrador = function (isValid){
-		console.log("El formulario " + (isValid ? "es " : "no es ") + "válido");
+	self.createNewPrayer = function (isValid){
+		if (!self.telefono && !self.email){
+			self.phoneOrEmailError = true;
+			isValid = false;
+		} else {
+			self.phoneOrEmailError = false;
+		}
+		if (isValid){
+			if ((self.visibilidad == "Público" && !self.seudonimo) ||
+				(!self.telefono && !self.email)){
+				isValid = false;
+			} else { 
+				var newPrayer = {};
+				newPrayer.nombre = self.nombre;
+				newPrayer.dia = self.dia;
+				newPrayer.turno = self.turno;
+				newPrayer.email = self.email;
+				newPrayer.telefono = self.telefono;
+				newPrayer.pais = self.pais;
+				newPrayer.notas = self.notas;
+				newPrayer.visibilidad = self.visibilidad;
+				newPrayer.seudonimo = self.seudonimo;
+				self.phoneOrEmailError = false;
+				addNewPrayer(newPrayer);
+				$rootScope.resetNewPrayerForm();
+				$rootScope.showDashBoardLayer();
+			}
+		}
 	};
 	
 	//FUNCIONES PRIVADAS
 	function inicializarDatos(){
+		self.nombre = undefined;
+		self.dia = "";
+		self.turno = "";
+		self.email = "";
+		self.telefono = "";
+		self.pais = "";
+		self.notas = "";
+		self.visibilidad = "";
+		self.seudonimo = "";
 		self.visibilidades = ["Oculto","Público"];
 		self.daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábados", "Domingos"];
 		self.paises = ["España", "Otro País"];
@@ -20,6 +55,31 @@ PrayingChain.controller("newPrayerController", [function() {
 		               "11:00am","11:30am","12:00pm","12:30pm","13:00pm","13:30pm","14:00pm","14:30pm","15:00pm","15:30pm",
 		               "16:00pm","16:30pm","17:00pm","17:30pm","18:00pm","18:30pm","19:00pm","19:30pm","20:00pm","20:30pm",
 		               "21:00pm","21:30pm","22:00pm","22:30pm","23:00pm","23:30pm"];
+	};
+	
+	$rootScope.resetNewPrayerForm = function(){
+		inicializarDatos();
+		$scope.newPrayerForm.nombre.$touched = false;
+		$scope.newPrayerForm.pais.$touched = false;
+		$scope.newPrayerForm.email.$touched = false;
+		$scope.newPrayerForm.telefono.$touched = false;
+		$scope.newPrayerForm.dia.$touched = false;
+		$scope.newPrayerForm.turno.$touched = false;
+		$scope.newPrayerForm.visibilidad.$touched = false;
+		$scope.newPrayerForm.$submitted = false;
+		$scope.newPrayerForm.$setPristine();
+	};
+	
+	function addNewPrayer(dataIn){
+		var promise = prayerServices.createNewPrayer(dataIn);
+		promise.then(function(dataOut) {
+    		bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
+		}, function(error) {
+    		bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
+		}).finally(function(){
+		     //Aquí el código que deberá ejecutarse al finalizar la llamada, independientemente del resultado de la llamada
+
+		});
 	};
 	
 }]);

@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain", ['ngAnimate','datatables']);
 
-PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptionsBuilder', function(chartService, prayerServices, DTOptionsBuilder) {
+PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', 'DTOptionsBuilder', function($rootScope, chartService, prayerServices, DTOptionsBuilder) {
 	var self = this;
     self.firstName = "Óscar";
     self.lastName = "Ibáñez";
@@ -27,21 +27,23 @@ PrayingChain.controller("dashboard", ['chartService', 'prayerServices', 'DTOptio
 	self.showHeaderSearch = true;
 	var errorWithServiceCall = false;
 	
-    self.showDashBoardLayer = function(){
+    $rootScope.showDashBoardLayer = function(){
     	self.showPrayersList = undefined;
     	self.showDashBoard = "activeMenuItem";
     	self.showNewPrayer = false;
     	self.showHeaderSearch = true;
+    	$rootScope.resetNewPrayerForm();
     };
 
-    self.showPrayersTableLayer = function(){
+    $rootScope.showPrayersTableLayer = function(){
     	self.showPrayersList = "activeMenuItem";
     	self.showDashBoard = undefined;
     	self.showNewPrayer = false;
     	self.showHeaderSearch = false;
+    	$rootScope.resetNewPrayerForm();
     };
 
-    self.showNewPrayerLayer = function(){
+    $rootScope.showNewPrayerLayer = function(){
     	self.showPrayersList = undefined;
     	self.showDashBoard = undefined;
     	self.showNewPrayer = true;
