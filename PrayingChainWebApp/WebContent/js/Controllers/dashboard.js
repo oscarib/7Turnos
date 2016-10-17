@@ -99,9 +99,9 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	statistics.then(function(dataOut){
     		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
     		self.EmptyTurns = dataOut.data.EmptyTurns;
-    		//self.EmptyTurns = 1700;
     		self.TotalTurns = dataOut.data.TotalTurns;
-    		self.AvailableTurns = dataOut.data.TotalTurns - dataOut.data.TurnsCovered
+    		self.TurnsCovered = dataOut.data.TurnsCovered;
+    		self.AvailableTurns = self.TotalTurns - self.TurnsCovered;
     		self.CommittedPrayers = dataOut.data.CommittedPrayers;
     		self.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
     		self.Redundancy = dataOut.data.TotalRedundancy-100;
@@ -137,14 +137,14 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         
         //Coverage pie chart
         var labels= ["Cubiertos", "Vacíos"];
-        var pieChartData = [self.TotalTurns,self.EmpytTurns];
+        var pieChartData = [self.TurnsCovered, self.EmptyTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
 
         //availables Vs Total pie chart
-        var labels= ["Totales", "Disponibles"];
-        var pieChartData = [self.TotalTurns,self.AvailableTurns];
+        var labels= ["Cubiertos", "Disponibles"];
+        var pieChartData = [self.TurnsCovered,self.AvailableTurns];
         var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
@@ -164,7 +164,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         chartService.setPieChart("hiddenPublicRatio", labels, pieChartData, backgroundColor, borderColor);
 
         //Hidden Vs Public Prayers
-        var labels= ["Locales", "Extranjeros"];
+        var labels= ["España", "Otro País"];
         var pieChartData = [self.LocalPrayers, self.ForeignPrayers];
         var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];

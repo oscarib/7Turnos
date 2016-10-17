@@ -11,7 +11,7 @@
         self.setPieChart = function(chartObj, labels, pieChartData, borderColor, backgroundColor){
         	
             var pieChart = document.getElementById(chartObj);
-            
+            //pieChart.remove(); //Borra el anterior gráfico, si existía.
             var data = 
             {
                 	labels: labels, 

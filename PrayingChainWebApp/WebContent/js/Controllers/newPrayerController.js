@@ -29,7 +29,7 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 				newPrayer.visibilidad = self.visibilidad;
 				newPrayer.seudonimo = self.seudonimo;
 				self.phoneOrEmailError = false;
-				var promise = addNewPrayer(newPrayer);
+				var promise = prayerServices.createNewPrayer(newPrayer);
 				promise.then(function(dataOut) {
 		    		bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
 					$rootScope.resetNewPrayerForm();
@@ -78,11 +78,6 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 		$scope.newPrayerForm.visibilidad.$touched = false;
 		$scope.newPrayerForm.$submitted = false;
 		$scope.newPrayerForm.$setPristine();
-	};
-	
-	function addNewPrayer(dataIn){
-		var promise = prayerServices.createNewPrayer(dataIn);
-		return promise;
 	};
 	
 }]);
