@@ -37,7 +37,7 @@ public class CreateNewPrayerController {
 	@ResponseBody
 	@RequestMapping(path="/createNewPrayer.do", method=RequestMethod.POST)
 	@Transactional
-	public boolean createNewPrayer(@RequestBody NewPrayerAndTurn newPrayerAndTurn) throws IOException, DDBBException{
+	public int createNewPrayer(@RequestBody NewPrayerAndTurn newPrayerAndTurn) throws IOException, DDBBException{
 
 		//Creación del orador
 		Prayer newPrayer = new Prayer();
@@ -79,6 +79,6 @@ public class CreateNewPrayerController {
 		newTurn.setTurn(SimpleTurn.getTurnByHour(newPrayerAndTurn.getTurno()));
 		main.addTurn(prayerID, newTurn);
 		
-		return true;
+		return prayerID;
 	}
 }
