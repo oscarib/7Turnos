@@ -43,21 +43,29 @@ public class MainService_Impl implements MainService {
 	@Override
 	public void addNewPrayer(Prayer prayer) throws PrayerAlreadyExistsException {
 		
-		//If prayer already exists, then error
+		Prayer foundPrayer;
+		//If email already exists, then error
 		try {
-			@SuppressWarnings("unused")
-			Prayer foundPrayer = getPrayerByEmail(prayer.getEmail());
+			foundPrayer = getPrayerByEmail(prayer.getEmail());
 			throw new PrayerAlreadyExistsException("Email '" + prayer.getEmail() + "' already exists in the ddbb"); 
 		} catch (PrayerNotFoundException e) {
 
-			try {
-				//TODO: Parametrizar admin
-				//Add the prayer to the ddbb
-				dao.addNewPrayer(1, prayer.getName(), prayer.getEmail(), prayer.getPhone(), prayer.isOwnCountry(), 
-									prayer.getOptinDate(), prayer.getNotes(), prayer.isHidden(), prayer.getPseudonym());
+			//If Phone already exists, then error...
+			try{
+				foundPrayer = getPrayerByPhone(prayer.getPhone());
+				throw new PrayerAlreadyExistsException("Phone '" + prayer.getPhone() + "' already exists in the ddbb"); 
+				
+			//Neither email or phone was found, so keep going with saving
+			} catch (PrayerNotFoundException ex) {
+				try {
+					//TODO: Parametrizar admin
+					//Add the prayer to the ddbb
+					dao.addNewPrayer(1, prayer.getName(), prayer.getEmail(), prayer.getPhone(), prayer.isOwnCountry(), 
+							prayer.getOptinDate(), prayer.getNotes(), prayer.isHidden(), prayer.getPseudonym());
 
-			} catch (PrayerNotFoundException e1) {
-				throw new RuntimeException("Something went really really wrong!!");
+				} catch (PrayerNotFoundException e1) {
+					throw new RuntimeException("Something went really really wrong!!");
+				}
 			}
 		}
 	}
@@ -111,6 +119,9 @@ public class MainService_Impl implements MainService {
 
 	@Override
 	public Prayer getPrayerByEmail(String email) throws PrayerNotFoundException {
+		if ("".equals(email)){
+			throw new PrayerNotFoundException("Can't search by email ''");
+		}
 		return dao.getPrayerByEmail(email);
 	}
 
@@ -121,9 +132,14 @@ public class MainService_Impl implements MainService {
 
 	@Override
 	public Prayer getPrayerByPhone(String phone) throws MoreThanOnePrayerException, PrayerNotFoundException, EmptyParameterException {
+		if ("".equals(phone) || phone == null){
+			throw new PrayerNotFoundException("Can't search for an empty phone string");
+		}
 		List<Prayer> foundPrayers = dao.getPrayersByPhone(phone);
 		if (foundPrayers.size()>1) {
-			throw new MoreThanOnePrayerException("There are more than 1 prayer with such phone number");
+			throw new MoreThanOnePrayerException("That phone '" + phone + "' was found more than 1 time into the ddbb");
+		} else if(foundPrayers.size()<1)  {
+			throw new PrayerNotFoundException("No prayer found by phone '" + phone + "'");
 		}
 		return foundPrayers.get(0);
 	}
