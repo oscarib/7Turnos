@@ -78,7 +78,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	}
     };
     
-    $rootScope.loadPrayerList = function(){
+    self.loadPrayerList = function(){
         //Cargamos la lista de oradores
         var prayerList = prayerServices.getPrayerList();
         prayerList.then(function(dataOut){

@@ -7,42 +7,33 @@ PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerSer
 	
 	//FUNCIONES SCOPE
 	self.createNewPrayer = function (isValid){
-		if (!self.telefono && !self.email){
-			self.phoneOrEmailError = true;
-			isValid = false;
-		} else {
-			self.phoneOrEmailError = false;
-		}
-		if (isValid){
-			if ((self.visibilidad == "Público" && !self.seudonimo) ||
-				(!self.telefono && !self.email)){
-				isValid = false;
-			} else { 
-				var newPrayer = {};
-				newPrayer.nombre = self.nombre;
-				newPrayer.dia = self.dia;
-				newPrayer.turno = self.turno;
-				newPrayer.email = self.email;
-				newPrayer.telefono = self.telefono;
-				newPrayer.pais = self.pais;
-				newPrayer.notas = self.notas;
-				newPrayer.visibilidad = self.visibilidad;
-				newPrayer.seudonimo = self.seudonimo;
-				self.phoneOrEmailError = false;
-				var promise = prayerServices.createNewPrayer(newPrayer);
-				promise.then(function(dataOut) {
-		    		bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
-					$rootScope.resetNewPrayerForm();
-					$rootScope.showDashBoardLayer();
-				    $rootScope.loadPrayerList();
-				    $rootScope.loadStatistics();
-				}, function(error) {
-		    		bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
-				}).finally(function(){
-				     //Aquí el código que deberá ejecutarse al finalizar la llamada, independientemente del resultado de la llamada
+		
+		self.phoneOrEmailError = (!self.telefono && !self.email) ? true: false;
+		isValid = isValid && (self.visibilidad == "Público" && !self.seudonimo) ? false: true;
+		isValid = isValid && self.phoneOrEmailError;
 
-				});
-			}
+		if (isValid){
+
+			var newPrayer = {};
+			newPrayer.nombre = self.nombre;
+			newPrayer.dia = self.dia;
+			newPrayer.turno = self.turno;
+			newPrayer.email = self.email;
+			newPrayer.telefono = self.telefono;
+			newPrayer.pais = self.pais;
+			newPrayer.notas = self.notas;
+			newPrayer.visibilidad = self.visibilidad;
+			newPrayer.seudonimo = self.seudonimo;
+
+			var promise = prayerServices.createNewPrayer(newPrayer);
+			promise.then(function(dataOut) {
+				bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
+				$rootScope.resetNewPrayerForm();
+				$rootScope.showDashBoardLayer();
+				$rootScope.loadStatistics();
+			}, function(error) {
+				bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
+			}).finally(function(){});
 		}
 	};
 	
