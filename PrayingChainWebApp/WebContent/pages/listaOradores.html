@@ -17,21 +17,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="prayer in ctrl.prayers">
-						<td>{{prayer.uid}}
-						</th>
-						<td>{{prayer.name}}
-						</th>
-						<td>{{prayer.email}}
-						</th>
-						<td>{{prayer.ownCountry}}
-						</th>
-						<td>{{prayer.hidden}}
-						</th>
-						<td>{{prayer.phoneNumber}}
-						</th>
-						<td>{{prayer.pseudonym}}
-						</th>
+					<tr ng-repeat="prayer in prayers">
+						<td>{{prayer.uid}}</td>
+						<td>{{prayer.name}}</td>
+						<td>{{prayer.email}}</td>
+						<td>{{prayer.ownCountry}}</td>
+						<td>{{prayer.hidden}}</td>
+						<td>{{prayer.phoneNumber}}</td>
+						<td>{{prayer.pseudonym}}</td>
+						<td>Editar | Borrar | Turnos</td>
 					</tr>
 				</tbody>
 			</table>
