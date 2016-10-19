@@ -32,10 +32,12 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	self.showDashBoard = "activeMenuItem";
     	self.showNewPrayer = false;
     	self.showHeaderSearch = true;
+    	self.loadStatistics();
     	$rootScope.resetNewPrayerForm();
     };
 
     $rootScope.showPrayersTableLayer = function(){
+    	self.loadPrayerList();
     	self.showPrayersList = "activeMenuItem";
     	self.showDashBoard = undefined;
     	self.showNewPrayer = false;
@@ -94,7 +96,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         });
     };
     
-    $rootScope.loadStatistics = function(){
+    self.loadStatistics = function(){
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
     		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
@@ -123,8 +125,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	});
     };    
     
-    self.loadPrayerList();
-    $rootScope.loadStatistics();
+    self.loadStatistics();
     
 //FUNCIONES PRIVADAS -->
     function loadCharts(){
