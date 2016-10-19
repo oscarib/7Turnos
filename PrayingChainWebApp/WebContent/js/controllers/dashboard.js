@@ -1,14 +1,9 @@
-var PrayingChain = angular.module("PrayingChain", ['ngAnimate','datatables']);
+var PrayingChain = angular.module("PrayingChain");
 
 PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', 'DTOptionsBuilder', function($rootScope, chartService, prayerServices, DTOptionsBuilder) {
 	var self = this;
     self.firstName = "Óscar";
     self.lastName = "Ibáñez";
-    self.hideMenu = [];
-    self.hideMenu[1] = true;
-    self.hideMenu[2] = true;
-    self.hideMenu[3] = true;
-    self.hideMenu[4] = true;
 	self.TotalPrayers = "";
 	self.EmptyTurns = "";
 	self.TotalTurns = "";
@@ -26,75 +21,6 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 	self.showLoadingGeneral = false;
 	self.showHeaderSearch = true;
 	var errorWithServiceCall = false;
-	
-    $rootScope.showDashBoardLayer = function(){
-    	self.showPrayersList = undefined;
-    	self.showDashBoard = "activeMenuItem";
-    	self.showNewPrayer = false;
-    	self.showHeaderSearch = true;
-    	self.loadStatistics();
-    	$rootScope.resetNewPrayerForm();
-    };
-
-    $rootScope.showPrayersTableLayer = function(){
-    	self.loadPrayerList();
-    	self.showPrayersList = "activeMenuItem";
-    	self.showDashBoard = undefined;
-    	self.showNewPrayer = false;
-    	self.showHeaderSearch = false;
-    	$rootScope.resetNewPrayerForm();
-    };
-
-    $rootScope.showNewPrayerLayer = function(){
-    	self.showPrayersList = undefined;
-    	self.showDashBoard = undefined;
-    	self.showNewPrayer = true;
-    	self.showHeaderSearch = false;
-    };
-    
-    self.uploadCalendar = function(){
-    	self.showLoadingGeneral = true;
-    	var uploadCalendar = prayerServices.uploadCalendar();
-    	uploadCalendar.then(function() {
-    		bootbox.alert({size:'small', message: 'Se ha podido actualizar el calendario correctamente'});
-        	self.showLoadingGeneral = false;
-    	}, function(error) {
-    		bootbox.alert({size:'small', message: 'Ha habido un problema al tratar de actualizar el calendario.'+ 
-    											  'Consulte la consola del navegador para más información'});
-    		console.error(error);
-        	self.showLoadingGeneral = false;
-    	}).finally(function(){
-    	});
-    }
-   
-    self.openMenu = function(menuItem){
-    	if (self.hideMenu[menuItem]){
-    		self.hideMenu[menuItem] = false;
-    		for (var i=0; i<self.hideMenu.length; i++){
-    			if (i!==menuItem){
-    				self.hideMenu[i] = true;
-    			}
-    		}
-    	} else {
-    		self.hideMenu[menuItem] = true;
-    	}
-    };
-    
-    self.loadPrayerList = function(){
-        //Cargamos la lista de oradores
-        var prayerList = prayerServices.getPrayerList();
-        prayerList.then(function(dataOut){
-        	self.prayers = dataOut.data;
-        	setDatatableOptions();
-        }, function(error) {
-        	if (!errorWithServiceCall){
-        		errorWithServiceCall = true;
-        		bootbox.alert({size:'small', message: 'Se produjo un error al solicitar la lista de oradores'});
-        	}
-    	}).finally(function(){
-        	self.showLoadingPrayersTable = false;
-        });
-    };
     
     self.loadStatistics = function(){
     	var statistics = prayerServices.getChainStatistics();

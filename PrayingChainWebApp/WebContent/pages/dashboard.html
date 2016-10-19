@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-if="ctrl.showLoadingGeneral">
+<div class="container-fluid" ng-if="vm.showLoadingGeneral">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="GeneralWarning">
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid" ng-if="!ctrl.showLoadingGeneral">
+<div class="container-fluid" ng-if="!vm.showLoadingGeneral">
 	<div class="row widgetRow" id="widgets-line-1">
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget" ng-click="showNewPrayerLayer()">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-			<div class="widget" ng-click="showPrayersTableLayer();ctrl.openMenu(2)">
+			<div class="widget" ng-click="showPrayersTableLayer();vm.openMenu(2)">
 				<div class="widget-header">
 					<img src="./images/AdvancedSearch.jpg">
 				</div>
@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-			<div class="widget" ng-click="ctrl.uploadCalendar()">
+			<div class="widget" ng-click="vm.uploadCalendar()">
 				<div class="widget-header">
 					<img src="./images/SendCalendar.jpg">
 				</div>
@@ -63,8 +63,8 @@
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
-				<div class="WarningFlag" ng-if="ctrl.OrphanPrayers>0">
-					<span>{{ctrl.OrphanPrayers}}</span>
+				<div class="WarningFlag" ng-if="vm.OrphanPrayers>0">
+					<span>{{vm.OrphanPrayers}}</span>
 				</div>
 				<div class="widget-header">
 					<img src="./images/huerfano.jpg">
@@ -79,8 +79,8 @@
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
-				<div class="WarningFlag" ng-if="ctrl.EmptyTurns>0">
-					<span>{{ctrl.EmptyTurns}}</span>
+				<div class="WarningFlag" ng-if="vm.EmptyTurns>0">
+					<span>{{vm.EmptyTurns}}</span>
 				</div>
 				<div class="widget-header">
 					<img src="./images/turnosvacios.jpg">
@@ -95,7 +95,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="localForeignRatio" width="160"
 						height="120"></canvas>
@@ -106,7 +106,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="hiddenPublicRatio" width="160"
 						height="120"></canvas>
@@ -117,7 +117,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" width="160" height="120"
 						id="chartCommitted"></canvas>
@@ -128,7 +128,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="availablePieChart" width="160"
 						height="120"></canvas>
@@ -139,7 +139,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="chartCoverage" width="160"
 						height="120"></canvas>
@@ -150,7 +150,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="ctrl.showLoadingStatistics"
+					<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
 						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="redundancePieChart" width="160"
 						height="120"></canvas>

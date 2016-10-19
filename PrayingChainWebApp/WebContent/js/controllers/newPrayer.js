@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("newPrayerController", ['$scope','$rootScope','prayerServices', function($scope,$rootScope,prayerServices) {
+PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices', function($scope,$rootScope,prayerServices) {
 	var self = this;
 	
 	inicializarDatos();

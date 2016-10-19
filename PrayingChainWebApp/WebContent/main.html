@@ -2,7 +2,7 @@
 <html ng-app="PrayingChain">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>PrayingChain 1.2</title>
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/main.css" rel="stylesheet">
 <script src="./js/lib/jquery-2.2.4.min.js"></script>
@@ -11,8 +11,12 @@
 <script src="./js/lib/bootbox.min.js"></script>
 <script src="./js/lib/angular.min.js"></script>
 <script src="./js/lib/angular-animate.min.js"></script>
-<script src="./js/Controllers/dashboard.js"></script>
-<script src="./js/Controllers/newPrayerController.js"></script>
+<script src="./js/lib/angular-route.min.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/controllers/dashboard.js"></script>
+<script src="./js/controllers/newPrayer.js"></script>
+<script src="./js/controllers/menu.js"></script>
+<script src="./js/controllers/head.js"></script>
 <script src="./js/lib/angular-datatables.min.js"></script>
 <script src="./js/lib/Chart.min.js"></script>
 <script src="./js/services/chartServices.js"></script>
@@ -21,17 +25,17 @@
 
 
 </head>
-<body ng-controller="dashboard as ctrl">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-item" id="sidebar-menu" ng-include="'./pages/menu.html'"></div>
-			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10	">
-				<div ng-show="ctrl.showHead" ng-include="'./pages/head.html'"></div>
-				<div ng-show="ctrl.showDashBoard" ng-include="'./pages/dashboard.html'"></div>
-				<div ng-show="ctrl.showPrayersList" ng-include="'./pages/listaOradores.html'"></div>
-				<div ng-show="ctrl.showNewPrayer" ng-include="'./pages/newPrayer.html'"></div>
-			</div>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-item"
+			id="sidebar-menu" ng-include="'./pages/menu.html'" ng-controller="menu as vm"></div>
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+			<div ng-include="'./pages/head.html'" ng-controller='head as vm'></div>
+			<div ng-view></div>
 		</div>
 	</div>
+</div>
+
 </body>
 </html>
