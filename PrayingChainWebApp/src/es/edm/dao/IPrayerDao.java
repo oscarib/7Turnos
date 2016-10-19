@@ -21,6 +21,8 @@ public interface IPrayerDao {
 	
 	PrayerEntity getPrayerByEmail(PrayerEntity prayer);
 	
+	PrayerEntity getPrayerByID(Integer uid);
+	
 	List<PrayerEntity> getForeignPrayers();
 	
 	List<PrayerEntity> getLocalPrayers();
@@ -28,6 +30,10 @@ public interface IPrayerDao {
 	List<PrayerEntity> getPrayersOnTurn(TurnEntity turn);
 	
 	List<PrayerEntity> find(PrayerEntity prayer);
+	
+	List<PrayerEntity> getOrphanPrayers();
+	
+	List<PrayerEntity> getCancelledPrayers();
 	
 	
 }

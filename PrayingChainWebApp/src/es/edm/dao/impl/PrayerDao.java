@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -199,6 +200,40 @@ public class PrayerDao implements IPrayerDao {
 				logger.error("No existe la columna '"+field.getName()+"' en la entidad '"+PrayerEntity.class.getSimpleName());
 			}
 		}
+
+		return objCriteria.list();
+	}
+
+	@Override
+	public PrayerEntity getPrayerByID(Integer uid) {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+
+		objCriteria.add(Restrictions.eq("uid", uid));
+
+		return (PrayerEntity) objCriteria.uniqueResult();
+	}
+
+	@Override
+	public List<PrayerEntity> getOrphanPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		//"SELECT edm_prayers.* FROM edm_prayers LEFT JOIN edm_turns ON edm_prayers.uid = edm_turns.prayer_id WHERE edm_turns.uid IS NULL"
+		Query query = session.createQuery("from PrayerEntity LEFT JOIN edm_turns ON PrayerEntity = TurnEntity.prayer WHERE TurnEnity.uid IS NULL");
+
+
+		return query.list();
+	}
+
+	@Override
+	public List<PrayerEntity> getCancelledPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+
+		objCriteria
+		.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
 
 		return objCriteria.list();
 	}
