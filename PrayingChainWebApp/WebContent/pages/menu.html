@@ -1,13 +1,13 @@
 <div class="container-fluid">
 	<div class="row menuRow">
 		<div id="UserInformation" class="col-lg-12">
-			<span id="UserName">{{vm.firstName}} {{vm.lastName}}</span><br>
-			<span id="UserGroup">España De Maria</span>
+			<span id="UserName">{{vm.adminName}}</span><br>
+			<span id="UserGroup">{{vm.pcName}}</span>
 		</div>
 	</div>
 </div>
 <div class="container-fluid">
-	<div class="row menuRow" ng-class="vm.showDashBoard" ng-click="showDashBoardLayer();vm.openMenu(1)">
+	<div class="row menuRow" ng-class="vm.showDashBoard" ng-click="vm.openMenu(1);navigateTo('/')">
 		<div class="col-lg-12">
 			<span>Dashboard</span>
 		</div>
@@ -24,7 +24,7 @@
 			</div>
 			<div class="fadeAnimate" ng-if="!vm.hideMenu[2]">
 				<div class="row" ng-class="vm.showPrayersList">
-					<div class="col-lg-2" ng-click="showPrayersTableLayer()">
+					<div class="col-lg-2" ng-click="navigateTo('/oradores')">
 						<span class="menu-item">Oradores</span>
 					</div>
 				</div>
@@ -42,16 +42,16 @@
 		<div class="col-lg-12">
 			<div class="row">
 				<div class="col-lg-1">
-					<img ng-click="vm.openMenu(3)" class="GroupOpener"
-						src="./images/GroupOpener.gif"> <span
-						ng-click="vm.openMenu(3)" class="menu-group">Acciones</span>
+					<img ng-click="vm.openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif"> 
+					<span ng-click="vm.openMenu(3)" class="menu-group">Acciones</span>
 				</div>
 			</div>
-			<div class="fadeAnimate" ng-if="!vm.hideMenu[3]" ng-click="showNewPrayerLayer()">
-				<div class="row">
-					<div class="col-lg-2">
-						<span class="menu-item">Crear Orador</span>
-					</div>
+			<div class="fadeAnimate" ng-if="!vm.hideMenu[3]">
+				<div class="row" ng-click="navigateTo('/crearOrador')">
+						<div class="col-lg-2">
+							<span class="menu-item">Crear Orador</span>
+						</div>
+					</a>
 				</div>
 				<div class="row">
 					<div class="col-lg-2">

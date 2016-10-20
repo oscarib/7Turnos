@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("menu", [function() {
+PrayingChain.controller("menu", ['$rootScope','$location',function($rootScope,$location) {
 	var self = this;
 
     self.hideMenu = [];
@@ -8,6 +8,17 @@ PrayingChain.controller("menu", [function() {
     self.hideMenu[2] = true;
     self.hideMenu[3] = true;
     self.hideMenu[4] = true;
+    self.adminName = "Oscar Ibáñez";
+    self.pcName = "EspañaDeMaria.ES";
+	self.showPrayersList = undefined;
+	self.showHead = "activeMenuItem";
+	self.showDashBoard = "activeMenuItem";
+	self.showNewPrayer = false;
+	
+	$rootScope.navigateTo = function(path){
+		$location.path(path);
+	};
+	
 
     self.openMenu = function(menuItem){
     	if (self.hideMenu[menuItem]){

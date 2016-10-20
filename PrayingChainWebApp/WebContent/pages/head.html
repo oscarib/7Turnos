@@ -1,16 +1,16 @@
 
 <div class="container-fluid">
-	<div id="warnings" class="row" ng-if="vm.OrphanPrayers>0 || vm.OrphanTurns>0">
+	<div id="warnings" class="row" ng-if="OrphanPrayers>0 || OrphanTurns>0">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<span ng-if="vm.OrphanPrayers>0 && vm.OrphanTurns>0">
-				Atención: Hay {{vm.OrphanPrayers}} orador(es) sin turnos asignados, 
-				y {{vm.OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
+			<span ng-if="OrphanPrayers>0 && OrphanTurns>0">
+				Atención: Hay {{OrphanPrayers}} orador(es) sin turnos asignados, 
+				y {{OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
 			</span>
-			<span ng-if="vm.OrphanPrayers>0 && vm.OrphanTurns==0">
-				Atención: Hay {{vm.OrphanPrayers}} orador(es) sin turnos asignados
+			<span ng-if="OrphanPrayers>0 && OrphanTurns==0">
+				Atención: Hay {{OrphanPrayers}} orador(es) sin turnos asignados
 			</span>
-			<span ng-if="vm.OrphanPrayers==0 && vm.OrphanTurns>0">
-				Atención: Hay {{vm.OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
+			<span ng-if="OrphanPrayers==0 && OrphanTurns>0">
+				Atención: Hay {{OrphanTurns}} turno(s) huérfanos (no existe el orador asignado al turno)
 			</span>
 		</div>
 	</div>
@@ -18,24 +18,24 @@
 <div class="container-fluid">
 	<div id="header" class="row">
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
-			<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
+			<img class="loadingGifImg" ng-show="showLoadingStatistics"
 				src="./images/loadingGif.gif"> <span class="NofPrayers">{{TotalPrayers}}</span><br>
 			<span class="labelNoPrayers">oradores</span>
 		</div>
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" ng-show="vm.EmptyTurns>0">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" ng-show="EmptyTurns>0">
 			<div class="EmptyTurns">
 				<img class="loadingGifImg" ng-show="vm.showLoadingStatistics" src="./images/loadingGif.gif">
-				<span class="EmptyTurnsNumber">{{vm.EmptyTurns}}</span>
+				<span class="EmptyTurnsNumber">{{EmptyTurns}}</span>
 				<span class="EmptyTurnsLabel">turnos vacios</span>
 			</div>
 		</div>
 		<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
-			<img class="loadingGifImg" ng-show="vm.showLoadingStatistics"
+			<img class="loadingGifImg" ng-show="showLoadingStatistics"
 				src="./images/loadingGif.gif"> <span>Turnos
-				disponibles: {{vm.AvailableTurns}}</span><br> <span>Turnos
-				cubiertos: {{vm.UsedTurnsPerc}}%</span><br> <span>Comprometidos:
-				{{vm.CommittedPrayers}}</span><br> <span>No comprometidos:
-				{{vm.NonCommittedPrayers}}</span>
+				disponibles: {{AvailableTurns}}</span><br> <span>Turnos
+				cubiertos: {{UsedTurnsPerc}}%</span><br> <span>Comprometidos:
+				{{CommittedPrayers}}</span><br> <span>No comprometidos:
+				{{NonCommittedPrayers}}</span>
 		</div>
 		<div id="Search" class="col-lg-5 col-md-4 col-sm-3 col-xs-3" ng-show="vm.EmptyTurns>0 && vm.showHeaderSearch">
 			<input type="text" class="form-control" id="searchText"> <img

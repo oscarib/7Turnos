@@ -2,44 +2,29 @@ var PrayingChain = angular.module("PrayingChain");
 
 PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', 'DTOptionsBuilder', function($rootScope, chartService, prayerServices, DTOptionsBuilder) {
 	var self = this;
-    self.firstName = "Óscar";
-    self.lastName = "Ibáñez";
-	self.TotalPrayers = "";
-	self.EmptyTurns = "";
-	self.TotalTurns = "";
-	self.AvailableTurns = "";
-	self.CommittedPrayers = "";
-	self.NonCommittedPrayers = "";
-	self.Redundancy = "";
-	self.UsedTurnsPerc = "";
-	self.showLoadingStatistics = true;
-	self.showLoadingPrayersTable = true;
-	self.showPrayersList = undefined;
-	self.showHead = "activeMenuItem";
-	self.showDashBoard = "activeMenuItem";
-	self.showNewPrayer = false;
-	self.showLoadingGeneral = false;
-	self.showHeaderSearch = true;
+	
+	$rootScope.showLoadingStatistics = true;
 	var errorWithServiceCall = false;
-    
+	initStatistics();
+	
     self.loadStatistics = function(){
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
     		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
-    		self.EmptyTurns = dataOut.data.EmptyTurns;
-    		self.TotalTurns = dataOut.data.TotalTurns;
-    		self.TurnsCovered = dataOut.data.TurnsCovered;
-    		self.AvailableTurns = self.TotalTurns - self.TurnsCovered;
-    		self.CommittedPrayers = dataOut.data.CommittedPrayers;
-    		self.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
-    		self.Redundancy = dataOut.data.TotalRedundancy-100;
-    		self.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
-    		self.HiddenPrayers = dataOut.data.HiddenPrayers;
-    		self.PublicPrayers = dataOut.data.PublicPrayers;
-    		self.ForeignPrayers = dataOut.data.ForeignPrayers;
-    		self.LocalPrayers = dataOut.data.LocalPrayers;
-    		self.OrphanTurns = dataOut.data.OrphanTurns;
-    		self.OrphanPrayers = dataOut.data.OrphanPrayers;
+    		$rootScope.EmptyTurns = dataOut.data.EmptyTurns;
+    		$rootScope.TotalTurns = dataOut.data.TotalTurns;
+    		$rootScope.TurnsCovered = dataOut.data.TurnsCovered;
+    		$rootScope.AvailableTurns = $rootScope.TotalTurns - $rootScope.TurnsCovered;
+    		$rootScope.CommittedPrayers = dataOut.data.CommittedPrayers;
+    		$rootScope.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
+    		$rootScope.Redundancy = dataOut.data.TotalRedundancy-100;
+    		$rootScope.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
+    		$rootScope.HiddenPrayers = dataOut.data.HiddenPrayers;
+    		$rootScope.PublicPrayers = dataOut.data.PublicPrayers;
+    		$rootScope.ForeignPrayers = dataOut.data.ForeignPrayers;
+    		$rootScope.LocalPrayers = dataOut.data.LocalPrayers;
+    		$rootScope.OrphanTurns = dataOut.data.OrphanTurns;
+    		$rootScope.OrphanPrayers = dataOut.data.OrphanPrayers;
     		loadCharts();
     	}, function(error) {
     		if (!errorWithServiceCall){
@@ -47,13 +32,32 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
     		}
     	}).finally(function(){
-    			self.showLoadingStatistics = false;
+    		$rootScope.showLoadingStatistics = false;
     	});
     };    
     
     self.loadStatistics();
     
 //FUNCIONES PRIVADAS -->
+    function initStatistics(){
+		$rootScope.TotalPrayers = 0;
+		$rootScope.EmptyTurns = 0;
+		$rootScope.TotalTurns = 0;
+		$rootScope.TurnsCovered = 0;
+		$rootScope.AvailableTurns = 0;
+		$rootScope.CommittedPrayers = 0;
+		$rootScope.NonCommittedPrayers = 0;
+		$rootScope.Redundancy = 0;
+		$rootScope.UsedTurnsPerc = 0;
+		$rootScope.HiddenPrayers = 0;
+		$rootScope.PublicPrayers = 0;
+		$rootScope.ForeignPrayers = 0;
+		$rootScope.LocalPrayers = 0;
+		$rootScope.OrphanTurns = 0;
+		$rootScope.OrphanPrayers = 0;
+    	
+    };
+    
     function loadCharts(){
         //Committed / Non committed pie chart
         var labels= ["Comprometidos", "No Comprometidos"];
