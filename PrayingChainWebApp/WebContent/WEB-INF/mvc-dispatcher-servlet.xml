@@ -24,10 +24,10 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="prayersPerTurn" value="3"/>
 
 		<!-- FTP Configuration -->
-		<property name="ftpServerName" value="hostbox.com.mx"/>
+		<property name="ftpServerName" value="localhost"/>
 		<property name="ftpPort" value="21"/>
-		<property name="ftpUser" value="oibanez@mexicodemaria.mx"/>
-		<property name="ftpPwd" value="MMFTP.2016"/>
+		<property name="ftpUser" value="root"/>
+		<property name="ftpPwd" value="root"/>
 		<property name="remoteFilePath" value="./turnos/"/>
 		<property name="localFilePath" value="."/>
 		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
@@ -35,7 +35,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="printFtpUpladingMessages" value="true"/>
 
 		<!-- Other COnfiguration -->
-		<property name="mailingListSecretPassword" value="arkanoid"/>
+		<property name="mailingListSecretPassword" value=""/>
 
 	</bean>
 
@@ -45,11 +45,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/edm"/>
         <property name="user" value="root"/>
-        <property name="password" value="kk::qrnp%3Vm"/>
-        <!-- <property name="user" value="root"/> -->
-        <!-- <property name="password" value="AQGgfv58951"/> -->
-        <!-- <property name="jdbcUrl" value="jdbc:mysql://mysql3161-prayingchain.jelastic.cloudhosted.es/edm"/> -->
-        <!-- This is for testing connections only in MySQL or PostgreSQL -->
+        <property name="password" value="root"/>
         <property name="preferredTestQuery" value="SELECT 1"/>
         <property name="acquireRetryDelay" value="5000"></property>
         <property name="acquireRetryAttempts" value="5"/>
