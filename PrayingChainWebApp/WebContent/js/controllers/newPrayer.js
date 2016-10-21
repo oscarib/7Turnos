@@ -27,9 +27,15 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 
 			var promise = prayerServices.createNewPrayer(newPrayer);
 			promise.then(function(dataOut) {
-				bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
-				$rootScope.resetNewPrayerForm();
-				$location.path('/');
+				var error = dataOut.data;
+				if (error==0) {
+					bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
+					$rootScope.resetNewPrayerForm();
+					$location.path('/');
+				} else {
+					var problema = (error==1 ? "email": "teléfono");
+					bootbox.alert({size:'small', message: 'Error: No puedes crear 2 oradores con el mismo ' + problema});
+				}
 			}, function(error) {
 				bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
 			}).finally(function(){});
