@@ -5,5 +5,4 @@ PrayingChain.controller("head", [function() {
 	self.showHeaderSearch = true;
 	self.showHeaderSearch = true;
 	self.EmptyTurns = 0;
-	self.showLoadingStatistics = true;
 }]);

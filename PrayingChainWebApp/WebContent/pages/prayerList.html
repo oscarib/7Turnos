@@ -1,9 +1,9 @@
 <div id="prayersTable" class="container-fluid">
 	<div class="row tableRow">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<img class="loadingGifImg" ng-show="ctrl.showLoadingPrayersTable"
+			<img class="loadingGifImg" ng-show="vm.showLoadingPrayersTable"
 				src="./images/loadingGif.gif">
-			<table datatable="ng" dt-options="ctrl.dtOptions"
+			<table datatable="ng" dt-options="vm.dtOptions"
 				class="table table-hover table-condensed">
 				<thead>
 					<tr>
@@ -17,7 +17,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="prayer in prayers">
+					<tr ng-repeat="prayer in vm.prayers">
 						<td>{{prayer.uid}}</td>
 						<td>{{prayer.name}}</td>
 						<td>{{prayer.email}}</td>

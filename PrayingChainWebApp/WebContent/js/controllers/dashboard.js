@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', 'DTOptionsBuilder', function($rootScope, chartService, prayerServices, DTOptionsBuilder) {
+PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', function($rootScope, chartService, prayerServices) {
 	var self = this;
 	
 	$rootScope.showLoadingStatistics = true;
@@ -61,73 +61,46 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     function loadCharts(){
         //Committed / Non committed pie chart
         var labels= ["Comprometidos", "No Comprometidos"];
-        var pieChartData = [self.CommittedPrayers,self.NonCommittedPrayers];
+        var pieChartData = [$rootScope.CommittedPrayers,$rootScope.NonCommittedPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCommitted", labels, pieChartData, backgroundColor, borderColor);
         
         //Coverage pie chart
         var labels= ["Cubiertos", "Vacíos"];
-        var pieChartData = [self.TurnsCovered, self.EmptyTurns];
+        var pieChartData = [$rootScope.TurnsCovered, $rootScope.EmptyTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
 
         //availables Vs Total pie chart
         var labels= ["Cubiertos", "Disponibles"];
-        var pieChartData = [self.TurnsCovered,self.AvailableTurns];
+        var pieChartData = [$rootScope.TurnsCovered,$rootScope.AvailableTurns];
         var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
         
         //Redundancy: overoccupied
         var labels= ["No Saturados", "Saturados"];
-        var pieChartData = [100,self.Redundancy];
+        var pieChartData = [100,$rootScope.Redundancy];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("redundancePieChart", labels, pieChartData, backgroundColor, borderColor);
 
         //Hidden Vs Public Prayers
         var labels= ["Públicos", "Anónimos"];
-        var pieChartData = [self.PublicPrayers, self.HiddenPrayers];
+        var pieChartData = [$rootScope.PublicPrayers, $rootScope.HiddenPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("hiddenPublicRatio", labels, pieChartData, backgroundColor, borderColor);
 
         //Hidden Vs Public Prayers
         var labels= ["España", "Otro País"];
-        var pieChartData = [self.LocalPrayers, self.ForeignPrayers];
+        var pieChartData = [$rootScope.LocalPrayers, $rootScope.ForeignPrayers];
         var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
     };
     
-    function setDatatableOptions(){
-    	self.dtOptions = DTOptionsBuilder.newOptions();
-    	self.dtOptions.withPaginationType('full_numbers').withDisplayLength(10).withDOM('lftpir').withLanguage({
-            "sEmptyTable":     "No hay datos disponibles",
-            "sInfo":           "Mostrando entradas de la _START_ a la _END_ de un total de _TOTAL_",
-            "sInfoEmpty":      "Mostrando entradas de la 0 a la 0 de un total de 0",
-            "sInfoFiltered":   "(filtradas de un total de _MAX_ entradas)",
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ".",
-            "sLengthMenu":     "Mostrar _MENU_ entradas",
-            "sLoadingRecords": "Cargando...",
-            "sProcessing":     "Procesando...",
-            "sSearch":         "Filtrar:",
-            "sZeroRecords":    "No hay resultados que coincidan",
-            "oPaginate": {
-                "sFirst":    "Primera",
-                "sLast":     "Última",
-                "sNext":     "Siguiente",
-                "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending":  ": activar para ordenar ascendentemente",
-                "sSortDescending": ": activar para ordenar descendentemente"
-            }
-        });
-    };
-
 //<-- Fin de FUNCIONES PRIVADAS
 }]);

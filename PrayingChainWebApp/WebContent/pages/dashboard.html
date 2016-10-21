@@ -12,7 +12,7 @@
 <div class="container-fluid" ng-if="!vm.showLoadingGeneral">
 	<div class="row widgetRow" id="widgets-line-1">
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-			<div class="widget" ng-click="showNewPrayerLayer()">
+			<div class="widget" ng-click="navigateTo('/crearOrador')">
 				<div class="widget-header">
 					<img src="./images/createPrayer.jpg">
 				</div>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-			<div class="widget" ng-click="showPrayersTableLayer();vm.openMenu(2)">
+			<div class="widget" ng-click="navigateTo('/oradores');vm.openMenu(2)">
 				<div class="widget-header">
 					<img src="./images/AdvancedSearch.jpg">
 				</div>
