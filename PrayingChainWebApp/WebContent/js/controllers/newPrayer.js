@@ -9,7 +9,7 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 	self.createNewPrayer = function (isValid){
 		
 		self.phoneOrEmailError = (!self.telefono && !self.email) ? true: false;
-		isValid = isValid && (self.visibilidad == "Público" && !self.seudonimo) ? false: true;
+		isValid = isValid && ((self.visibilidad == "Público" && !self.seudonimo) ? false: true);
 		isValid = isValid && !self.phoneOrEmailError;
 
 		if (isValid){
