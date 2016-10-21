@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices', function($scope,$rootScope,prayerServices) {
+PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$location', function($scope,$rootScope,prayerServices,$location) {
 	var self = this;
 	
 	inicializarDatos();
@@ -10,7 +10,7 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices', fu
 		
 		self.phoneOrEmailError = (!self.telefono && !self.email) ? true: false;
 		isValid = isValid && (self.visibilidad == "Público" && !self.seudonimo) ? false: true;
-		isValid = isValid && self.phoneOrEmailError;
+		isValid = isValid && !self.phoneOrEmailError;
 
 		if (isValid){
 
@@ -29,8 +29,7 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices', fu
 			promise.then(function(dataOut) {
 				bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
 				$rootScope.resetNewPrayerForm();
-				$rootScope.showDashBoardLayer();
-				$rootScope.loadStatistics();
+				$location.path('/');
 			}, function(error) {
 				bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
 			}).finally(function(){});
