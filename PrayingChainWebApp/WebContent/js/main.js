@@ -1,4 +1,4 @@
-var PrayingChain = angular.module("PrayingChain", ['ngAnimate','datatables','ngRoute']);
+var PrayingChain = angular.module("PrayingChain", ['ngAnimate','ngTable','ngRoute']);
 
 PrayingChain.config(function($routeProvider){
 		$routeProvider

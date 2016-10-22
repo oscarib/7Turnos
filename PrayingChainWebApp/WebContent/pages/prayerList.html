@@ -3,30 +3,16 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<img class="loadingGifImg" ng-show="vm.showLoadingPrayersTable"
 				src="./images/loadingGif.gif">
-			<table datatable="ng" dt-options="vm.dtOptions"
-				class="table table-hover table-condensed">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Nombre</th>
-						<th>Email</th>
-						<th>Local</th>
-						<th>Oculto</th>
-						<th>Teléfono</th>
-						<th>Seudónimo</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="prayer in vm.prayers">
-						<td>{{prayer.uid}}</td>
-						<td>{{prayer.name}}</td>
-						<td>{{prayer.email}}</td>
-						<td>{{prayer.ownCountry}}</td>
-						<td>{{prayer.hidden}}</td>
-						<td>{{prayer.phoneNumber}}</td>
-						<td>{{prayer.pseudonym}}</td>
-					</tr>
-				</tbody>
+			<table ng-table="vm.tableParams" id="prayerList" class="table table-hover table-condensed">
+				<tr ng-repeat="prayer in $data">
+					<td>{{prayer.uid}}</td>
+					<td data-title="'Nombre'" sortable="'name'" filter="{name: 'text'}">{{prayer.name}}</td>
+					<td data-title="'Email'" sortable="'email'">{{prayer.email}}</td>
+					<td data-title="'España'" sortable="'ownCountry'">{{prayer.ownCountry}}</td>
+					<td data-title="'Público'" sortable="'hidden'">{{prayer.hidden}}</td>
+					<td>{{prayer.phoneNumber}}</td>
+					<td>{{prayer.pseudonym}}</td>
+				</tr>
 			</table>
 
 		</div>
