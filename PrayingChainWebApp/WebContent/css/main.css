@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+div#headerSearchPrayer img#magnifierIcon {
+	cursor: pointer;
+}
 #newPrayer label {
 	height: ;
 	width: 90px;
