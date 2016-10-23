@@ -22,6 +22,11 @@ PrayingChain.config(function($routeProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/upload.html"
 			})
+			.when("/fichaOrador",{
+				controller: "prayerCard",
+				controllerAs: "vm",
+				templateUrl: "pages/prayerCard.html"
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
