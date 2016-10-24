@@ -1,5 +1,8 @@
 package es.edm.controllers;
 
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,19 +12,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.edm.exceptions.DDBBException;
+import es.edm.services.Configuration;
+import es.edm.services.FileService;
 import es.edm.services.MainService;
 
 @Controller
-public class getStatistics {
+public class OtherServicesController {
 
 	@Autowired
-	private MainService main;
+	MainService main;
 	
-	HashMap<String,String> statistics;
+	@Autowired
+	FileService fileService;
 	
+	@Autowired
+	Configuration conf;
+
+	//CONTROLLER: UPLOADCALENDAR
+	@RequestMapping(path="/uploadCalendar.do", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean UploadCalendar() throws IOException, DDBBException{
+		try{
+			fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
+			fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
+			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
+			fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+		} catch (UnknownHostException e){
+			throw new RuntimeException("Error: " + e);
+		} catch (SocketException e) {
+			throw new RuntimeException("Error: " + e);
+		}
+		return true;
+	}
+	
+	//CONTROLLER: GETSTATISTICS
 	@ResponseBody
 	@RequestMapping(value = "/getStatistics.do", method = RequestMethod.POST)
 	public Map<String,String> getallStatistics() {
+		
+		HashMap<String,String> statistics;
+		
 		statistics = new HashMap<String, String>();
 		statistics.put("TotalTurns", Integer.toString(main.getTotalTurns()));
 		statistics.put("TurnsCovered", Integer.toString(main.getUsedTurns()));
@@ -45,6 +76,7 @@ public class getStatistics {
 		statistics.put("LocalPrayers", Integer.toString(main.getLocalPrayers().size()));
 		statistics.put("OrphanTurns", Integer.toString(main.getOrphanTurns().size()));
 		statistics.put("OrphanPrayers", Integer.toString(main.getOrphanPrayers().size()));
+		
 		return statistics;
 	}
 }

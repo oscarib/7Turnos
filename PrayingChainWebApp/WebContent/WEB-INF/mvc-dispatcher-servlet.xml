@@ -54,6 +54,38 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <property name="checkoutTimeout" value="60000"/>
         <property name="idleConnectionTestPeriod" value="300"></property>
     </bean>
+    
+    
+    
+	<!-- **************************************************************************************** -->
+	<!-- Gestiona las transaciones de JPA -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	
+	<!-- Escaneador que gestiona y valida los mapeos relacionales contra las tablas al inicio de la aplicacion -->
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="DataSource" />
+		<property name="packagesToScan" value="es.edm.domain.entity" />
+
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="false" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- Habilitar para medir rendimiento -->
+				<!-- <prop key="hibernate.generate_statistics">true</prop> -->
+			</props>
+		</property>
+	</bean>
+	<!-- ****************************************************************************** -->
 
 	<!-- Templates -->
 	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -82,16 +114,11 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<context:component-scan base-package="es.edm.controllers"/>
 	<context:component-scan base-package="es.edm.resources"/>
 	<context:component-scan base-package="es.edm.services.Impl"/>
+	<context:component-scan base-package="es.edm.dao.impl"/>
 
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="es/edm/resources/messages"/>
 	</bean>
-	
-    <!-- Transactional behavior based on annotations -->
-    <tx:annotation-driven transaction-manager="txManager"/>
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="DataSource"/>
-    </bean>	
 
 </beans>

@@ -22,7 +22,7 @@ import es.edm.util.EmailSender;
 
 @Controller
 @RequestMapping(path="/Webhook")
-public class MailingServiceIntegrationController_MailchimpImpl {
+public class MailchimpController {
 	
 	/* Mailchimp Webhook URLs
 	 * 		Local: http://prayingchain.ddns.net:8787/PrayingChainWebApp/Webhook.html?secret=arkanoid
