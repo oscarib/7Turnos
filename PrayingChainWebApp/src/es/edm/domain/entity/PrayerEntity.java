@@ -3,8 +3,11 @@ package es.edm.domain.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,12 +15,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="edm_prayers")
 public class PrayerEntity {
 
 	@Id	
 	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer uid;
 	
 	@Column
@@ -44,9 +50,10 @@ public class PrayerEntity {
 	@Column
 	private String pseudonym;
 	
-	@OneToMany(mappedBy="prayer")
+	@OneToMany(mappedBy="prayer", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Fetch(FetchMode.JOIN)
-	List<TurnEntity> turns;
+	@JsonBackReference //Para evitar que la serialización a JSON entre en un bucle infinito
+	private List<TurnEntity> turns;
 
 	/**
 	 * @return the uid
@@ -173,7 +180,12 @@ public class PrayerEntity {
 	public void setPseudonym(String pseudonym) {
 		this.pseudonym = pseudonym;
 	}
-	
-	
 
+	public List<TurnEntity> getTurns() {
+		return turns;
+	}
+
+	public void setTurns(List<TurnEntity> turns) {
+		this.turns = turns;
+	}
 }

@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,9 +14,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
-import es.edm.util.TurnsOfDay;
 
 @Entity
 @Table(name="edm_turns")
@@ -22,6 +25,7 @@ public class TurnEntity {
 
 	@Id
 	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer uid;
 	
 	@Column(name="day")
@@ -29,7 +33,7 @@ public class TurnEntity {
 	private DayOfWeek dow;
 	
 	@Column(name="hour")
-	private TurnsOfDay turn;
+	private String turn;
 	
 	@Enumerated(EnumType.STRING)
 	private TurnStatus status;
@@ -43,6 +47,7 @@ public class TurnEntity {
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "prayer_id")
+	@JsonManagedReference //Para evitar que la serialización a JSON entre en un bucle infinito
 	private PrayerEntity prayer;
 
 	/**
@@ -76,14 +81,14 @@ public class TurnEntity {
 	/**
 	 * @return the turn
 	 */
-	public TurnsOfDay getTurn() {
+	public String getTurn() {
 		return turn;
 	}
 
 	/**
 	 * @param turn the turn to set
 	 */
-	public void setTurn(TurnsOfDay turn) {
+	public void setTurn(String turn) {
 		this.turn = turn;
 	}
 

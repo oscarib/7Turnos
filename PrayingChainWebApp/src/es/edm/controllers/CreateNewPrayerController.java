@@ -1,6 +1,7 @@
 package es.edm.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -8,27 +9,27 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.edm.domain.Prayer;
 import es.edm.domain.SimpleTurn;
+import es.edm.domain.entity.PrayerEntity;
+import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.NewPrayerAndTurn;
 import es.edm.exceptions.DDBBException;
-import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.services.Configuration;
-import es.edm.services.MainService;
+import es.edm.services.IPrayerService;
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
+import es.edm.util.TurnsOfDay;
 
 @Controller
 public class CreateNewPrayerController {
 
 	@Autowired
-	MainService main;
+	IPrayerService prayerService;
 	
 	@Autowired
 	Configuration conf;
@@ -40,29 +41,25 @@ public class CreateNewPrayerController {
 	 * En caso contrario, crea el orador en ddbb*/
 	@ResponseBody
 	@RequestMapping(path="/createNewPrayer.do", method=RequestMethod.POST)
-	@Transactional
 	public int createNewPrayer(@RequestBody NewPrayerAndTurn newPrayerAndTurn) throws IOException, DDBBException{
 
 		int error = 0;
+		PrayerEntity interPrayer = new PrayerEntity();
+		PrayerEntity foundPrayer = new PrayerEntity();
+		interPrayer.setEmail(newPrayerAndTurn.getEmail());
+		interPrayer.setPhone(newPrayerAndTurn.getTelefono());
 
 		//Comprobamos si ese email ya existe
-		try{
-			@SuppressWarnings("unused")
-			Prayer foundPrayer = main.getPrayerByEmail(newPrayerAndTurn.getEmail());
-			error = 1;
-			
-		} catch (PrayerNotFoundException ex){
-			
-			//Comprobamos si ese teléfono ya existe
-			try{
-				@SuppressWarnings("unused")
-				List<Prayer> foundPrayer = main.getPrayersByPhone(newPrayerAndTurn.getTelefono());
-				error = 2;
-				
-			} catch (PrayerNotFoundException ex2){
-				
+		foundPrayer = prayerService.getPrayerByEmail(interPrayer);
+		if (foundPrayer==null){
+
+			//Comprobamos si existe ese teléfono
+			List<PrayerEntity> foundPrayers = new ArrayList<PrayerEntity>();
+			foundPrayers = prayerService.getPrayersByPhone(interPrayer);
+			if (foundPrayers.size()==0){
+
 				//Creación del orador
-				Prayer newPrayer = new Prayer();
+				PrayerEntity newPrayer = new PrayerEntity();
 				newPrayer.setName(newPrayerAndTurn.getNombre());
 				newPrayer.setEmail(newPrayerAndTurn.getEmail());
 				newPrayer.setPhone(newPrayerAndTurn.getTelefono());
@@ -75,32 +72,29 @@ public class CreateNewPrayerController {
 				String hiddenString = properties.getMessage("turn.hidden", null, Locale.getDefault());
 				boolean hidden = (hiddenString.equals(newPrayerAndTurn.getVisibilidad()) ? true : false);
 				newPrayer.setHidden(hidden);
-				
-				main.addNewPrayer(newPrayer);
-				
-				//Obtención del ID del orador
-				int prayerID = 0;
-				if ("".equals(newPrayerAndTurn.getEmail()) || newPrayerAndTurn.getEmail() == null){
-					if ("".equals(newPrayerAndTurn.getTelefono()) || newPrayerAndTurn.getTelefono()==null){
-						throw new RuntimeException("No pudo encontrarse el orador ni por email ni por teléfono");
-					} else {
-						prayerID = main.getPrayerByPhone(newPrayerAndTurn.getTelefono()).getUid();
-					}
-				} else {
-					prayerID = main.getPrayerByEmail(newPrayerAndTurn.getEmail()).getUid();
-				}
-				
+
 				//Creación del turno asociado
-				SimpleTurn newTurn = new SimpleTurn();
+				TurnEntity newTurn = new TurnEntity();
 				DayOfWeek dow = SimpleTurn.getDayOfWeek(newPrayerAndTurn.getDia());
 				newTurn.setDow(dow);
 				newTurn.setNotes(newPrayerAndTurn.getNotas());
 				newTurn.setPax(1);
-				newTurn.setPrayer_id(prayerID);
 				newTurn.setStatus(TurnStatus.accepted);
-				newTurn.setTurn(SimpleTurn.getTurnByHour(newPrayerAndTurn.getTurno()));
-				main.addTurn(prayerID, newTurn);
+				newTurn.setTurn(newPrayerAndTurn.getTurno());
+				newTurn.setPrayer(newPrayer);
+				List<TurnEntity> turnos = new ArrayList<TurnEntity>();
+				turnos.add(newTurn);
+				newPrayer.setTurns(turnos);
+				
+				prayerService.addPrayer(newPrayer);
+
+			} else {
+				error = 2;
 			}
+			
+		} else {
+			//Se encontraron oradores con el mismo email
+			error = 1;
 		}
 		
 		return error;
