@@ -22,6 +22,21 @@
     		
     		return promise;
     	};
+    	
+    	self.getPrayerAndTurns = function(prayerID){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./getPrayerAndTurns.do", prayerID);
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
 
     	self.getChainStatistics = function(requestData){
     		var defered = $q.defer();
