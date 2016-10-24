@@ -105,4 +105,11 @@ public class PrayerController {
 		
 		return error;
 	}	
+	
+/*	@RequestMapping(path="/getPrayerAndTurns.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Object getPrayerAndTurns() throws IOException, DDBBException{
+		
+	}
+*/
 }
