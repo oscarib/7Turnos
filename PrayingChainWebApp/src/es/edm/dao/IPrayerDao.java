@@ -35,5 +35,5 @@ public interface IPrayerDao {
 	
 	List<PrayerEntity> getCancelledPrayers();
 	
-	
+	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer);
 }

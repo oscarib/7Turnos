@@ -73,4 +73,9 @@ public class PrayerService implements IPrayerService {
 		return prayerDao.find(prayer);
 	}
 
+	@Override
+	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
+		return prayerDao.getPrayersByPhone(prayer);
+	}
+
 }

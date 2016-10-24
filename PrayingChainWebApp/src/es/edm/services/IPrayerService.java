@@ -21,6 +21,8 @@ public interface IPrayerService {
 	
 	PrayerEntity getPrayerByEmail(PrayerEntity prayer);
 	
+	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer);
+	
 	List<PrayerEntity> getForeignPrayers();
 	
 	List<PrayerEntity> getLocalPrayers();

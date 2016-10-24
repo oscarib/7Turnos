@@ -238,4 +238,15 @@ public class PrayerDao implements IPrayerDao {
 		return objCriteria.list();
 	}
 
+	@Override
+	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria.add(Restrictions.eq("phone", prayer.getPhone()));
+		
+		return objCriteria.list();
+	}
+
 }
