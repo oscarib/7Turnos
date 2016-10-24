@@ -23,20 +23,26 @@ import es.edm.services.Configuration;
 import es.edm.services.IPrayerService;
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
-import es.edm.util.TurnsOfDay;
 
 @Controller
-public class CreateNewPrayerController {
+public class PrayerController {
 
 	@Autowired
-	IPrayerService prayerService;
+	private IPrayerService prayerService;
 	
 	@Autowired
 	Configuration conf;
 	
 	@Autowired
 	ResourceBundleMessageSource properties;
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/getAllPrayers.do", method = RequestMethod.POST)
+	public List<PrayerEntity> getAllPrayerList() {
+		List<PrayerEntity> prayers2Return = prayerService.getPrayers();
+		return prayers2Return;
+	}
+	
 	/* Comprueba si existen más oradores con el mismo email y teléfono
 	 * En caso contrario, crea el orador en ddbb*/
 	@ResponseBody
@@ -98,5 +104,5 @@ public class CreateNewPrayerController {
 		}
 		
 		return error;
-	}
+	}	
 }
