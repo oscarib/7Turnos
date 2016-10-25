@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +48,7 @@ public class TurnEntity {
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "prayer_id")
-	@JsonManagedReference //Para evitar que la serialización a JSON entre en un bucle infinito
+	@JsonManagedReference //Para evitar que la serializaciï¿½n a JSON entre en un bucle infinito
 	private PrayerEntity prayer;
 
 	/**

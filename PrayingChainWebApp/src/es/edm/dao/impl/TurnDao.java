@@ -1,9 +1,12 @@
 package es.edm.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -39,6 +42,64 @@ public class TurnDao implements ITurnDao {
 	@Override
 	public void updateTurn(TurnEntity turn) {
 		entityManager.persist(turn);
+	}
+
+	@Override
+	public List<TurnEntity> getOrphanTurns() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Query query = session.createQuery("select turn from TurnEntity as turn left join turn.prayer as prayer where prayer.turns is empty");
+
+		return query.list();
+
+	}
+
+	@Override
+	public float getTotalRedundancy() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getCommittedRedundancy() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getEmptyTurnsPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getFreeTurnsPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTurnsUsedPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getEmptyTurns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTotalTurns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getUsedTurns() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

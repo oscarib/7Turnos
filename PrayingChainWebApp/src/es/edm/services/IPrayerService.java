@@ -27,7 +27,13 @@ public interface IPrayerService {
 	
 	List<PrayerEntity> getLocalPrayers();
 	
+	List<PrayerEntity> getPublicPrayers();
+	
+	List<PrayerEntity> getHiddenPrayers();
+	
 	List<PrayerEntity> getPrayersOnTurn(TurnEntity turn);
 	
 	List<PrayerEntity> find(PrayerEntity prayer);
+	
+	List<PrayerEntity> getOrphanPrayers();
 }

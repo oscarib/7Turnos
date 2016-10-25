@@ -36,4 +36,8 @@ public interface IPrayerDao {
 	List<PrayerEntity> getCancelledPrayers();
 	
 	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer);
+	
+	List<PrayerEntity> getPublicPrayers();
+	
+	List<PrayerEntity> getHiddenPrayers();
 }

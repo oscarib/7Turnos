@@ -1,5 +1,7 @@
 package es.edm.services.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,51 @@ public class TurnService implements ITurnService {
 	@Override
 	public void updateTurn(TurnEntity turn) {
 		turnDao.updateTurn(turn);
-		
+	}
+
+	@Override
+	public List<TurnEntity> getOrphanTurns() {
+		return turnDao.getOrphanTurns(); 
+	}
+
+	@Override
+	public float getTotalRedundancy() {
+		return turnDao.getTotalRedundancy();
+	}
+
+	@Override
+	public float getCommittedRedundancy() {
+		return turnDao.getCommittedRedundancy();
+	}
+
+	@Override
+	public float getEmptyTurnsPercentage() {
+		return turnDao.getEmptyTurnsPercentage();
+	}
+
+	@Override
+	public float getFreeTurnsPercentage() {
+		return turnDao.getFreeTurnsPercentage();
+	}
+
+	@Override
+	public float getTurnsUsedPercentage() {
+		return turnDao.getTurnsUsedPercentage();
+	}
+
+	@Override
+	public int getEmptyTurns() {
+		return turnDao.getEmptyTurns();
+	}
+
+	@Override
+	public int getTotalTurns() {
+		return turnDao.getTotalTurns();
+	}
+
+	@Override
+	public int getUsedTurns() {
+		return turnDao.getUsedTurns();
 	}
 
 }
