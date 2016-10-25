@@ -1,7 +1,5 @@
 package es.edm.services;
 
-import java.util.List;
-
 import es.edm.domain.entity.TurnEntity;
 
 public interface ITurnService {
