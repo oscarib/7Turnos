@@ -249,4 +249,26 @@ public class PrayerDao implements IPrayerDao {
 		return objCriteria.list();
 	}
 
+	@Override
+	public List<PrayerEntity> getPublicPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria.add(Restrictions.eq("hidden", false));
+		
+		return objCriteria.list();
+	}
+
+	@Override
+	public List<PrayerEntity> getHiddenPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria.add(Restrictions.eq("hidden", true));
+		
+		return objCriteria.list();
+	}
+
 }

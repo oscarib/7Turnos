@@ -17,10 +17,7 @@ import es.edm.domain.SimpleTurn;
 import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.DataTimeException;
 import es.edm.exceptions.EmptyParameterException;
-import es.edm.exceptions.MoreThanOnePrayerException;
-import es.edm.exceptions.PrayerAlreadyExistsException;
 import es.edm.exceptions.PrayerException;
-import es.edm.exceptions.PrayerHasTurnsException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnAlreadyExistsException;
 import es.edm.exceptions.TurnException;
@@ -41,36 +38,6 @@ public class MainService_Impl implements MainService {
 	}
 
 	@Override
-	public void addNewPrayer(Prayer prayer) throws PrayerAlreadyExistsException {
-		
-		Prayer foundPrayer;
-		//If email already exists, then error
-		try {
-			foundPrayer = getPrayerByEmail(prayer.getEmail());
-			throw new PrayerAlreadyExistsException("Email '" + prayer.getEmail() + "' already exists in the ddbb"); 
-		} catch (PrayerNotFoundException e) {
-
-			//If Phone already exists, then error...
-			try{
-				foundPrayer = getPrayerByPhone(prayer.getPhone());
-				throw new PrayerAlreadyExistsException("Phone '" + prayer.getPhone() + "' already exists in the ddbb"); 
-				
-			//Neither email or phone was found, so keep going with saving
-			} catch (PrayerNotFoundException ex) {
-				try {
-					//TODO: Parametrizar admin
-					//Add the prayer to the ddbb
-					dao.addNewPrayer(1, prayer.getName(), prayer.getEmail(), prayer.getPhone(), prayer.isOwnCountry(), 
-							prayer.getOptinDate(), prayer.getNotes(), prayer.isHidden(), prayer.getPseudonym());
-
-				} catch (PrayerNotFoundException e1) {
-					throw new RuntimeException("Something went really really wrong!!");
-				}
-			}
-		}
-	}
-
-	@Override
 	public void addTurn(int prayerId, SimpleTurn turn) throws PrayerNotFoundException, TurnAlreadyExistsException, TurnException {
 		
 		Prayer foundPrayer = getPrayerByID(prayerId);
@@ -83,29 +50,6 @@ public class MainService_Impl implements MainService {
 		dao.addNewTurn(prayerId, turn.getDow(), SimpleTurn.getHourByTurn(turn.getTurn()), "accepted", turn.getNotes(), turn.getPax());
 	}
 
-	@Override
-	public void removePrayer(int prayerId) throws PrayerNotFoundException, PrayerHasTurnsException {
-		
-		//If prayer doens't exists, then error
-		if (getPrayerByID(prayerId)==null){
-			throw new PrayerNotFoundException("That prayer uid (" + prayerId + " is not in the ddbb");
-		}
-		
-		//To see if that prayer has turns
-		List<SimpleTurn> prayerTurns = getPrayerTurns(prayerId);
-		
-		//If so, then it cannot be deleted, so we launch an error
-		if (prayerTurns==null | prayerTurns.size()>0){
-			throw new PrayerHasTurnsException("That prayer cannot be removed, since there are already " + prayerTurns.size() + " turns for him on the ddbb");
-		}
-
-		dao.removePrayer(prayerId);
-	}
-
-	@Override
-	public List<Prayer> getAllPrayers() throws DDBBException {
-		return dao.getAllPrayers();
-	}
 
 	@Override
 	public List<SimpleTurn> getAllActiveTurns() throws DDBBException {
@@ -117,68 +61,10 @@ public class MainService_Impl implements MainService {
 		return dao.getAllTurns();
 	}
 
-	@Override
-	public Prayer getPrayerByEmail(String email) throws PrayerNotFoundException {
-		if ("".equals(email)){
-			throw new PrayerNotFoundException("Can't search by email ''");
-		}
-		return dao.getPrayerByEmail(email);
-	}
 
 	@Override
 	public List<Prayer> getPrayersByName(String name) throws PrayerNotFoundException {
 		return dao.getPrayersByName(name);
-	}
-
-	@Override
-	public Prayer getPrayerByPhone(String phone) throws MoreThanOnePrayerException, PrayerNotFoundException, EmptyParameterException {
-		if ("".equals(phone) || phone == null){
-			throw new PrayerNotFoundException("Can't search for an empty phone string");
-		}
-		List<Prayer> foundPrayers = dao.getPrayersByPhone(phone);
-		if (foundPrayers.size()>1) {
-			throw new MoreThanOnePrayerException("That phone '" + phone + "' was found more than 1 time into the ddbb");
-		} else if(foundPrayers.size()<1)  {
-			throw new PrayerNotFoundException("No prayer found by phone '" + phone + "'");
-		}
-		return foundPrayers.get(0);
-	}
-
-	@Override
-	//Returns a list of prayers that are set as own_country=0
-	public List<Prayer> getForeignPrayers() throws PrayerNotFoundException {
-		try {
-			return dao.getForeignPrayers();
-		} catch (PrayerNotFoundException e){
-			return new ArrayList<Prayer>();
-		}
-	}
-
-	@Override
-	public List<Prayer> getLocalPrayers() throws PrayerNotFoundException {
-		try {
-			return dao.getLocalPrayers();
-		} catch (PrayerNotFoundException e){
-			return new ArrayList<Prayer>();
-		}
-	}
-
-	@Override
-	public List<Prayer> getHiddenPrayers(){
-		try {
-			return dao.getHiddenPrayers();
-		} catch (PrayerNotFoundException e){
-			return new ArrayList<Prayer>();
-		}
-	}
-
-	@Override
-	public List<Prayer> getPublicPrayers() throws PrayerNotFoundException {
-		try {
-			return dao.getPublicPrayers();
-		} catch (PrayerNotFoundException e){
-			return new ArrayList<Prayer>();
-		}
 	}
 
 	@Override
@@ -212,16 +98,6 @@ public class MainService_Impl implements MainService {
 		return dao.getWhatsappCandidates(dow, phoneMask);
 	}
 
-	@Override
-	public List<Prayer> getCommittedPrayers() {
-		return dao.getCommittedPrayers();
-	}
-
-	@Override
-	public List<Prayer> getNonCommittedPrayers() {
-		return dao.getNonCommittedPrayers();
-	}
-	
 	@Override
 	//We need to count the max number of pax on all turns prayed by the given prayer
 	//If we only sum all paxes in all turns for the given prayer, then If a prayer is praying
@@ -497,11 +373,6 @@ public class MainService_Impl implements MainService {
 		return dao.getPrayerByID(id);
 	}
 
-	@Override
-	public List<Prayer> getPrayersByPhone(String phone) throws PrayerNotFoundException, EmptyParameterException {
-		return dao.getPrayersByPhone(phone);
-	}
-	
 	//PRIVATE METHODS //PRIVATE METHODS //PRIVATE METHODS
 	
 	@SuppressWarnings("unused")
@@ -606,16 +477,6 @@ public class MainService_Impl implements MainService {
 	@Override
 	public List<Prayer> getPrayersByNotes(String notesMask) throws PrayerNotFoundException {
 		return dao.getPrayersByNotes(notesMask);
-	}
-
-	@Override
-	public SimpleTurn getTurnByID(int turnID) throws TurnException {
-		return dao.getTurnByID(turnID);
-	}
-
-	@Override
-	public void changeTurn(SimpleTurn turn) throws TurnException {
-		dao.changeTurn(turn.getUid(), turn.getDow(), SimpleTurn.getHourByTurn(turn.getTurn()), turn.getStatus().toString(), turn.getNotes());
 	}
 
 	@Override

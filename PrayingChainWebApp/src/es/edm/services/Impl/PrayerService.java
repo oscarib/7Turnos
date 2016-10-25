@@ -78,4 +78,14 @@ public class PrayerService implements IPrayerService {
 		return prayerDao.getPrayersByPhone(prayer);
 	}
 
+	@Override
+	public List<PrayerEntity> getPublicPrayers() {
+		return prayerDao.getPublicPrayers();
+	}
+
+	@Override
+	public List<PrayerEntity> getHiddenPrayers() {
+		return prayerDao.getHiddenPrayers();
+	}
+
 }
