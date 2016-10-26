@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.domain.middle.UsedTurns;
+import es.edm.services.Configuration;
 import es.edm.services.ITurnService;
 
 @Service
@@ -16,6 +18,9 @@ public class TurnService implements ITurnService {
 	
 	@Autowired
 	ITurnDao turnDao;
+	
+	@Autowired
+	Configuration conf;
 
 	@Override
 	public TurnEntity getTurnById(Integer uid) {
@@ -54,15 +59,25 @@ public class TurnService implements ITurnService {
 
 	@Override
 	public int getTotalTurns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 48 * 7 * conf.getPrayersPerTurn();
 	}
 
 	@Override
 	public int getUsedTurns() {
-		List<TurnEntity> turnos = turnDao.getTurns();
-		//TODO: Terminar esto
-		return 0;
+		//Suma agrupada de turnos por día
+		List<UsedTurns> usedTurns = turnDao.getUsedTurns();
+		int sumOfTurns = 0;
+		
+		//Si la suma por día es superior al máximo definido en configuración, sólo sumamos hasta esa cantidad
+		for (UsedTurns turn : usedTurns){
+			System.out.println(turn.getCountOfTurns());
+			if (turn.getCountOfTurns()>conf.getPrayersPerTurn()){
+				sumOfTurns += conf.getPrayersPerTurn();
+			} else {
+				sumOfTurns += turn.getCountOfTurns();
+			}
+		}
+		
+		return sumOfTurns;
 	}
-
 }

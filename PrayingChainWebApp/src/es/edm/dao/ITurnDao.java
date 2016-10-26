@@ -3,6 +3,7 @@ package es.edm.dao;
 import java.util.List;
 
 import es.edm.domain.entity.TurnEntity;
+import es.edm.domain.middle.UsedTurns;
 
 public interface ITurnDao {
 	
@@ -20,5 +21,5 @@ public interface ITurnDao {
 
 	public int getEmptyTurns();
 
-	public List<TurnEntity> getTurns();
+	public List<UsedTurns> getUsedTurns();
 }
