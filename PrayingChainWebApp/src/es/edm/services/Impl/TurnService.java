@@ -70,7 +70,7 @@ public class TurnService implements ITurnService {
 		
 		//Si la suma por día es superior al máximo definido en configuración, sólo sumamos hasta esa cantidad
 		for (UsedTurns turn : usedTurns){
-			System.out.println(turn.getCountOfTurns());
+
 			if (turn.getCountOfTurns()>conf.getPrayersPerTurn()){
 				sumOfTurns += conf.getPrayersPerTurn();
 			} else {
