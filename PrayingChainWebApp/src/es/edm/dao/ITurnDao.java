@@ -10,11 +10,7 @@ public interface ITurnDao {
 	
 	void updateTurn(TurnEntity turn);
 
-	public List<TurnEntity> getOrphanTurns();
-
-	public float getTotalRedundancy();
-
-	public float getCommittedRedundancy();
+	public float getRedundancyPercentage();
 
 	public float getEmptyTurnsPercentage();
 
@@ -24,7 +20,5 @@ public interface ITurnDao {
 
 	public int getEmptyTurns();
 
-	public int getTotalTurns();
-
-	public int getUsedTurns();
+	public List<TurnEntity> getTurns();
 }

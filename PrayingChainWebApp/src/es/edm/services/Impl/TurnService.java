@@ -28,18 +28,8 @@ public class TurnService implements ITurnService {
 	}
 
 	@Override
-	public List<TurnEntity> getOrphanTurns() {
-		return turnDao.getOrphanTurns(); 
-	}
-
-	@Override
-	public float getTotalRedundancy() {
-		return turnDao.getTotalRedundancy();
-	}
-
-	@Override
-	public float getCommittedRedundancy() {
-		return turnDao.getCommittedRedundancy();
+	public float getRedundancyPercentage() {
+		return turnDao.getRedundancyPercentage();
 	}
 
 	@Override
@@ -64,12 +54,15 @@ public class TurnService implements ITurnService {
 
 	@Override
 	public int getTotalTurns() {
-		return turnDao.getTotalTurns();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int getUsedTurns() {
-		return turnDao.getUsedTurns();
+		List<TurnEntity> turnos = turnDao.getTurns();
+		//TODO: Terminar esto
+		return 0;
 	}
 
 }

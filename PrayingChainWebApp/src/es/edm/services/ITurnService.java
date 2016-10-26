@@ -9,11 +9,7 @@ public interface ITurnService {
 	
 	void updateTurn(TurnEntity turn);
 	
-	List<TurnEntity> getOrphanTurns();
-	
-	float getTotalRedundancy();
-	
-	float getCommittedRedundancy();
+	float getRedundancyPercentage();
 	
 	float getEmptyTurnsPercentage();
 	

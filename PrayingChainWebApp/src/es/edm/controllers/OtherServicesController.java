@@ -78,13 +78,11 @@ public class OtherServicesController {
 		statistics.put("TurnsUsedPercentage", turnService.getTurnsUsedPercentage());
 		statistics.put("FreeTurnsPercentage", turnService.getFreeTurnsPercentage());
 		statistics.put("EmptyTurnsPercentage", turnService.getEmptyTurnsPercentage());
-		statistics.put("CommittedRedundancy", turnService.getCommittedRedundancy());
-		statistics.put("TotalRedundancy",  turnService.getTotalRedundancy());
+		statistics.put("TotalRedundancy",  turnService.getRedundancyPercentage());
 		statistics.put("HiddenPrayers", prayerService.getHiddenPrayers().size());
 		statistics.put("PublicPrayers",prayerService.getPublicPrayers().size());
 		statistics.put("ForeignPrayers", prayerService.getForeignPrayers().size());
 		statistics.put("LocalPrayers", prayerService.getLocalPrayers().size());
-		statistics.put("OrphanTurns", turnService.getOrphanTurns().size());
 		statistics.put("OrphanPrayers", prayerService.getOrphanPrayers().size()); //TODO: Crear vista para no tener que traerse todos los oradores y contarlos
 		
 		return statistics;

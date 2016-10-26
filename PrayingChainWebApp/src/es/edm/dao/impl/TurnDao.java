@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -17,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.util.TurnStatus;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -45,23 +45,7 @@ public class TurnDao implements ITurnDao {
 	}
 
 	@Override
-	public List<TurnEntity> getOrphanTurns() {
-		Session session = entityManager.unwrap(Session.class);
-		
-		Query query = session.createQuery("select turn from TurnEntity as turn left join turn.prayer as prayer where prayer.turns is empty");
-
-		return query.list();
-
-	}
-
-	@Override
-	public float getTotalRedundancy() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getCommittedRedundancy() {
+	public float getRedundancyPercentage() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -91,15 +75,14 @@ public class TurnDao implements ITurnDao {
 	}
 
 	@Override
-	public int getTotalTurns() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public List<TurnEntity> getTurns() {
+		Session session = entityManager.unwrap(Session.class);
 
-	@Override
-	public int getUsedTurns() {
-		// TODO Auto-generated method stub
-		return 0;
+		Criteria objCriteria = session.createCriteria(TurnEntity.class);
+
+		objCriteria.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
+
+		return objCriteria.list();
 	}
 
 
