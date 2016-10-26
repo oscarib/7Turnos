@@ -20,6 +20,4 @@ public interface ITurnDao {
 	public float getTurnsUsedPercentage();
 
 	public int getEmptyTurns();
-
-	public List<UsedTurns> getUsedTurns();
 }

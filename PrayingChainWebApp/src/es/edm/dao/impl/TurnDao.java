@@ -1,5 +1,6 @@
 package es.edm.dao.impl;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.UsedTurns;
 import es.edm.util.TurnStatus;
+import es.edm.util.TurnsOfDay;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -71,12 +73,17 @@ public class TurnDao implements ITurnDao {
 
 	@Override
 	public int getEmptyTurns() {
-		// TODO Auto-generated method stub
-		return 0;
+		int noDays = DayOfWeek.values().length;
+		int noTurns = TurnsOfDay.values().length;
+		List<UsedTurns> usedTurns = getUsedTurns();
+		for (int day = 0 ; day < noDays; day++){
+			for (int turn = 0; turn<noTurns; turn++){
+				
+			}
+		}
 	}
 
-	@Override
-	public List<UsedTurns> getUsedTurns() {
+	private List<UsedTurns> getUsedTurns() {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(UsedTurns.class);
