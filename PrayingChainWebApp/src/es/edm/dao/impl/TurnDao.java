@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.domain.middle.UsedTurns;
 import es.edm.util.TurnStatus;
 
 @Repository
@@ -75,12 +76,10 @@ public class TurnDao implements ITurnDao {
 	}
 
 	@Override
-	public List<TurnEntity> getTurns() {
+	public List<TurnEntity> getUsedTurns() {
 		Session session = entityManager.unwrap(Session.class);
 
-		Criteria objCriteria = session.createCriteria(TurnEntity.class);
-
-		objCriteria.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
+		Criteria objCriteria = session.createCriteria(UsedTurns.class);
 
 		return objCriteria.list();
 	}

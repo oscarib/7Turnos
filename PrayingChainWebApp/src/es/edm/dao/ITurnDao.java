@@ -20,5 +20,5 @@ public interface ITurnDao {
 
 	public int getEmptyTurns();
 
-	public List<TurnEntity> getTurns();
+	public List<TurnEntity> getUsedTurns();
 }
