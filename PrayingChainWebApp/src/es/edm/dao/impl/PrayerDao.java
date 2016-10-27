@@ -36,14 +36,7 @@ public class PrayerDao implements IPrayerDao {
 	public List<PrayerEntity> getPrayers() {
 		Session session = entityManager.unwrap(Session.class);
 
-		// "SELECT distinct edm_prayers.* FROM `edm_prayers` join edm_turns on
-		// edm_prayers.uid=edm_turns.prayer_id
-		// where edm_turns.status!='cancelled' AND
-		// edm_turns.status!='NotCommitted'";
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-
-		// Comentado para devolver toda la lista completa
-		// objCriteria.add(Restrictions.ne("turns.status",TurnStatus.cancelled)).add(Restrictions.ne("turns.status",TurnStatus.NotCommitted));
 
 		return objCriteria.list();
 	}
