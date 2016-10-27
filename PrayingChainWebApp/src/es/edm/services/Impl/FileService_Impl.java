@@ -16,6 +16,8 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.Selectors;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
@@ -23,6 +25,8 @@ import es.edm.services.FileService;
 public class FileService_Impl implements FileService {
 	
 	Configuration conf;
+	
+	private final static Logger logger = LoggerFactory.getLogger(FileService.class);
 	
 	FileService_Impl(Configuration conf){
 		this.conf = conf;
@@ -45,16 +49,13 @@ public class FileService_Impl implements FileService {
             try ( // Uploads file using an InputStream
                     InputStream inputStream = new FileInputStream(localFileName)) {
                 if (conf.isPrintFtpUpladingMessages()) {
-            		//TODO: Retirar System.out.println
-                    System.out.println("Uploading file to " + conf.getFtpServerName());
-            		//TODO: Retirar System.out.println
-                    System.out.println("\tLocal File URI is " + localFileName);
-            		//TODO: Retirar System.out.println
-                    System.out.println("\tRemote File URI is " + remoteFileName);
+                	logger.info("Uploading file to " + conf.getFtpServerName());
+                	logger.info("\tLocal File URI is " + localFileName);
+                	logger.info("\tRemote File URI is " + remoteFileName);
                 }   done = ftp.storeFile(remoteFileName, inputStream);
             }
             if (done && conf.isPrintFtpUpladingMessages()) {
-                System.out.println("\tThe file was uploaded successfully.");
+            	logger.info("\tThe file was uploaded successfully.");
             }
  
         } finally {
@@ -90,12 +91,9 @@ public class FileService_Impl implements FileService {
     		//Initializes the file manager
     		manager.init();
 
-    		//TODO: Remove System.out.println
-            System.out.println("Uploading file to "+ serverAddress);
-    		//TODO: Remove System.out.println
-            System.out.println("\tLocal File URI is " + localFileName);
-    		//TODO: Remove System.out.println
-            System.out.println("\tRemote File URI is " + remoteFileName);
+            logger.info("Uploading file to "+ serverAddress);
+            logger.info("\tLocal File URI is " + localFileName);
+            logger.info("\tRemote File URI is " + remoteFileName);
 
             //Setup our SFTP configuration
     		FileSystemOptions opts = new FileSystemOptions();
@@ -116,8 +114,7 @@ public class FileService_Impl implements FileService {
 
     		// Copy local file to sftp server
     		remoteFile.copyFrom(localFile, Selectors.SELECT_SELF);
-    		//TODO: Remove System.out.println
-            System.out.println("\tThe file was uploaded successfully.");
+            logger.info("\tThe file was uploaded successfully.");
 
     	} finally {
     		manager.close();

@@ -30,12 +30,11 @@
 			</div>
 		</div>
 		<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
-			<img class="loadingGifImg" ng-show="showLoadingStatistics"
-				src="./images/loadingGif.gif"> <span>Turnos
-				disponibles: {{AvailableTurns}}</span><br> <span>Turnos
-				cubiertos: {{UsedTurnsPerc}}%</span><br> <span>Comprometidos:
-				{{CommittedPrayers}}</span><br> <span>No comprometidos:
-				{{NonCommittedPrayers}}</span>
+			<img class="loadingGifImg" ng-show="showLoadingStatistics" src="./images/loadingGif.gif">
+			<span>Turnos disponibles: {{AvailableTurns}}</span><br>
+			<span>Dias cubiertos: {{DaysCovered}}</span><br>
+			<span>Oradores Comprometidos: {{CommittedPrayers}}</span><br>
+			<span>No comprometidos: {{NonCommittedPrayers}}</span>
 		</div>
 		<div id="headerSearchPrayer" class="col-lg-5 col-md-4 col-sm-3 col-xs-3" ng-show="EmptyTurns>0">
 			<input type="text" class="form-control" id="searchText" ng-model="vm.searchString"> 

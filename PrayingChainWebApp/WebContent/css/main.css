@@ -15,6 +15,39 @@ div#headerSearchPrayer img#magnifierIcon {
 	height: ;
 	width: 50%;
 }
+div#prayerData div.dataHeader {
+	background-color: #01B0D6;
+	color: #FFFFFF;
+}
+div#prayerData .row.rowBorder div {
+	height: 30px;
+	width: ;
+	padding-top: 3px;
+	border: 1px solid #017B96;
+	padding-left: 6px;
+}
+div#prayerData div.colSection {
+	padding-right: 30px;
+	padding-left: 11px;
+}
+div#prayerData div.groupHeader {
+	background-color: #007994;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-align: left;
+	height: 40px;
+	width: ;
+	margin-top: 15px;
+}
+div#prayerData {
+	margin-top: -5px !important;
+}
+div#prayerData div.row div.dataContainer {
+	border: 1px solid #01B0D6;
+}
+div#prayerData {
+	margin-top: 13px;
+}
 #newPrayer .row {
 	padding-bottom: 10px;
 }
