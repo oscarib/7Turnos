@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class PrayerDao implements IPrayerDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		objCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		return objCriteria.list();
 	}
