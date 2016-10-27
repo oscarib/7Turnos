@@ -56,6 +56,7 @@ public class TurnService implements ITurnService {
 
 	@Override
 	public int getEmptyTurns() {
+		//TODO: Damián:  Convertir esta mierda en una puta vista
 		int noDays = DayOfWeek.values().length;
 		int noTurns = TurnsOfDay.values().length;
 		int emptyTurns = 0;
@@ -111,6 +112,7 @@ public class TurnService implements ITurnService {
 	}
 
 	private boolean findTurn(String dow, String turn, List<UsedTurns> usedTurns){
+		//TODO: Damián: Eliminar esta mierda de código, creando una puta vista en mySQL
 		for (UsedTurns usedTurn : usedTurns){
 			String day2Evaluate = usedTurn.getDay().toString().toLowerCase();
 			String turn2Evaluate = usedTurn.getTurn().toString().toLowerCase();

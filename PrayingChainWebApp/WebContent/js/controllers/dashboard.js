@@ -14,11 +14,10 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     		$rootScope.EmptyTurns = dataOut.data.EmptyTurns;
     		$rootScope.TotalTurns = dataOut.data.TotalTurns;
     		$rootScope.TurnsCovered = dataOut.data.TurnsCovered;
-    		$rootScope.AvailableTurns = $rootScope.TotalTurns - $rootScope.TurnsCovered;
+    		$rootScope.AvailableTurns = dataOut.data.AvailableTurns;
+    		$rootScope.DaysCovered = dataOut.data.DaysCovered;
     		$rootScope.CommittedPrayers = dataOut.data.CommittedPrayers;
     		$rootScope.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
-    		$rootScope.Redundancy = dataOut.data.TotalRedundancy-100;
-    		$rootScope.UsedTurnsPerc = dataOut.data.TurnsUsedPercentage;
     		$rootScope.HiddenPrayers = dataOut.data.HiddenPrayers;
     		$rootScope.PublicPrayers = dataOut.data.PublicPrayers;
     		$rootScope.ForeignPrayers = dataOut.data.ForeignPrayers;
@@ -68,25 +67,18 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         
         //Coverage pie chart
         var labels= ["Cubiertos", "Vacíos"];
-        var pieChartData = [$rootScope.TurnsCovered, $rootScope.EmptyTurns];
+        var pieChartData = [$rootScope.DaysCovered, $rootScope.availableDays];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
 
         //availables Vs Total pie chart
         var labels= ["Cubiertos", "Disponibles"];
-        var pieChartData = [$rootScope.TurnsCovered,$rootScope.AvailableTurns];
+        var pieChartData = [$rootScope.UsedTurns,$rootScope.AvailableTurns];
         var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
         var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
         chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
         
-        //Redundancy: overoccupied
-        var labels= ["No Saturados", "Saturados"];
-        var pieChartData = [100,$rootScope.Redundancy];
-        var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
-        var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
-        chartService.setPieChart("redundancePieChart", labels, pieChartData, backgroundColor, borderColor);
-
         //Hidden Vs Public Prayers
         var labels= ["Públicos", "Anónimos"];
         var pieChartData = [$rootScope.PublicPrayers, $rootScope.HiddenPrayers];

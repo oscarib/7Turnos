@@ -79,10 +79,6 @@ public class OtherServicesController {
 		statistics.put("NonCommittedPrayers", nonCommittedPrayers);
 		int totalPrayers = committedPrayers+nonCommittedPrayers;
 		statistics.put("TotalPrayers", totalPrayers);
-		statistics.put("TurnsUsedPercentage", turnService.getTurnsUsedPercentage());
-		statistics.put("FreeTurnsPercentage", turnService.getFreeTurnsPercentage());
-		statistics.put("EmptyTurnsPercentage", turnService.getEmptyTurnsPercentage());
-		statistics.put("TotalRedundancy",  turnService.getRedundancyPercentage());
 		statistics.put("HiddenPrayers", prayerService.getHiddenPrayers().size());
 		statistics.put("PublicPrayers",prayerService.getPublicPrayers().size());
 		statistics.put("ForeignPrayers", prayerService.getForeignPrayers().size());
