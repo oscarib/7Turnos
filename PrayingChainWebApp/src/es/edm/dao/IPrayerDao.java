@@ -13,8 +13,6 @@ public interface IPrayerDao {
 	
 	List<PrayerEntity> getNonCommittedPrayers();
 	
-	List<PrayerEntity> getPrayersWithoutEmailButWithPhone();
-	
 	void addPrayer(PrayerEntity prayer);
 	
 	void removePrayer(PrayerEntity prayer);

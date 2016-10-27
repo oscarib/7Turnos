@@ -301,26 +301,22 @@ public class Configuration_XML_Impl implements Configuration{
 
 	@Override
 	public String getEmailServiceUserName() {
-		// TODO Auto-generated method stub
-		return null;
+		return EmailServiceUserName;
 	}
 
 	@Override
 	public String getEmailServiceUserPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return EmailServiceUserPassword;
 	}
 
 	@Override
 	public String getEmailServiceHostName() {
-		// TODO Auto-generated method stub
-		return null;
+		return EmailServiceHostName;
 	}
 
 	@Override
 	public int getEmailServiceSmtpPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return EmailServiceSmtpPort;
 	}
 
 	@Override

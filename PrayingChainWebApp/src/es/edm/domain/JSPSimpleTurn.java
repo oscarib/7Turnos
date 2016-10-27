@@ -19,7 +19,6 @@ public class JSPSimpleTurn {
 		this.uid = Integer.toString(turn.getUid());
 		this.prayer_id = Integer.toString(turn.getPrayer_id());
 		this.dow = turn.getDow().toString();
-		//TODO: Substitute the turn String by and internationalized one
 		this.turn = SimpleTurn.getHourByTurn(turn.getTurn());
 		this.turnInt = turn.getTurn();
 		this.status = turn.getStatus().toString();

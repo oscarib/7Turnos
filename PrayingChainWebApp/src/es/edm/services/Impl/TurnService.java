@@ -35,28 +35,8 @@ public class TurnService implements ITurnService {
 	}
 
 	@Override
-	public float getRedundancyPercentage() {
-		return turnDao.getRedundancyPercentage();
-	}
-
-	@Override
-	public float getEmptyTurnsPercentage() {
-		return turnDao.getEmptyTurnsPercentage();
-	}
-
-	@Override
-	public float getFreeTurnsPercentage() {
-		return turnDao.getFreeTurnsPercentage();
-	}
-
-	@Override
-	public float getTurnsUsedPercentage() {
-		return turnDao.getTurnsUsedPercentage();
-	}
-
-	@Override
 	public int getEmptyTurns() {
-		//TODO: Damián:  Convertir esta mierda en una puta vista
+		//TODO: Eliminar este algoritmo y en su lugar crear una vista en MySQL
 		int noDays = DayOfWeek.values().length;
 		int noTurns = TurnsOfDay.values().length;
 		int emptyTurns = 0;
@@ -112,7 +92,7 @@ public class TurnService implements ITurnService {
 	}
 
 	private boolean findTurn(String dow, String turn, List<UsedTurns> usedTurns){
-		//TODO: Damián: Eliminar esta mierda de código, creando una puta vista en mySQL
+		//TODO: Eliminar este algoritmo y en su lugar crear una vista en MySQL
 		for (UsedTurns usedTurn : usedTurns){
 			String day2Evaluate = usedTurn.getDay().toString().toLowerCase();
 			String turn2Evaluate = usedTurn.getTurn().toString().toLowerCase();

@@ -9,14 +9,6 @@ public interface ITurnService {
 	
 	void updateTurn(TurnEntity turn);
 	
-	float getRedundancyPercentage();
-	
-	float getEmptyTurnsPercentage();
-	
-	float getFreeTurnsPercentage();
-	
-	float getTurnsUsedPercentage();
-	
 	int getEmptyTurns();
 	
 	int getTotalTurns();
