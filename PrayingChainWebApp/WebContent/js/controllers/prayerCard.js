@@ -4,26 +4,15 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	var self = this;
 	
 	function inicializarDatos(data){
-		self.prayerID = 1089;
-		self.prayerName = "Oscar";
-		self.prayerEmail = "oscar.ibafer@gmail.com";
-		self.prayerCountry = "Sí";
-		self.prayerVisibility = "No";
-		self.prayerPhone = "+34.696.95.35.87";
-		self.prayerPseudonym = "Oscar";
-		self.turns = [];
-		var turn1 = {};
-		turn1.id = 1089;
-		turn1.day = "Lunes";
-		turn1.hour = "20:00";
-		turn1.status = "Aceptado";
-		self.turns.push(turn1);
-		var turn2 = {};
-		turn2.id = 1090;
-		turn2.day = "Martes";
-		turn2.hour = "21:00";
-		turn2.status = "Cancelado";
-		self.turns.push(turn2);
+		self.prayerID = data.Prayer.uid;
+		self.prayerName = data.Prayer.name
+		self.prayerEmail = data.Prayer.email
+		self.prayerCountry = data.Prayer.ownCountry ? "X" : "";
+		self.prayerVisibility = data.Prayer.hidden ? "" : "X";
+		self.prayerPhone = data.Prayer.phone;
+		self.prayerPseudonym = data.Prayer.pseudonym;
+		self.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
+		self.turns = data.turns;
 	};
 	
 	function getPrayerAndTurns(){
@@ -36,7 +25,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 			promise.then(function(dataOut) {
 				inicializarDatos(dataOut.data);
 			}, function(error) {
-				bootbox.alert({size:'small', message: 'Hubo un error al tratar de solicitar los datos del orador'});
+				bootbox.alert({size:'small', message: 'Hubo un error al tratar de solicitar los datos del orador de n.' + prayerID});
 			}).finally(function(){
 			});
 

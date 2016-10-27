@@ -3,8 +3,10 @@ package es.edm.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -106,10 +108,16 @@ public class PrayerController {
 		return error;
 	}	
 	
-/*	@RequestMapping(path="/getPrayerAndTurns.do", method=RequestMethod.POST)
+	@RequestMapping(path="/getPrayerAndTurns.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Object getPrayerAndTurns() throws IOException, DDBBException{
-		
+	public Map<String,Object> getPrayerAndTurns(@RequestBody int prayerID) throws IOException, DDBBException{
+		PrayerEntity prayer = prayerService.getPrayer(prayerID);
+		if (prayer==null) throw new RuntimeException("El orador con ID n." + prayerID + " no existe en la base de datos");
+		List<TurnEntity> turns = prayer.getTurns();
+		Map<String, Object> result = new HashMap<String,Object>();
+		result.put("Prayer", prayer);
+		if (turns!=null) result.put("turns", turns);
+		return result;
 	}
-*/
+
 }

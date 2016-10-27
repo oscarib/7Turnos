@@ -34,11 +34,6 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public List<PrayerEntity> getPrayersWithoutEmailButWithPhone() {
-		return prayerDao.getPrayersWithoutEmailButWithPhone();
-	}
-
-	@Override
 	public void addPrayer(PrayerEntity prayer) {
 		prayerDao.addPrayer(prayer);
 	}
@@ -91,6 +86,11 @@ public class PrayerService implements IPrayerService {
 	@Override
 	public List<PrayerEntity> getOrphanPrayers() {
 		return prayerDao.getOrphanPrayers();
+	}
+
+	@Override
+	public PrayerEntity getPrayer(int prayerID) {
+		return prayerDao.getPrayerByID(prayerID);
 	}
 
 }

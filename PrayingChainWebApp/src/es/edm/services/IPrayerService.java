@@ -13,8 +13,6 @@ public interface IPrayerService {
 	
 	List<PrayerEntity> getNonCommittedPrayers();
 	
-	List<PrayerEntity> getPrayersWithoutEmailButWithPhone();
-	
 	void addPrayer(PrayerEntity prayer);
 	
 	void removePrayer(PrayerEntity prayer);
@@ -36,4 +34,6 @@ public interface IPrayerService {
 	List<PrayerEntity> find(PrayerEntity prayer);
 	
 	List<PrayerEntity> getOrphanPrayers();
+	
+	PrayerEntity getPrayer(int prayerID);
 }

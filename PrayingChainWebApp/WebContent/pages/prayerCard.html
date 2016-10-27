@@ -77,13 +77,13 @@
 			</div>
 			<div ng-repeat="turn in vm.turns" class="row rowBorder">
 				<div class="dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{turn.id}}</span>
+					<span>{{turn.uid}}</span>
 				</div>
 				<div class="dataContainer col-lg-3 col-md-3 col-sm-3 col-xs-3">
-					<span>{{turn.day}}</span>
+					<span>{{turn.dow}}</span>
 				</div>
 				<div class="dataContainer col-lg-3 col-md-3 col-sm-3 col-xs-3">
-					<span>{{turn.hour}}</span>
+					<span>{{turn.turn}}</span>
 				</div>
 				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<span>{{turn.status}}</span>
@@ -98,12 +98,7 @@
 			</div>
 			<div class="row">
 				<div class="dataContainer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>Lorem ipsum dolor sit amet, consectetur adipiscing
-						elit. Duis a porttitor leo. Morbi malesuada vitae ex eget
-						sagittis. Nullam quis metus et leo tristique auctor. Quisque a
-						ipsum sit amet sapien ultrices imperdiet. Duis venenatis ut quam
-						id pulvinar. Suspendisse sit amet lorem sit amet sem dignissim
-						mollis.</span>
+					<span>{{vm.notes}}</span>
 				</div>
 			</div>
 		</div>	
