@@ -1,5 +1,6 @@
 package es.edm.services.Impl;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.UsedTurns;
 import es.edm.services.Configuration;
 import es.edm.services.ITurnService;
+import es.edm.util.TurnsOfDay;
 
 @Service
 @Transactional
@@ -54,7 +56,20 @@ public class TurnService implements ITurnService {
 
 	@Override
 	public int getEmptyTurns() {
-		return turnDao.getEmptyTurns();
+		int noDays = DayOfWeek.values().length;
+		int noTurns = TurnsOfDay.values().length;
+		int emptyTurns = 0;
+		List<UsedTurns> usedTurns = turnDao.getUsedTurns();
+		for (int day = 0 ; day < noDays; day++){
+			for (int turn = 0; turn<noTurns; turn++){
+				String day2Evaluate = DayOfWeek.values()[(day)].toString().toLowerCase();
+				String turn2Evaluate = TurnsOfDay.values()[turn].toString().toLowerCase();
+				if (!findTurn(day2Evaluate, turn2Evaluate, usedTurns)){
+					emptyTurns++;
+				}
+			}
+		}
+		return emptyTurns;
 	}
 
 	@Override
@@ -79,5 +94,30 @@ public class TurnService implements ITurnService {
 		}
 		
 		return sumOfTurns;
+	}
+	
+	@Override
+	public int getDaysCovered() {
+		//Suma agrupada de turnos por día
+		List<UsedTurns> usedTurns = turnDao.getUsedTurns();
+		int sumOfTurns = 0;
+		
+		//Si la suma por día es superior al máximo definido en configuración, sólo sumamos hasta esa cantidad
+		for (UsedTurns turn : usedTurns){
+			sumOfTurns++;
+		}
+		
+		return sumOfTurns;
+	}
+
+	private boolean findTurn(String dow, String turn, List<UsedTurns> usedTurns){
+		for (UsedTurns usedTurn : usedTurns){
+			String day2Evaluate = usedTurn.getDay().toString().toLowerCase();
+			String turn2Evaluate = usedTurn.getTurn().toString().toLowerCase();
+			if (day2Evaluate.equals(dow) && turn2Evaluate.equals(turn)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

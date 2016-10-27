@@ -72,18 +72,7 @@ public class TurnDao implements ITurnDao {
 	}
 
 	@Override
-	public int getEmptyTurns() {
-		int noDays = DayOfWeek.values().length;
-		int noTurns = TurnsOfDay.values().length;
-		List<UsedTurns> usedTurns = getUsedTurns();
-		for (int day = 0 ; day < noDays; day++){
-			for (int turn = 0; turn<noTurns; turn++){
-				
-			}
-		}
-	}
-
-	private List<UsedTurns> getUsedTurns() {
+	public List<UsedTurns> getUsedTurns() {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(UsedTurns.class);

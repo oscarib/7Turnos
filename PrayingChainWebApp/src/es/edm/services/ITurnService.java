@@ -22,4 +22,7 @@ public interface ITurnService {
 	int getTotalTurns();
 	
 	int getUsedTurns();
+
+	int getDaysCovered();
+
 }

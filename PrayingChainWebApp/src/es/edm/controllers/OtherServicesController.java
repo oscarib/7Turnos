@@ -63,12 +63,16 @@ public class OtherServicesController {
 		
 		statistics = new HashMap<String, Object>();
 		int totalTurns = turnService.getTotalTurns();
-		int TurnsCovered = turnService.getUsedTurns();
+		int daysCovered = turnService.getDaysCovered();
+		int usedTurns = turnService.getUsedTurns();
 		statistics.put("TotalTurns", totalTurns);
-		statistics.put("TurnsCovered", TurnsCovered);
-		int availableTurns = totalTurns-TurnsCovered;
+		int availableTurns = totalTurns-usedTurns;
+		int availableDays = (totalTurns/conf.getPrayersPerTurn())-daysCovered;
 		statistics.put("AvailableTurns", availableTurns);
 		statistics.put("EmptyTurns", turnService.getEmptyTurns());
+		statistics.put("UsedTurns", usedTurns);
+		statistics.put("DaysCovered", daysCovered);
+		statistics.put("availableDays", availableDays);
 		int committedPrayers = prayerService.getCommittedPrayers().size();
 		int nonCommittedPrayers = prayerService.getPrayers().size() - committedPrayers;
 		statistics.put("CommittedPrayers", committedPrayers);
