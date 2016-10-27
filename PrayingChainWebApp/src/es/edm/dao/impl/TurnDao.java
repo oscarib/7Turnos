@@ -48,30 +48,6 @@ public class TurnDao implements ITurnDao {
 	}
 
 	@Override
-	public float getRedundancyPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getEmptyTurnsPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getFreeTurnsPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getTurnsUsedPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<UsedTurns> getUsedTurns() {
 		Session session = entityManager.unwrap(Session.class);
 

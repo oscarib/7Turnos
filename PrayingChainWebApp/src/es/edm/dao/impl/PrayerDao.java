@@ -63,6 +63,7 @@ public class PrayerDao implements IPrayerDao {
 		return objCriteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<PrayerEntity> getNonCommittedPrayers() {
 		Session session = entityManager.unwrap(Session.class);
@@ -75,30 +76,8 @@ public class PrayerDao implements IPrayerDao {
 		objCriteria.add(Restrictions.ne("turns.status", TurnStatus.cancelled))
 				.add(Restrictions.eq("turns.status", TurnStatus.NotCommitted));
 
-		return objCriteria.list();
-	}
-
-	@Override
-	public List<PrayerEntity> getPrayersWithoutEmailButWithPhone() {
-		Session session = entityManager.unwrap(Session.class);
-
-		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-		// "select edm_prayers.name, edm_prayers.phone, edm_prayers.notes as
-		// NotasOrador, edm_prayers.hidden,
-		// edm_prayers.pseudonym, edm_turns.day, edm_turns.hour, edm_turns.notes
-		// as "
-		// + "NotasTurno from edm_prayers join edm_turns on
-		// edm_prayers.uid=edm_turns.prayer_id
-		// where edm_turns.status!='Cancelled' and edm_prayers.email IS NULL and
-		// edm_prayers.phone Like "
-		// + "CONCAT('%?%')";
-
-		// TODO comprobar si isNotNull es válido o hay que usar like o
-		// isNotEmpty
-		objCriteria.add(Restrictions.ne("turns.status", TurnStatus.cancelled)).add(Restrictions.isNull("email"))
-				.add(Restrictions.isNotNull("phone"));
-
-		return objCriteria.list();
+		List<PrayerEntity> list = objCriteria.list();
+		return list;
 	}
 
 	@Override

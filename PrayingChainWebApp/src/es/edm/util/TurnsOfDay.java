@@ -1,5 +1,5 @@
 package es.edm.util;
-
+//TODO: Eliminar los enumerados de toda la aplicación
 public enum TurnsOfDay {
 	AM_00_00("00:00am"), AM_00_30("00:30am"),
 	AM_01_00("01:00am"), AM_01_30("01:30am"),
