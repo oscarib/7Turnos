@@ -28,8 +28,6 @@ public interface MainService {
 	public Prayer getPrayerByID(int id) throws PrayerNotFoundException;
 	public List<Prayer> getPrayersByNotes(String notesMask) throws PrayerNotFoundException;
 	public boolean isTurnPrayedByPrayer(int prayerID, DayOfWeek dow, int turn) throws TurnException;
-	public List<Prayer> getHiddenPrayers() throws PrayerNotFoundException;
-	public List<Prayer> getPublicPrayers() throws PrayerNotFoundException;
 	public List<Prayer> getPrayersBetween(DateTime fromDate, DateTime toDate) throws DataTimeException, PrayerNotFoundException;
 	public List<SimpleTurn> getOrphanTurns(); //Search for orphan turns
 	public List<Prayer> getOrphanPrayers(); //Search for orphan prayers (no related turn at all)

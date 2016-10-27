@@ -47,7 +47,7 @@ public class TurnEntity {
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "prayer_id")
-	@JsonManagedReference //Para evitar que la serialización a JSON entre en un bucle infinito
+	@JsonManagedReference //Para evitar que la serializaciï¿½n a JSON entre en un bucle infinito
 	private PrayerEntity prayer;
 
 	/**

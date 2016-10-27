@@ -69,7 +69,12 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<bean id="entityManager"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="DataSource" />
-		<property name="packagesToScan" value="es.edm.domain.entity" />
+		<property name="packagesToScan">
+			<array>
+				<value>es.edm.domain.entity</value>
+				<value>es.edm.domain.middle</value>
+			</array> 
+		</property>
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

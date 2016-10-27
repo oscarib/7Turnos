@@ -1,5 +1,8 @@
 package es.edm.dao.impl;
 
+import java.time.DayOfWeek;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.domain.middle.UsedTurns;
+import es.edm.util.TurnStatus;
+import es.edm.util.TurnsOfDay;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -39,6 +45,39 @@ public class TurnDao implements ITurnDao {
 	@Override
 	public void updateTurn(TurnEntity turn) {
 		entityManager.persist(turn);
+	}
+
+	@Override
+	public float getRedundancyPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getEmptyTurnsPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getFreeTurnsPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTurnsUsedPercentage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<UsedTurns> getUsedTurns() {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(UsedTurns.class);
+
+		return objCriteria.list();
 	}
 
 

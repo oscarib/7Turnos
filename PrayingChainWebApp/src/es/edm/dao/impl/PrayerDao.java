@@ -219,9 +219,7 @@ public class PrayerDao implements IPrayerDao {
 	public List<PrayerEntity> getOrphanPrayers() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		//"SELECT edm_prayers.* FROM edm_prayers LEFT JOIN edm_turns ON edm_prayers.uid = edm_turns.prayer_id WHERE edm_turns.uid IS NULL"
-		Query query = session.createQuery("from PrayerEntity LEFT JOIN edm_turns ON PrayerEntity = TurnEntity.prayer WHERE TurnEnity.uid IS NULL");
-
+		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null");
 
 		return query.list();
 	}
@@ -245,6 +243,28 @@ public class PrayerDao implements IPrayerDao {
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		
 		objCriteria.add(Restrictions.eq("phone", prayer.getPhone()));
+		
+		return objCriteria.list();
+	}
+
+	@Override
+	public List<PrayerEntity> getPublicPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria.add(Restrictions.eq("hidden", false));
+		
+		return objCriteria.list();
+	}
+
+	@Override
+	public List<PrayerEntity> getHiddenPrayers() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria.add(Restrictions.eq("hidden", true));
 		
 		return objCriteria.list();
 	}
