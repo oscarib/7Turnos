@@ -7,7 +7,6 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         var prayerList = prayerServices.getPrayerList();
         prayerList.then(function(dataOut){
         	self.tableParams = new NgTableParams({}, { dataset: dataOut.data});
-            self.tableParams.filter({ $: "Oscar" })
         }, function(error) {
         	if (!errorWithServiceCall){
         		errorWithServiceCall = true;
