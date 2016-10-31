@@ -1,17 +1,15 @@
 package es.edm.services.Impl;
 
-import java.time.DayOfWeek;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.UsedTurns;
 import es.edm.services.Configuration;
 import es.edm.services.ITurnService;
+import es.edm.util.DayOfWeek;
 import es.edm.util.TurnsOfDay;
 
 @Service

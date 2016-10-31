@@ -21,12 +21,12 @@ public class UsedTurns implements Serializable{
 	private static final long serialVersionUID = 1113036870663039268L;
 
 	@Column
-	@Enumerated(EnumType.STRING)
-	DayOfWeek day;
+	int countOfTurns;
 
 	@Id
 	@Column
-	int countOfTurns;
+	@Enumerated(EnumType.STRING)
+	DayOfWeek day;
 
 	@Id
 	@Column
@@ -78,6 +78,4 @@ public class UsedTurns implements Serializable{
 		result = prime * result + ((turn == null) ? 0 : turn.hashCode());
 		return result;
 	}
-	
-	
 }
