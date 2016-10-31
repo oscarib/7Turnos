@@ -21,7 +21,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="enoughPrayersForWhatsappGroupWarning" value="true"/>
 		<property name="minimumNumberOfPrayersForWhatsappGroups" value="5"/>
 		<property name="showPrayerNamesOnCalendar" value="true"/> <!-- To show or not prayer pseudonym on calendar -->
-		<property name="prayersPerTurn" value="3"/>
+		<property name="prayersPerTurn" value="5"/>
 
 		<!-- FTP Configuration -->
 		<property name="ftpServerName" value="localhost"/>
