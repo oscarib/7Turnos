@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', function(prayerServices, $location, prayerServices) {
+PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', '$routeParams', function(prayerServices, $location, prayerServices, $routeParams) {
 	var self = this;
 	
 	function inicializarDatos(data){
@@ -16,8 +16,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	};
 	
 	function getPrayerAndTurns(){
-		var locationParams = $location.search();
-		var prayerID = locationParams.prayerID;
+		var prayerID = $routeParams.prayerID;
 		if (!prayerID) {
 			bootbox.alert({size:'small', message: 'Esta página debe ser solicitada adjuntando el ID de un orador'});
 		} else {

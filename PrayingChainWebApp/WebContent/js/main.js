@@ -22,7 +22,7 @@ PrayingChain.config(function($routeProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/upload.html"
 			})
-			.when("/fichaOrador",{
+			.when("/oradores/:prayerID",{
 				controller: "prayerCard",
 				controllerAs: "vm",
 				templateUrl: "pages/prayerCard.html"

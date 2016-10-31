@@ -403,3 +403,7 @@ div.menu-item.col-xs-12 {
 	margin-bottom: 38px;
 	margin-top: 34px;
 }
+
+td.iconColumn {
+    width: 30px;
+}
