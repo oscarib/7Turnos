@@ -11,11 +11,13 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
     		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
+    		$rootScope.UsedTurns = dataOut.data.UsedTurns;
     		$rootScope.EmptyTurns = dataOut.data.EmptyTurns;
     		$rootScope.TotalTurns = dataOut.data.TotalTurns;
     		$rootScope.TurnsCovered = dataOut.data.TurnsCovered;
     		$rootScope.AvailableTurns = dataOut.data.AvailableTurns;
     		$rootScope.DaysCovered = dataOut.data.DaysCovered;
+    		$rootScope.availableDays = dataOut.data.availableDays;
     		$rootScope.CommittedPrayers = dataOut.data.CommittedPrayers;
     		$rootScope.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
     		$rootScope.HiddenPrayers = dataOut.data.HiddenPrayers;
@@ -66,7 +68,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         chartService.setPieChart("chartCommitted", labels, pieChartData, backgroundColor, borderColor);
         
         //Coverage pie chart
-        var labels= ["Cubiertos", "Vacíos"];
+        var labels= ["No Vacíos", "Vacíos"];
         var pieChartData = [$rootScope.DaysCovered, $rootScope.availableDays];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
