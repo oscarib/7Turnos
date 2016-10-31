@@ -64,7 +64,7 @@ public class PrayerController {
 			//Comprobamos si existe ese teléfono
 			List<PrayerEntity> foundPrayers = new ArrayList<PrayerEntity>();
 			foundPrayers = prayerService.getPrayersByPhone(interPrayer);
-			if (foundPrayers.size()==0){
+			if (foundPrayers.size()==0 || newPrayerAndTurn.getEmail()!=null){
 
 				//Creación del orador
 				PrayerEntity newPrayer = new PrayerEntity();
