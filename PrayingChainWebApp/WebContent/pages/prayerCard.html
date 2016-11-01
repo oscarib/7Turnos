@@ -114,9 +114,9 @@
 					<span>{{turn.status}}</span>
 				</div>
 				<div class="{{turn.status}} iconHeader dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<img ng-show="!vm.editing" ng-click="vm.editPrayer()" src="./images/edit.svg" alt="Edit Prayer" height="24" width="24">
-					<img ng-show="vm.editing" ng-click="vm.saveChanges()" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
-					<img ng-show="vm.editing" ng-click="vm.cancelEditing()" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
+					<img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.editTurn(turn.uid)" src="./images/edit.svg" alt="Edit Turn" height="24" width="24">
+					<img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.saveTurnChanges(turn.uid)" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
+					<img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.cancelEditingTurn(turn.uid)" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
 				</div>
 			</div>
 		</div>
