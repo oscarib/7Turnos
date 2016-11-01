@@ -4,19 +4,21 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	var self = this;
 	
 	function inicializarDatos(data){
-		self.prayerID = data.Prayer.uid;
-		self.prayerName = data.Prayer.name
-		self.prayerEmail = data.Prayer.email
-		self.prayerCountry = data.Prayer.ownCountry ? "Sí" : "No";
-		self.prayerVisibility = data.Prayer.hidden ? "Sí" : "No";
-		self.prayerPhone = data.Prayer.phone;
-		self.prayerPseudonym = data.Prayer.pseudonym;
-		self.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
+		self.prayer = {};
+		self.prayer.uid = data.Prayer.uid;
+		self.prayer.name = data.Prayer.name;
+		self.prayer.email = data.Prayer.email
+		self.prayer.country = data.Prayer.ownCountry ? "Sí" : "No";
+		self.prayer.visibility = data.Prayer.hidden ? "Sí" : "No";
+		self.prayer.phone = data.Prayer.phone;
+		self.prayer.pseudonym = data.Prayer.pseudonym;
+		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
+		self.prayer.dayOfWeek = inicializarDias();
+		self.unchangedPrayer = angular.copy(self.prayer);
 		self.turns = data.turns;
 		self.editing = false;
 		self.editingTurn = [];
 		self.creatingNewTurn = false;
-		self.DayOfWeek = inicializarDias();
 		self.turnos = inicializarTurnos();
 		self.status = inicializarStatus();
 		self.alreadyANew = false;
@@ -38,6 +40,14 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 
 		}
 	};
+	
+	function prayerHasChanged(){
+		if (JSON.stringify(self.prayer) !== JSON.stringify(self.unchangedPrayer)){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	function inicializarDias(){
 		var dias = [];
@@ -175,12 +185,17 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	};
 	
 	self.cancelEditing = function(){
-		//TODO: Implementar
 		self.editing = false;
+		self.prayer = angular.copy(self.unchangedPrayer);
 	};
 	
 	self.saveChanges = function(){
-		//TODO: Implementar
+		if (prayerHasChanged()){
+			bootbox.alert({size:'small', message: 'Falta hacer que se graben los datos cambiados'});
+			self.unchangedPrayer = angular.copy(self.prayer);
+		} else {
+			bootbox.alert({size:'small', message: 'No hubo cambios. No hace falta grabar nada'});
+		}
 		self.editing = false;
 	};
 	

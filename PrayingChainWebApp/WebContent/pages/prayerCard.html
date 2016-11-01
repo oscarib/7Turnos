@@ -24,15 +24,15 @@
 			</div>
 			<div class="row rowBorder">
 				<div class="dataContainer col-lg-1 col-md-2 col-sm-1 col-xs-2">
-					<span>{{vm.prayerID}}</span>
+					<span>{{vm.prayer.uid}}</span>
 				</div>
 				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayerName}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayerName">
+					<span ng-show="!vm.editing">{{vm.prayer.name}}</span>
+					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.name">
 				</div>
 				<div class="dataContainer col-lg-7 col-md-6 col-sm-7 col-xs-6">
-					<span ng-show="!vm.editing">{{vm.prayerEmail}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayerEmail">
+					<span ng-show="!vm.editing">{{vm.prayer.email}}</span>
+					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.email">
 				</div>
 			</div>
 			<div class="row rowBorder">
@@ -50,27 +50,27 @@
 				</div>
 			</div>
 			<div class="row rowBorder">
-				<div class="{{vm.prayerCountry == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span ng-show="!vm.editing" >{{vm.prayerCountry}}</span>
-					<select ng-show="vm.editing" ng-model="vm.prayerCountry">
+				<div class="{{vm.prayer.country == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<span ng-show="!vm.editing" >{{vm.prayer.country}}</span>
+					<select ng-show="vm.editing" ng-model="vm.prayer.country">
 					  <option value="Sí">Sí</option>
 					  <option value="No">No</option>
 					</select>
 				</div>
-				<div class="{{vm.prayerVisibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span ng-show="!vm.editing" >{{vm.prayerVisibility}}</span>
-					<select ng-show="vm.editing" ng-model="vm.prayerVisibility">
+				<div class="{{vm.prayer.visibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<span ng-show="!vm.editing" >{{vm.prayer.visibility}}</span>
+					<select ng-show="vm.editing" ng-model="vm.prayer.visibility">
 					  <option value="Sí">Sí</option>
 					  <option value="No">No</option>
 					</select>
 				</div>
 				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayerPhone}}</span>
-					<input ng-show="vm.editing" class="editing" type="text" ng-model="vm.prayerPhone">
+					<span ng-show="!vm.editing">{{vm.prayer.phone}}</span>
+					<input ng-show="vm.editing" class="editing" type="text" ng-model="vm.prayer.phone">
 				</div>
 				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayerPseudonym}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayerPseudonym">
+					<span ng-show="!vm.editing">{{vm.prayer.pseudonym}}</span>
+					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.pseudonym">
 				</div>
 			</div>
 			<div class="row rowBorder">
@@ -137,7 +137,8 @@
 			</div>
 			<div class="row">
 				<div class="dataContainer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>{{vm.notes}}</span>
+					<span ng-show="!vm.editing" >{{vm.prayer.notes}}</span>
+					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.notes">
 				</div>
 			</div>
 		</div>	
