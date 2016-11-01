@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+div.dataContainer {
+	word-wrap: break-word;
+}
 div#headerSearchPrayer img#magnifierIcon {
 	cursor: pointer;
 }
@@ -16,34 +19,48 @@ div#headerSearchPrayer img#magnifierIcon {
 	width: 50%;
 }
 div#prayerData div.dataHeader {
-	background-color: #01B0D6;
+	background-color: #939393;
 	color: #FFFFFF;
 }
 div#prayerData .row.rowBorder div {
-	height: 30px;
-	width: ;
 	padding-top: 3px;
-	border: 1px solid #017B96;
+	border: 1px solid #000000;
 	padding-left: 6px;
+	min-height: 30px;
 }
 div#prayerData div.colSection {
 	padding-right: 30px;
 	padding-left: 11px;
 }
 div#prayerData div.groupHeader {
-	background-color: #007994;
+	background-color: #084156;
 	color: #FFFFFF;
 	font-weight: normal;
 	text-align: left;
-	height: 40px;
-	width: ;
 	margin-top: 15px;
+}
+div.dataContainer.Red {
+	background-color: #D9B5A4;
 }
 div#prayerData {
 	margin-top: -5px !important;
 }
 div#prayerData div.row div.dataContainer {
-	border: 1px solid #01B0D6;
+	border: 1px solid #000000;
+	min-height: 30px;
+}
+div.row .cancelled {
+	color: #B7B7B7;
+	font-weight: normal;
+	font-style: normal;
+	background-color: #DFDFDF;
+}
+div.row .NotCommitted {
+	background-color: #DFDFDF;
+	color: #827B7B;
+}
+div.dataContainer.Green {
+	background-color: #ABD6C8;
 }
 div#prayerData {
 	margin-top: 13px;
@@ -403,7 +420,6 @@ div.menu-item.col-xs-12 {
 	margin-bottom: 38px;
 	margin-top: 34px;
 }
-
 td.iconColumn {
-    width: 30px;
+	width: 30px;
 }

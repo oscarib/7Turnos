@@ -7,8 +7,10 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayerID = data.Prayer.uid;
 		self.prayerName = data.Prayer.name
 		self.prayerEmail = data.Prayer.email
-		self.prayerCountry = data.Prayer.ownCountry ? "X" : "";
-		self.prayerVisibility = data.Prayer.hidden ? "" : "X";
+		self.prayerCountry = data.Prayer.ownCountry ? "Sí" : "No";
+		self.prayerCountryClass = self.prayerCountry == "Sí" ? "Green" : "Red";
+		self.prayerVisibility = data.Prayer.hidden ? "Sí" : "No";
+		self.prayerVisibilityClass = self.prayerVisibility == "Sí" ? "Red" : "Green";
 		self.prayerPhone = data.Prayer.phone;
 		self.prayerPseudonym = data.Prayer.pseudonym;
 		self.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
