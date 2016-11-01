@@ -77,8 +77,8 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         //availables Vs Total pie chart
         var labels= ["Cubiertos", "Disponibles"];
         var pieChartData = [$rootScope.UsedTurns,$rootScope.AvailableTurns];
-        var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
-        var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
+        var borderColor = ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'];
+        var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
         
         //Hidden Vs Public Prayers
@@ -91,8 +91,8 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         //Hidden Vs Public Prayers
         var labels= ["España", "Otro País"];
         var pieChartData = [$rootScope.LocalPrayers, $rootScope.ForeignPrayers];
-        var borderColor = ['rgba(80, 190, 132, 0.2)', 'rgba(13, 180, 220, 0.2)'];
-        var backgroundColor = ['rgba(80,190,132,1)','rgba(13, 180, 220, 1)'];
+        var borderColor = ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'];
+        var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
     };
     
