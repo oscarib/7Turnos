@@ -15,6 +15,8 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayerPseudonym = data.Prayer.pseudonym;
 		self.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
 		self.turns = data.turns;
+		self.editing = false;
+		self.creatingNewTurn = false;
 	};
 	
 	function getPrayerAndTurns(){
@@ -33,5 +35,19 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		}
 	};
 	
+	self.editPrayer = function(){
+		self.editing = true;
+	};
+	
+	self.cancelEditing = function(){
+		//TODO: Implementar
+		self.editing = false;
+	};
+	
+	self.saveChanges = function(){
+		//TODO: Implementar
+		self.editing = false;
+	};
+
 	getPrayerAndTurns();
 }]);

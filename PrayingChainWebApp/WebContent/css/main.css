@@ -1,14 +1,41 @@
 @charset "UTF-8";
 
+div.iconHeader {
+	margin-top: 15px;
+	height: ;
+}
+div.dataContainer input {
+	border: 1px dashed black;
+	height: ;
+	width: 100%;
+	margin-top: -1px;
+}
+div.iconHeader img {
+	cursor: pointer;
+}
 div.dataContainer {
 	word-wrap: break-word;
 }
 div#headerSearchPrayer img#magnifierIcon {
 	cursor: pointer;
 }
+div#prayerData div.iconHeader {
+	text-align: right;
+	padding-right: 3px;
+}
+div.dataContainer input {
+	font-family: verdana;
+	font-size: 15px;
+}
 #newPrayer label {
 	height: ;
 	width: 90px;
+}
+div.dataContainer select {
+	width: 100%;
+}
+div.iconHeader.dataContainer {
+	margin-top: 0;
 }
 #newPrayer select {
 	height: ;
@@ -26,7 +53,7 @@ div#prayerData .row.rowBorder div {
 	padding-top: 3px;
 	border: 1px solid #000000;
 	padding-left: 6px;
-	min-height: 30px;
+	min-height: 35px;
 }
 div#prayerData div.colSection {
 	padding-right: 30px;
