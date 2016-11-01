@@ -4,6 +4,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	var self = this;
 	
 	function inicializarDatos(data){
+		//Orador
 		self.prayer = {};
 		self.prayer.uid = data.Prayer.uid;
 		self.prayer.name = data.Prayer.name;
@@ -15,12 +16,15 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
 		self.prayer.dayOfWeek = inicializarDias();
 		self.unchangedPrayer = angular.copy(self.prayer);
+		
+		//Turno
 		self.turns = data.turns;
 		self.editing = false;
 		self.editingTurn = [];
 		self.creatingNewTurn = false;
 		self.turnos = inicializarTurnos();
 		self.status = inicializarStatus();
+		self.unchangedTurns = angular.copy(self.turns);
 		self.alreadyANew = false;
 		self.NewTurn = [];
 	};
@@ -47,7 +51,17 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		} else {
 			return false;
 		}
-	}
+	};
+
+	function turnsHaveChanged(){
+		console.log(JSON.stringify(self.turns));
+		console.log(JSON.stringify(self.unchangedTurns));
+		if (JSON.stringify(self.turns) !== JSON.stringify(self.unchangedTurns)){
+			return true;
+		} else {
+			return false;
+		}
+	};
 	
 	function inicializarDias(){
 		var dias = [];
@@ -212,10 +226,16 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		} else {
 			self.editingTurn[uid] = false;
 		}
+		self.unchangedTurns = angular.copy(self.turns);
 	};
 	
 	self.saveTurnChanges = function(uid){
-		//TODO: Implementar
+		if (turnsHaveChanged()){
+			bootbox.alert({size:'small', message: 'Falta hacer que se graben los datos cambiados'});
+			self.unchangedTurns = angular.copy(self.turns);
+		} else {
+			bootbox.alert({size:'small', message: 'No hubo cambios. No hace falta grabar nada'});
+		}
 		self.editingTurn[uid] = false;
 	};
 	
