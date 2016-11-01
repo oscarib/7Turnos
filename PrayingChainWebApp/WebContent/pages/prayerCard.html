@@ -50,14 +50,14 @@
 				</div>
 			</div>
 			<div class="row rowBorder">
-				<div class="{{vm.prayerCountryClass}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				<div class="{{vm.prayerCountry == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<span ng-show="!vm.editing" >{{vm.prayerCountry}}</span>
 					<select ng-show="vm.editing" ng-model="vm.prayerCountry">
 					  <option value="Sí">Sí</option>
 					  <option value="No">No</option>
 					</select>
 				</div>
-				<div class="{{vm.prayerVisibilityClass}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				<div class="{{vm.prayerVisibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<span ng-show="!vm.editing" >{{vm.prayerVisibility}}</span>
 					<select ng-show="vm.editing" ng-model="vm.prayerVisibility">
 					  <option value="Sí">Sí</option>
@@ -105,13 +105,22 @@
 					<span>{{turn.uid}}</span>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-3 col-sm-3 col-xs-3">
-					<span>{{turn.dow}}</span>
+					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.dow}}</span>
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.dow">
+					  <option ng-repeat="dia in vm.DayOfWeek" value="{{dia.key}}">{{dia.value}}</option>
+					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-3 col-xs-3">
-					<span>{{turn.turn}}</span>
+					<span ng-show="!vm.editingTurn[turn.uid]" >{{turn.turn}}</span>
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.turn">
+					  <option ng-repeat="turn in vm.turnos" value="{{turn.key}}">{{turn.value}}</option>
+					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-4 col-md-3 col-sm-4 col-xs-4">
-					<span>{{turn.status}}</span>
+					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.status}}</span>
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.status">
+					  <option ng-repeat="status in vm.status" value="{{status.key}}">{{status.value}}</option>
+					</select>
 				</div>
 				<div class="{{turn.status}} iconHeader dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.editTurn(turn.uid)" src="./images/edit.svg" alt="Edit Turn" height="24" width="24">
