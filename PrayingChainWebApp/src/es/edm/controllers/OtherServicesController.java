@@ -6,12 +6,15 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.edm.dao.impl.PrayerDao;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
@@ -36,6 +39,8 @@ public class OtherServicesController {
 	
 	@Autowired
 	Configuration conf;
+	
+	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
 	//CONTROLLER: UPLOADCALENDAR
 	@RequestMapping(path="/uploadCalendar.do", method=RequestMethod.POST)
@@ -43,14 +48,18 @@ public class OtherServicesController {
 	public boolean UploadCalendar() throws IOException, DDBBException{
 		try{
 			fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
+			logger.info("Generando el archivo del calendario...");
 			fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
+			logger.info("Generando el archivo de estadísticas...");
 			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
+			logger.info("Subiendo los archivos al sitio FTP...");
 			fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
 		} catch (UnknownHostException e){
 			throw new RuntimeException("Error: " + e);
 		} catch (SocketException e) {
 			throw new RuntimeException("Error: " + e);
 		}
+		logger.info("Se subieron los archivos con éxito al sitio FTP.");
 		return true;
 	}
 	
