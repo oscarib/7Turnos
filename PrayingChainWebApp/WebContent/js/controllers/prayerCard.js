@@ -14,7 +14,6 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer.phone = data.Prayer.phone;
 		self.prayer.pseudonym = data.Prayer.pseudonym;
 		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
-		self.prayer.dayOfWeek = inicializarDias();
 		self.unchangedPrayer = angular.copy(self.prayer);
 		
 		//Turno
@@ -22,7 +21,8 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.editing = false;
 		self.editingTurn = [];
 		self.creatingNewTurn = false;
-		self.turnos = inicializarTurnos();
+		self.DayOfWeek = inicializarDias();
+		self.horas = inicializarHoras();
 		self.status = inicializarStatus();
 		self.unchangedTurns = angular.copy(self.turns);
 		self.alreadyANew = false;
@@ -46,7 +46,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	};
 	
 	function prayerHasChanged(){
-		if (JSON.stringify(self.prayer) !== JSON.stringify(self.unchangedPrayer)){
+		if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){
 			return true;
 		} else {
 			return false;
@@ -54,9 +54,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	};
 
 	function turnsHaveChanged(){
-		console.log(JSON.stringify(self.turns));
-		console.log(JSON.stringify(self.unchangedTurns));
-		if (JSON.stringify(self.turns) !== JSON.stringify(self.unchangedTurns)){
+		if (angular.toJson(self.turns) !== angular.toJson(self.unchangedTurns)){
 			return true;
 		} else {
 			return false;
@@ -82,105 +80,105 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		return dias;
 	};
 	
-	function inicializarTurnos(){
-		var turns = [];
+	function inicializarHoras(){
+		var horas = [];
 		var turno = {key:'00:00am', value:'00:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'00:30am', value:'00:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'01:00am', value:'01:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'01:30am', value:'01:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'02:00am', value:'02:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'02:30am', value:'02:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'03:00am', value:'03:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'03:30am', value:'03:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'04:00am', value:'04:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'04:30am', value:'04:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'05:00am', value:'05:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'05:30am', value:'05:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'06:00am', value:'06:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'06:30am', value:'06:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'07:00am', value:'07:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'07:30am', value:'07:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'08:00am', value:'08:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'08:30am', value:'08:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'09:00am', value:'09:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'09:30am', value:'09:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'10:00am', value:'10:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'10:30am', value:'10:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'11:00am', value:'11:00am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'11:30am', value:'11:30am'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'12:00pm', value:'12:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'12:30pm', value:'12:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'13:00pm', value:'13:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'13:30pm', value:'13:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'14:00pm', value:'14:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'14:30pm', value:'14:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'15:00pm', value:'15:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'15:30pm', value:'15:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'16:00pm', value:'16:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'16:30pm', value:'16:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'17:00pm', value:'17:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'17:30pm', value:'17:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'18:00pm', value:'18:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'18:30pm', value:'18:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'19:00pm', value:'19:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'19:30pm', value:'19:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'20:00pm', value:'20:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'20:30pm', value:'20:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'21:00pm', value:'21:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'21:30pm', value:'21:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'22:00pm', value:'22:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'22:30pm', value:'22:30pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'23:00pm', value:'23:00pm'};
-		turns.push(turno);
+		horas.push(turno);
 		var turno = {key:'23:30pm', value:'23:30pm'};
-		turns.push(turno);
-		return turns;
+		horas.push(turno);
+		return horas;
 	};
 	
 	function inicializarStatus(){

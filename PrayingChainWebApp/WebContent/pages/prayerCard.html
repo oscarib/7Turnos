@@ -78,7 +78,7 @@
 					<span>Datos Turnos</span>
 				</div>
 				<div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<img ng-show="!vm.creatingNewTurn" ng-click="vm.addTurn()" src="./images/add.svg" alt="Edit Prayer" height="24" width="24">
+					<img ng-show="!vm.creatingNewTurn" ng-click="vm.addTurn()" src="./images/add.svg" alt="Edit Turn" height="24" width="24">
 					<img ng-show="vm.creatingNewTurn" ng-click="vm.saveNewTurn()" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
 					<img ng-show="vm.creatingNewTurn" ng-click="vm.cancelNewTurn()" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
 				</div>
@@ -106,19 +106,19 @@
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-3 col-sm-3 col-xs-3">
 					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.dow}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.dow">
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].dow">
 					  <option ng-repeat="dia in vm.DayOfWeek" value="{{dia.key}}">{{dia.value}}</option>
 					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-3 col-xs-3">
 					<span ng-show="!vm.editingTurn[turn.uid]" >{{turn.turn}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.turn">
-					  <option ng-repeat="turn in vm.turnos" value="{{turn.key}}">{{turn.value}}</option>
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].turn">
+					  <option ng-repeat="hora in vm.horas" value="{{hora.key}}">{{hora.value}}</option>
 					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-4 col-md-3 col-sm-4 col-xs-4">
 					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.status}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.status">
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].status">
 					  <option ng-repeat="status in vm.status" value="{{status.key}}">{{status.value}}</option>
 					</select>
 				</div>
