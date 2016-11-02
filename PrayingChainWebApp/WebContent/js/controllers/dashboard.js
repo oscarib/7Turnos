@@ -7,6 +7,15 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 	var errorWithServiceCall = false;
 	initStatistics();
 	
+	$rootScope.uploadCalendar = function(){
+		var promise = prayerServices.uploadCalendar();
+		promise.then(function(dataOut){
+			bootbox.alert({size:'small', message: 'Se ha actualizado el calendario con éxito'});
+    	}, function(error) {
+			bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar el calendario'});
+    	});
+	};
+	
     self.loadStatistics = function(){
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
