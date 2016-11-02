@@ -123,9 +123,9 @@ public class PrayerController {
 	@RequestMapping(path="/updatePrayer.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Boolean updatePrayer(@RequestBody PrayerEntity prayer){
-//		if (prayer!=null){
-//			return prayerService.updatePrayer(prayer);
-//		}
+		if (prayer!=null){
+			return prayerService.updatePrayer(prayer);
+		}
 		return true;
 	}
 

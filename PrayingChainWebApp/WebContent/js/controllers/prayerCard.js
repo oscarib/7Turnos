@@ -12,6 +12,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer.country = data.Prayer.ownCountry ? "Sí" : "No";
 		self.prayer.visibility = data.Prayer.hidden ? "Sí" : "No";
 		self.prayer.phone = data.Prayer.phone;
+		self.prayer.optinDate = data.Prayer.optinDate;
 		self.prayer.pseudonym = data.Prayer.pseudonym;
 		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
 		self.unchangedPrayer = angular.copy(self.prayer);
@@ -210,6 +211,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 					console.error("Hubo un error al tratar de actualizar los datos de este orador: " + angular.toJson(self.prayer));
 					console.error("El error fue: " + error.status + ": " + error.statusText);
 				}).finally(function(){
+					bootbox.alert({size:'small', message: 'Se guardaron los datos correctamente'});
 					$route.reload();
 				});
 			}
@@ -271,9 +273,10 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		prayerEntity.email = dataIn.email;
 		prayerEntity.phone = dataIn.phone;
 		prayerEntity.ownCountry = dataIn.country=="No" ? false : true;
-		prayerEntity.optinDate = "";
-		prayerEntity.notes = "";
-		prayerEntity.hidden = dataIn.visibility == "Sí" ? false : true;
+		prayerEntity.optinDate = dataIn.optinDate;
+		prayerEntity.notes = dataIn.notes;
+		prayerEntity.hidden = dataIn.visibility == "No" ? false : true;
+		prayerEntity.pseudonym = dataIn.pseudonym;
 		return prayerEntity;
 	};
 
