@@ -240,14 +240,31 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		if (turnsHaveChanged()){
 			for (index in self.turns){
 				if (angular.toJson(self.turns[index]) !== angular.toJson(self.unchangedTurns[index])){
-					var promise = prayerServices.updateTurn(self.turns[index]);
-					promise.then(function(dataOut) {}, function(error) {
-						bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
-						console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
-						console.error("El error fue: " + error.status + ": " + error.statusText);
-					}).finally(function(){
-						$route.reload();
-					});
+
+					self.turns[index].pax=1;
+					self.turns[index].prayer = self.prayer;
+					
+					if (self.turns[index].uid=='Auto'){
+						self.turns[index].uid='';
+						var promise = prayerServices.addTurn(self.turns[index]);
+						promise.then(function(dataOut) {}, function(error) {
+							bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
+							console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
+							console.error("El error fue: " + error.status + ": " + error.statusText);
+						}).finally(function(){
+							$route.reload();
+						});
+					} else {
+						var promise = prayerServices.updateTurn(self.turns[index]);
+						promise.then(function(dataOut) {}, function(error) {
+							bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
+							console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
+							console.error("El error fue: " + error.status + ": " + error.statusText);
+						}).finally(function(){
+							$route.reload();
+						});
+						
+					}
 				}
 			}
 			self.unchangedTurns = angular.copy(self.turns);

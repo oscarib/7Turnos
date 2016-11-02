@@ -103,4 +103,14 @@ public class PrayerService implements IPrayerService {
 		}
 	}
 
+	@Override
+	public Boolean updateTurn(TurnEntity turn) {
+		try{
+			prayerDao.updateTurn(turn);
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
+
 }

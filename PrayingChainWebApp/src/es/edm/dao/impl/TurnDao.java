@@ -56,5 +56,10 @@ public class TurnDao implements ITurnDao {
 		return objCriteria.list();
 	}
 
+	@Override
+	public void addTurn(TurnEntity turn) {
+		entityManager.merge(turn);
+	}
+
 
 }

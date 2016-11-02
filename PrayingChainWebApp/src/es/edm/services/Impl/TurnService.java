@@ -100,4 +100,14 @@ public class TurnService implements ITurnService {
 		}
 		return false;
 	}
+
+	@Override
+	public Boolean addTurn(TurnEntity turn) {
+		try{
+			turnDao.addTurn(turn);
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
 }

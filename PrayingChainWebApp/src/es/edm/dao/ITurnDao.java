@@ -13,4 +13,6 @@ public interface ITurnDao {
 
 	public List<UsedTurns> getUsedTurns();
 
+	void addTurn(TurnEntity turn);
+
 }

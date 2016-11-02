@@ -38,4 +38,6 @@ public interface IPrayerService {
 	PrayerEntity getPrayer(int prayerID);
 	
 	boolean updatePrayer(PrayerEntity prayer);
+
+	Boolean updateTurn(TurnEntity turn);
 }

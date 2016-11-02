@@ -40,4 +40,6 @@ public interface IPrayerDao {
 	List<PrayerEntity> getPublicPrayers();
 	
 	List<PrayerEntity> getHiddenPrayers();
+
+	void updateTurn(TurnEntity turn);
 }

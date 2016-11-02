@@ -251,4 +251,9 @@ public class PrayerDao implements IPrayerDao {
 
 	}
 
+	@Override
+	public void updateTurn(TurnEntity turn) {
+		entityManager.merge(turn);
+	}
+
 }

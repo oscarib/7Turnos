@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import es.edm.domain.SimpleTurn;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
@@ -23,6 +23,7 @@ import es.edm.domain.middle.NewPrayerAndTurn;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
 import es.edm.services.IPrayerService;
+import es.edm.services.ITurnService;
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
 
@@ -32,6 +33,9 @@ public class PrayerController {
 	@Autowired
 	private IPrayerService prayerService;
 	
+	@Autowired
+	private ITurnService turnService;
+
 	@Autowired
 	Configuration conf;
 	
@@ -129,4 +133,21 @@ public class PrayerController {
 		return true;
 	}
 
+	@RequestMapping(path="/updateTurn.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Boolean updateTurn(@RequestBody TurnEntity turn){
+		if (turn!=null){
+			return prayerService.updateTurn(turn);
+		}
+		return true;
+	}
+
+	@RequestMapping(path="/addTurn.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Boolean addTurn(@RequestBody TurnEntity turn){
+		if (turn!=null){
+			return turnService.addTurn(turn);
+		}
+		return true;
+	}
 }

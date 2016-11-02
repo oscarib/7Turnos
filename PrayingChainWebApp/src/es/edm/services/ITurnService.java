@@ -17,4 +17,6 @@ public interface ITurnService {
 
 	int getDaysCovered();
 
+	Boolean addTurn(TurnEntity turn);
+
 }
