@@ -211,7 +211,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 					console.error("Hubo un error al tratar de actualizar los datos de este orador: " + angular.toJson(self.prayer));
 					console.error("El error fue: " + error.status + ": " + error.statusText);
 				}).finally(function(){
-					bootbox.alert({size:'small', message: 'Se guardaron los datos correctamente'});
+					//bootbox.alert({size:'small', message: 'Se guardaron los datos correctamente'});
 					$route.reload();
 				});
 			}
