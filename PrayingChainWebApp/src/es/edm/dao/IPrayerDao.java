@@ -9,6 +9,8 @@ public interface IPrayerDao {
 
 	List<PrayerEntity> getPrayers();
 	
+	void updatePrayer(PrayerEntity prayer);
+	
 	List<PrayerEntity> getCommittedPrayers();
 	
 	List<PrayerEntity> getNonCommittedPrayers();

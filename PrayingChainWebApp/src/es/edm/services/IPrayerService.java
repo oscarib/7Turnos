@@ -36,4 +36,6 @@ public interface IPrayerService {
 	List<PrayerEntity> getOrphanPrayers();
 	
 	PrayerEntity getPrayer(int prayerID);
+	
+	boolean updatePrayer(PrayerEntity prayer);
 }

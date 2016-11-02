@@ -243,4 +243,12 @@ public class PrayerDao implements IPrayerDao {
 		return objCriteria.list();
 	}
 
+	@Override
+	public void updatePrayer(PrayerEntity prayer) {
+		//TODO: Esto hay que hacerlo de otra manera, porque merge inserta el registro si no existía antes.
+		//		Investigar "bloqueos optimistas"
+		entityManager.merge(prayer);
+
+	}
+
 }

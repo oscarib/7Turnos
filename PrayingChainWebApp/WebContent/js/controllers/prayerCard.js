@@ -204,7 +204,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	self.saveChanges = function(){
 		if (prayerHasChanged()){
 			if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){
-				var promise = prayerServices.updatePrayer(self.prayer);
+				var promise = prayerServices.updatePrayer(prayerBean(self.prayer));
 				promise.then(function(dataOut) {}, function(error) {
 					bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del orador'});
 					console.error("Hubo un error al tratar de actualizar los datos de este orador: " + angular.toJson(self.prayer));
@@ -262,6 +262,19 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 			self.turns.push(self.NewTurn);
 			self.editingTurn['Auto'] = true;
 		}
+	};
+	
+	prayerBean = function(dataIn){
+		var prayerEntity = {};
+		prayerEntity.uid = dataIn.uid; 
+		prayerEntity.name = dataIn.name;
+		prayerEntity.email = dataIn.email;
+		prayerEntity.phone = dataIn.phone;
+		prayerEntity.ownCountry = dataIn.country=="No" ? false : true;
+		prayerEntity.optinDate = "";
+		prayerEntity.notes = "";
+		prayerEntity.hidden = dataIn.visibility == "Sí" ? false : true;
+		return prayerEntity;
 	};
 
 	getPrayerAndTurns();

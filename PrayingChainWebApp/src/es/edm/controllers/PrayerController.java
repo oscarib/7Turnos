@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import es.edm.domain.SimpleTurn;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
@@ -118,6 +118,15 @@ public class PrayerController {
 		result.put("Prayer", prayer);
 		if (turns!=null) result.put("turns", turns);
 		return result;
+	}
+	
+	@RequestMapping(path="/updatePrayer.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Boolean updatePrayer(@RequestBody PrayerEntity prayer){
+//		if (prayer!=null){
+//			return prayerService.updatePrayer(prayer);
+//		}
+		return true;
 	}
 
 }

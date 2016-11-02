@@ -93,4 +93,14 @@ public class PrayerService implements IPrayerService {
 		return prayerDao.getPrayerByID(prayerID);
 	}
 
+	@Override
+	public boolean updatePrayer(PrayerEntity prayer) {
+		try{
+			prayerDao.updatePrayer(prayer);
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
+
 }
