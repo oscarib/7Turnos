@@ -106,19 +106,19 @@
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-3 col-sm-3 col-xs-3">
 					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.dow}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].dow">
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.dow">
 					  <option ng-repeat="dia in vm.DayOfWeek" value="{{dia.key}}">{{dia.value}}</option>
 					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-3 col-xs-3">
 					<span ng-show="!vm.editingTurn[turn.uid]" >{{turn.turn}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].turn">
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.turn">
 					  <option ng-repeat="hora in vm.horas" value="{{hora.key}}">{{hora.value}}</option>
 					</select>
 				</div>
 				<div class="{{turn.status}} dataContainer col-lg-4 col-md-3 col-sm-4 col-xs-4">
 					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.status}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="vm.turns[turn.uid].status">
+					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.status">
 					  <option ng-repeat="status in vm.status" value="{{status.key}}">{{status.value}}</option>
 					</select>
 				</div>

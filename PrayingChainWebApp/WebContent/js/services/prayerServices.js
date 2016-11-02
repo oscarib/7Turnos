@@ -82,6 +82,36 @@
     		
     		return promise;
     	};
+    	
+    	self.updateTurn = function(dataIn){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./updateTurn.do", dataIn);
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
+    	self.updatePrayer = function(dataIn){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./updatePrayer.do", dataIn);
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
 
     	return self;
     }

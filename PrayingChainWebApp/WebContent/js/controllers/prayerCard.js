@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', '$routeParams', function(prayerServices, $location, prayerServices, $routeParams) {
+PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', '$routeParams','$route', function(prayerServices, $location, prayerServices, $routeParams,$route) {
 	var self = this;
 	
 	function inicializarDatos(data){
@@ -203,10 +203,17 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	
 	self.saveChanges = function(){
 		if (prayerHasChanged()){
-			bootbox.alert({size:'small', message: 'Falta hacer que se graben los datos cambiados'});
+			if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){
+				var promise = prayerServices.updatePrayer(self.prayer);
+				promise.then(function(dataOut) {}, function(error) {
+					bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del orador'});
+					console.error("Hubo un error al tratar de actualizar los datos de este orador: " + angular.toJson(self.prayer));
+					console.error("El error fue: " + error.status + ": " + error.statusText);
+				}).finally(function(){
+					$route.reload();
+				});
+			}
 			self.unchangedPrayer = angular.copy(self.prayer);
-		} else {
-			bootbox.alert({size:'small', message: 'No hubo cambios. No hace falta grabar nada'});
 		}
 		self.editing = false;
 	};
@@ -224,15 +231,24 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		} else {
 			self.editingTurn[uid] = false;
 		}
-		self.unchangedTurns = angular.copy(self.turns);
+		self.turns = angular.copy(self.unchangedTurns);
 	};
 	
 	self.saveTurnChanges = function(uid){
 		if (turnsHaveChanged()){
-			bootbox.alert({size:'small', message: 'Falta hacer que se graben los datos cambiados'});
+			for (index in self.turns){
+				if (angular.toJson(self.turns[index]) !== angular.toJson(self.unchangedTurns[index])){
+					var promise = prayerServices.updateTurn(self.turns[index]);
+					promise.then(function(dataOut) {}, function(error) {
+						bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
+						console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
+						console.error("El error fue: " + error.status + ": " + error.statusText);
+					}).finally(function(){
+						$route.reload();
+					});
+				}
+			}
 			self.unchangedTurns = angular.copy(self.turns);
-		} else {
-			bootbox.alert({size:'small', message: 'No hubo cambios. No hace falta grabar nada'});
 		}
 		self.editingTurn[uid] = false;
 	};
