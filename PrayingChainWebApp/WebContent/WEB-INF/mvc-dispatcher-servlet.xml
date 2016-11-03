@@ -55,8 +55,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <property name="idleConnectionTestPeriod" value="300"></property>
     </bean>
     
-    
-    
 	<!-- **************************************************************************************** -->
 	<!-- Gestiona las transaciones de JPA -->
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -78,7 +76,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
+				<property name="showSql" value="false" />
 				<property name="generateDdl" value="false" />
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
 			</bean>
@@ -97,14 +95,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <constructor-arg ref="DataSource"/>
     </bean>
 
-    <bean id="DAOSqlSt" class="es.edm.services.Impl.DAOSqlSt_Impl"/>
-
     <!-- Services -->
-
-	<bean id="DAO" class="es.edm.services.Impl.DAO_MySql_JDBCTemplate_Impl">
-		<constructor-arg ref="JdbcTemplate"/>
-		<constructor-arg ref="DAOSqlSt"/>
-	</bean>
 
 	<bean id="FileService" class="es.edm.services.Impl.FileService_Impl">
 		<constructor-arg ref="Configuration"/>

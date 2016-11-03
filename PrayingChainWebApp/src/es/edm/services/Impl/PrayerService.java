@@ -117,11 +117,6 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public List<PrayerEntity> getPrayersOnTurn(DayOfWeek dow, TurnsOfDay turn) {
-
-	}
-
-	@Override
 	public List<TurnEntity> getPrayerTurns(int prayerId) throws PrayerNotFoundException {
 		PrayerEntity prayer = getPrayer(prayerId);
 		List<TurnEntity> turns = prayer.getTurns();

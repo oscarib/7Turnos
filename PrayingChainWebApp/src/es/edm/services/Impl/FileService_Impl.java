@@ -22,12 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import es.edm.domain.ListOfTurns;
-import es.edm.domain.Prayer;
 import es.edm.domain.SimpleTurn;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
-import es.edm.exceptions.DDBBException;
-import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
@@ -170,11 +167,11 @@ public class FileService_Impl implements FileService {
 	public String getStatisticsString() {
 		StringBuilder html = new StringBuilder();
 		html.append("[thrive_number_counter color='blue' value='");
-		int committed = getNumberOfCommittedPrayers();
+		int committed = prayerService.getCommittedPrayers().size();
 		html.append(Integer.toString(committed));
 		html.append("' before='Ya somos ' after='' label='']");
 		html.append("[thrive_number_counter color='blue' value='");
-		int empty = getEmptyTurns();
+		int empty = turnService.getEmptyTurns();
 		html.append(Integer.toString(empty));
 		html.append("' before='Quedan: ' after='turnos vacíos' label='']");
 		return html.toString();
@@ -183,7 +180,7 @@ public class FileService_Impl implements FileService {
 	@Override
 	public String getCalendarTableString() {
 		
-		ListOfTurns[][] turns = loadAllTurns();
+		ListOfTurns[][] turns = turnService.loadAllTurns();
 		
 		StringBuilder html = new StringBuilder();
 
@@ -287,7 +284,10 @@ public class FileService_Impl implements FileService {
 	//Like "Prayers on this turn: anonymous, Peter, John"
 	public String getPrayersOnTurnString(DayOfWeek day, TurnsOfDay turn) throws TurnException {
 		//Get the prayers from the ddbb
-		List<PrayerEntity> prayers = prayerService.getPrayersOnTurn(day, turn);
+		TurnEntity turn2Search = new TurnEntity();
+		turn2Search.setDow(day);
+		turn2Search.setTurn(turn.toString());
+		List<PrayerEntity> prayers = prayerService.getPrayersOnTurn(turn2Search);
 		StringBuilder prayersString = new StringBuilder();
 		for (PrayerEntity nextPrayer : prayers){
 			String pseudonym;
@@ -305,78 +305,4 @@ public class FileService_Impl implements FileService {
 		return prayersString.toString();
 	}
 
-	//Load all turns in a simple array of 7 days, 48 turns per day. Each turn in each position (each position is itself an Array of SimpleTurns)
-	public ListOfTurns[][] loadAllTurns(){
-		
-		//Create the empty array
-		ListOfTurns[][] listOfTurns = new ListOfTurns[7][48];
-		
-		//Load all turns from ddbb
-		try {
-			List<TurnEntity> ddbbTurns = turnService.getAllActiveTurns();
-
-			//Loop through all turns in the ddbb
-			for (TurnEntity nextTurn : ddbbTurns){
-				
-				//load Day of Week as an integer
-				int day = nextTurn.getDow().ordinal();
-				
-				//Load the turn
-				int turn = TurnsOfDay.valueOf(nextTurn.getTurn()).ordinal();
-				
-				//If the grid List is empty, create a new one
-				if (listOfTurns[day][turn] == null) listOfTurns[day][turn] = new ListOfTurns();
-
-				//Add the turn to its position
-				listOfTurns[day][turn].add(nextTurn);
-			}
-			
-			return listOfTurns;
-		} catch (DDBBException e) {
-			throw new RuntimeException("There was a problem connecting with the ddbb: " + e.toString());
-		}
-	}
-
-	@Override
-	public int getEmptyTurns() {
-		ListOfTurns[][] turns = loadAllTurns();
-		int emptyTurns = 0;
-		for (int day = 0; day < 7; day++){
-			for (int turn=0; turn<48; turn++){
-				if (turns[day][turn] == null) emptyTurns++;
-			}
-		}
-		return emptyTurns;
-	}
-	
-	@Override
-	//We need to count the max number of pax on all turns prayed by the given prayer
-	//If we only sum all paxes in all turns for the given prayer, then If a prayer is praying
-	//3 turns, it will be counted 3 committed Prayers, when in fact there is just one
-	public int getNumberOfCommittedPrayers() {
-		int noCommittedPrayers = 0;
-		//get all committedPrayers
-		List<PrayerEntity> committedPrayers = prayerService.getCommittedPrayers();
-		
-		//Loop them
-		for (PrayerEntity nextPrayer : committedPrayers){
-			int maxPax = 0;
-
-			try {
-
-				//Get all turns prayed by nextPrayer
-				List<TurnEntity> turns = prayerService.getPrayerTurns(nextPrayer.getUid());
-				
-				//Get the maximum number for pax in all turns
-				for (TurnEntity nextTurn : turns){
-					if (nextTurn.getPax() > maxPax) maxPax = nextTurn.getPax();
-				}
-			} catch (PrayerNotFoundException e) {
-			}
-			
-			noCommittedPrayers += maxPax;
-		}
-		
-		return noCommittedPrayers;
-	}
 }

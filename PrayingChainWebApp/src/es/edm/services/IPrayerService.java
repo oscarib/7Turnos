@@ -44,8 +44,6 @@ public interface IPrayerService {
 
 	Boolean updateTurn(TurnEntity turn);
 	
-	List<PrayerEntity> getPrayersOnTurn(DayOfWeek dow, TurnsOfDay turn);
-	
 	public List<TurnEntity> getPrayerTurns(int prayerId) throws PrayerNotFoundException;
 
 }
