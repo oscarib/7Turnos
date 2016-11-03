@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import es.edm.dao.IPrayerDao;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.services.IPrayerService;
+import es.edm.util.DayOfWeek;
+import es.edm.util.TurnsOfDay;
 
 @Service
 @Transactional
@@ -111,6 +114,18 @@ public class PrayerService implements IPrayerService {
 		} catch (Exception e){
 			return false;
 		}
+	}
+
+	@Override
+	public List<PrayerEntity> getPrayersOnTurn(DayOfWeek dow, TurnsOfDay turn) {
+
+	}
+
+	@Override
+	public List<TurnEntity> getPrayerTurns(int prayerId) throws PrayerNotFoundException {
+		PrayerEntity prayer = getPrayer(prayerId);
+		List<TurnEntity> turns = prayer.getTurns();
+		return turns;
 	}
 
 }

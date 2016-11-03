@@ -61,5 +61,10 @@ public class TurnDao implements ITurnDao {
 		entityManager.merge(turn);
 	}
 
+	@Override
+	public List<TurnEntity> getAllActiveTurns() {
+		
+	}
+
 
 }

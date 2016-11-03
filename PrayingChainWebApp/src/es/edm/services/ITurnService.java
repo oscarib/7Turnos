@@ -1,7 +1,7 @@
 package es.edm.services;
 
-import es.edm.domain.entity.TurnEntity;
 import java.util.List;
+import es.edm.domain.entity.TurnEntity;
 
 public interface ITurnService {
 	
@@ -19,4 +19,5 @@ public interface ITurnService {
 
 	Boolean addTurn(TurnEntity turn);
 
+	List<TurnEntity> getAllActiveTurns();
 }

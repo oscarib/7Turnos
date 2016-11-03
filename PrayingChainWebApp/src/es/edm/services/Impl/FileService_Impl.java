@@ -24,20 +24,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import es.edm.domain.ListOfTurns;
 import es.edm.domain.Prayer;
 import es.edm.domain.SimpleTurn;
+import es.edm.domain.entity.PrayerEntity;
+import es.edm.domain.entity.TurnEntity;
 import es.edm.exceptions.DDBBException;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.exceptions.TurnException;
 import es.edm.services.Configuration;
-import es.edm.services.DAO;
 import es.edm.services.FileService;
+import es.edm.services.IPrayerService;
+import es.edm.services.ITurnService;
 import es.edm.util.DayOfWeek;
+import es.edm.util.TurnsOfDay;
 
 public class FileService_Impl implements FileService {
 	
 	Configuration conf;
 	
 	@Autowired
-	DAO dao;
+	IPrayerService prayerService;
+	
+	@Autowired
+	ITurnService turnService;
 	
 	private final static Logger logger = LoggerFactory.getLogger(FileService.class);
 	
@@ -224,7 +231,7 @@ public class FileService_Impl implements FileService {
 						html.append("\n");
 					}
 					if (turns[day][turn]!=null){
-						String prayersString = getPrayersOnTurnString(DayOfWeek.values()[day], turn);
+						String prayersString = getPrayersOnTurnString(DayOfWeek.values()[day], TurnsOfDay.values()[turn]);
 						int nOfPrayers = turns[day][turn].size();
 						int freeTurns = prayersPerTurn-nOfPrayers;
 						if (freeTurns==0) {
@@ -278,11 +285,11 @@ public class FileService_Impl implements FileService {
 	
 	@Override
 	//Like "Prayers on this turn: anonymous, Peter, John"
-	public String getPrayersOnTurnString(DayOfWeek day, int turn) throws TurnException {
+	public String getPrayersOnTurnString(DayOfWeek day, TurnsOfDay turn) throws TurnException {
 		//Get the prayers from the ddbb
-		List<Prayer> prayers = dao.getPrayersOnTurn(day, turn);
+		List<PrayerEntity> prayers = prayerService.getPrayersOnTurn(day, turn);
 		StringBuilder prayersString = new StringBuilder();
-		for (Prayer nextPrayer : prayers){
+		for (PrayerEntity nextPrayer : prayers){
 			String pseudonym;
 			if (nextPrayer.getPseudonym()==null){
 				pseudonym = "anónimo";
@@ -306,16 +313,16 @@ public class FileService_Impl implements FileService {
 		
 		//Load all turns from ddbb
 		try {
-			List<SimpleTurn> ddbbTurns = dao.getAllActiveTurns();
+			List<TurnEntity> ddbbTurns = turnService.getAllActiveTurns();
 
 			//Loop through all turns in the ddbb
-			for (SimpleTurn nextTurn : ddbbTurns){
+			for (TurnEntity nextTurn : ddbbTurns){
 				
 				//load Day of Week as an integer
 				int day = nextTurn.getDow().ordinal();
 				
 				//Load the turn
-				int turn = nextTurn.getTurn();
+				int turn = TurnsOfDay.valueOf(nextTurn.getTurn()).ordinal();
 				
 				//If the grid List is empty, create a new one
 				if (listOfTurns[day][turn] == null) listOfTurns[day][turn] = new ListOfTurns();
@@ -349,19 +356,19 @@ public class FileService_Impl implements FileService {
 	public int getNumberOfCommittedPrayers() {
 		int noCommittedPrayers = 0;
 		//get all committedPrayers
-		List<Prayer> committedPrayers = dao.getCommittedPrayers();
+		List<PrayerEntity> committedPrayers = prayerService.getCommittedPrayers();
 		
 		//Loop them
-		for (Prayer nextPrayer : committedPrayers){
+		for (PrayerEntity nextPrayer : committedPrayers){
 			int maxPax = 0;
 
 			try {
 
 				//Get all turns prayed by nextPrayer
-				List<SimpleTurn> turns = getPrayerTurns(nextPrayer.getUid());
+				List<TurnEntity> turns = prayerService.getPrayerTurns(nextPrayer.getUid());
 				
 				//Get the maximum number for pax in all turns
-				for (SimpleTurn nextTurn : turns){
+				for (TurnEntity nextTurn : turns){
 					if (nextTurn.getPax() > maxPax) maxPax = nextTurn.getPax();
 				}
 			} catch (PrayerNotFoundException e) {
@@ -372,10 +379,4 @@ public class FileService_Impl implements FileService {
 		
 		return noCommittedPrayers;
 	}
-	
-	@Override
-	public List<SimpleTurn> getPrayerTurns(int prayerId) throws PrayerNotFoundException {
-		return dao.getPrayerTurns(prayerId);
-	}
-
 }
