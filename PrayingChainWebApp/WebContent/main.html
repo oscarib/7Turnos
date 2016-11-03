@@ -31,8 +31,15 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
+		<div class="batidoraFondo" ng-if="batidoraGeneral">
+			<div class="batidoraImagen">
+				<span>Actualizando el calendario. Por favor, espere...</span>
+				<img class="loadingGifImg" src="./images/loadingGif.gif">
+			</div>
+		</div>
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-item"
-			id="sidebar-menu" ng-include="'./pages/menu.html'" ng-controller="menu as vm"></div>
+			id="sidebar-menu" ng-include="'./pages/menu.html'" ng-controller="menu as vm">
+		</div>
 		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 			<div ng-include="'./pages/head.html'" ng-controller='head as vm'></div>
 			<div ng-view></div>

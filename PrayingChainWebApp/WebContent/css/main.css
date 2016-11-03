@@ -1,5 +1,35 @@
 @charset "UTF-8";
 
+div.batidoraFondo {
+	height: 100%;
+	width: 100%;
+	background-color: #000000;
+	/*+placement: anchor-bottom-left;*/
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	opacity: 0.66;
+	font-family: ;
+	color: #FFFFFF;
+}
+div.batidoraImagen {
+	height: 100px;
+	width: 205px;
+	/*background-color: #B78383;*/
+	position: fixed;
+	top: 50%;
+	left: 55%;
+	transform: translate(-54%, -54%);
+	/*+placement: anchor-bottom-right;*/
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+div.batidoraImagen img.loadingGifImg {
+	margin-top: 52px;
+	margin-left: 69px;
+}
 div.iconHeader {
 	margin-top: 15px;
 	height: ;
