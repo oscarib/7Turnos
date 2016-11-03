@@ -14,20 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.edm.dao.impl.PrayerDao;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
-import es.edm.services.MainService;
 import es.edm.services.Impl.PrayerService;
 import es.edm.services.Impl.TurnService;
 
 @Controller
 public class OtherServicesController {
 
-	@Autowired
-	MainService main;
-	
 	@Autowired
 	FileService fileService;
 	
@@ -47,9 +42,9 @@ public class OtherServicesController {
 	@ResponseBody
 	public boolean UploadCalendar() throws IOException, DDBBException{
 		try{
-			fileService.WriteFile(main.getCalendarTableString(), conf.getCalendarFile2UploadURI());
+			fileService.WriteFile(fileService.getCalendarTableString(), conf.getCalendarFile2UploadURI());
 			logger.info("Generando el archivo del calendario...");
-			fileService.WriteFile(main.getStatisticsString(), conf.getStatisticsFile2UploadURI());
+			fileService.WriteFile(fileService.getStatisticsString(), conf.getStatisticsFile2UploadURI());
 			logger.info("Generando el archivo de estadísticas...");
 			fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
 			logger.info("Subiendo los archivos al sitio FTP...");
