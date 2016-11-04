@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', '$routeParams','$route', function(prayerServices, $location, prayerServices, $routeParams,$route) {
+PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerServices', '$routeParams','$route','$rootScope', function(prayerServices, $location, prayerServices, $routeParams,$route,$rootScope) {
 	var self = this;
 	
 	function inicializarDatos(data){
@@ -202,6 +202,18 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer = angular.copy(self.unchangedPrayer);
 	};
 	
+	self.deletePrayer = function(){
+		bootbox.confirm("¿Estás seguro de querer borrar el orador y todos sus turnos?", 
+				function(result){ 
+					if (result){
+						self.prayer.erased=true;
+						self.saveChanges();
+						bootbox.alert({size:'small', message: 'Se ha borrado el orador'});
+						$rootScope.navigateTo("/");
+					}
+				});
+	};
+	
 	self.saveChanges = function(){
 		if (prayerHasChanged()){
 			if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){
@@ -294,6 +306,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		prayerEntity.notes = dataIn.notes;
 		prayerEntity.hidden = dataIn.visibility == "No" ? false : true;
 		prayerEntity.pseudonym = dataIn.pseudonym;
+		prayerEntity.erased = dataIn.erased;
 		return prayerEntity;
 	};
 
