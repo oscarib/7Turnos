@@ -27,6 +27,9 @@ public class PrayerEntity {
 	private Integer uid;
 	
 	@Column
+	private boolean erased;
+	
+	@Column
 	private String name;
 	
 	@Column
@@ -188,4 +191,13 @@ public class PrayerEntity {
 	public void setTurns(List<TurnEntity> turns) {
 		this.turns = turns;
 	}
+
+	public boolean isErased() {
+		return erased;
+	}
+
+	public void setErased(boolean erased) {
+		this.erased = erased;
+	}
+	
 }

@@ -38,6 +38,7 @@ public class PrayerDao implements IPrayerDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		return objCriteria.list();
@@ -52,6 +53,7 @@ public class PrayerDao implements IPrayerDao {
 		// edm_prayers.uid=edm_turns.prayer_id
 		// where edm_turns.status!='cancelled' and
 		// edm_turns.status!='NotCommitted';"
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.createCriteria("turns").add(Restrictions.ne("status", TurnStatus.cancelled))
 				.add(Restrictions.ne("status", TurnStatus.NotCommitted));
 
@@ -68,6 +70,7 @@ public class PrayerDao implements IPrayerDao {
 		// edm_prayers.uid=edm_turns.prayer_id
 		// where edm_turns.status!='cancelled' and
 		// edm_turns.status!='NotCommitted';"
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.ne("turns.status", TurnStatus.cancelled))
 				.add(Restrictions.eq("turns.status", TurnStatus.NotCommitted));
 
@@ -95,6 +98,7 @@ public class PrayerDao implements IPrayerDao {
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.eq("email", prayer.getEmail()));
 
 		return (PrayerEntity) objCriteria.uniqueResult();
@@ -106,7 +110,7 @@ public class PrayerDao implements IPrayerDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.eq("ownCountry", Boolean.FALSE));
 
 		return objCriteria.list();
@@ -117,7 +121,7 @@ public class PrayerDao implements IPrayerDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-
+		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.eq("ownCountry", Boolean.TRUE));
 
 		return objCriteria.list();
@@ -132,6 +136,7 @@ public class PrayerDao implements IPrayerDao {
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
 		objCriteria
+		.add(Restrictions.ne("erased", true))
 		.add(Restrictions.ne("turns.status",TurnStatus.cancelled))
 		.add(Restrictions.ne("turns.status",TurnStatus.NotCommitted))
 		.add(Restrictions.eq("turns.day",turn.getDow()))
@@ -157,16 +162,22 @@ public class PrayerDao implements IPrayerDao {
 					//Si el campo es un date se filtra con equal
 					if(field.getType().isAssignableFrom(Date.class))
 					{
-						objCriteria.add( Restrictions.eq(field.getName(),value));
+						objCriteria
+							.add(Restrictions.ne("erased", true))
+							.add( Restrictions.eq(field.getName(),value));
 						
 					}//Si el campo es un character se filtra con equal
 					else if(field.getType().isAssignableFrom(Character.class))
 					{
-						objCriteria.add( Restrictions.eq(field.getName(),value));
+						objCriteria
+							.add(Restrictions.ne("erased", true))
+							.add( Restrictions.eq(field.getName(),value));
 					}
 					else //Para el resto de campos se filtra con like %value%
 					{
-						objCriteria.add( new LikeExpressionPrayers(field.getName(),value.toString(),MatchMode.ANYWHERE));
+						objCriteria
+							.add(Restrictions.ne("erased", true))
+							.add( new LikeExpressionPrayers(field.getName(),value.toString(),MatchMode.ANYWHERE));
 					}
 				}
 			} catch (IllegalArgumentException|IllegalAccessException|SecurityException e) {
@@ -184,7 +195,9 @@ public class PrayerDao implements IPrayerDao {
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
-		objCriteria.add(Restrictions.eq("uid", uid));
+		objCriteria
+			.add(Restrictions.neOrIsNotNull("erased", true))
+			.add(Restrictions.eq("uid", uid));
 
 		return (PrayerEntity) objCriteria.uniqueResult();
 	}
@@ -193,7 +206,7 @@ public class PrayerDao implements IPrayerDao {
 	public List<PrayerEntity> getOrphanPrayers() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null");
+		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null and prayer.erased<>true");
 
 		return query.list();
 	}
@@ -205,7 +218,8 @@ public class PrayerDao implements IPrayerDao {
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
 		objCriteria
-		.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
+			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
 
 		return objCriteria.list();
 	}
@@ -216,7 +230,9 @@ public class PrayerDao implements IPrayerDao {
 		
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		
-		objCriteria.add(Restrictions.eq("phone", prayer.getPhone()));
+		objCriteria
+			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("phone", prayer.getPhone()));
 		
 		return objCriteria.list();
 	}
@@ -227,7 +243,9 @@ public class PrayerDao implements IPrayerDao {
 		
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		
-		objCriteria.add(Restrictions.eq("hidden", false));
+		objCriteria
+			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("hidden", false));
 		
 		return objCriteria.list();
 	}
@@ -238,7 +256,9 @@ public class PrayerDao implements IPrayerDao {
 		
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		
-		objCriteria.add(Restrictions.eq("hidden", true));
+		objCriteria
+			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("hidden", true));
 		
 		return objCriteria.list();
 	}

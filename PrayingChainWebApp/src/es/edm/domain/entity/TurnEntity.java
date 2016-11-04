@@ -28,6 +28,9 @@ public class TurnEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer uid;
 	
+	@Column
+	private boolean erased;
+	
 	@Column(name="day")
 	@Enumerated(EnumType.STRING)
 	private DayOfWeek dow;
@@ -148,4 +151,11 @@ public class TurnEntity {
 		this.prayer = prayer;
 	}
 
+	public boolean isErased() {
+		return erased;
+	}
+
+	public void setErased(boolean erased) {
+		this.erased = erased;
+	}
 }
