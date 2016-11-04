@@ -1,5 +1,26 @@
 @charset "UTF-8";
 
+table#prayerList td.Green {
+	background-color: #ACEAD5;
+	border: 1px solid white;
+}
+table#prayerList td.Red {
+	background-color: #EDC1C1;
+	border: 1px solid white;
+}
+div.widget div.WidgetDeshabilitado {
+	position: fixed;
+	z-index: 1;
+	background-color: #FFFFFF;
+	opacity: 0.8;
+	/*+placement: anchor-bottom-left;*/
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 95%;
+	width: 96%;
+	margin-left: 10px;
+}
 div.batidoraFondo {
 	height: 100%;
 	width: 100%;
@@ -8,7 +29,7 @@ div.batidoraFondo {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	z-index: 1;
+	z-index: 2;
 	opacity: 0.66;
 	font-family: ;
 	color: #FFFFFF;
@@ -354,6 +375,9 @@ div.widget-links {
 	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
 	overflow: hidden;
 	cursor: pointer;
+}
+.widget .WidgetDeshabilitado {
+	cursor: default;
 }
 .widget-content:hover {
 	background-color: gainsboro;
