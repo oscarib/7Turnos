@@ -1,15 +1,4 @@
-<div class="container-fluid" ng-if="vm.showLoadingGeneral">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="GeneralWarning">
-				<img class="loadingGifImg" src="./images/loadingGif.gif">
-				<span>Estamos
-					realizando lo que nos has pedido... por favor, espera...</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid" ng-if="!vm.showLoadingGeneral">
+<div class="container-fluid">
 	<div class="row widgetRow" id="widgets-line-1">
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget" ng-click="navigateTo('/crearOrador')">
@@ -94,8 +83,6 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="showLoadingStatistics"
-						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="localForeignRatio" width="160"
 						height="120"></canvas>
 				</div>
@@ -105,8 +92,6 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="showLoadingStatistics"
-						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="hiddenPublicRatio" width="160"
 						height="120"></canvas>
 				</div>
@@ -116,8 +101,6 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="showLoadingStatistics"
-						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" width="160" height="120"
 						id="chartCommitted"></canvas>
 				</div>
@@ -127,8 +110,6 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="showLoadingStatistics"
-						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="availablePieChart" width="160"
 						height="120"></canvas>
 				</div>
@@ -138,8 +119,6 @@
 		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="widget-Chart">
-					<img class="loadingGifImg" ng-show="showLoadingStatistics"
-						src="./images/loadingGif.gif">
 					<canvas class="widget-chart" id="chartCoverage" width="160"
 						height="120"></canvas>
 				</div>

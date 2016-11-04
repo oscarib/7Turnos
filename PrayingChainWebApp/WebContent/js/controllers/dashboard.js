@@ -3,12 +3,12 @@ var PrayingChain = angular.module("PrayingChain");
 PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', function($rootScope, chartService, prayerServices) {
 	var self = this;
 	
-	$rootScope.showLoadingStatistics = true;
 	var errorWithServiceCall = false;
 	$rootScope.batidoraGeneral=false;
 	initStatistics();
 	
 	$rootScope.uploadCalendar = function(){
+		$rootScope.batidoraGeneralText='Realizando el envío del calendario. Por favor, espere...';
 		$rootScope.batidoraGeneral=true;
 		var promise = prayerServices.uploadCalendar();
 		promise.then(function(dataOut){
@@ -21,6 +21,8 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 	};
 	
     self.loadStatistics = function(){
+    	$rootScope.batidoraGeneralText='Cargando estadísticas y datos. Por favor, espere...';
+    	$rootScope.batidoraGeneral=true;
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
     		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
@@ -46,7 +48,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
     		}
     	}).finally(function(){
-    		$rootScope.showLoadingStatistics = false;
+    		$rootScope.batidoraGeneral=false;
     	});
     };    
     
