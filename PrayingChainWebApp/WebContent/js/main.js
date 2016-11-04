@@ -22,10 +22,15 @@ PrayingChain.config(function($routeProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/upload.html"
 			})
-			.when("/oradores/:prayerID",{
+			.when("/orador/:prayerID",{
 				controller: "prayerCard",
 				controllerAs: "vm",
 				templateUrl: "pages/prayerCard.html"
+			})
+			.when("/oradores/:filterString",{
+				controller: "prayerList",
+				controllerAs: "vm",
+				templateUrl: "pages/prayerList.html"
 			})
 			.otherwise({
 				redirectTo: '/'
