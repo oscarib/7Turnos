@@ -6,7 +6,19 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         //Cargamos la lista de oradores
         var prayerList = prayerServices.getPrayerList();
         prayerList.then(function(dataOut){
-        	self.tableParams = new NgTableParams({}, { dataset: dataOut.data});
+        	var originalArray = dataOut.data;
+        	var reformattedArray = originalArray.map(function(obj){ 
+        		   var rObj = {};
+        		   rObj.name = obj.name;
+        		   rObj.email = obj.email;
+        		   rObj.ownCountry = obj.ownCountry ? '' : 'Extranjero';
+        		   rObj.hidden = obj.hidden ? 'X' : '-';
+        		   rObj.phone = obj.phone;
+        		   rObj.pseudonym = obj.pseudonym;
+        		   rObj.uid = obj.uid;
+        		   return rObj;
+        		});
+        	self.tableParams = new NgTableParams({}, { dataset: reformattedArray});
         }, function(error) {
         	if (!errorWithServiceCall){
         		errorWithServiceCall = true;
