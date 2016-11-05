@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+table#prayerList {
+	word-break: break-all;
+}
+table#prayerList thead tr.ng-table-sort-header {
+	word-break: keep-all;
+}
 table#prayerList td.Green {
 	background-color: #ACEAD5;
 	border: 1px solid white;
