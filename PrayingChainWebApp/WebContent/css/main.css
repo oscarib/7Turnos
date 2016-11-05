@@ -3,6 +3,26 @@
 table#prayerList {
 	word-break: break-all;
 }
+td .toolTip .toolTipText {
+	visibility: hidden;
+	position: absolute;
+}
+td:hover .toolTip .toolTipText {
+	visibility: visible;
+	position: absolute;
+	background-color: #FFFFFF;
+	font-size: 10px;
+	z-index: 3;
+}
+div#calendar .saturedTurn {
+	cursor: pointer;
+}
+div#calendar .availableTurn {
+	cursor: pointer;
+}
+div#calendar .unavailableTurn {
+	cursor: pointer;
+}
 table#prayerList thead tr.ng-table-sort-header {
 	word-break: keep-all;
 }
@@ -400,7 +420,6 @@ div.widget-links {
 .widget {
 	height: 180px;
 	margin-top: 10px;
-	padding-left: border: 1px outset rgba(0, 0, 0, 0.034);
 	border-radius: 5px;
 	box-shadow: 3px 3px 2px -2px rgba(0, 0, 0, 0.333);
 	overflow: hidden;

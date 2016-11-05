@@ -234,15 +234,15 @@ public class FileService_Impl implements FileService {
 							int nOfPrayers = turns[day][turn].size();
 							int freeTurns = prayersPerTurn-nOfPrayers;
 							if (freeTurns==0) {
-								html.append("\t\t<td title='");
-								html.append(""+prayersString);
-								html.append("' class='unavailableTurn'>");
+								html.append("\t\t<td ");
+								html.append(" class='unavailableTurn'>");
+								html.append("<span class='toolTip'><span class='toolTipText'>"+ prayersString + "</span></span>");
 								html.append("\n");
 							} else {
 								if (freeTurns<0) {
-									html.append("\t\t<td title='");
-									html.append(""+prayersString);
-									html.append("' class='saturedTurn'>");
+									html.append("\t\t<td ");
+									html.append(" class='saturedTurn'>");
+									html.append("<span class='toolTip'><span class='toolTipText'>"+ prayersString + "</span></span>");
 									html.append("\n");
 									if (conf.isMySqlWarningMessagesActivated()){
 										System.out.println("\t\tWarning: Satured turn! There are " + (-1*freeTurns) + " extra Prayers on " + DayOfWeek.values()[day] + ", "+ SimpleTurn.getHourByTurn(turn));
@@ -255,9 +255,9 @@ public class FileService_Impl implements FileService {
 									}
 									freeTurns=0;
 								} else {
-									html.append("\t\t<td title='");
-									html.append(""+prayersString);
-									html.append("' class='availableTurn'>");
+									html.append("\t\t<td ");
+									html.append(" class='availableTurn'>");
+									html.append("<span class='toolTip'><span class='toolTipText'>"+ prayersString + "</span></span>");
 									html.append("\n");
 								}
 							}
