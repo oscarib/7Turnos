@@ -214,6 +214,18 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 				});
 	};
 	
+	self.deleteTurn = function(index){
+		bootbox.confirm("¿Estás seguro de querer borrar este turno?", 
+				function(result){ 
+					if (result){
+						self.turns[index].erased=true;
+						self.saveTurnChanges();
+						bootbox.alert({size:'small', message: 'Se ha borrado el turno'});
+						$route.reload();
+					}
+				});
+	};
+	
 	self.saveChanges = function(){
 		if (prayerHasChanged()){
 			if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){

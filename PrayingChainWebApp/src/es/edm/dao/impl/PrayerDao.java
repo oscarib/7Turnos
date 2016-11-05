@@ -196,10 +196,10 @@ public class PrayerDao implements IPrayerDao {
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
 		objCriteria
-			.add(Restrictions.neOrIsNotNull("erased", true))
+			.add(Restrictions.ne("erased", true))
 			.add(Restrictions.eq("uid", uid));
-
-		return (PrayerEntity) objCriteria.uniqueResult();
+		PrayerEntity prayer = (PrayerEntity)objCriteria.uniqueResult();
+		return prayer;
 	}
 
 	@Override

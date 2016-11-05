@@ -1,5 +1,6 @@
 package es.edm.services.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,14 @@ public class PrayerService implements IPrayerService {
 
 	@Override
 	public PrayerEntity getPrayer(int prayerID) {
-		return prayerDao.getPrayerByID(prayerID);
+		PrayerEntity prayer = (PrayerEntity)prayerDao.getPrayerByID(prayerID);
+		List<TurnEntity> turns = prayer.getTurns();
+		List<TurnEntity> filteredTurns = new ArrayList<TurnEntity>();
+		for (TurnEntity turn : turns){
+			if (!turn.isErased()) filteredTurns.add(turn);
+		}
+		prayer.setTurns(filteredTurns);
+		return prayer;
 	}
 
 	@Override
