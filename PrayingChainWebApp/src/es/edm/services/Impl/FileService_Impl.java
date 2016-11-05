@@ -229,8 +229,8 @@ public class FileService_Impl implements FileService {
 							html.append("\t\t</td>");
 							html.append("\n");
 						}
-						if (turns[day][turn]!=null){
-							String prayersString = getPrayersOnTurnString(DayOfWeek.values()[day], TurnsOfDay.values()[turn]);
+						String prayersString = getPrayersOnTurnString(DayOfWeek.values()[day], TurnsOfDay.values()[turn]);
+						if (turns[day][turn]!=null && !"".equals(prayersString)){
 							int nOfPrayers = turns[day][turn].size();
 							int freeTurns = prayersPerTurn-nOfPrayers;
 							if (freeTurns==0) {
