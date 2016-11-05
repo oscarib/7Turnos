@@ -63,6 +63,7 @@ public class TurnDao implements ITurnDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(TurnEntity.class);
+		objCriteria.add(Restrictions.ne("erased", true));
 
 		return objCriteria.list();
 	}

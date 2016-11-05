@@ -3,7 +3,9 @@ package es.edm.controllers;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -42,7 +44,7 @@ public class OtherServicesController {
 	@ResponseBody
 	public boolean UploadCalendar() throws IOException, DDBBException{
 		try{
-			fileService.WriteFile(fileService.getCalendarTableString(), conf.getCalendarFile2UploadURI());
+			fileService.WriteFile(fileService.getCalendarTableString(1), conf.getCalendarFile2UploadURI());
 			logger.info("Generando el archivo del calendario...");
 			fileService.WriteFile(fileService.getStatisticsString(), conf.getStatisticsFile2UploadURI());
 			logger.info("Generando el archivo de estadísticas...");
@@ -90,5 +92,14 @@ public class OtherServicesController {
 		statistics.put("OrphanPrayers", prayerService.getOrphanPrayers().size()); 		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
 		
 		return statistics;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getCalendarHtml.do", method = RequestMethod.POST)
+	public List<String> getCalendarString(){
+		List<String> calendar = new ArrayList<String>();
+		String calendarString = fileService.getCalendarTableString(4);
+		calendar.add(calendarString);
+		return calendar;
 	}
 }

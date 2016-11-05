@@ -32,6 +32,11 @@ PrayingChain.config(function($routeProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/prayerList.html"
 			})
+			.when("/calendar",{
+				controller: "calendar",
+				controllerAs: "vm",
+				templateUrl: "pages/calendar.html"
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

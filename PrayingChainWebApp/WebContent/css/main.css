@@ -6,6 +6,30 @@ table#prayerList {
 table#prayerList thead tr.ng-table-sort-header {
 	word-break: keep-all;
 }
+div#calendar div.rowOptions {
+	margin-bottom: -160px;
+}
+table.Planning td.availableTurn {
+	background-color: #F8D6D6;
+	border: 1px solid #FFFFFF;
+}
+table.Planning td.saturedTurn {
+	background-color: #A33A3A;
+	border: 1px solid #FEBCBC;
+}
+table.Planning td.unavailableTurn {
+	background-color: #C45D5D;
+	border: 1px solid #FFFFFF;
+}
+table.Planning td {
+	min-width: 20px;
+}
+table.Planning td.freeTurn {
+	border: 1px solid #F8D6D6;
+}
+table.Planning tr th {
+	text-align: center;
+}
 table#prayerList td.Green {
 	background-color: #ACEAD5;
 	border: 1px solid white;
