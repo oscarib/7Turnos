@@ -135,12 +135,12 @@ public class PrayerDao implements IPrayerDao {
 //		+ "where edm_turns.day=? and edm_turns.hour=? and edm_turns.status!='cancelled' and edm_turns.status!='NotCommitted'"
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
-		objCriteria
+		objCriteria.createCriteria("turns")
 		.add(Restrictions.ne("erased", true))
-		.add(Restrictions.ne("turns.status",TurnStatus.cancelled))
-		.add(Restrictions.ne("turns.status",TurnStatus.NotCommitted))
-		.add(Restrictions.eq("turns.day",turn.getDow()))
-		.add(Restrictions.eq("turns.turn",turn.getTurn()));
+		.add(Restrictions.ne("status",TurnStatus.cancelled))
+		.add(Restrictions.ne("status",TurnStatus.NotCommitted))
+		.add(Restrictions.eq("dow",turn.getDow()))
+		.add(Restrictions.eq("turn",turn.getTurn())).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
 		return objCriteria.list();
 	}

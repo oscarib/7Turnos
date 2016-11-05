@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.util.List;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -18,13 +19,29 @@ import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import es.edm.domain.ListOfTurns;
+import es.edm.domain.SimpleTurn;
+import es.edm.domain.entity.PrayerEntity;
+import es.edm.domain.entity.TurnEntity;
+import es.edm.exceptions.TurnException;
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
+import es.edm.services.IPrayerService;
+import es.edm.services.ITurnService;
+import es.edm.util.DayOfWeek;
+import es.edm.util.TurnsOfDay;
 
 public class FileService_Impl implements FileService {
 	
 	Configuration conf;
+	
+	@Autowired
+	IPrayerService prayerService;
+	
+	@Autowired
+	ITurnService turnService;
 	
 	private final static Logger logger = LoggerFactory.getLogger(FileService.class);
 	
@@ -145,4 +162,147 @@ public class FileService_Impl implements FileService {
 		}
 
 	}
+    
+	@Override
+	public String getStatisticsString() {
+		StringBuilder html = new StringBuilder();
+		html.append("[thrive_number_counter color='blue' value='");
+		int committed = prayerService.getCommittedPrayers().size();
+		html.append(Integer.toString(committed));
+		html.append("' before='Ya somos ' after='' label='']");
+		html.append("[thrive_number_counter color='blue' value='");
+		int empty = turnService.getEmptyTurns();
+		html.append(Integer.toString(empty));
+		html.append("' before='Quedan: ' after='turnos vacíos' label='']");
+		return html.toString();
+	}
+	
+	@Override
+	public String getCalendarTableString() {
+		
+		ListOfTurns[][] turns = turnService.loadAllTurns();
+		
+		StringBuilder html = new StringBuilder();
+
+		html.append("<table class='Planning'>");
+		html.append("\n");
+		html.append("\t<tr>");
+		html.append("\n");
+		html.append("\t\t<th></th>");
+		html.append("\n");
+		html.append("\t\t<th>L</th>");
+		html.append("\n");
+		html.append("\t\t<th>M</th>");
+		html.append("\n");
+		html.append("\t\t<th>X</th>");
+		html.append("\n");
+		html.append("\t\t<th>J</th>");
+		html.append("\n");
+		html.append("\t\t<th>V</th>");
+		html.append("\n");
+		html.append("\t\t<th>S</th>");
+		html.append("\n");
+		html.append("\t\t<th>D</th>");
+		html.append("\n");
+		html.append("\t</tr>");
+		html.append("\n");
+
+		//loop through the turns on the day
+		for (int turn=0; turn<48; turn++){
+			html.append("\t<tr>");
+			html.append("\n");
+
+			try{
+
+				//Loop through the days on the week
+				for (int day=0; day<7; day++){
+
+					//Cell for monday
+					int prayersPerTurn = conf.getPrayersPerTurn();
+					if (day==0) {
+						html.append("\t\t<td>");
+						html.append("\n");
+						html.append("\t\t\t"+SimpleTurn.getHourByTurn(turn));
+						html.append("\n");
+						html.append("\t\t</td>");
+						html.append("\n");
+					}
+					if (turns[day][turn]!=null){
+						String prayersString = getPrayersOnTurnString(DayOfWeek.values()[day], TurnsOfDay.values()[turn]);
+						int nOfPrayers = turns[day][turn].size();
+						int freeTurns = prayersPerTurn-nOfPrayers;
+						if (freeTurns==0) {
+							html.append("\t\t<td title='");
+							html.append(""+prayersString);
+							html.append("' class='unavailableTurn'>");
+							html.append("\n");
+						} else {
+							if (freeTurns<0) {
+								html.append("\t\t<td title='");
+								html.append(""+prayersString);
+								html.append("' class='saturedTurn'>");
+								html.append("\n");
+								if (conf.isMySqlWarningMessagesActivated()){
+									System.out.println("\t\tWarning: Satured turn! There are " + (-1*freeTurns) + " extra Prayers on " + DayOfWeek.values()[day] + ", "+ SimpleTurn.getHourByTurn(turn));
+									if (conf.isDetailedInfoActivatedForSaturedTurns()){
+										System.out.println("\t\tPrayers on the turn:");
+										System.out.println("");
+										System.out.println(prayersString);
+										System.out.println("");
+									}
+								}
+								freeTurns=0;
+							} else {
+								html.append("\t\t<td title='");
+								html.append(""+prayersString);
+								html.append("' class='availableTurn'>");
+								html.append("\n");
+							}
+						}
+					} else {
+						html.append("\t\t<td title='");
+						html.append("' class='freeTurn'>");
+						html.append("\n");
+					}
+					html.append("\t\t</td>");				
+					html.append("\n");
+				}	
+
+			} catch (TurnException e){
+				throw new RuntimeException(e);
+			} 
+
+			html.append("\t</tr>");
+			html.append("\n");
+		}
+		html.append("</table>");
+		html.append("\n");
+		return html.toString();
+	}
+	
+	@Override
+	//Like "Prayers on this turn: anonymous, Peter, John"
+	public String getPrayersOnTurnString(DayOfWeek day, TurnsOfDay turn) throws TurnException {
+		//Get the prayers from the ddbb
+		TurnEntity turn2Search = new TurnEntity();
+		turn2Search.setDow(day);
+		turn2Search.setTurn(turn.toString());
+		List<PrayerEntity> prayers = prayerService.getPrayersOnTurn(turn2Search);
+		StringBuilder prayersString = new StringBuilder();
+		for (PrayerEntity nextPrayer : prayers){
+			String pseudonym;
+			if (nextPrayer.getPseudonym()==null){
+				pseudonym = "anónimo";
+			} else {
+				if (nextPrayer.getPseudonym().equals("")){
+					pseudonym = "anónimo";
+				} else {
+					pseudonym = nextPrayer.getPseudonym();
+				}
+			}
+			prayersString.append(pseudonym + ", ");
+		}
+		return prayersString.toString();
+	}
+
 }
