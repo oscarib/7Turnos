@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.UsedTurns;
+import es.edm.util.TurnStatus;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -63,7 +64,9 @@ public class TurnDao implements ITurnDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(TurnEntity.class);
-		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.ne("erased", true))
+		.add(Restrictions.ne("status",TurnStatus.cancelled))
+		.add(Restrictions.ne("status",TurnStatus.NotCommitted));
 
 		return objCriteria.list();
 	}
