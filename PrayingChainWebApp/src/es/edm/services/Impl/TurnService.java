@@ -131,18 +131,20 @@ public class TurnService implements ITurnService {
 			//Loop through all turns in the ddbb
 			for (TurnEntity nextTurn : ddbbTurns){
 				
-				//load Day of Week as an integer
-				int day = nextTurn.getDow().ordinal();
-				
-				//Load the turn
-				int turn = getTurnPosition(nextTurn.getTurn());
-				if (turn<0) throw new RuntimeException("No se pudo encontrar ese turno (String) en el enumerado TurnsOfDay");
-				
-				//If the grid List is empty, create a new one
-				if (listOfTurns[day][turn] == null) listOfTurns[day][turn] = new ListOfTurns();
-
-				//Add the turn to its position
-				listOfTurns[day][turn].add(nextTurn);
+				if (!nextTurn.getPrayer().isErased()){
+					//load Day of Week as an integer
+					int day = nextTurn.getDow().ordinal();
+					
+					//Load the turn
+					int turn = getTurnPosition(nextTurn.getTurn());
+					if (turn<0) throw new RuntimeException("No se pudo encontrar ese turno (String) en el enumerado TurnsOfDay");
+					
+					//If the grid List is empty, create a new one
+					if (listOfTurns[day][turn] == null) listOfTurns[day][turn] = new ListOfTurns();
+	
+					//Add the turn to its position
+					listOfTurns[day][turn].add(nextTurn);
+				}
 			}
 			
 			return listOfTurns;
