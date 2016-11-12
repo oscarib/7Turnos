@@ -24,7 +24,7 @@ import es.edm.services.Impl.PrayerService;
 import es.edm.services.Impl.TurnService;
 
 @RestController
-public class OtherServicesController {
+public class LoginServiceController {
 
 	@Autowired
 	FileService fileService;
@@ -38,7 +38,7 @@ public class OtherServicesController {
 	@Autowired
 	Configuration conf;
 	
-	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
+	private final static Logger logger = LoggerFactory.getLogger(LoginServiceController.class);
 
 	//CONTROLLER: UPLOADCALENDAR
 	@RequestMapping(path="/uploadCalendar.do", method=RequestMethod.POST)

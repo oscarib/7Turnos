@@ -33,7 +33,7 @@
 		<intercept-url pattern="/**" access="isFullyAuthenticated()" />
 -->
 		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
-					login-page="/Login.jsp" authentication-failure-url="/Login.jsp?error" />
+					login-page="/main.html" authentication-failure-url="/Login.jsp?error" />
 		<logout logout-success-url="/index.html"/> 
 
 	</http>

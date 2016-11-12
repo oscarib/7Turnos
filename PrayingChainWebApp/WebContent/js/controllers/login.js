@@ -1,15 +1,13 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("login", ['$location','$rootScope',function($location,$rootScope) {
+PrayingChain.controller("login", ['$location','$rootScope','$http', function($location,$rootScope,$http) {
 	var self = this;
 	
 	var authenticate = function(credentials, callback) {
 
-	    var headers = credentials ? {authorization : "Basic "
-	        + btoa(credentials.username + ":" + credentials.password)
-	    } : {};
+	    var headers = credentials ? {authorization : "edmUser:" + credentials.edmUser + ":edmPwd:" + credentials.edmPwd} : {};
 
-	    $http.get('user', {headers : headers}).then(function(response) {
+	    $http.post('./performLogin', {headers : headers}).then(function(response) {
 	      if (response.data.name) {
 	        $rootScope.authenticated = true;
 	      } else {
@@ -36,6 +34,4 @@ PrayingChain.controller("login", ['$location','$rootScope',function($location,$r
 	        }
 	      });
 	  };
-	});
-	
 }]);

@@ -19,6 +19,7 @@
 <script src="./js/controllers/prayerList.js"></script>
 <script src="./js/controllers/prayerCard.js"></script>
 <script src="./js/controllers/menu.js"></script>
+<script src="./js/controllers/login.js"></script>
 <script src="./js/controllers/calendar.js"></script>
 <script src="./js/controllers/head.js"></script>
 <script src="./js/lib/angular-datatables.min.js"></script>
@@ -33,12 +34,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="loginFondo" ng-if="!authenticated">
-			<div class="loginForm">
-				<span>Please, login to access...</span>
-				<label>Usuario: </label><br><input type="text" name="user" ng-model="credentials.name">
-				<label>Contraseña: </label><br><input type="password" name="pwd" ng-model="credentials.pwd">
-				<input class ="loginSubmit" type="button" name="submit" value="Login">
-			</div>
+			<div ng-include="'./pages/login.html'" ng-controller='login as vm'></div>
 		</div>
 		<div class="batidoraFondo" ng-if="batidoraGeneral">
 			<div class="batidoraImagen">
