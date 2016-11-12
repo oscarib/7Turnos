@@ -3,6 +3,7 @@ package es.edm.controllers;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ import es.edm.services.FileService;
 import es.edm.services.Impl.PrayerService;
 import es.edm.services.Impl.TurnService;
 
-@Controller
+@RestController
 public class OtherServicesController {
 
 	@Autowired
@@ -102,4 +103,9 @@ public class OtherServicesController {
 		calendar.add(calendarString);
 		return calendar;
 	}
+	
+	  @RequestMapping(value = "/user.do", method = RequestMethod.POST)
+	  public Principal user(Principal user) {
+	    return user;
+	  }
 }

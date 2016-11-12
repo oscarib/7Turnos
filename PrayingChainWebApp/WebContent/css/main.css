@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+div.loginFondo {
+	height: 100%;
+	width: 100%;
+	background-color: #83B2EF;
+	/*+placement: anchor-bottom-left;*/
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 2;
+}
 table#prayerList {
 	word-break: break-all;
 }
@@ -87,7 +97,6 @@ div.batidoraFondo {
 div.batidoraImagen {
 	height: 100px;
 	width: 205px;
-	/*background-color: #B78383;*/
 	position: fixed;
 	top: 50%;
 	left: 55%;
@@ -96,6 +105,40 @@ div.batidoraImagen {
 	position: absolute;
 	right: 0;
 	bottom: 0;
+}
+div.loginForm {
+	height: 217px;
+	width: 220px;
+	background-color: #5F8ECA;
+	top: 50%;
+	left: 50%;
+	/*+placement: anchor-bottom-right;*/
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transform: translate(-50%, -50%);
+}
+div.loginForm label {
+	margin-left: 11px;
+	margin-top: 6px;
+	padding-top: 3px;
+	padding-left: 2px;
+	color: #3C3C3C;
+}
+div.loginForm span {
+	color: #FFFFFF;
+}
+div.loginForm .loginSubmit {
+	margin-left: 35px;
+	margin-top: 19px;
+	height: ;
+	width: 151px;
+	color: #FFFFFF;
+	background-color: #0B3D7D;
+}
+div.loginForm input {
+	margin-left: 35px;
+	margin-top: 3px;
 }
 div.batidoraImagen img.loadingGifImg {
 	margin-top: 52px;
