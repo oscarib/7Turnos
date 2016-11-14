@@ -5,7 +5,6 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 	
 	var errorWithServiceCall = false;
 	$rootScope.batidoraGeneral=false;
-	$rootScope.authenticated = false;
 	initStatistics();
 	
 	$rootScope.uploadCalendar = function(){

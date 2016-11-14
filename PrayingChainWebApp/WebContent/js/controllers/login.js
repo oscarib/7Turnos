@@ -3,8 +3,6 @@ var PrayingChain = angular.module("PrayingChain");
 PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope', function($location,$rootScope,prayerServices,$rootScope) {
 	var self = this;
 
-	$rootScope.authenticated = false;
-
 	$rootScope.authenticate = function(){
 		var loggedUser = prayerServices.getLoggedUser();
 		loggedUser.then(function(dataOut) {
@@ -28,7 +26,7 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 
 		var promise = prayerServices.login(self.credentials);
 		promise.then(function(dataOut) {
-			if (!dataOut.data.username) {
+			if (dataOut.data.username) {
 				$rootScope.authenticated = true;
 			}
 		});
