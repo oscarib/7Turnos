@@ -103,10 +103,4 @@ public class OtherServicesController {
 		calendar.add(calendarString);
 		return calendar;
 	}
-	
-	@ResponseBody	
-	@RequestMapping(value = "/user.do", method = RequestMethod.POST)
-	public Principal user(Principal user) {
-		return user;
-	}
 }

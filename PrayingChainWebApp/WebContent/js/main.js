@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain", ['ngAnimate','ngTable','ngRoute']);
 
-PrayingChain.config(function($routeProvider){
+PrayingChain.config(function($routeProvider,$httpProvider){
 		$routeProvider
 			.when("/", {
 				controller: "dashboard",
@@ -40,4 +40,6 @@ PrayingChain.config(function($routeProvider){
 			.otherwise({
 				redirectTo: '/'
 			});
+		
+		$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 });

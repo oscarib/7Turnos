@@ -45,7 +45,7 @@
 		<authentication-provider>
 			<password-encoder ref="bcryptEncoder"/>  
 			<jdbc-user-service data-source-ref="DataSource" 
-							   users-by-username-query="select username,password,enabled from users where username = ?"
+							   users-by-username-query="select username,password,enabled from users where username = ? and enabled=1"
 							   role-prefix="ROLE_"/>
 		</authentication-provider>
 	</authentication-manager>

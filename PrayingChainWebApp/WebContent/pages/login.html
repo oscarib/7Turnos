@@ -1,10 +1,15 @@
 	<div class="loginForm">
-		<form action="./performlogin">
-		<span>Please, login to access...</span>
-		<label>Usuario: </label><br>
-		<input type="text" name="edmUser" ng-model="vm.credentials.edmUser">
-		<label>Contraseña:</label><br>
-		<input type="password" name="edmPwd" ng-model="vm.credentials.edmPwd">
-		<input class="loginSubmit" type="submit" name="submit" value="Login">
+		<form role="form" ng-submit="vm.login()">
+
+			<span>Please, login to access...</span>
+
+			<label>Usuario: </label><br>
+			<input type="text" name="edmUser" ng-model="vm.credentials.userName">
+
+			<label>Contraseña:</label><br>
+			<input type="password" name="edmPwd" ng-model="vm.credentials.userPwd">
+
+			<input class="loginSubmit" type="submit" name="submit" value="Login">
+
 		</form>
 	</div>

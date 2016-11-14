@@ -1,37 +1,37 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("login", ['$location','$rootScope','$http', function($location,$rootScope,$http) {
+PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope', function($location,$rootScope,prayerServices,$rootScope) {
 	var self = this;
+
+	$rootScope.authenticated = false;
+
+	$rootScope.authenticate = function(){
+		var loggedUser = prayerServices.getLoggedUser();
+		loggedUser.then(function(dataOut) {
+			var loggedUser = dataOut.data; 
+			if (!loggedUser.username){
+				$rootScope.authenticated = false;
+			} else {
+				$rootScope.authenticated = true;
+			}
+		}, function(error) {
+			//Aquí el código cuando la llamada falle (deferred.reject())
+
+		}).finally(function(){});
+	};
 	
-	var authenticate = function(credentials, callback) {
+	$rootScope.authenticate();
+	
+	self.login = function(){
+		
+		$rootScope.authenticated = false;
 
-	    var headers = credentials ? {authorization : "edmUser:" + credentials.edmUser + ":edmPwd:" + credentials.edmPwd} : {};
+		var promise = prayerServices.login(self.credentials);
+		promise.then(function(dataOut) {
+			if (!dataOut.data.username) {
+				$rootScope.authenticated = true;
+			}
+		});
+	};
 
-	    $http.post('./performLogin', {headers : headers}).then(function(response) {
-	      if (response.data.name) {
-	        $rootScope.authenticated = true;
-	      } else {
-	        $rootScope.authenticated = false;
-	      }
-	      callback && callback();
-	    }, function() {
-	      $rootScope.authenticated = false;
-	      callback && callback();
-	    });
-
-	  }
-
-	  authenticate();
-	  self.credentials = {};
-	  self.login = function() {
-	      authenticate(self.credentials, function() {
-	        if ($rootScope.authenticated) {
-	          $location.path("/");
-	          self.error = false;
-	        } else {
-	          $location.path("/login");
-	          self.error = true;
-	        }
-	      });
-	  };
 }]);

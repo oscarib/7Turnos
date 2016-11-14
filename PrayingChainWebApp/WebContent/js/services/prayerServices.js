@@ -5,7 +5,7 @@
         .factory('prayerServices', prayerServices);
     
     /** @ngInject **/
-    function prayerServices ($q, pcUtils) {
+    function prayerServices ($q, pcUtils, $http) {
     	var self = this;
 
     	self.getPrayerList = function(requestData){
@@ -142,7 +142,47 @@
     		
     		return promise;
     	};
+    	
+    	self.getLoggedUser = function(){
 
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
+    		$http({
+    			url: './getLoggedUser.do',
+    			dataType: 'json',
+    			method: 'POST'
+    		}).then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
+    	self.login = function(credentials){
+
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
+    		$http({
+    			url: './login.do',
+    			dataType: 'json',
+    			data: credentials,
+    			headers: {
+    				"Content-Type": "application/json"
+    			},
+    			method: 'POST'
+    		}).then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+    	
     	return self;
     }
 })();
