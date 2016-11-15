@@ -1,0 +1,23 @@
+<div id="prayersTable" class="container-fluid">
+	<div class="row tableRow">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<img class="loadingGifImg" ng-show="vm.showLoadingPrayersTable"
+				src="./images/loadingGif.gif">
+			<table ng-table="vm.tableParams" id="prayerList" class="table table-hover table-condensed">
+				<tr ng-repeat="prayer in $data">
+					<td width="50">{{prayer.uid}}</td>
+					<td width="150" data-title="'Nombre'" sortable="'name'" filter="{name: 'text'}">{{prayer.name}}</td>
+					<td width="250" data-title="'Email'" sortable="'email'" filter="{email: 'text'}">{{prayer.email}}</td>
+					<td width="150" data-title="'España'" sortable="'ownCountry'" filter="{ownCountry: 'text'}">{{prayer.ownCountry}}</td>
+					<td width="120" data-title="'Oculto'" sortable="'hidden'" filter="{hidden: 'text'}">{{prayer.hidden}}</td>
+					<td width="150" data-title="'Teléfono'" sortable="'phone'" filter="{phone: 'text'}">{{prayer.phone}}</td>
+					<td width="150" data-title="'Seudónimo'" sortable="'pseudonym'" filter="{pseudonym: 'text'}">{{prayer.pseudonym}}</td>
+					<td class="iconColumn">
+						<img ng-click="navigateTo('/orador/'+prayer.uid)" src="./images/open.svg" alt="Edit Prayer" height="24" width="24">
+					</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</div>

@@ -7,12 +7,7 @@
   <display-name>Spring Web MVC Application</display-name>
 
 	<welcome-file-list>
-    	<welcome-file>index.html</welcome-file>
-    	<welcome-file>index.htm</welcome-file>
-    	<welcome-file>index.jsp</welcome-file>
-    	<welcome-file>default.html</welcome-file>
-    	<welcome-file>default.htm</welcome-file>
-    	<welcome-file>default.jsp</welcome-file>
+    	<welcome-file>/pages/main.html</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -23,7 +18,7 @@
 
 	<servlet-mapping>
  		<servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 	<!--  Load up all spring xml files as part of the loading of the webapp -->

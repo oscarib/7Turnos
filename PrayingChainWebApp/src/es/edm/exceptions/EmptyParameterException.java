@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class EmptyParameterException extends Exception {
+public class EmptyParameterException extends RuntimeException {
 
 	private static final long serialVersionUID = 812652056266048477L;
 

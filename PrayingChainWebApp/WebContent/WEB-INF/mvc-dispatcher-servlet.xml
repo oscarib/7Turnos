@@ -1,0 +1,115 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<mvc:annotation-driven/>
+
+	<!-- General Configuration -->
+	<bean id="Configuration" class="es.edm.services.Impl.Configuration_XML_Impl">
+
+		<!-- General Configuration -->		
+		<property name="detailedNotesOnSaturedTurns" value="false"/>
+		<property name="enoughPrayersForWhatsappGroupWarning" value="true"/>
+		<property name="minimumNumberOfPrayersForWhatsappGroups" value="5"/>
+		<property name="showPrayerNamesOnCalendar" value="true"/> <!-- To show or not prayer pseudonym on calendar -->
+		<property name="prayersPerTurn" value="5"/>
+
+		<!-- FTP Configuration -->
+		<property name="ftpServerName" value="localhost"/>
+		<property name="ftpPort" value="21"/>
+		<property name="ftpUser" value="root"/>
+		<property name="ftpPwd" value="root"/>
+		<property name="remoteFilePath" value="./turnos/"/>
+		<property name="localFilePath" value="."/>
+		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
+		<property name="statisticsFileName" value="Statistics.html"/> <!-- Name of the file with the code to generate the statistics on the web -->
+		<property name="printFtpUpladingMessages" value="true"/>
+
+		<!-- Other COnfiguration -->
+		<property name="mailingListSecretPassword" value=""/>
+
+	</bean>
+
+
+	<!-- Datasources -->
+    <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/edm_dev"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="acquireRetryDelay" value="5000"></property>
+        <property name="acquireRetryAttempts" value="5"/>
+        <property name="breakAfterAcquireFailure" value="true"/>
+        <property name="testConnectionOnCheckout" value="true"/>
+        <property name="checkoutTimeout" value="60000"/>
+        <property name="idleConnectionTestPeriod" value="300"></property>
+    </bean>
+    
+	<!-- **************************************************************************************** -->
+	<!-- Gestiona las transaciones de JPA -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	
+	<!-- Escaneador que gestiona y valida los mapeos relacionales contra las tablas al inicio de la aplicacion -->
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="DataSource" />
+		<property name="packagesToScan">
+			<array>
+				<value>es.edm.domain.entity</value>
+				<value>es.edm.domain.middle</value>
+			</array> 
+		</property>
+
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false" />
+				<property name="generateDdl" value="false" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- Habilitar para medir rendimiento -->
+				<!-- <prop key="hibernate.generate_statistics">true</prop> -->
+			</props>
+		</property>
+	</bean>
+	<!-- ****************************************************************************** -->
+
+	<!-- Templates -->
+	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="DataSource"/>
+    </bean>
+
+    <!-- Services -->
+
+	<bean id="FileService" class="es.edm.services.Impl.FileService_Impl">
+		<constructor-arg ref="Configuration"/>
+	</bean>
+
+	<!-- Spring MVC Auto-Controller scanning -->
+	<context:component-scan base-package="es.edm.controllers"/>
+	<context:component-scan base-package="es.edm.resources"/>
+	<context:component-scan base-package="es.edm.services.Impl"/>
+	<context:component-scan base-package="es.edm.dao.impl"/>
+
+	<!-- Messages Bundle -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="es/edm/resources/messages"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,101 @@
+<div id="newPrayer" class="container-fluid">
+	<div class="row tableRow">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<form ng-submit="vm.createNewPrayer(newPrayerForm.$valid)" name="newPrayerForm" novalidate>
+				
+				<div class="container-fluid">
+				
+					<div class="row">
+						<h1>Crear un Orador</h1>
+					</div>
+
+					<div class="row">
+						<label>Nombre</label>
+						<input type="text" name="nombre" ng-model="vm.nombre" required><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.nombre.$error.required">Rellene este campo</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>Día</label>
+						<select ng-model="vm.dia" name="dia" required>
+							<option ng-repeat="day in vm.daysOfWeek" value="{{day}}">{{day}}</option>
+						</select><br> 
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.dia.$error.required">Rellene este campo</span>
+						</span>
+      					</div>
+					
+					<div class="row">
+						<label>Turno</label>
+						<select ng-model="vm.turno" name="turno" required>
+							<option ng-repeat="turno in vm.turnos" value="{{turno}}">{{turno}}</option>
+						</select><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.turno.$error.required">Rellene este campo</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>Email</label>
+						<input type="email" name="email" ng-model="vm.email"><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted && newPrayerForm.email.$touched">
+							<span ng-show="newPrayerForm.email.$error.email">Formato de email incorrecto<br></span>
+						</span>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="vm.phoneOrEmailError">Debe rellenar un email o un teléfono</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>Teléfono</label>
+						<input type="text" name="telefono" ng-model="vm.telefono"><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="vm.phoneOrEmailError">Debe rellenar un email o un teléfono</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>País</label>
+						<select ng-model="vm.pais" name="pais" required>
+							<option ng-repeat="pais in vm.paises" value="{{pais}}">{{pais}}</option>
+						</select><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.pais.$error.required">Rellene este campo</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>Notas</label>
+						<input type="text" name="notes" ng-model="vm.notas" />
+					</div>
+					
+					<div class="row">
+						<label>Visibilidad</label>
+						<select ng-model="vm.visibilidad" name="visibilidad" required>
+							<option ng-repeat="visibilidad in vm.visibilidades"
+								value="{{visibilidad}}">{{visibilidad}}</option>
+						</select><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.visibilidad.$error.required">Rellene este campo</span>
+						</span>
+					</div>
+					
+					<div class="row">
+						<label>Seudónimo</label>
+						<input type="text" name="seudonimo" ng-model="vm.seudonimo" /><br>
+						<span class="error-messages" ng-show="newPrayerForm.$submitted">
+							<span ng-show="newPrayerForm.visibilidad.$touched && vm.visibilidad=='Público'">Rellene este campo</span>
+						</span>
+					</div>
+
+					<div class="row">
+						<input type="submit" />
+					</div>
+			
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

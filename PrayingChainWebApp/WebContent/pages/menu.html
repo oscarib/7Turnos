@@ -1,0 +1,91 @@
+<div class="container-fluid">
+	<div class="row menuRow">
+		<div id="UserInformation" class="col-lg-12">
+			<span id="UserName">{{vm.adminName}}</span><br>
+			<span id="UserGroup">{{vm.pcName}}</span>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row menuRow" ng-class="vm.showDashBoard" ng-click="vm.openMenu(1);navigateTo('/')">
+		<div class="col-lg-12">
+			<span>Dashboard</span>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row menuRow">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-2" ng-click="vm.openMenu(2)">
+					<img class="GroupOpener" src="./images/GroupOpener.gif"> <span
+						class="menu-group">Listados</span>
+				</div>
+			</div>
+			<div class="fadeAnimate" ng-if="!vm.hideMenu[2]">
+				<div class="row" ng-class="vm.showPrayersList">
+					<div class="col-lg-2" ng-click="navigateTo('/oradores')">
+						<span class="menu-item">Oradores</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2" ng-click="navigateTo('/calendar')">
+						<span class="menu-item">Calendario</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row menuRow">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-1">
+					<img ng-click="vm.openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif"> 
+					<span ng-click="vm.openMenu(3)" class="menu-group">Acciones</span>
+				</div>
+			</div>
+			<div class="fadeAnimate" ng-if="!vm.hideMenu[3]">
+				<div class="row" ng-click="navigateTo('/crearOrador')">
+						<div class="col-lg-2">
+							<span class="menu-item">Crear Orador</span>
+						</div>
+					</a>
+				</div>
+				<div class="row">
+					<div class="col-lg-2">
+						<span ng-click="uploadCalendar()" class="menu-item">Actualizar Cal.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+<div class="container-fluid">
+	<div class="row menuRow">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-1">
+					<img ng-click="vm.openMenu(4)" class="GroupOpener"
+						src="./images/GroupOpener.gif"> <span
+						ng-click="vm.openMenu(4)" class="menu-group">Configuración</span>
+				</div>
+			</div>
+			<div class="fadeAnimate" ng-if="!vm.hideMenu[4]">
+				<div class="row">
+					<div class="col-lg-2">
+						<span class="menu-item">Sitio FTP</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2">
+						<span class="menu-item">MailChimp</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+-->

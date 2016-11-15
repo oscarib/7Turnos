@@ -157,19 +157,19 @@ public class SimpleTurn {
 	
 	public static DayOfWeek getDayOfWeek(String day) throws DayOfWeekException{
 		switch (day) {
-		case "monday":
+		case "Lunes":
 			return DayOfWeek.monday;
-		case "tuesday":
+		case "Martes":
 			return DayOfWeek.tuesday;
-		case "wednesday":
+		case "Miércoles":
 			return DayOfWeek.wednesday;
-		case "thursday":
+		case "Jueves":
 			return DayOfWeek.thursday;
-		case "friday":
+		case "Viernes":
 			return DayOfWeek.friday;
-		case "saturday":
+		case "Sábado":
 			return DayOfWeek.saturday;
-		case "sunday":
+		case "Domingo":
 			return DayOfWeek.sunday;
 		default:
 			throw new DayOfWeekException("provided day is not valid (" + day + ")");

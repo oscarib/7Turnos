@@ -1,6 +1,6 @@
 package es.edm.exceptions;
 
-public class TurnException extends Exception {
+public class TurnException extends RuntimeException {
 
 	/**
 	 * 

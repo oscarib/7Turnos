@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="PrayingChain">
+<head>
+<meta charset="UTF-8">
+<title>PrayingChain 2.0</title>
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/main.css" rel="stylesheet">
+<link href="./css/lib/ng-table.min.css" rel="stylesheet">
+<script src="./js/lib/jquery-2.2.4.min.js"></script>
+<script src="./js/lib/bootstrap.min.js"></script>
+<script src="./js/lib/bootbox.min.js"></script>
+<script src="./js/lib/angular.min.js"></script>
+<script src="./js/lib/angular-animate.min.js"></script>
+<script src="./js/lib/angular-route.min.js"></script>
+<script src="./js/lib/ng-table.min.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/controllers/dashboard.js"></script>
+<script src="./js/controllers/newPrayer.js"></script>
+<script src="./js/controllers/prayerList.js"></script>
+<script src="./js/controllers/prayerCard.js"></script>
+<script src="./js/controllers/menu.js"></script>
+<script src="./js/controllers/calendar.js"></script>
+<script src="./js/controllers/head.js"></script>
+<script src="./js/lib/angular-datatables.min.js"></script>
+<script src="./js/lib/Chart.min.js"></script>
+<script src="./js/services/chartServices.js"></script>
+<script src="./js/services/prayerServices.js"></script>
+<script src="./js/services/pcUtils.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="batidoraFondo" ng-if="batidoraGeneral">
+			<div class="batidoraImagen">
+				<span>{{batidoraGeneralText}}</span>
+				<img class="loadingGifImg" src="./images/loadingGif.gif">
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-item"
+			id="sidebar-menu" ng-include="'./pages/menu.html'" ng-controller="menu as vm">
+		</div>
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+			<div ng-include="'./pages/head.html'" ng-controller='head as vm'></div>
+			<div ng-view></div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
