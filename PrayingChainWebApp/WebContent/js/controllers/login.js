@@ -3,7 +3,13 @@ var PrayingChain = angular.module("PrayingChain");
 PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope', function($location,$rootScope,prayerServices,$rootScope) {
 	var self = this;
 
-	$rootScope.maxUserRole = -1;
+	self.initialize = function(){
+		$rootScope.maxUserRole = -1;
+		$rootScope.userName = "";
+		$rootScope.authenticated = false;
+	};
+	
+	self.initialize();
 	
 	$rootScope.getLoggedUser = function(){
 		var loggedUser = prayerServices.getLoggedUser();
@@ -32,6 +38,7 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 		promise.then(function(dataOut) {
 			if (dataOut.data.username) {
 				$rootScope.authenticated = true;
+				$rootScope.getLoggedUser();
 			}
 		});
 	};
@@ -45,6 +52,13 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 			maxUserRole = roleIndex>maxUserRole ? roleIndex : maxUserRole;
 		}
 		return maxUserRole;
-	}
+	};
+	
+	$rootScope.logout = function(){
+		var promise = prayerServices.logout();
+		promise.finally(function(){
+			self.initialize();
+		});
+	};
 
 }]);

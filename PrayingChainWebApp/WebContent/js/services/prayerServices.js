@@ -183,6 +183,21 @@
     		return promise;
     	};
     	
+    	self.logout = function() {
+
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		$http({
+    			url: './logout.do',
+    			method: 'POST'
+    		}).then(function(dataOut){
+    			defered.resolve(dataOut);
+    		});
+    		
+    		return promise;
+    	};
+    	
     	return self;
     }
 })();

@@ -2,6 +2,8 @@ package es.edm.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,5 +54,12 @@ public class LoginServiceController {
     } catch (BadCredentialsException e) {
       return new LoginStatus(false, null, null);
     }
+  }
+  
+  @ResponseBody
+  @RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+  public LoginStatus logout() {
+	  SecurityContextHolder.clearContext();
+	  return new LoginStatus(false, null, null);
   }
 }
