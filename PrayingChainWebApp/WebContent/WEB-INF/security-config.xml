@@ -20,21 +20,15 @@
 
 		<csrf disabled="false"/>
 		<intercept-url pattern="**" access="permitAll"/>
- <!--	<intercept-url pattern="/Login.jsp" access="permitAll"/>
+
+<!--	Ejemplos de interceptores
+ 		<intercept-url pattern="/Login.jsp" access="permitAll"/>
 		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
 		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/changePrayer.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/changeTurn.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/createPrayer.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/uploadCalendar.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/webhook.html*" access="permitAll" />
-		<intercept-url pattern="/MailchimpAnswer.jsp" access="permitAll" />
-		<intercept-url pattern="/**" access="isFullyAuthenticated()" />
--->
- 		<form-login login-processing-url="/performLogin" password-parameter="edmPwd" username-parameter="edmUser"
-					login-page="/login.jsp" authentication-failure-url="/Login.jsp?error" />
-			<logout logout-success-url="/index.html"/> 
+		<intercept-url pattern="/**" access="isFullyAuthenticated()" />-->
  
+		<http-basic/> <!-- Esto para evitar tener que definir un formulario de login -->
+		
 		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="csrfHeaderFilter" /> <!-- Para añadir el token CSRF a las respuestas del servidor -->
 	</http>
 	
