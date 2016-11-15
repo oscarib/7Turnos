@@ -23,13 +23,13 @@
 				</div>
 			</div>
 			<div class="fadeAnimate" ng-if="!vm.hideMenu[2]">
-				<div class="row" ng-class="vm.showPrayersList">
+				<div ng-if="maxUserRole>=1" class="row" ng-class="vm.showPrayersList">
 					<div class="col-lg-2" ng-click="navigateTo('/oradores')">
 						<span class="menu-item">Oradores</span>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-2" ng-click="navigateTo('/calendar')">
+					<div ng-if="maxUserRole>=0" class="col-lg-2" ng-click="navigateTo('/calendar')">
 						<span class="menu-item">Calendario</span>
 					</div>
 				</div>
@@ -47,13 +47,13 @@
 				</div>
 			</div>
 			<div class="fadeAnimate" ng-if="!vm.hideMenu[3]">
-				<div class="row" ng-click="navigateTo('/crearOrador')">
+				<div ng-if="maxUserRole>=1" class="row" ng-click="navigateTo('/crearOrador')">
 						<div class="col-lg-2">
 							<span class="menu-item">Crear Orador</span>
 						</div>
 					</a>
 				</div>
-				<div class="row">
+				<div ng-if="maxUserRole>=2" class="row">
 					<div class="col-lg-2">
 						<span ng-click="uploadCalendar()" class="menu-item">Actualizar Cal.</span>
 					</div>
