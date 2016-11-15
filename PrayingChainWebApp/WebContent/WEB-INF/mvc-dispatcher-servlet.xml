@@ -76,7 +76,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
+				<property name="showSql" value="false" />
 				<property name="generateDdl" value="false" />
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
 			</bean>
