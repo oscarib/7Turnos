@@ -22,10 +22,7 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 				$rootScope.maxUserRole = getMaxUserRole(dataOut.data.authorities);
 				$rootScope.userName = dataOut.data.username;
 			}
-		}, function(error) {
-			//Aquí el código cuando la llamada falle (deferred.reject())
-
-		}).finally(function(){});
+		});
 	};
 	
 	$rootScope.getLoggedUser();
@@ -39,7 +36,11 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 			if (dataOut.data.username) {
 				$rootScope.authenticated = true;
 				$rootScope.getLoggedUser();
+			} else {
+				bootbox.alert({size:'small', message: 'Con esas credenciales no vas a ninguna parte'});
 			}
+		}, function(error) {
+			bootbox.alert({size:'small', message: 'Hubo un error al comprobar las credenciales'});
 		});
 	};
 	

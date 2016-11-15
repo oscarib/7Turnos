@@ -19,9 +19,9 @@
 	<http>
 
 		<csrf disabled="false"/>
+		<intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="**" access="permitAll"/>
 
-		<intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_SU')"/>
 <!--	Ejemplos de interceptores
  		<intercept-url pattern="/Login.jsp" access="permitAll"/>
 		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
