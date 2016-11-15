@@ -14,6 +14,7 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 			} else {
 				$rootScope.authenticated = true;
 				$rootScope.maxUserRole = getMaxUserRole(dataOut.data.authorities);
+				$rootScope.userName = dataOut.data.username;
 			}
 		}, function(error) {
 			//Aquí el código cuando la llamada falle (deferred.reject())
