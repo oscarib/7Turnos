@@ -20,13 +20,21 @@
 
 		<csrf disabled="false"/>
 		<intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/getStatistics.do" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
+		<intercept-url pattern="/getAllPrayers.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/addTurn.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="**" access="permitAll"/>
 
 <!--	Ejemplos de interceptores
  		<intercept-url pattern="/Login.jsp" access="permitAll"/>
 		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
-		<intercept-url pattern="/createTurn.html" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/**" access="isFullyAuthenticated()" />-->
+		<intercept-url pattern="/createTurn.html" access="isAnonymous()"/>
+		<intercept-url pattern="/**" access="hasAnyRole([role1,role2])" />-->
  
 		<http-basic/> <!-- Esto para evitar tener que definir un formulario de login -->
 		
