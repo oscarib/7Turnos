@@ -42,4 +42,8 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 			});
 		
 		$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+		
+		// CSRF headers names to fit spring csrf filter
+		$httpProvider.defaults.xsrfCookieName = 'XSRF-TOKEN';
+		$httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
 });

@@ -106,6 +106,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<context:component-scan base-package="es.edm.resources"/>
 	<context:component-scan base-package="es.edm.services.Impl"/>
 	<context:component-scan base-package="es.edm.dao.impl"/>
+	<context:component-scan base-package="es.edm.filters"/>
 
 	<!-- Messages Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
