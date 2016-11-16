@@ -1,60 +1,43 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    version="3.0">
-    <display-name>Servlet 3.0 Web Application</display-name>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Servlet 3.0 Web Application</display-name>
   <display-name>Spring Web MVC Application</display-name>
-
-	<welcome-file-list>
-    	<welcome-file>/pages/main.html</welcome-file>
-	</welcome-file-list>
-
-	<servlet>
-  		<servlet-name>mvc-dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
- 		<servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>*.do</url-pattern>
-	</servlet-mapping>
-
-	<!--  Load up all spring xml files as part of the loading of the webapp -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-    
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/security-config.xml;/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
-	</context-param>
-	
-	 <!--  This filter is used by Spring Security to intercept all URL patterns -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<error-page>
-	    <error-code>403</error-code>
-	    <location>/Forbidden.html</location>
-	</error-page>
-	
- 	<error-page>
-	  <exception-type>org.springframework.web.util.NestedServletException</exception-type>
-	  <location>/JDBCException.html</location>
-	</error-page> 	
-
-	<!-- Session expiration max time (in minutes) -->
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
-
+  <welcome-file-list>
+    <welcome-file>/pages/main.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/security-config.xml;/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+  </context-param>
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/Forbidden.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.springframework.web.util.NestedServletException</exception-type>
+    <location>/JDBCException.html</location>
+  </error-page>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
 </web-app>
