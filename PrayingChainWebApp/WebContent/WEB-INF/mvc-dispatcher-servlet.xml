@@ -14,30 +14,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<mvc:annotation-driven/>
 
 	<!-- General Configuration -->
-	<bean id="Configuration" class="es.edm.services.Impl.Configuration_XML_Impl">
-
-		<!-- General Configuration -->		
-		<property name="detailedNotesOnSaturedTurns" value="false"/>
-		<property name="enoughPrayersForWhatsappGroupWarning" value="true"/>
-		<property name="minimumNumberOfPrayersForWhatsappGroups" value="5"/>
-		<property name="showPrayerNamesOnCalendar" value="true"/> <!-- To show or not prayer pseudonym on calendar -->
-		<property name="prayersPerTurn" value="5"/>
-
-		<!-- FTP Configuration -->
-		<property name="ftpServerName" value="localhost"/>
-		<property name="ftpPort" value="21"/>
-		<property name="ftpUser" value="root"/>
-		<property name="ftpPwd" value="root"/>
-		<property name="remoteFilePath" value="./turnos/"/>
-		<property name="localFilePath" value="."/>
-		<property name="calendarFileName" value="PrayingChain.html"/> <!-- Name of the file for the calendar html table -->
-		<property name="statisticsFileName" value="Statistics.html"/> <!-- Name of the file with the code to generate the statistics on the web -->
-		<property name="printFtpUpladingMessages" value="true"/>
-
-		<!-- Other COnfiguration -->
-		<property name="mailingListSecretPassword" value=""/>
-
-	</bean>
+	<bean id="Configuration" class="es.edm.services.Impl.Configuration_DDBB_Impl"/>
 
 
 	<!-- Datasources -->
