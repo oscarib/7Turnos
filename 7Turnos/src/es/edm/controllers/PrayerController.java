@@ -22,6 +22,7 @@ import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.NewPrayerAndTurn;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
+import es.edm.services.IOtherServices;
 import es.edm.services.IPrayerService;
 import es.edm.services.ITurnService;
 import es.edm.util.DayOfWeek;
@@ -35,6 +36,9 @@ public class PrayerController {
 	
 	@Autowired
 	private ITurnService turnService;
+	
+	@Autowired
+	private IOtherServices otherServices;
 
 	@Autowired
 	Configuration conf;
@@ -75,6 +79,7 @@ public class PrayerController {
 				newPrayer.setName(newPrayerAndTurn.getNombre());
 				newPrayer.setEmail(newPrayerAndTurn.getEmail());
 				newPrayer.setPhone(newPrayerAndTurn.getTelefono());
+				newPrayer.setChain(otherServices.getLoggedUser().getChain());
 				String ownCountryString = properties.getMessage("prayer.ownCountry", null, Locale.getDefault());
 				boolean ownCountry = (ownCountryString.equals(newPrayerAndTurn.getPais()) ? true : false);
 				newPrayer.setOwnCountry(ownCountry);

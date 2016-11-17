@@ -15,6 +15,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.edm.dao.IPrayerDao;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
+import es.edm.services.IOtherServices;
 import es.edm.util.TurnStatus;
 
 @Repository
@@ -31,6 +33,9 @@ public class PrayerDao implements IPrayerDao {
 	@PersistenceContext
 	protected EntityManager entityManager;
 	
+	@Autowired
+	IOtherServices otherServices;
+	
 	private final static Logger logger = LoggerFactory.getLogger(PrayerDao.class);
 
 	@Override
@@ -39,6 +44,7 @@ public class PrayerDao implements IPrayerDao {
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		return objCriteria.list();
@@ -54,6 +60,7 @@ public class PrayerDao implements IPrayerDao {
 		// where edm_turns.status!='cancelled' and
 		// edm_turns.status!='NotCommitted';"
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.createCriteria("turns").add(Restrictions.ne("status", TurnStatus.cancelled))
 				.add(Restrictions.ne("status", TurnStatus.NotCommitted));
 
@@ -71,6 +78,7 @@ public class PrayerDao implements IPrayerDao {
 		// where edm_turns.status!='cancelled' and
 		// edm_turns.status!='NotCommitted';"
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.add(Restrictions.ne("turns.status", TurnStatus.cancelled))
 				.add(Restrictions.eq("turns.status", TurnStatus.NotCommitted));
 
@@ -99,6 +107,7 @@ public class PrayerDao implements IPrayerDao {
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.add(Restrictions.eq("email", prayer.getEmail()));
 
 		return (PrayerEntity) objCriteria.uniqueResult();
@@ -111,6 +120,7 @@ public class PrayerDao implements IPrayerDao {
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.add(Restrictions.eq("ownCountry", Boolean.FALSE));
 
 		return objCriteria.list();
@@ -122,6 +132,7 @@ public class PrayerDao implements IPrayerDao {
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.add(Restrictions.eq("ownCountry", Boolean.TRUE));
 
 		return objCriteria.list();
@@ -134,6 +145,7 @@ public class PrayerDao implements IPrayerDao {
 //		"select edm_prayers.* FROM edm_prayers JOIN edm_turns on edm_prayers.uid=edm_turns.prayer_id "
 //		+ "where edm_turns.day=? and edm_turns.hour=? and edm_turns.status!='cancelled' and edm_turns.status!='NotCommitted'"
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 
 		objCriteria.createCriteria("turns")
 		.add(Restrictions.ne("erased", true))
@@ -164,6 +176,7 @@ public class PrayerDao implements IPrayerDao {
 					{
 						objCriteria
 							.add(Restrictions.ne("erased", true))
+							.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 							.add( Restrictions.eq(field.getName(),value));
 						
 					}//Si el campo es un character se filtra con equal
@@ -171,12 +184,14 @@ public class PrayerDao implements IPrayerDao {
 					{
 						objCriteria
 							.add(Restrictions.ne("erased", true))
+							.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 							.add( Restrictions.eq(field.getName(),value));
 					}
 					else //Para el resto de campos se filtra con like %value%
 					{
 						objCriteria
 							.add(Restrictions.ne("erased", true))
+							.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 							.add( new LikeExpressionPrayers(field.getName(),value.toString(),MatchMode.ANYWHERE));
 					}
 				}
@@ -197,6 +212,7 @@ public class PrayerDao implements IPrayerDao {
 
 		objCriteria
 			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.eq("uid", uid));
 		PrayerEntity prayer = (PrayerEntity)objCriteria.uniqueResult();
 		return prayer;
@@ -206,7 +222,7 @@ public class PrayerDao implements IPrayerDao {
 	public List<PrayerEntity> getOrphanPrayers() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null and prayer.erased<>true");
+		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null and prayer.erased<>true and prayer.chain='" + otherServices.getLoggedUser().getChain() + "'");
 
 		return query.list();
 	}
@@ -219,6 +235,7 @@ public class PrayerDao implements IPrayerDao {
 
 		objCriteria
 			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.ne("turns.status",TurnStatus.cancelled));
 
 		return objCriteria.list();
@@ -232,6 +249,7 @@ public class PrayerDao implements IPrayerDao {
 		
 		objCriteria
 			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.eq("phone", prayer.getPhone()));
 		
 		return objCriteria.list();
@@ -245,6 +263,7 @@ public class PrayerDao implements IPrayerDao {
 		
 		objCriteria
 			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.eq("hidden", false));
 		
 		return objCriteria.list();
@@ -258,6 +277,7 @@ public class PrayerDao implements IPrayerDao {
 		
 		objCriteria
 			.add(Restrictions.ne("erased", true))
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.eq("hidden", true));
 		
 		return objCriteria.list();
