@@ -55,7 +55,7 @@ public class MailchimpController {
 		EmailSender emailSender = new EmailSender(userName, hostName, password, smtpPort, ssl);
 
 		if (request.getParameter("secret")!= null){
-			if (request.getParameter("secret").equals(conf.getMailingListSecretPassword())){
+			if (request.getParameter("secret").equals(conf.getMailchimpUrlPwd())){
 
 				try{
 					//Depending on request type...
