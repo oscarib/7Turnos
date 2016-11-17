@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -18,7 +19,7 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="edm_prayers")
+@Table(name="prayers")
 public class PrayerEntity {
 
 	@Id	
@@ -31,6 +32,9 @@ public class PrayerEntity {
 	
 	@Column
 	private String name;
+	
+	@Column
+	private Integer chain;
 	
 	@Column
 	private String email;
@@ -53,11 +57,11 @@ public class PrayerEntity {
 	@Column
 	private String pseudonym;
 	
-    @OneToMany(mappedBy="prayer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="prayer")
     @Fetch(FetchMode.JOIN)
 	@JsonBackReference //Para evitar que la serializaci�n a JSON entre en un bucle infinito
 	private List<TurnEntity> turns;
-
+    
 	/**
 	 * @return the uid
 	 */
@@ -199,5 +203,12 @@ public class PrayerEntity {
 	public void setErased(boolean erased) {
 		this.erased = erased;
 	}
-	
+
+	public Integer getChain() {
+		return chain;
+	}
+
+	public void setChain(Integer chain) {
+		this.chain = chain;
+	}
 }

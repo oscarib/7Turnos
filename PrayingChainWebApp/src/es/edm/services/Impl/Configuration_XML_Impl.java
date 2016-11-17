@@ -51,15 +51,6 @@ public class Configuration_XML_Impl implements Configuration{
 		EmailServiceSmtpPort = emailServiceSmtpPort;
 	}
 
-	@Override
-	public String getMailingListSecretPassword() {
-		return mailingListSecretPassword;
-	}
-
-	@Override
-	public void setMailingListSecretPassword(String mailingListSecretPassword) {
-		this.mailingListSecretPassword = mailingListSecretPassword;
-	}
 
 	public String getLocalFilePath() {
 		return localFilePath;
@@ -323,10 +314,10 @@ public class Configuration_XML_Impl implements Configuration{
 	public boolean isEmailServiceSSL() {
 		return EmailServiceIsSSL;
 	}
-	
+
 	@Override
-	public void setEmailServiceSSL(boolean emailServiceIsSSL) {
-		EmailServiceIsSSL = emailServiceIsSSL;
+	public String getMailchimpUrlPwd() {
+		return mailingListSecretPassword;
 	}
 
 }

@@ -20,7 +20,7 @@ import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
 
 @Entity
-@Table(name="edm_turns")
+@Table(name="turns")
 public class TurnEntity {
 
 	@Id

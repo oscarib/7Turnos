@@ -20,5 +20,4 @@ public class LoginCredentials {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
-	
 }

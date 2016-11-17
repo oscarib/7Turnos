@@ -14,6 +14,9 @@ public class UserEntity {
 	private Integer id;
 	
 	@Column
+	private Integer chain;
+	
+	@Column
 	private String username;
 	
 	@Column
@@ -76,6 +79,14 @@ public class UserEntity {
 	 */
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Integer getChain() {
+		return chain;
+	}
+
+	public void setChain(Integer chain) {
+		this.chain = chain;
 	}
 	
 }

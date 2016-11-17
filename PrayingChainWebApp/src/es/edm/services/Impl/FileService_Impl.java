@@ -64,15 +64,8 @@ public class FileService_Impl implements FileService {
  
             boolean done;
             try ( // Uploads file using an InputStream
-                    InputStream inputStream = new FileInputStream(localFileName)) {
-                if (conf.isPrintFtpUpladingMessages()) {
-                	logger.info("Uploading file to " + conf.getFtpServerName());
-                	logger.info("\tLocal File URI is " + localFileName);
-                	logger.info("\tRemote File URI is " + remoteFileName);
-                }   done = ftp.storeFile(remoteFileName, inputStream);
-            }
-            if (done && conf.isPrintFtpUpladingMessages()) {
-            	logger.info("\tThe file was uploaded successfully.");
+            	InputStream inputStream = new FileInputStream(localFileName)) {
+                done = ftp.storeFile(remoteFileName, inputStream);
             }
  
         } finally {
@@ -244,15 +237,6 @@ public class FileService_Impl implements FileService {
 									html.append(" class='saturedTurn'>");
 									html.append("<span class='toolTip'><span class='toolTipText'>"+ prayersString + "</span></span>");
 									html.append("\n");
-									if (conf.isMySqlWarningMessagesActivated()){
-										System.out.println("\t\tWarning: Satured turn! There are " + (-1*freeTurns) + " extra Prayers on " + DayOfWeek.values()[day] + ", "+ SimpleTurn.getHourByTurn(turn));
-										if (conf.isDetailedInfoActivatedForSaturedTurns()){
-											System.out.println("\t\tPrayers on the turn:");
-											System.out.println("");
-											System.out.println(prayersString);
-											System.out.println("");
-										}
-									}
 									freeTurns=0;
 								} else {
 									html.append("\t\t<td ");
