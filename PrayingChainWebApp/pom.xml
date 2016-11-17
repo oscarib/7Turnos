@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>PrayingChainWebApp</groupId>
-  <artifactId>PrayingChainWebApp</artifactId>
-  <version>2.1</version>
+  <groupId>7Turnos</groupId>
+  <artifactId>7Turnos</artifactId>
+  <version>2.5</version>
   <packaging>war</packaging>
   
   <properties>
@@ -212,4 +212,10 @@
 		</dependency>
 
 	</dependencies>
+  <name>7Turnos</name>
+  <url>control.españademaria.es</url>
+  <organization>
+  	<name>EspañaDeMaria.ES</name>
+  	<url>españademaria.es</url>
+  </organization>
 </project>
