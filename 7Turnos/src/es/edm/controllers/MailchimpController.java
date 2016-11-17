@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.edm.services.Configuration;
+import es.edm.services.IOtherServices;
 import es.edm.util.EmailSender;
 
 @Controller
 @RequestMapping(path="/Webhook")
 public class MailchimpController {
 	
+	@Autowired
+	IOtherServices otherServices;
+	
 	/* Mailchimp Webhook URLs
 	 * 		Local: http://prayingchain.ddns.net:8787/PrayingChainWebApp/Webhook.html?secret=arkanoid
 	 * 		Jelastic: http://prayingchain.jelastic.cloudhosted.es/Webhook.html?secret=arkanoid
 	 */
-	
-	@Autowired
-	Configuration conf;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getProcess(WebRequest request){
@@ -40,7 +40,9 @@ public class MailchimpController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView postProcess(WebRequest request){
-
+		
+		Configuration conf = otherServices.getConfiguration();
+		
 		//Let's get the Mailchimp request Data
 		Map<String,String> mailchimpData = getMailchimpData(request);
 		

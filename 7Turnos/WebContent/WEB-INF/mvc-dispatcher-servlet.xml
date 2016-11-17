@@ -13,6 +13,9 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 	<mvc:annotation-driven/>
 
+	<!-- General Configuration -->
+	<bean id="Configuration" class="es.edm.services.Impl.Configuration_DDBB_Impl"/>
+
 	<!-- Datasources -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
@@ -33,7 +36,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
 	
 	<!-- Escaneador que gestiona y valida los mapeos relacionales contra las tablas al inicio de la aplicacion -->
