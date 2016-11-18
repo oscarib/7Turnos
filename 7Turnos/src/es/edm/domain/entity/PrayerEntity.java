@@ -56,8 +56,8 @@ public class PrayerEntity {
 	
 	@Column
 	private String pseudonym;
-	
-    @OneToMany(mappedBy="prayer")
+
+    @OneToMany(mappedBy="prayer", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
 	@JsonBackReference //Para evitar que la serializaci�n a JSON entre en un bucle infinito
 	private List<TurnEntity> turns;
