@@ -61,8 +61,10 @@ public class PrayerDao implements IPrayerDao {
 		// edm_turns.status!='NotCommitted';"
 		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
-		objCriteria.createCriteria("turns").add(Restrictions.ne("status", TurnStatus.cancelled))
-				.add(Restrictions.ne("status", TurnStatus.NotCommitted));
+		objCriteria.createCriteria("turns")
+				.add(Restrictions.ne("status", TurnStatus.cancelled))
+				.add(Restrictions.ne("status", TurnStatus.NotCommitted))
+				.add(Restrictions.ne("erased", true));
 
 		return objCriteria.list();
 	}
@@ -79,8 +81,10 @@ public class PrayerDao implements IPrayerDao {
 		// edm_turns.status!='NotCommitted';"
 		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
-		objCriteria.add(Restrictions.ne("turns.status", TurnStatus.cancelled))
-				.add(Restrictions.eq("turns.status", TurnStatus.NotCommitted));
+		objCriteria.createCriteria("turns")
+			.add(Restrictions.ne("status", TurnStatus.cancelled))
+			.add(Restrictions.eq("status", TurnStatus.NotCommitted))
+			.add(Restrictions.ne("erased", true));
 
 		List<PrayerEntity> list = objCriteria.list();
 		return list;
@@ -222,7 +226,7 @@ public class PrayerDao implements IPrayerDao {
 	public List<PrayerEntity> getOrphanPrayers() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where turn.prayer = null and prayer.erased<>true and prayer.chain='" + otherServices.getLoggedUser().getChain() + "'");
+		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where (turn.prayer = null or turn.erased='erased') and prayer.erased<>true and prayer.chain='" + otherServices.getLoggedUser().getChain() + "'");
 
 		return query.list();
 	}
