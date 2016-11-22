@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.MatchMode;
@@ -225,10 +224,20 @@ public class PrayerDao implements IPrayerDao {
 	@Override
 	public List<PrayerEntity> getOrphanPrayers() {
 		Session session = entityManager.unwrap(Session.class);
-		
-		Query query = session.createQuery("select prayer from PrayerEntity as prayer left join prayer.turns as turn where (turn.prayer = null or turn.erased='erased') and prayer.erased<>true and prayer.chain='" + otherServices.getLoggedUser().getChain() + "'");
 
-		return query.list();
+		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
+		
+		objCriteria
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
+			.add(Restrictions.ne("erased",true));
+		
+		objCriteria.createCriteria("turns")
+			.add(Restrictions.disjunction()
+					.add(Restrictions.isNull("status"))
+					.add(Restrictions.eq("status", TurnStatus.cancelled))
+					.add(Restrictions.eq("erased", true)));
+
+		return objCriteria.list();
 	}
 
 	@Override
