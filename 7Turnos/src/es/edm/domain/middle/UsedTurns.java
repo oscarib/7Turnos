@@ -32,6 +32,10 @@ public class UsedTurns implements Serializable{
 	@Column
 	String turn;
 	
+	@Id
+	@Column
+	Integer chain;
+	
 	public int getCountOfTurns() {
 		return countOfTurns;
 	}
@@ -51,6 +55,12 @@ public class UsedTurns implements Serializable{
 		this.turn = turn;
 	}
 	
+	public Integer getChain() {
+		return chain;
+	}
+	public void setChain(Integer chain) {
+		this.chain = chain;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

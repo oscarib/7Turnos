@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.edm.dao.ITurnDao;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.domain.middle.UsedTurns;
+import es.edm.services.Impl.OtherServices;
 import es.edm.util.TurnStatus;
 
 @Repository
@@ -25,6 +27,9 @@ public class TurnDao implements ITurnDao {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
+	@Autowired
+	OtherServices otherServices;
 	
 	private final static Logger logger = LoggerFactory.getLogger(TurnDao.class);
 
@@ -50,6 +55,7 @@ public class TurnDao implements ITurnDao {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(UsedTurns.class);
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 
 		return objCriteria.list();
 	}

@@ -20,6 +20,7 @@
 
 		<csrf disabled="false"/>
 		<intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/createNewPrayer.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/getStatistics.do" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
@@ -28,7 +29,11 @@
 		<intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/addTurn.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="**" access="permitAll"/>
+		<intercept-url pattern="/getLoggedUser.do" access="permitAll"/>
+		<intercept-url pattern="/login.do" access="permitAll"/>
+		<intercept-url pattern="/logout.do" access="isAuthenticated()"/>
+		<intercept-url pattern="/main.html" access="permitAll"/>
+		<intercept-url pattern="**" access="denyAll"/>
 
 <!--	Ejemplos de interceptores
  		<intercept-url pattern="/Login.jsp" access="permitAll"/>
