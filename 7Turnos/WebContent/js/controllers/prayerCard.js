@@ -14,6 +14,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer.phone = data.Prayer.phone;
 		self.prayer.optinDate = data.Prayer.optinDate;
 		self.prayer.pseudonym = data.Prayer.pseudonym;
+		self.prayer.chain = data.Prayer.chain;
 		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
 		self.unchangedPrayer = angular.copy(self.prayer);
 		
@@ -318,6 +319,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		prayerEntity.notes = dataIn.notes;
 		prayerEntity.hidden = dataIn.visibility == "No" ? false : true;
 		prayerEntity.pseudonym = dataIn.pseudonym;
+		prayerEntity.chain = dataIn.chain;
 		prayerEntity.erased = dataIn.erased;
 		return prayerEntity;
 	};
