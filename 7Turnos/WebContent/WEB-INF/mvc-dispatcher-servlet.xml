@@ -73,9 +73,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
     <!-- Services -->
 
-	<bean id="FileService" class="es.edm.services.Impl.FileService_Impl">
-		<constructor-arg ref="Configuration"/>
-	</bean>
+	<bean id="FileService" class="es.edm.services.Impl.FileService_Impl"></bean>
 
 	<!-- Spring MVC Auto-Controller scanning -->
 	<context:component-scan base-package="es.edm.controllers"/>

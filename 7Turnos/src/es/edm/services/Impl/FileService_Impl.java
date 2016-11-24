@@ -23,10 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import es.edm.domain.ListOfTurns;
 import es.edm.domain.SimpleTurn;
+import es.edm.domain.entity.ConfigurationEntity;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.exceptions.TurnException;
-import es.edm.services.Configuration;
 import es.edm.services.FileService;
 import es.edm.services.IPrayerService;
 import es.edm.services.ITurnService;
@@ -35,7 +35,8 @@ import es.edm.util.TurnsOfDay;
 
 public class FileService_Impl implements FileService {
 	
-	Configuration conf;
+	@Autowired
+	OtherServices otherServices;
 	
 	@Autowired
 	IPrayerService prayerService;
@@ -44,15 +45,12 @@ public class FileService_Impl implements FileService {
 	ITurnService turnService;
 	
 	private final static Logger logger = LoggerFactory.getLogger(FileService.class);
-	
-	FileService_Impl(Configuration conf){
-		this.conf = conf;
-	}
 
 	@Override
     public void UploadFileFTP(String localFileName, String remoteFileName) throws SocketException, IOException {
     	
     	FTPClient ftp = new FTPClient();
+    	ConfigurationEntity conf = otherServices.getConfiguration();
 
        	try {
  
@@ -84,6 +82,8 @@ public class FileService_Impl implements FileService {
 	public void UploadFileSFTP(String localFileName, String remoteFileName) throws FileSystemException {
     	
     	StandardFileSystemManager manager = new StandardFileSystemManager();
+    	
+    	ConfigurationEntity conf = otherServices.getConfiguration();
 
     	try {
 
@@ -174,6 +174,8 @@ public class FileService_Impl implements FileService {
 	public String getCalendarTableString(int times) {
 		
 		ListOfTurns[][] turns = turnService.loadAllTurns();
+		
+		ConfigurationEntity conf = otherServices.getConfiguration();
 		
 		StringBuilder html = new StringBuilder();
 		
