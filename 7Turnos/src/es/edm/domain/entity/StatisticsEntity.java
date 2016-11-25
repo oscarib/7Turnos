@@ -24,6 +24,27 @@ public class StatisticsEntity {
 	Integer usedTurns;
 	
 	@Column
+	Integer availableTurns;
+	
+	@Column
+	Integer visiblePrayers;
+	
+	@Column
+	Integer hiddenPrayers;
+	
+	@Column
+	Integer localPrayers;
+	
+	@Column
+	Integer totalPrayes;
+	
+	@Column 
+	Integer NonCommittedPrayers;
+	
+	@Column
+	Integer foreignPrayers;
+	
+	@Column
 	Integer totalTurns;
 
 	public Integer getChain() {

@@ -86,7 +86,7 @@ public class OtherServicesController {
 		int totalPrayers = committedPrayers+nonCommittedPrayers;
 		statistics.put("TotalPrayers", totalPrayers);
 		statistics.put("HiddenPrayers", prayerService.getHiddenPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
-		statistics.put("PublicPrayers",prayerService.getPublicPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
+		statistics.put("VisiblePrayers",prayerService.getPublicPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
 		statistics.put("ForeignPrayers", prayerService.getForeignPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
 		statistics.put("LocalPrayers", prayerService.getLocalPrayers().size());   		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
 		statistics.put("OrphanPrayers", prayerService.getOrphanPrayers().size()); 		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
