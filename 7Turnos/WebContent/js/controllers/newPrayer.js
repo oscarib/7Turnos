@@ -33,8 +33,19 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 					$rootScope.resetNewPrayerForm();
 					$location.path('/');
 				} else {
-					var problema = (error==1 ? "email": "teléfono");
-					bootbox.alert({size:'small', message: 'Error: No puedes crear 2 oradores con el mismo ' + problema});
+					if (error == 3){
+						bootbox.alert({size:'small', message: 'ALERTA: El orador que ha intentado crear ya existía en la cadena y fue borrado'+
+															  ' con anterioridad. Se ha procedido a recuperar este orador, y a actualizar'+
+															  ' sus datos con los nuevos introducidos, pero para evitar eliminar información'+
+															  ' no se ha creado un turno con los datos introducidos, sino que se recuperaron'+
+															  ' los turnos que tenía el orador asignados anteriormente. Por favor, acceda a'+ 
+															  ' la ficha del orador, para comprobar los cambios'});
+						$rootScope.resetNewPrayerForm();
+						$location.path('/');
+					} else{
+						problema = (error==1 ? "email": "teléfono");
+						bootbox.alert({size:'small', message: 'Error: No puedes crear 2 oradores con el mismo ' + problema});
+					}
 				}
 			}, function(error) {
 				bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
