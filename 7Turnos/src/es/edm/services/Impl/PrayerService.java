@@ -35,8 +35,8 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public PrayerEntity getPrayerByEmail(PrayerEntity prayer) {
-		return prayerDao.getPrayerByEmail(prayer);
+	public List<PrayerEntity> getPrayersByEmail(PrayerEntity prayer, boolean includeErased) {
+		return prayerDao.getPrayersByEmail(prayer, includeErased);
 	}
 	@Override
 	public List<PrayerEntity> getPrayersOnTurn(TurnEntity turn) {
@@ -49,8 +49,8 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
-		return prayerDao.getPrayersByPhone(prayer);
+	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer, boolean includeErased) {
+		return prayerDao.getPrayersByPhone(prayer, includeErased);
 	}
 
 	@Override
@@ -91,5 +91,4 @@ public class PrayerService implements IPrayerService {
 		List<TurnEntity> turns = prayer.getTurns();
 		return turns;
 	}
-
 }
