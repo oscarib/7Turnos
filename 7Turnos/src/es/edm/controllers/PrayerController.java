@@ -54,28 +54,57 @@ public class PrayerController {
 	}
 	
 	/* Comprueba si existen más oradores con el mismo email y teléfono
-	 * En caso contrario, crea el orador en ddbb*/
+	 * En caso contrario, crea el orador en ddbb
+	 * Códigos de retorno:
+	 * 0: Se crea el orador
+	 * 1: No se pudo crear el orador, porque ya existe otro con el mismo email
+	 * 2: No se pudo crear el orador, porque ya existe otro orador con el mismo teléfono
+	 * 3: Se recupera un orador borrado con anterioridad*/
 	@ResponseBody
 	@RequestMapping(path="/createNewPrayer.do", method=RequestMethod.POST)
 	public int createNewPrayer(@RequestBody NewPrayerAndTurn newPrayerAndTurn) throws IOException, DDBBException{
 
 		int error = 0;
 		PrayerEntity interPrayer = new PrayerEntity();
-		PrayerEntity foundPrayer = new PrayerEntity();
+		List<PrayerEntity> foundPrayers;
+		PrayerEntity foundPrayer = null;
+		PrayerEntity newPrayer;
 		interPrayer.setEmail(newPrayerAndTurn.getEmail());
 		interPrayer.setPhone(newPrayerAndTurn.getTelefono());
+		
 
-		//Comprobamos si ese email ya existe
-		foundPrayer = prayerService.getPrayerByEmail(interPrayer);
+		//Comprobamos si existe un orador con los mismos datos en la ddbb
+		foundPrayers = prayerService.getPrayersByEmail(interPrayer, true);
+		if (!foundPrayers.isEmpty()){
+			foundPrayer = findPrayer(foundPrayers, newPrayerAndTurn);
+		}
+
+		boolean isErased = foundPrayer!=null && foundPrayer.isErased();
+		if (isErased){
+			copyPrayerData(foundPrayer, newPrayerAndTurn);
+			updatePrayer(foundPrayer);
+			return 3;
+		}
+				
 		if (foundPrayer==null){
 
 			//Comprobamos si existe ese teléfono
-			List<PrayerEntity> foundPrayers = new ArrayList<PrayerEntity>();
-			foundPrayers = prayerService.getPrayersByPhone(interPrayer);
-			if (foundPrayers.size()==0 || newPrayerAndTurn.getEmail()!=null){
+			foundPrayers = prayerService.getPrayersByPhone(interPrayer, true);
+			if (!foundPrayers.isEmpty()){
+				foundPrayer = findPrayer(foundPrayers, newPrayerAndTurn);
+			}
+
+			isErased = foundPrayer!=null && foundPrayer.isErased();
+			if (isErased){
+				copyPrayerData(foundPrayer, newPrayerAndTurn);
+				updatePrayer(foundPrayer);
+				return 3;
+			}
+			
+			if (foundPrayer==null){
 
 				//Creación del orador
-				PrayerEntity newPrayer = new PrayerEntity();
+				newPrayer = new PrayerEntity();
 				newPrayer.setName(newPrayerAndTurn.getNombre());
 				newPrayer.setEmail(newPrayerAndTurn.getEmail());
 				newPrayer.setPhone(newPrayerAndTurn.getTelefono());
@@ -110,7 +139,6 @@ public class PrayerController {
 			}
 			
 		} else {
-			//Se encontraron oradores con el mismo email
 			error = 1;
 		}
 		
@@ -154,5 +182,32 @@ public class PrayerController {
 			return turnService.addTurn(turn);
 		}
 		return true;
+	}
+	
+	private void copyPrayerData(PrayerEntity foundPrayer, NewPrayerAndTurn newData){
+		foundPrayer.setChain(otherServices.getLoggedUser().getChain());
+		foundPrayer.setEmail(newData.getEmail());
+		foundPrayer.setErased(false);
+		String hiddenString = properties.getMessage("turn.hidden", null, Locale.getDefault());
+		foundPrayer.setHidden(hiddenString.equals(newData.getVisibilidad()) ? true : false);
+		foundPrayer.setName(newData.getNombre());
+		foundPrayer.setNotes(newData.getNotas());
+		String ownCountryString = properties.getMessage("prayer.ownCountry", null, Locale.getDefault());
+		boolean ownCountry = (ownCountryString.equals(newData.getPais()) ? true : false);
+		foundPrayer.setOwnCountry(ownCountry);
+		foundPrayer.setPhone(newData.getTelefono());
+		foundPrayer.setPseudonym(newData.getSeudonimo());
+	}
+	
+	private PrayerEntity findPrayer(List<PrayerEntity> prayersList, NewPrayerAndTurn prayer2Find){
+		for (PrayerEntity prayer : prayersList){
+			if (prayer2Find.getNombre().equals(prayer.getName()) &&
+				prayer2Find.getEmail().equals(prayer.getEmail()) && 
+				prayer2Find.getTelefono().equals(prayer.getPhone()) && 
+				otherServices.getLoggedUser().getChain() == prayer.getChain()){
+				return prayer;
+			}
+		}
+		return null;
 	}
 }

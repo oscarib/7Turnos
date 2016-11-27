@@ -12,8 +12,6 @@ import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.services.IPrayerService;
-import es.edm.util.DayOfWeek;
-import es.edm.util.TurnsOfDay;
 
 @Service
 @Transactional
@@ -48,8 +46,8 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public PrayerEntity getPrayerByEmail(PrayerEntity prayer) {
-		return prayerDao.getPrayerByEmail(prayer);
+	public List<PrayerEntity> getPrayersByEmail(PrayerEntity prayer, boolean includeErased) {
+		return prayerDao.getPrayersByEmail(prayer, includeErased);
 	}
 
 	@Override
@@ -73,8 +71,8 @@ public class PrayerService implements IPrayerService {
 	}
 
 	@Override
-	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
-		return prayerDao.getPrayersByPhone(prayer);
+	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer, boolean includeErased) {
+		return prayerDao.getPrayersByPhone(prayer, includeErased);
 	}
 
 	@Override
@@ -130,5 +128,4 @@ public class PrayerService implements IPrayerService {
 		List<TurnEntity> turns = prayer.getTurns();
 		return turns;
 	}
-
 }

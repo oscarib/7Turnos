@@ -20,9 +20,9 @@ public interface IPrayerService {
 	
 	void removePrayer(PrayerEntity prayer);
 	
-	PrayerEntity getPrayerByEmail(PrayerEntity prayer);
+	List<PrayerEntity> getPrayersByEmail(PrayerEntity prayer, boolean includeErased);
 	
-	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer);
+	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer, boolean includeErased);
 	
 	List<PrayerEntity> getForeignPrayers();
 	

@@ -19,7 +19,7 @@ public interface IPrayerDao {
 	
 	void removePrayer(PrayerEntity prayer);
 	
-	PrayerEntity getPrayerByEmail(PrayerEntity prayer);
+	List<PrayerEntity> getPrayersByEmail(PrayerEntity prayer, boolean inlcudeErased);
 	
 	PrayerEntity getPrayerByID(Integer uid);
 	
@@ -35,7 +35,7 @@ public interface IPrayerDao {
 	
 	List<PrayerEntity> getCancelledPrayers();
 	
-	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer);
+	List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer, boolean includeErased);
 	
 	List<PrayerEntity> getPublicPrayers();
 	

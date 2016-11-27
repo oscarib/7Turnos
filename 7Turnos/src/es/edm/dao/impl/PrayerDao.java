@@ -104,16 +104,19 @@ public class PrayerDao implements IPrayerDao {
 	}
 
 	@Override
-	public PrayerEntity getPrayerByEmail(PrayerEntity prayer) {
+	public List<PrayerEntity> getPrayersByEmail(PrayerEntity prayer, boolean includeErased) {
 		Session session = entityManager.unwrap(Session.class);
 
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
 
-		objCriteria.add(Restrictions.ne("erased", true));
+		if (!includeErased) {
+			objCriteria.add(Restrictions.ne("erased", true));
+		}
+
 		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 		objCriteria.add(Restrictions.eq("email", prayer.getEmail()));
 
-		return (PrayerEntity) objCriteria.uniqueResult();
+		return (List<PrayerEntity>) objCriteria.list();
 	}
 
 	@Override
@@ -255,17 +258,18 @@ public class PrayerDao implements IPrayerDao {
 	}
 
 	@Override
-	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
+	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer, boolean includeErased) {
 		Session session = entityManager.unwrap(Session.class);
 		
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-		
+		if (!includeErased) {
+			objCriteria.add(Restrictions.ne("erased", true));
+		}
 		objCriteria
-			.add(Restrictions.ne("erased", true))
 			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
 			.add(Restrictions.eq("phone", prayer.getPhone()));
 		
-		return objCriteria.list();
+		return (List<PrayerEntity>)objCriteria.list();
 	}
 
 	@Override
@@ -308,5 +312,4 @@ public class PrayerDao implements IPrayerDao {
 	public void updateTurn(TurnEntity turn) {
 		entityManager.merge(turn);
 	}
-
 }
