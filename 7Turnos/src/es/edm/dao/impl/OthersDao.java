@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.IOthersDao;
 import es.edm.domain.entity.ConfigurationEntity;
+import es.edm.domain.entity.StatisticsEntity;
 import es.edm.domain.entity.UserEntity;
 import es.edm.domain.middle.LoginStatus;
 
@@ -44,5 +45,16 @@ public class OthersDao implements IOthersDao {
 		UserEntity user = (UserEntity)objCriteria.uniqueResult(); 
 
 		return user.getChain();
+	}
+
+	@Override
+	public StatisticsEntity getStatistics(LoginStatus loggedUser) {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(StatisticsEntity.class);
+
+		objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
+
+		return (StatisticsEntity) objCriteria.uniqueResult();
 	}
 }

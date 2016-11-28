@@ -25,21 +25,19 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     	$rootScope.batidoraGeneral=true;
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
-    		$rootScope.TotalPrayers = dataOut.data.TotalPrayers;
-    		$rootScope.UsedTurns = dataOut.data.UsedTurns;
-    		$rootScope.EmptyTurns = dataOut.data.EmptyTurns;
-    		$rootScope.TotalTurns = dataOut.data.TotalTurns;
-    		$rootScope.TurnsCovered = dataOut.data.TurnsCovered;
-    		$rootScope.AvailableTurns = dataOut.data.AvailableTurns;
-    		$rootScope.DaysCovered = dataOut.data.DaysCovered;
-    		$rootScope.availableDays = dataOut.data.availableDays;
-    		$rootScope.CommittedPrayers = dataOut.data.CommittedPrayers;
-    		$rootScope.NonCommittedPrayers = dataOut.data.NonCommittedPrayers;
-    		$rootScope.HiddenPrayers = dataOut.data.HiddenPrayers;
-    		$rootScope.PublicPrayers = dataOut.data.PublicPrayers;
-    		$rootScope.ForeignPrayers = dataOut.data.ForeignPrayers;
-    		$rootScope.LocalPrayers = dataOut.data.LocalPrayers;
-    		$rootScope.OrphanPrayers = dataOut.data.OrphanPrayers;
+    		$rootScope.TotalPrayers = dataOut.data.totalPrayers;
+    		$rootScope.UsedTurns = dataOut.data.usedTurns;
+    		$rootScope.EmptyTurns = dataOut.data.emptyTurns;
+    		$rootScope.TotalTurns = dataOut.data.totalTurns;
+    		$rootScope.NonEmptyTurns = $rootScope.TotalTurns - $rootScope.EmptyTurns;
+    		$rootScope.AvailableTurns = $rootScope.TotalTurns - $rootScope.UsedTurns;
+    		$rootScope.CommittedPrayers = dataOut.data.committedPrayers;
+    		$rootScope.NonCommittedPrayers = dataOut.data.nonCommittedPrayers;
+    		$rootScope.HiddenPrayers = dataOut.data.hiddenPrayers;
+    		$rootScope.PublicPrayers = $rootScope.TotalPrayers - dataOut.data.hiddenPrayers;
+    		$rootScope.ForeignPrayers = dataOut.data.foreignPrayers;
+    		$rootScope.LocalPrayers = dataOut.data.localPrayers;
+    		$rootScope.OrphanPrayers = dataOut.data.orphanPrayers;
     		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers > 1 ? $rootScope.OrphanPrayers + " oradores" : $rootScope.OrphanPrayers + " orador";
     		loadCharts();
     	}, function(error) {
@@ -84,7 +82,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         
         //Coverage pie chart
         var labels= ["No Vacíos", "Vacíos"];
-        var pieChartData = [$rootScope.DaysCovered, $rootScope.availableDays];
+        var pieChartData = [$rootScope.NonEmptyTurns, $rootScope.EmptyTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);

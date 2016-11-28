@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.IOthersDao;
 import es.edm.domain.entity.ConfigurationEntity;
+import es.edm.domain.entity.StatisticsEntity;
 import es.edm.domain.middle.LoginCredentials;
 import es.edm.domain.middle.LoginStatus;
 import es.edm.services.IOtherServices;
@@ -62,5 +63,11 @@ public class OtherServices implements IOtherServices {
 	    } catch (BadCredentialsException e) {
 	      return new LoginStatus(false, null, -1, null);
 	    }
+	}
+
+	@Override
+	public StatisticsEntity getStatistics() {
+		LoginStatus login = getLoggedUser();
+		return dao.getStatistics(login);
 	}
 }

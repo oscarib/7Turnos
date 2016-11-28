@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.edm.domain.entity.StatisticsEntity;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
 import es.edm.services.FileService;
-import es.edm.services.Impl.PrayerService;
-import es.edm.services.Impl.TurnService;
+import es.edm.services.IOtherServices;
+import es.edm.services.IPrayerService;
+import es.edm.services.ITurnService;
 
 @RestController
 public class OtherServicesController {
@@ -29,10 +31,13 @@ public class OtherServicesController {
 	FileService fileService;
 	
 	@Autowired
-	PrayerService prayerService;
+	IPrayerService prayerService;
 	
 	@Autowired
-	TurnService turnService;
+	ITurnService turnService;
+	
+	@Autowired
+	IOtherServices otherServices;
 	
 	@Autowired
 	Configuration conf;
@@ -63,33 +68,9 @@ public class OtherServicesController {
 	//CONTROLLER: GETSTATISTICS
 	@ResponseBody
 	@RequestMapping(value = "/getStatistics.do", method = RequestMethod.POST)
-	public Map<String,Object> getallStatistics() {
+	public StatisticsEntity getallStatistics() {
 		
-		HashMap<String,Object> statistics;
-		
-		statistics = new HashMap<String, Object>();
-		int totalTurns = turnService.getTotalTurns();
-		int daysCovered = turnService.getDaysCovered();
-		int usedTurns = turnService.getUsedTurns();
-		statistics.put("TotalTurns", totalTurns);
-		int availableTurns = totalTurns-usedTurns;
-		int availableDays = (totalTurns/conf.getPrayersPerTurn())-daysCovered;
-		statistics.put("AvailableTurns", availableTurns);
-		statistics.put("EmptyTurns", turnService.getEmptyTurns());
-		statistics.put("UsedTurns", usedTurns);
-		statistics.put("DaysCovered", daysCovered);
-		statistics.put("availableDays", availableDays);
-		int committedPrayers = prayerService.getCommittedPrayers().size();
-		int nonCommittedPrayers = prayerService.getPrayers().size() - committedPrayers;
-		statistics.put("CommittedPrayers", committedPrayers);
-		statistics.put("NonCommittedPrayers", nonCommittedPrayers);
-		int totalPrayers = committedPrayers+nonCommittedPrayers;
-		statistics.put("TotalPrayers", totalPrayers);
-		statistics.put("HiddenPrayers", prayerService.getHiddenPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
-		statistics.put("VisiblePrayers",prayerService.getPublicPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
-		statistics.put("ForeignPrayers", prayerService.getForeignPrayers().size());		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
-		statistics.put("LocalPrayers", prayerService.getLocalPrayers().size());   		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
-		statistics.put("OrphanPrayers", prayerService.getOrphanPrayers().size()); 		//TODO: Crear vista para no tener que traerse todos los oradores y contarlos
+		StatisticsEntity statistics = otherServices.getStatistics();
 		
 		return statistics;
 	}
