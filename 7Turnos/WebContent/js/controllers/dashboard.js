@@ -82,7 +82,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         
         //Coverage pie chart
         var labels= ["No Vacíos", "Vacíos"];
-        var pieChartData = [$rootScope.NonEmptyTurns, $rootScope.EmptyTurns];
+        var pieChartData = [$rootScope.UsedTurns, $rootScope.EmptyTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
