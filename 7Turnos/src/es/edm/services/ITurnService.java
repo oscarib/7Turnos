@@ -11,14 +11,6 @@ public interface ITurnService {
 	
 	void updateTurn(TurnEntity turn);
 	
-	int getEmptyTurns();
-	
-	int getTotalTurns();
-	
-	int getUsedTurns();
-
-	int getDaysCovered();
-
 	Boolean addTurn(TurnEntity turn);
 
 	List<TurnEntity> getAllActiveTurns();

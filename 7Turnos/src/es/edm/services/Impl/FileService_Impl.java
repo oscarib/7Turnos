@@ -25,6 +25,7 @@ import es.edm.domain.ListOfTurns;
 import es.edm.domain.SimpleTurn;
 import es.edm.domain.entity.ConfigurationEntity;
 import es.edm.domain.entity.PrayerEntity;
+import es.edm.domain.entity.StatisticsEntity;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.exceptions.TurnException;
 import es.edm.services.FileService;
@@ -160,11 +161,12 @@ public class FileService_Impl implements FileService {
 	public String getStatisticsString() {
 		StringBuilder html = new StringBuilder();
 		html.append("[thrive_number_counter color='blue' value='");
-		int committed = prayerService.getCommittedPrayers().size();
+		StatisticsEntity statistics = otherServices.getStatistics(); 
+		int committed = statistics.getCommittedPrayers();
 		html.append(Integer.toString(committed));
 		html.append("' before='Ya somos ' after='' label='']");
 		html.append("[thrive_number_counter color='blue' value='");
-		int empty = turnService.getEmptyTurns();
+		int empty = statistics.getEmptyTurns();
 		html.append(Integer.toString(empty));
 		html.append("' before='Quedan: ' after='turnos vacíos' label='']");
 		return html.toString();

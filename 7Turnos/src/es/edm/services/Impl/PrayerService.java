@@ -12,8 +12,6 @@ import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.exceptions.PrayerNotFoundException;
 import es.edm.services.IPrayerService;
-import es.edm.util.DayOfWeek;
-import es.edm.util.TurnsOfDay;
 
 @Service
 @Transactional
@@ -26,17 +24,6 @@ public class PrayerService implements IPrayerService {
 	public List<PrayerEntity> getPrayers() {
 		return prayerDao.getPrayers();
 	}
-
-	@Override
-	public List<PrayerEntity> getCommittedPrayers() {
-		return prayerDao.getCommittedPrayers();
-	}
-
-	@Override
-	public List<PrayerEntity> getNonCommittedPrayers() {
-		return prayerDao.getNonCommittedPrayers();
-	}
-
 	@Override
 	public void addPrayer(PrayerEntity prayer) {
 		prayerDao.addPrayer(prayer);
@@ -51,17 +38,6 @@ public class PrayerService implements IPrayerService {
 	public PrayerEntity getPrayerByEmail(PrayerEntity prayer) {
 		return prayerDao.getPrayerByEmail(prayer);
 	}
-
-	@Override
-	public List<PrayerEntity> getForeignPrayers() {
-		return prayerDao.getForeignPrayers();
-	}
-
-	@Override
-	public List<PrayerEntity> getLocalPrayers() {
-		return prayerDao.getLocalPrayers();
-	}
-
 	@Override
 	public List<PrayerEntity> getPrayersOnTurn(TurnEntity turn) {
 		return prayerDao.getPrayersOnTurn(turn);
@@ -75,21 +51,6 @@ public class PrayerService implements IPrayerService {
 	@Override
 	public List<PrayerEntity> getPrayersByPhone(PrayerEntity prayer) {
 		return prayerDao.getPrayersByPhone(prayer);
-	}
-
-	@Override
-	public List<PrayerEntity> getPublicPrayers() {
-		return prayerDao.getPublicPrayers();
-	}
-
-	@Override
-	public List<PrayerEntity> getHiddenPrayers() {
-		return prayerDao.getHiddenPrayers();
-	}
-
-	@Override
-	public List<PrayerEntity> getOrphanPrayers() {
-		return prayerDao.getOrphanPrayers();
 	}
 
 	@Override
