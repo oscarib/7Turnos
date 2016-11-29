@@ -3,12 +3,15 @@
 div.loginFondo {
 	height: 100%;
 	width: 100%;
-	background-color: #83B2EF;
 	/*+placement: anchor-bottom-left;*/
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	z-index: 2;
+	background-image: url("../images/fondo.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 table#prayerList {
 	word-break: break-all;
@@ -109,7 +112,7 @@ div.batidoraImagen {
 div.loginForm {
 	height: 217px;
 	width: 220px;
-	background-color: #5F8ECA;
+	background-color: #FFFFFF;
 	top: 50%;
 	left: 50%;
 	/*+placement: anchor-bottom-right;*/
@@ -342,10 +345,10 @@ div#Search {
 	background: linear-gradient(#00B2D8, #006C84);
 	/* Standard syntax */
 	height: 100vh;
-	/*+placement: ;*/
-	position: relative;
 	min-width: 120px;
 	min-height: 600px;
+	/*+placement: ;*/
+	position: relative;
 	left: 0;
 	top: 0;
 }
