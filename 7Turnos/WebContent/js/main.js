@@ -48,11 +48,11 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
 });
 
-PrayingChain.controller("main", ['$scope','$window', function($scope,$window) {
+PrayingChain.controller("main", ['$scope','$window', function($scope,$rootScope, $window) {
 	var self = this;
 	
 	//Para proteger las dimensiones mínimas de la aplicación
-    $scope.isMinimumSize = false;
+	$rootScope.isMinimumSize = false;
     $scope.minWidth = "800";
     $scope.minHeight = "600";
     $scope.sizeWidth = 0;
@@ -70,10 +70,10 @@ PrayingChain.controller("main", ['$scope','$window', function($scope,$window) {
     $scope.$watch($scope.getWindowDimensions, function (newValue, oldValue) {
     	$scope.sizeWidth = newValue.w;
     	$scope.sizeHeight =  newValue.h;
-        if(newValue.w < attr.minWidth || newValue.h < attr.minHeight) {
-        	$scope.isMinimumSize = true;
+        if(newValue.w < $scope.minWidth || newValue.h < $scope.minHeight) {
+        	$rootScope.isMinimumSize = true;
         } else {
-        	$scope.isMinimumSize = false;
+        	$rootScope.isMinimumSize = false;
         }
     }, true);
 
