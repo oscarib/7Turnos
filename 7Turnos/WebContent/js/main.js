@@ -47,3 +47,39 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 		$httpProvider.defaults.xsrfCookieName = 'XSRF-TOKEN';
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
 });
+
+PrayingChain.controller("main", ['$scope','$window', function($scope,$window) {
+	var self = this;
+	
+	//Para proteger las dimensiones mínimas de la aplicación
+    $scope.isMinimumSize = false;
+    $scope.minWidth = "800";
+    $scope.minHeight = "600";
+    $scope.sizeWidth = 0;
+    $scope.sizeHeight = 0;
+
+    var w = angular.element($window);
+
+    $scope.getWindowDimensions = function () {
+        return {
+            'h': w.height(),
+            'w': w.width()
+        };
+    };
+
+    $scope.$watch($scope.getWindowDimensions, function (newValue, oldValue) {
+    	$scope.sizeWidth = newValue.w;
+    	$scope.sizeHeight =  newValue.h;
+        if(newValue.w < attr.minWidth || newValue.h < attr.minHeight) {
+        	$scope.isMinimumSize = true;
+        } else {
+        	$scope.isMinimumSize = false;
+        }
+    }, true);
+
+    w.bind('resize', function () {
+    	$scope.$apply();
+    });
+
+	
+}]);
