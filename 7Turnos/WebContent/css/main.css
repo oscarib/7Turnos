@@ -3,12 +3,15 @@
 div.loginFondo {
 	height: 100%;
 	width: 100%;
-	background-color: #83B2EF;
 	/*+placement: anchor-bottom-left;*/
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	z-index: 2;
+	background-image: url("../images/fondo.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 table#prayerList {
 	word-break: break-all;
@@ -107,9 +110,9 @@ div.batidoraImagen {
 	bottom: 0;
 }
 div.loginForm {
-	height: 217px;
-	width: 220px;
-	background-color: #5F8ECA;
+	height: 254px;
+	width: 391px;
+	background-color: #FFFFFF;
 	top: 50%;
 	left: 50%;
 	/*+placement: anchor-bottom-right;*/
@@ -117,6 +120,19 @@ div.loginForm {
 	right: 0;
 	bottom: 0;
 	transform: translate(-50%, -50%);
+	border: 1px solid;
+	border-radius: 13px;
+}
+div.loginForm form.ng-valid.ng-dirty.ng-valid-parse.ng-submitted {
+	background-color: #FFFFFF;
+}
+div.loginForm img#logo {
+	/*+placement: anchor-top-left;*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-left: 122px;
+	margin-top: -76px;
 }
 div.loginForm label {
 	margin-left: 11px;
@@ -128,17 +144,52 @@ div.loginForm label {
 div.loginForm span {
 	color: #FFFFFF;
 }
-div.loginForm .loginSubmit {
-	margin-left: 35px;
-	margin-top: 19px;
+div.loginContent {
 	height: ;
-	width: 151px;
+	width: 345px;
+	align-content: center;
+	left: 61px;
+	/*+placement: margin-auto;*/
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	left: 0;
+	top: 0;
+	margin-top: 23px;
+}
+div.loginForm .loginSubmit {
+	height: ;
+	width: 267px;
 	color: #FFFFFF;
-	background-color: #0B3D7D;
+	background-color: #3099D2;
+	border: 1px none black;
+	border-radius: 8px;
+	text-align: center;
+	/*+placement: shift;*/
+	position: relative;
+	left: 0;
+	top: 0;
+	font-family: arial;
+	margin-left: 40px;
+	margin-top: 25px;
 }
 div.loginForm input {
-	margin-left: 35px;
-	margin-top: 3px;
+	margin-left: 13px;
+	margin-top: 16px;
+	font-weight: normal;
+	height: 42px;
+	width: 318px;
+	border: 2px solid #939393;
+	border-radius: 6px;
+	padding-left: 9px;
+}
+div.loginForm input {
+	color: #797878;
+	font-size: 25px;
+}
+div.loginContent form {
+	margin-top: 7px;
+	padding-top: 20px;
 }
 div.batidoraImagen img.loadingGifImg {
 	margin-top: 52px;
@@ -341,7 +392,9 @@ div#Search {
 	/* For Firefox 3.6 to 15 */
 	background: linear-gradient(#00B2D8, #006C84);
 	/* Standard syntax */
-	height: 700px;
+	height: 100vh;
+	min-width: 120px;
+	min-height: 600px;
 	/*+placement: ;*/
 	position: relative;
 	left: 0;
