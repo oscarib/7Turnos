@@ -1,16 +1,10 @@
 	<div class="loginForm">
-		<form role="form" ng-submit="vm.login()">
-
-			<span>Please, login to access...</span>
-
-			<label>Usuario: </label><br>
-			<input type="text" name="edmUser" ng-model="vm.credentials.userName">
-
-			<label>Contraseña:</label><br>
-			<span ng-if="isMinimumSize">Hola</span>
-			<input type="password" name="edmPwd" ng-model="vm.credentials.userPwd">
-
-			<input class="loginSubmit" type="submit" name="submit" value="Login">
-
-		</form>
+		<div class="loginContent">
+			<img id="logo" src="./images/logo.gif" heigth="96" width="96">
+			<form role="form" ng-submit="vm.login()">
+				<input type="text" value="usuario" name="edmUser" ng-model="vm.credentials.userName"><br>
+				<input type="password" value="contraseña" name="edmPwd" ng-model="vm.credentials.userPwd"><br>
+				<input class="loginSubmit" type="submit" name="submit" value="Acceder">
+			</form>
+		</div>
 	</div>
