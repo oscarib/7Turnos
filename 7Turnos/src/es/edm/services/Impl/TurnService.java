@@ -109,4 +109,9 @@ public class TurnService implements ITurnService {
 		}
 		return -1;
 	}
+
+	@Override
+	public List<TurnEntity> getAllTurns() {
+		return turnDao.getAllTurns();
+	}
 }

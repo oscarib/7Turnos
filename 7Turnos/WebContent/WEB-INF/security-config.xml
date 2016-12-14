@@ -25,6 +25,7 @@
 		<intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
 		<intercept-url pattern="/getAllPrayers.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/getAllTurns.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>

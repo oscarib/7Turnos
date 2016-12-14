@@ -1,0 +1,17 @@
+<div id="turnTable" class="container-fluid">
+	<div class="row tableRow">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<table ng-table="vm.tableParams" id="TurnList" class="table table-hover table-condensed">
+				<tr ng-repeat="turn in $data">
+					<td width="150" data-title="'Día'" sortable="'day'" filter="{day: 'text'}">{{turn.day}}</td>
+					<td width="250" data-title="'Turno'" sortable="'turn'" filter="{turn: 'text'}">{{turn.turn}}</td>
+					<td width="150" data-title="'Estado'" sortable="'status'" filter="{status: 'text'}">{{turn.status}}</td>
+					<td class="iconColumn">
+						<img ng-click="navigateTo('/orador/'+prayer.uid)" src="./images/open.svg" alt="Edit Prayer" height="24" width="24">
+					</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</div>

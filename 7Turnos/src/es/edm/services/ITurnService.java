@@ -15,6 +15,8 @@ public interface ITurnService {
 
 	List<TurnEntity> getAllActiveTurns();
 	
+	List<TurnEntity> getAllTurns();
+	
 	public ListOfTurns[][] loadAllTurns();
 
 }

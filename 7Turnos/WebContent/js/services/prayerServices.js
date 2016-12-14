@@ -23,6 +23,21 @@
     		return promise;
     	};
     	
+    	self.getTurnsList = function(){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+
+    		var utilsPromise = pcUtils.getBackendData("./getAllTurns.do");
+    		
+    		utilsPromise.then(function(dataOut) {
+    		     defered.resolve(dataOut);
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+    	
     	self.getPrayerAndTurns = function(prayerID){
     		var defered = $q.defer();
     		var promise = defered.promise;

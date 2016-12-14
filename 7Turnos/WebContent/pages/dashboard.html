@@ -37,6 +37,18 @@
 				<div class="widget-links">Mostrar</div>
 			</div>
 		</div>
+		<div ng-if="maxUserRole>0" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget" ng-click="navigateTo('/turnos');vm.openMenu(2)">
+				<div class="widget-header">
+					<img src="./images/TurnList.jpg">
+				</div>
+				<div class="widget-content">
+					<h4>Lista de Turnos</h4>
+					<span>Lista ordenada y activa de turnos</span>
+				</div>
+				<div class="widget-links">Mostrar</div>
+			</div>
+		</div>
 		<div ng-if="maxUserRole>=1" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget" ng-click="uploadCalendar()">
 				<div class="widget-header">

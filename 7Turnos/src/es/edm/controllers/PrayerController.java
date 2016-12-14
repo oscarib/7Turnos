@@ -53,6 +53,13 @@ public class PrayerController {
 		return prayers2Return;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/getAllTurns.do", method = RequestMethod.POST)
+	public List<TurnEntity> getAllTurns() {
+		List<TurnEntity> turns2Return = turnService.getAllTurns();
+		return turns2Return;
+	}
+	
 	/* Comprueba si existen más oradores con el mismo email y teléfono
 	 * En caso contrario, crea el orador en ddbb
 	 * Códigos de retorno:

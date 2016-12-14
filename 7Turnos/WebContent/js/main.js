@@ -17,6 +17,11 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/prayerList.html"
 			})
+			.when("/turnos",{
+				controller: "turnList",
+				controllerAs: "vm",
+				templateUrl: "pages/turnList.html"
+			})
 			.when("/upload",{
 				controller: "upload",
 				controllerAs: "vm",

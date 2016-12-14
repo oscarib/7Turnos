@@ -76,4 +76,14 @@ public class TurnDao implements ITurnDao {
 
 		return objCriteria.list();
 	}
+
+	@Override
+	public List<TurnEntity> getAllTurns() {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(TurnEntity.class);
+		objCriteria.add(Restrictions.ne("erased", true));
+
+		return objCriteria.list();
+	}
 }
