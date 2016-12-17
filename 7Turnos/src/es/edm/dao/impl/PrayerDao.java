@@ -151,7 +151,8 @@ public class PrayerDao implements IPrayerDao {
 //		"select edm_prayers.* FROM edm_prayers JOIN edm_turns on edm_prayers.uid=edm_turns.prayer_id "
 //		+ "where edm_turns.day=? and edm_turns.hour=? and edm_turns.status!='cancelled' and edm_turns.status!='NotCommitted'"
 		Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
+		objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
+		.add(Restrictions.ne("erased", true));
 
 		objCriteria.createCriteria("turns")
 		.add(Restrictions.ne("erased", true))
