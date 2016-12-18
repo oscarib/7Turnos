@@ -1,11 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module('PrayingChain')
-        .factory('pcUtils', pcUtils);
+    angular.module('PrayingChain').factory('pcUtils', pcUtils);
     
     /** @ngInject **/
-    function pcUtils ($q, $http) {
+    function pcUtils ($q, $http, $rootScope) {
     	var self = this;
 
     	self.getBackendData = function(url, requestData){
@@ -27,6 +26,22 @@
     		});
     		
     		return promise;
+    	};
+    	
+    	self.getProperties = function(){
+    		$http({
+    			url: "./getProperties.do",
+    			dataType: 'json',
+    			method: 'POST',
+    			headers: {
+    				"Content-Type": "application/json"
+    			}
+    		}).then(function(dataOut) {
+    			$rootScope.labels.name = dataOut.data.label.name;
+    			
+    		}, function(error) {
+    		     defered.reject(error);
+    		});
     	}
 
     	return self;

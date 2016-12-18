@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,6 +42,9 @@ public class OtherServicesController {
 	@Autowired
 	Configuration conf;
 	
+	@Value("${label.name}")
+	String labelName;
+
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
 	//CONTROLLER: UPLOADCALENDAR
@@ -82,5 +85,13 @@ public class OtherServicesController {
 		String calendarString = fileService.getCalendarTableString(4);
 		calendar.add(calendarString);
 		return calendar;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
+	public Properties getProperties(){
+		Properties properties = new Properties();
+		properties.setProperty("label.name", labelName);
+		return properties;
 	}
 }

@@ -1,7 +1,10 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServices','$location', 'NgTableParams', function($rootScope, chartService, prayerServices,$location,NgTableParams) {
+PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServices','$location', 'NgTableParams','pcUtils', function($rootScope, chartService, prayerServices,$location,NgTableParams,pcUtils) {
 	var self = this;
+	
+	var promise = pcUtils.getProperties();
+
 	self.loadPrayerList = function(){
         //Cargamos la lista de oradores
         var prayerList = prayerServices.getPrayerList();

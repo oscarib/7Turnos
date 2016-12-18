@@ -23,6 +23,7 @@
 		<intercept-url pattern="/createNewPrayer.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/getStatistics.do" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/getProperties.do" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
 		<intercept-url pattern="/getAllPrayers.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
