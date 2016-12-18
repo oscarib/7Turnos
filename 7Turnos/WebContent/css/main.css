@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+div.versionRow {
+	/*+placement: anchor-bottom-right;*/
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin-bottom: -11px;
+	margin-right: -12px;
+	color: #00819E;
+}
+div.versionRow span {
+	font-size: 11px;
+	height: ;
+}
 div.loginFondo {
 	height: 100%;
 	width: 100%;
