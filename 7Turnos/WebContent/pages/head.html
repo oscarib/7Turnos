@@ -3,7 +3,7 @@
 	<div id="warnings" class="row" ng-if="OrphanPrayers>0">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<span ng-if="OrphanPrayers>0">
-				Atención: Hay {{OrphanPrayersText}} sin turnos asignados
+				Atención: {{labels.there_are}} {{OrphanPrayersText}} {{labels.without_assigned_turns}}
 			</span>
 		</div>
 	</div>

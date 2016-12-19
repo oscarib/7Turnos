@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,6 +44,29 @@ public class OtherServicesController {
 	@Autowired
 	Configuration conf;
 	
+	@Value("${label_name}")
+	String labelName;
+	@Value("${label_email}")
+	String labelEmail;
+	@Value("${label_ownCountry}")
+	String labelOwnCountry;
+	@Value("${label_hidden}")
+	String labelHidden;
+	@Value("${label_phone}")
+	String labelPhone;
+	@Value("${label_pseudonym}")
+	String labelPseudonym;
+	@Value("${label_warning}")
+	String labelWarning;
+	@Value("${label_there_are}")
+	String labelThereAre;
+	@Value("${label_without_assigned_turns}")
+	String labelWithoutAssignedTurns;
+	@Value("${label_prayer}")
+	String labelPrayer;
+	@Value("${label_prayers}")
+	String labelPrayers;
+
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
 	//CONTROLLER: UPLOADCALENDAR
@@ -82,5 +107,23 @@ public class OtherServicesController {
 		String calendarString = fileService.getCalendarTableString(4);
 		calendar.add(calendarString);
 		return calendar;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
+	public Properties getProperties(){
+		Properties properties = new Properties();
+		properties.setProperty("label_name", labelName);
+		properties.setProperty("label_email", labelEmail);
+		properties.setProperty("label_phone", labelPhone);
+		properties.setProperty("label_ownCountry", labelOwnCountry);
+		properties.setProperty("label_hidden", labelHidden);
+		properties.setProperty("label_pseudonym", labelPseudonym);
+		properties.setProperty("label_warning", labelWarning);
+		properties.setProperty("label_there_are", labelThereAre);
+		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
+		properties.setProperty("label_prayer", labelPrayer);
+		properties.setProperty("label_prayers", labelPrayers);
+		return properties;
 	}
 }
