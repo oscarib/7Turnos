@@ -62,6 +62,10 @@ public class OtherServicesController {
 	String labelThereAre;
 	@Value("${label_without_assigned_turns}")
 	String labelWithoutAssignedTurns;
+	@Value("${label_prayer}")
+	String labelPrayer;
+	@Value("${label_prayers}")
+	String labelPrayers;
 
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -118,6 +122,8 @@ public class OtherServicesController {
 		properties.setProperty("label_warning", labelWarning);
 		properties.setProperty("label_there_are", labelThereAre);
 		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
+		properties.setProperty("label_prayer", labelPrayer);
+		properties.setProperty("label_prayers", labelPrayers);
 		return properties;
 	}
 }

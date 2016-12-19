@@ -68,6 +68,8 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.warning = dataOut.data.label_warning;
 		$rootScope.labels.there_are = dataOut.data.label_there_are;
 		$rootScope.labels.without_assigned_turns = dataOut.data.label_without_assigned_turns;
+		$rootScope.labels.label_prayer = dataOut.data.label_prayer;
+		$rootScope.labels.label_prayers = dataOut.data.label_prayers;
 	});
 
     var w = angular.element($window);

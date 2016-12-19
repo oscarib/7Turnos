@@ -38,7 +38,7 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     		$rootScope.ForeignPrayers = dataOut.data.foreignPrayers;
     		$rootScope.LocalPrayers = dataOut.data.localPrayers;
     		$rootScope.OrphanPrayers = dataOut.data.orphanPrayers;
-    		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers > 1 ? $rootScope.OrphanPrayers + " oradores" : $rootScope.OrphanPrayers + " orador";
+    		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers > 1 ? $rootScope.OrphanPrayers + " " + $rootScope.labels.label_prayers : $rootScope.OrphanPrayers + " " + $rootScope.labels.label_prayer;
     		loadCharts();
     	}, function(error) {
     		if (!errorWithServiceCall){
