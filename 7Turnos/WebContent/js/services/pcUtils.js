@@ -29,6 +29,9 @@
     	};
     	
     	self.getProperties = function(){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
     		$http({
     			url: "./getProperties.do",
     			dataType: 'json',
@@ -37,11 +40,12 @@
     				"Content-Type": "application/json"
     			}
     		}).then(function(dataOut) {
-    			$rootScope.labels.name = dataOut.data.label.name;
-    			
+    			defered.resolve(dataOut);
     		}, function(error) {
-    		     defered.reject(error);
+    			defered.reject(error);
     		});
+    		
+    		return promise;
     	}
 
     	return self;

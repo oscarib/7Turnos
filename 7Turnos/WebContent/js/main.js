@@ -48,7 +48,7 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
 });
 
-PrayingChain.controller("main", ['$scope','$window', function($scope,$rootScope, $window) {
+PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', function($scope,$rootScope,$window,pcUtils) {
 	var self = this;
 	
 	//Para proteger las dimensiones mínimas de la aplicación
@@ -57,6 +57,18 @@ PrayingChain.controller("main", ['$scope','$window', function($scope,$rootScope,
     $scope.minHeight = "600";
     $scope.sizeWidth = 0;
     $scope.sizeHeight = 0;
+	var promise = pcUtils.getProperties();
+	promise.then(function(dataOut){
+		$rootScope.labels={};
+		$rootScope.labels.name = dataOut.data.label_name;
+		$rootScope.labels.email = dataOut.data.label_email;
+		$rootScope.labels.ownCountry = dataOut.data.label_ownCountry;
+		$rootScope.labels.hidden = dataOut.data.label_hidden;
+		$rootScope.labels.pseudonym = dataOut.data.label_pseudonym;
+		$rootScope.labels.warning = dataOut.data.label_warning;
+		$rootScope.labels.there_are = dataOut.data.label_there_are;
+		$rootScope.labels.without_assigned_turns = dataOut.data.label_without_assigned_turns;
+	});
 
     var w = angular.element($window);
 

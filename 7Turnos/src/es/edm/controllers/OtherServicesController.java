@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,24 @@ public class OtherServicesController {
 	@Autowired
 	Configuration conf;
 	
-	@Value("${label.name}")
+	@Value("${label_name}")
 	String labelName;
+	@Value("${label_email}")
+	String labelEmail;
+	@Value("${label_ownCountry}")
+	String labelOwnCountry;
+	@Value("${label_hidden}")
+	String labelHidden;
+	@Value("${label_phone}")
+	String labelPhone;
+	@Value("${label_pseudonym}")
+	String labelPseudonym;
+	@Value("${label_warning}")
+	String labelWarning;
+	@Value("${label_there_are}")
+	String labelThereAre;
+	@Value("${label_without_assigned_turns}")
+	String labelWithoutAssignedTurns;
 
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -91,7 +109,15 @@ public class OtherServicesController {
 	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
 	public Properties getProperties(){
 		Properties properties = new Properties();
-		properties.setProperty("label.name", labelName);
+		properties.setProperty("label_name", labelName);
+		properties.setProperty("label_email", labelEmail);
+		properties.setProperty("label_phone", labelPhone);
+		properties.setProperty("label_ownCountry", labelOwnCountry);
+		properties.setProperty("label_hidden", labelHidden);
+		properties.setProperty("label_pseudonym", labelPseudonym);
+		properties.setProperty("label_warning", labelWarning);
+		properties.setProperty("label_there_are", labelThereAre);
+		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
 		return properties;
 	}
 }
