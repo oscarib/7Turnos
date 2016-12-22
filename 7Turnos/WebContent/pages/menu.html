@@ -33,6 +33,11 @@
 					</div>
 				</div>
 				<div class="row">
+					<div ng-if="maxUserRole>=0" class="col-lg-2" ng-click="navigateTo('/turnos')">
+						<span class="menu-item">Turnos</span>
+					</div>
+				</div>
+				<div class="row">
 					<div ng-if="maxUserRole>=0" class="col-lg-2" ng-click="navigateTo('/calendar')">
 						<span class="menu-item">Calendario</span>
 					</div>

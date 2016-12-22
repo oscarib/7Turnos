@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+table#TurnList tr.Cancelado {
+	background-color: #707070;
+	color: #FFFFFF;
+}
+table#TurnList tr.No.Comprometido {
+	background-color: #BDBDBD;
+	color: #FFFFFF;
+}
 div.versionRow {
 	/*+placement: anchor-bottom-right;*/
 	position: absolute;

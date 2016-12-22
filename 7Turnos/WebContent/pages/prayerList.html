@@ -6,7 +6,7 @@
 			<table ng-table="vm.tableParams" id="prayerList" class="table table-hover table-condensed">
 				<tr ng-repeat="prayer in $data">
 					<td width="50">{{prayer.uid}}</td>
-					<td width="150" data-title="{{labels.name}}" sortable="'name'" filter="{name: 'text'}">{{prayer.name}}</td>
+					<td width="150" data-title="'Nombre'" sortable="'name'" filter="{name: 'text'}">{{prayer.name}}</td>
 					<td width="250" data-title="'Email'" sortable="'email'" filter="{email: 'text'}">{{prayer.email}}</td>
 					<td width="150" data-title="'España'" sortable="'ownCountry'" filter="{ownCountry: 'text'}">{{prayer.ownCountry}}</td>
 					<td width="120" data-title="'Oculto'" sortable="'hidden'" filter="{hidden: 'text'}">{{prayer.hidden}}</td>
