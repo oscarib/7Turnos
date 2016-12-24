@@ -3,7 +3,7 @@
   <display-name>Servlet 3.0 Web Application</display-name>
   <display-name>Spring Web MVC Application</display-name>
   <welcome-file-list>
-    <welcome-file>/pages/main.html</welcome-file>
+    <welcome-file>/main.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>
