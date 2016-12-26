@@ -75,6 +75,13 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.without_assigned_turns = dataOut.data.label_without_assigned_turns;
 		$rootScope.labels.label_prayer = dataOut.data.label_prayer;
 		$rootScope.labels.label_prayers = dataOut.data.label_prayers;
+		$rootScope.labels.createPrayer = dataOut.data.label_createPrayer;
+		$rootScope.labels.createPrayerOneStep = dataOut.data.label_createPrayerOneStep;
+		$rootScope.labels.showCalendar = dataOut.data.label_showCalendar;
+		$rootScope.labels.showCalendarDescription = dataOut.data.label_showCalendarDescription;
+		$rootScope.labels.prayerList = dataOut.data.label_prayerList;
+		$rootScope.labels.prayerListDescription = dataOut.data.label_prayerListDescription;
+		$rootScope.labels.goTo = dataOut.data.label_goTo;
 	});
 
     var w = angular.element($window);

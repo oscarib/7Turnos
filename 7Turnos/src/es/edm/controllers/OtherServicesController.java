@@ -66,6 +66,20 @@ public class OtherServicesController {
 	String labelPrayer;
 	@Value("${label_prayers}")
 	String labelPrayers;
+	@Value("${label_createPrayer}")
+	String labelCreatePrayer;
+	@Value("${label_createPrayerOneStep}")
+	String labelCreatePrayerOneStep;
+	@Value("${label_showCalendar}")
+	String labelShowCalendar;
+	@Value("${label_showCalendarDescription}")
+	String labelShowCalendarDescription;
+	@Value("${label_prayerList}")
+	String labelPrayerList;
+	@Value("${label_prayerListDescription}")
+	String labelPrayerListDescription;
+	@Value("${label_goTo}")
+	String labelGoTo;
 
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -124,6 +138,13 @@ public class OtherServicesController {
 		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
 		properties.setProperty("label_prayer", labelPrayer);
 		properties.setProperty("label_prayers", labelPrayers);
+		properties.setProperty("label_createPrayer", labelCreatePrayer);
+		properties.setProperty("label_createPrayerOneStep", labelCreatePrayerOneStep);
+		properties.setProperty("label_showCalendar", labelShowCalendar);
+		properties.setProperty("label_showCalendarDescription", labelShowCalendarDescription);
+		properties.setProperty("label_prayerList", labelPrayerList);
+		properties.setProperty("label_prayerListDescription", labelPrayerListDescription);
+		properties.setProperty("label_goTo", labelGoTo);
 		return properties;
 	}
 }
