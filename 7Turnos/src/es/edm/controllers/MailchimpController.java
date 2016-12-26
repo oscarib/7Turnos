@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.EmailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class MailchimpController {
 	@Autowired
 	Configuration conf;
 	
+	private final static Logger logger = LoggerFactory.getLogger(MailchimpController.class);
+	
 	/* Mailchimp Webhook URLs
 	 * 		Local: http://prayingchain.ddns.net:8787/PrayingChainWebApp/Webhook.html?secret=arkanoid
 	 * 		Jelastic: http://prayingchain.jelastic.cloudhosted.es/Webhook.html?secret=arkanoid
@@ -34,7 +38,7 @@ public class MailchimpController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getProcess(WebRequest request){
-		System.out.println(new Date() + ": Detected a Mailchimp GET request...");
+		logger.info(new Date() + ": Detected a Mailchimp GET request...");
 		return new ModelAndView("/web/MailchimpAnswer.jsp");
 	}
 	
@@ -66,7 +70,7 @@ public class MailchimpController {
 					case "cleaned": processCleanedEmail(mailchimpData, emailSender); break;
 					}
 				} catch (EmailException e){
-					System.out.println("Something went really wrong while trying to send an email...");
+					logger.error("Something went really wrong while trying to send an email...");
 				}
 			}
 		}
@@ -100,8 +104,7 @@ public class MailchimpController {
 	//TODO: Change hardcoded email addresses...
 	private void sendWarningEmail(Map<String,String> mailchimpData, EmailSender emailSender) throws EmailException{
 		
-		//Logs the reuqest type to System.out
-		System.out.println(new Date() + ": Requester is " + mailchimpData.get("email"));
+		logger.info(new Date() + ": Requester is " + mailchimpData.get("email"));
 		
 		//Sets the email subject
 		String subject = "Received a MailChimp '" + mailchimpData.get("type") + "' advice from " + mailchimpData.get("name");
@@ -127,7 +130,7 @@ public class MailchimpController {
 			emailSender.setRecipients(recipients);
 
 			//Logging that we're gonna send an email...
-			System.out.println(new Date() + ": Sending a warning email to oscar.ibafer@gmail.com...");
+			logger.info(new Date() + ": Sending a warning email to oscar.ibafer@gmail.com...");
 
 			//Starts a new thread to send the email asynchronously
 			emailSender.start();
@@ -139,11 +142,11 @@ public class MailchimpController {
 	}
 	
 	private void printHeader(String requestType){
-		System.out.println(new Date() + ": Received a MailChimp '" + requestType + "' advice. Processing...");
+		logger.info(new Date() + ": Received a MailChimp '" + requestType + "' advice. Processing...");
 	}
 	
 	private void printFooter(){
-		System.out.println(new Date() + ": Mailchimp request has been answered");
+		logger.info(new Date() + ": Mailchimp request has been answered");
 	}
 	
 	private Map<String,String> getMailchimpData(WebRequest request){

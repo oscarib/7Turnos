@@ -9,7 +9,11 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import es.edm.controllers.OtherServicesController;
 
 @Component
 public class EmailSender extends Thread{
@@ -27,6 +31,7 @@ public class EmailSender extends Thread{
 	List<InternetAddress> recipientsCC;
 	List<InternetAddress> recipientsCCO;
 	Thread t;
+	private final static Logger logger = LoggerFactory.getLogger(EmailSender.class);
 	
 	public EmailSender(String userName, String hostName, String password, int smtpPort, boolean ssl){
 		this.userName = userName;
@@ -80,18 +85,13 @@ public class EmailSender extends Thread{
 			email.send();
 			
 			//Including recipients in the log...
-			System.out.print(new Date() + ": An email was sucesfully sent to ");
+			logger.info(new Date() + ": An email was sucesfully sent to ");
 			for (InternetAddress nextRecp: recipients){
-				System.out.print(nextRecp.getAddress() + ", ");
+				logger.info(nextRecp.getAddress() + ", ");
 			}
-			//Print a new line code to finish all recipients message
-			System.out.println("");
-
-			//Print another line to isolate new requests from previous ones
-			System.out.println("");
 
 		} catch (EmailException e){
-			System.out.println(new Date() + ": Something went really wrong while trying to send an email. Stack trace is:");
+			logger.error(new Date() + ": Something went really wrong while trying to send an email. Stack trace is:");
 			e.printStackTrace();
 		}
 	}
