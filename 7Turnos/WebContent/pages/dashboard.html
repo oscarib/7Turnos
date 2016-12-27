@@ -61,6 +61,18 @@
 				<div class="widget-links">{{labels.send}}</div>
 			</div>
 		</div>
+		<div ng-if="maxUserRole>0" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+			<div class="widget" ng-click="navigateTo('/configuracion');vm.openMenu(2)">
+				<div class="widget-header">
+					<img src="./images/Configuracion.jpg">
+				</div>
+				<div class="widget-content">
+					<h4>{{labels.configuration}}</h4>
+					<span>{{labels.configurationDescription}}</span>
+				</div>
+				<div class="widget-links">{{labels.show}}</div>
+			</div>
+		</div>
 		<div ng-if="maxUserRole>=1" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
 			<div class="widget">
 				<div class="WidgetDeshabilitado"></div>

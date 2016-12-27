@@ -163,6 +163,7 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.notEmpty = dataOut.data.label_notEmpty;
 		$rootScope.labels.updateCalendarShort = dataOut.data.label_updateCalendarShort;
 		$rootScope.labels.configuration = dataOut.data.label_configuration;
+		$rootScope.labels.configurationDescription = dataOut.data.label_configurationDescription;
 	});
 
     var w = angular.element($window);
