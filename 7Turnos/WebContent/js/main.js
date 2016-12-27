@@ -53,15 +53,46 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
 });
 
-PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', function($scope,$rootScope,$window,pcUtils) {
+PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','prayerServices', function($scope,$rootScope,$window,pcUtils,prayerServices) {
 	var self = this;
 	
-	//Para proteger las dimensiones mínimas de la aplicación
+    self.loadStatistics = function(){
+    	$rootScope.batidoraGeneralText=$rootScope.labels.loadingStatistics;
+    	$rootScope.batidoraGeneral=true;
+    	var statistics = prayerServices.getChainStatistics();
+    	statistics.then(function(dataOut){
+    		$rootScope.TotalPrayers = dataOut.data.totalPrayers;
+    		$rootScope.UsedTurns = dataOut.data.usedTurns;
+    		$rootScope.EmptyTurns = dataOut.data.emptyTurns;
+    		$rootScope.TotalTurns = dataOut.data.totalTurns;
+    		$rootScope.NonEmptyTurns = $rootScope.TotalTurns - $rootScope.EmptyTurns;
+    		$rootScope.AvailableTurns = $rootScope.TotalTurns - $rootScope.UsedTurns;
+    		$rootScope.CommittedPrayers = dataOut.data.committedPrayers;
+    		$rootScope.NonCommittedPrayers = dataOut.data.nonCommittedPrayers;
+    		$rootScope.HiddenPrayers = dataOut.data.hiddenPrayers;
+    		$rootScope.PublicPrayers = $rootScope.TotalPrayers - dataOut.data.hiddenPrayers;
+    		$rootScope.ForeignPrayers = dataOut.data.foreignPrayers;
+    		$rootScope.LocalPrayers = dataOut.data.localPrayers;
+    		$rootScope.OrphanPrayers = dataOut.data.orphanPrayers;
+    		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers + " " + ($rootScope.OrphanPrayers > 1 ? $rootScope.labels.prayers : $rootScope.labels.prayer);
+    		$rootScope.$emit('statisticsLoaded');
+    	}, function(error) {
+    		if (!errorWithServiceCall){
+    			errorWithServiceCall = true;
+    			bootbox.alert({size:'small', message: $rootScope.labels.errorLoadingStatistics});
+    		}
+    	}).finally(function(){
+    		$rootScope.batidoraGeneral=false;
+    	});
+    };
+    
+    //Para proteger las dimensiones mínimas de la aplicación
 	$rootScope.isMinimumSize = false;
     $scope.minWidth = "800";
     $scope.minHeight = "600";
     $scope.sizeWidth = 0;
     $scope.sizeHeight = 0;
+    
 	var promise = pcUtils.getProperties();
 	promise.then(function(dataOut){
 		$rootScope.labels={};
@@ -162,8 +193,16 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.anonymousPlural = dataOut.data.label_anonymousPlural;
 		$rootScope.labels.notEmpty = dataOut.data.label_notEmpty;
 		$rootScope.labels.updateCalendarShort = dataOut.data.label_updateCalendarShort;
+		
+	    //Una vez cargadas las propiedades, podemos cargar las estadísticas
+		self.loadStatistics();
 	});
-
+	
+	//Si alguien solicita las estadísticas, se ejecuta la carga
+	$rootScope.$on('needStatistics', function(){
+		self.loadStatistics();
+	});
+	
     var w = angular.element($window);
 
     $scope.getWindowDimensions = function () {
@@ -186,6 +225,4 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
     w.bind('resize', function () {
     	$scope.$apply();
     });
-
-	
 }]);
