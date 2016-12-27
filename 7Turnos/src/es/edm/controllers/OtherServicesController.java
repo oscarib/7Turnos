@@ -238,6 +238,8 @@ public class OtherServicesController {
 	String label_notEmpty;
 	@Value("${label_updateCalendarShort}")
 	String label_updateCalendarShort;
+	@Value("${label_configuration}")
+	String label_configuration;
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -342,6 +344,8 @@ public class OtherServicesController {
 		properties.setProperty("label_publicoPlural", label_publicoPlural);
 		properties.setProperty("label_anonymousPlural", label_anonymousPlural);
 		properties.setProperty("label_notEmpty", label_notEmpty);
+		properties.setProperty("label_updateCalendarShort", label_updateCalendarShort);
+		properties.setProperty("label_configuration", label_configuration);
 
 		return properties;
 	}

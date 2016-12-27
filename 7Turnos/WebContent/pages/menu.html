@@ -67,6 +67,12 @@
 						<span ng-click="uploadCalendar()" class="menu-item">{{labels.updateCalendarShort}}</span>
 					</div>
 				</div>
+				<div ng-if="maxUserRole>=1" class="row" ng-click="navigateTo('/configuracion')">
+						<div class="col-lg-2">
+							<span class="menu-item">{{labels.configuration}}</span>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
