@@ -8,20 +8,20 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 	initStatistics();
 	
 	$rootScope.uploadCalendar = function(){
-		$rootScope.batidoraGeneralText='Realizando el envío del calendario. Por favor, espere...';
+		$rootScope.batidoraGeneralText=$rootScope.labels.uploadingCalendar;
 		$rootScope.batidoraGeneral=true;
 		var promise = prayerServices.uploadCalendar();
 		promise.then(function(dataOut){
-			bootbox.alert({size:'small', message: 'Se ha actualizado el calendario con éxito'});
+			bootbox.alert({size:'small', message: $rootScope.labels.calendarUpdated});
     	}, function(error) {
-			bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar el calendario'});
+			bootbox.alert({size:'small', message: $rootScope.labels.errorUpdatingCalendar});
     	}).finally(function(){
 			$rootScope.batidoraGeneral=false;
     	});
 	};
 	
     self.loadStatistics = function(){
-    	$rootScope.batidoraGeneralText='Cargando estadísticas y datos. Por favor, espere...';
+    	$rootScope.batidoraGeneralText=$rootScope.labels.loadingStatistics;
     	$rootScope.batidoraGeneral=true;
     	var statistics = prayerServices.getChainStatistics();
     	statistics.then(function(dataOut){
@@ -38,12 +38,12 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     		$rootScope.ForeignPrayers = dataOut.data.foreignPrayers;
     		$rootScope.LocalPrayers = dataOut.data.localPrayers;
     		$rootScope.OrphanPrayers = dataOut.data.orphanPrayers;
-    		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers > 1 ? $rootScope.OrphanPrayers + " " + $rootScope.labels.label_prayers : $rootScope.OrphanPrayers + " " + $rootScope.labels.label_prayer;
+    		$rootScope.OrphanPrayersText = $rootScope.OrphanPrayers + " " + ($rootScope.OrphanPrayers > 1 ? $rootScope.labels.prayers : $rootScope.labels.prayer);
     		loadCharts();
     	}, function(error) {
     		if (!errorWithServiceCall){
     			errorWithServiceCall = true;
-    			bootbox.alert({size:'small', message: 'Se produjo un error al solicitar las estadísticas'});
+    			bootbox.alert({size:'small', message: $rootScope.labels.errorLoadingStatistics});
     		}
     	}).finally(function(){
     		$rootScope.batidoraGeneral=false;
@@ -74,35 +74,35 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
     
     function loadCharts(){
         //Committed / Non committed pie chart
-        var labels= ["Comprometidos", "No Comprometidos"];
+        var labels= [$rootScope.labels.committed, $rootScope.labels.notCommittedPlural];
         var pieChartData = [$rootScope.CommittedPrayers,$rootScope.NonCommittedPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCommitted", labels, pieChartData, backgroundColor, borderColor);
         
         //Coverage pie chart
-        var labels= ["No Vacíos", "Vacíos"];
+        var labels= [$rootScope.labels.notEmpty, $rootScope.labels.empty];
         var pieChartData = [$rootScope.UsedTurns, $rootScope.EmptyTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("chartCoverage", labels, pieChartData, backgroundColor, borderColor);
 
         //availables Vs Total pie chart
-        var labels= ["Cubiertos", "Disponibles"];
+        var labels= [$rootScope.labels.covered, $rootScope.labels.available];
         var pieChartData = [$rootScope.UsedTurns,$rootScope.AvailableTurns];
         var borderColor = ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("availablePieChart", labels, pieChartData, backgroundColor, borderColor);
         
         //Hidden Vs Public Prayers
-        var labels= ["Públicos", "Anónimos"];
+        var labels= [$rootScope.labels.publicoPlural, $rootScope.labels.anonymousPlural];
         var pieChartData = [$rootScope.PublicPrayers, $rootScope.HiddenPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("hiddenPublicRatio", labels, pieChartData, backgroundColor, borderColor);
 
         //Hidden Vs Public Prayers
-        var labels= ["España", "Otro País"];
+        var labels= [$rootScope.labels.ownCountry, $rootScope.labels.otherCountry];
         var pieChartData = [$rootScope.LocalPrayers, $rootScope.ForeignPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];

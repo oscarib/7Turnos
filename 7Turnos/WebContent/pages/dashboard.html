@@ -108,7 +108,7 @@
 					<canvas class="widget-chart" id="hiddenPublicRatio" width="160"
 						height="120"></canvas>
 				</div>
-				<div class="widget-links">{{labels.prayers}} {{labels.anonymous}}</div>
+				<div class="widget-links">{{labels.anonymousPrayers}}</div>
 			</div>
 		</div>
 		<div ng-if="maxUserRole>=0" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
@@ -117,7 +117,7 @@
 					<canvas class="widget-chart" width="160" height="120"
 						id="chartCommitted"></canvas>
 				</div>
-				<div class="widget-links">{{labels.prayers}} {{labels.committed}}</div>
+				<div class="widget-links">{{labels.committedPrayers}}</div>
 			</div>
 		</div>
 		<div ng-if="maxUserRole>=0" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
@@ -126,7 +126,7 @@
 					<canvas class="widget-chart" id="availablePieChart" width="160"
 						height="120"></canvas>
 				</div>
-				<div class="widget-links">{{labels.turns}} {{labels.covered}}</div>
+				<div class="widget-links">{{labels.coveredTurns}}</div>
 			</div>
 		</div>
 		<div ng-if="maxUserRole>=0" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
@@ -135,7 +135,7 @@
 					<canvas class="widget-chart" id="chartCoverage" width="160"
 						height="120"></canvas>
 				</div>
-				<div class="widget-links">{{labels.turns}} {{labels.empty}}</div>
+				<div class="widget-links">{{labels.emptyTurns}}</div>
 			</div>
 		</div>
 	</div>

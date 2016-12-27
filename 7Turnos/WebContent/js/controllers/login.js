@@ -37,10 +37,10 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 				$rootScope.authenticated = true;
 				$rootScope.getLoggedUser();
 			} else {
-				bootbox.alert({size:'small', message: 'Con esas credenciales no vas a ninguna parte'});
+				bootbox.alert({size:'small', message: $rootScope.labels.loginError});
 			}
 		}, function(error) {
-			bootbox.alert({size:'small', message: 'Hubo un error al comprobar las credenciales'});
+			bootbox.alert({size:'small', message: $rootScope.labels.errorCheckingCredentials});
 		});
 	};
 	

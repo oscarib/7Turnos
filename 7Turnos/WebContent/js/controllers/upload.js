@@ -7,11 +7,10 @@ PrayingChain.controller("upload", ['$rootScope', 'chartService', 'prayerServices
     	self.showLoadingGeneral = true;
     	var uploadCalendar = prayerServices.uploadCalendar();
     	uploadCalendar.then(function() {
-    		bootbox.alert({size:'small', message: 'Se ha podido actualizar el calendario correctamente'});
+    		bootbox.alert({size:'small', message: $rootScope.labels.calendarUpdated});
         	self.showLoadingGeneral = false;
     	}, function(error) {
-    		bootbox.alert({size:'small', message: 'Ha habido un problema al tratar de actualizar el calendario.'+ 
-    											  'Consulte la consola del navegador para más información'});
+    		bootbox.alert({size:'small', message: $rootScope.labels.errorUpdatingCalendar});
     		console.error(error);
         	self.showLoadingGeneral = false;
     	}).finally(function(){

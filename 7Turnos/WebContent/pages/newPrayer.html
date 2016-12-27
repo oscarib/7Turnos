@@ -6,14 +6,14 @@
 				<div class="container-fluid">
 				
 					<div class="row">
-						<h1>Crear un Orador</h1>
+						<h1>{{labels.createPrayer}}</h1>
 					</div>
 
 					<div class="row">
-						<label>Nombre</label>
+						<label>{{labels.name}}</label>
 						<input type="text" name="nombre" ng-model="vm.nombre" required><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.nombre.$error.required">Rellene este campo</span>
+							<span ng-show="newPrayerForm.nombre.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
@@ -23,7 +23,7 @@
 							<option ng-repeat="day in vm.daysOfWeek" value="{{day}}">{{day}}</option>
 						</select><br> 
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.dia.$error.required">Rellene este campo</span>
+							<span ng-show="newPrayerForm.dia.$error.required">{{labels.fileRequired}}</span>
 						</span>
       					</div>
 					
@@ -33,7 +33,7 @@
 							<option ng-repeat="turno in vm.turnos" value="{{turno}}">{{turno}}</option>
 						</select><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.turno.$error.required">Rellene este campo</span>
+							<span ng-show="newPrayerForm.turno.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
@@ -41,52 +41,52 @@
 						<label>Email</label>
 						<input type="email" name="email" ng-model="vm.email"><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted && newPrayerForm.email.$touched">
-							<span ng-show="newPrayerForm.email.$error.email">Formato de email incorrecto<br></span>
+							<span ng-show="newPrayerForm.email.$error.email">{{labels.emailError}}<br></span>
 						</span>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="vm.phoneOrEmailError">Debe rellenar un email o un teléfono</span>
+							<span ng-show="vm.phoneOrEmailError">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
 					<div class="row">
-						<label>Teléfono</label>
+						<label>{{labels.phone}}</label>
 						<input type="text" name="telefono" ng-model="vm.telefono"><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="vm.phoneOrEmailError">Debe rellenar un email o un teléfono</span>
+							<span ng-show="vm.phoneOrEmailError">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
 					<div class="row">
-						<label>País</label>
+						<label>{{labels.country}}</label>
 						<select ng-model="vm.pais" name="pais" required>
 							<option ng-repeat="pais in vm.paises" value="{{pais}}">{{pais}}</option>
 						</select><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.pais.$error.required">Rellene este campo</span>
+							<span ng-show="newPrayerForm.pais.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
 					<div class="row">
-						<label>Notas</label>
+						<label>{{labels.notes}}</label>
 						<input type="text" name="notes" ng-model="vm.notas" />
 					</div>
 					
 					<div class="row">
-						<label>Visibilidad</label>
+						<label>{{labels.visibility}}</label>
 						<select ng-model="vm.visibilidad" name="visibilidad" required>
 							<option ng-repeat="visibilidad in vm.visibilidades"
 								value="{{visibilidad}}">{{visibilidad}}</option>
 						</select><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.visibilidad.$error.required">Rellene este campo</span>
+							<span ng-show="newPrayerForm.visibilidad.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 					
 					<div class="row">
-						<label>Seudónimo</label>
+						<label>{{labels.pseudonym}}</label>
 						<input type="text" name="seudonimo" ng-model="vm.seudonimo" /><br>
 						<span class="error-messages" ng-show="newPrayerForm.$submitted">
-							<span ng-show="newPrayerForm.visibilidad.$touched && vm.visibilidad=='Público'">Rellene este campo</span>
+							<span ng-show="newPrayerForm.visibilidad.$touched && vm.visibilidad=='Público'">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 

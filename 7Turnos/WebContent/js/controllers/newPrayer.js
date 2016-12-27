@@ -9,7 +9,7 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 	self.createNewPrayer = function (isValid){
 		
 		self.phoneOrEmailError = (!self.telefono && !self.email) ? true: false;
-		isValid = isValid && ((self.visibilidad == "Público" && !self.seudonimo) ? false: true);
+		isValid = isValid && ((self.visibilidad == $rootScope.labels.publico && !self.seudonimo) ? false: true);
 		isValid = isValid && !self.phoneOrEmailError;
 
 		if (isValid){
@@ -29,26 +29,21 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 			promise.then(function(dataOut) {
 				var error = dataOut.data;
 				if (error==0) {
-					bootbox.alert({size:'small', message: 'Se ha creado el orador en base de datos'});
+					bootbox.alert({size:'small', message: $rootScope.labels.prayerCreated});
 					$rootScope.resetNewPrayerForm();
 					$location.path('/');
 				} else {
 					if (error == 3){
-						bootbox.alert({size:'small', message: 'ALERTA: El orador que ha intentado crear ya existía en la cadena y fue borrado'+
-															  ' con anterioridad. Se ha procedido a recuperar este orador, y a actualizar'+
-															  ' sus datos con los nuevos introducidos, pero para evitar eliminar información'+
-															  ' no se ha creado un turno con los datos introducidos, sino que se recuperaron'+
-															  ' los turnos que tenía el orador asignados anteriormente. Por favor, acceda a'+ 
-															  ' la ficha del orador, para comprobar los cambios'});
+						bootbox.alert({size:'small', message: $rootScope.labels.errorPrayerAlreadyExists});
 						$rootScope.resetNewPrayerForm();
 						$location.path('/');
 					} else{
-						problema = (error==1 ? "email": "teléfono");
-						bootbox.alert({size:'small', message: 'Error: No puedes crear 2 oradores con el mismo ' + problema});
+						problema = (error==1 ? "email": $rootScope.labels.phone);
+						bootbox.alert({size:'small', message: $rootScope.labels.errorRepetitiveID + " " + problema});
 					}
 				}
 			}, function(error) {
-				bootbox.alert({size:'small', message: 'Hubo un error al tratar de crear el orador'});
+				bootbox.alert({size:'small', message: $rootScope.labels.errorCreatingPrayer});
 			}).finally(function(){});
 		}
 	};
@@ -64,9 +59,10 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 		self.notas = "";
 		self.visibilidad = "";
 		self.seudonimo = "";
-		self.visibilidades = ["Oculto","Público"];
-		self.daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-		self.paises = ["España", "Otro País"];
+		self.visibilidades = [$rootScope.labels.hidden,$rootScope.labels.publico];
+		self.daysOfWeek = [$rootScope.labels.monday, $rootScope.labels.tuesday, $rootScope.labels.wednesday,
+		                   $rootScope.labels.thursday, $rootScope.labels.friday, $rootScope.labels.saturday, $rootScope.labels.sunday];
+		self.paises = [$rootScope.labels.country, $rootScope.labels.otherCountry];
 		self.turnos = ["00:00am","00:30am","01:00am","01:30am","02:00am","02:30am","03:00am","03:30am","04:00am","04:30am",
 		               "05:00am","05:30am","06:00am","06:30am","07:00am","07:30am","08:00am","08:30am","10:00am","10:30am",
 		               "11:00am","11:30am","12:00pm","12:30pm","13:00pm","13:30pm","14:00pm","14:30pm","15:00pm","15:30pm",
