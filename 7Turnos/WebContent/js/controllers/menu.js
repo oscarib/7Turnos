@@ -8,7 +8,6 @@ PrayingChain.controller("menu", ['$rootScope','$location',function($rootScope,$l
     self.hideMenu[2] = true;
     self.hideMenu[3] = true;
     self.hideMenu[4] = true;
-    self.adminName = "Oscar Ibáñez";
     self.pcName = "EspañaDeMaria.ES";
 	self.showPrayersList = undefined;
 	self.showHead = "activeMenuItem";

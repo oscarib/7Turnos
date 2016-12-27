@@ -1,5 +1,7 @@
 package es.edm.services;
 
+import es.edm.domain.entity.ConfigurationEntity;
+
 public interface Configuration {
 
 	public String getFtpServerName();
@@ -17,4 +19,5 @@ public interface Configuration {
 	public String getEmailServiceHostName();
 	public boolean isEmailServiceSSL();
 	public int getEmailServiceSmtpPort();
+	public ConfigurationEntity getConfigurationEntity();
 }

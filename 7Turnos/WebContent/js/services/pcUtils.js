@@ -46,7 +46,27 @@
     		});
     		
     		return promise;
-    	}
+    	};
+    	
+    	self.getConfiguration = function(){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
+    		$http({
+    			url: "./getConfiguration.do",
+    			dataType: 'json',
+    			method: 'POST',
+    			headers: {
+    				"Content-Type": "application/json"
+    			}
+    		}).then(function(dataOut) {
+    			defered.resolve(dataOut);
+    		}, function(error) {
+    			defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
 
     	return self;
     }

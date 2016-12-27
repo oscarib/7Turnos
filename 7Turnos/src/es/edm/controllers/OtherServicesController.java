@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.edm.domain.entity.ConfigurationEntity;
 import es.edm.domain.entity.StatisticsEntity;
 import es.edm.exceptions.DDBBException;
 import es.edm.services.Configuration;
@@ -434,7 +433,7 @@ public class OtherServicesController {
 		} catch (SocketException e) {
 			throw new RuntimeException("Error: " + e);
 		}
-		logger.info("Se subieron los archivos con Ã©xito al sitio FTP.");
+		logger.info("Se subieron los archivos con éxito al sitio FTP.");
 		return true;
 	}
 	
@@ -455,5 +454,11 @@ public class OtherServicesController {
 		String calendarString = fileService.getCalendarTableString(4);
 		calendar.add(calendarString);
 		return calendar;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getConfiguration.do", method = RequestMethod.POST)
+	public ConfigurationEntity getConfiguration(){
+		return conf.getConfigurationEntity();
 	}
 }

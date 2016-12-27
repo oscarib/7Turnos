@@ -100,4 +100,9 @@ public class Configuration_DDBB_Impl implements Configuration {
 		ConfigurationEntity conf = otherServices.getConfiguration();
 		return conf.getMailchimpUrlPwd();
 	}
+
+	@Override
+	public ConfigurationEntity getConfigurationEntity() {
+		return otherServices.getConfiguration();
+	}
 }
