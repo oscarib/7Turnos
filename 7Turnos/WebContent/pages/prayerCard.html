@@ -3,7 +3,7 @@
 		<div class="colSection col-lg-7 col-md-8 col-sm-12 col-xs-12">
 			<div class="row rowBorder">
 				<div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
-					<span>Datos Orador</span>
+					<span>{{labels.prayerData}}</span>
 				</div>
 				<div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<img ng-show="!vm.editing" ng-click="vm.editPrayer()" src="./images/edit.svg" alt="Edit Prayer" height="24" width="24">
@@ -17,7 +17,7 @@
 					<span>ID</span>
 				</div>
 				<div class="dataHeader col-lg-3 col-md-4 col-sm-4 col-xs-4">
-					<span>Nombre</span>
+					<span>{{labels.name}}</span>
 				</div>
 				<div class="dataHeader col-lg-7 col-md-6 col-sm-7 col-xs-6">
 					<span>Email</span>
@@ -38,31 +38,31 @@
 			</div>
 			<div class="row rowBorder">
 				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>España</span>
+					<span>{{labels.ownCountry}}</span>
 				</div>
 				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>Oculto</span>
+					<span>{{labels.hidden}}</span>
 				</div>
 				<div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>Teléfono</span>
+					<span>{{labels.phone}}</span>
 				</div>
 				<div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>Seudónimo</span>
+					<span>{{labels.pseudonym}}</span>
 				</div>
 			</div>
 			<div class="row rowBorder">
 				<div class="{{vm.prayer.country == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<span ng-show="!vm.editing" >{{vm.prayer.country}}</span>
 					<select ng-show="vm.editing" ng-model="vm.prayer.country">
-					  <option value="Sí">Sí</option>
-					  <option value="No">No</option>
+					  <option value="Sí">{{labels.yes}}</option>
+					  <option value="No">{{labels.no}}</option>
 					</select>
 				</div>
 				<div class="{{vm.prayer.visibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<span ng-show="!vm.editing" >{{vm.prayer.visibility}}</span>
 					<select ng-show="vm.editing" ng-model="vm.prayer.visibility">
-					  <option value="Sí">Sí</option>
-					  <option value="No">No</option>
+					  <option value="Sí">{{labels.yes}}</option>
+					  <option value="No">{{labels.no}}</option>
 					</select>
 				</div>
 				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -76,7 +76,7 @@
 			</div>
 			<div class="row rowBorder">
 				<div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
-					<span>Datos Turnos</span>
+					<span>{{labels.turnsData}}</span>
 				</div>
 				<div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<img ng-show="!vm.creatingNewTurn" ng-click="vm.addTurn()" src="./images/add.svg" alt="Edit Turn" height="24" width="24">
@@ -89,16 +89,16 @@
 					<span>ID</span>
 				</div>
 				<div class="dataHeader col-lg-2 col-md-3 col-sm-3 col-xs-3">
-					<span>Día</span>
+					<span>{{labels.day}}</span>
 				</div>
 				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>Turno</span>
+					<span>{{labels.turn}}</span>
 				</div>
 				<div class="dataHeader col-lg-4 col-md-3 col-sm-3 col-xs-3">
-					<span>Estado</span>
+					<span>{{labels.status}}</span>
 				</div>
 				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>Acciones</span>
+					<span>{{labels.actions}}</span>
 				</div>
 			</div>
 			<div ng-repeat="turn in vm.turns" class="row rowBorder">

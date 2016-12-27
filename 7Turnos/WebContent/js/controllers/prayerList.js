@@ -12,7 +12,7 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         		   var rObj = {};
         		   rObj.name = obj.name;
         		   rObj.email = obj.email;
-        		   rObj.ownCountry = obj.ownCountry ? '' : 'Extranjero';
+        		   rObj.ownCountry = obj.ownCountry ? '' : $rootScope.labels.label_foreign;
         		   rObj.hidden = obj.hidden ? 'X' : '-';
         		   rObj.phone = obj.phone;
         		   rObj.pseudonym = obj.pseudonym;
@@ -23,7 +23,7 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         }, function(error) {
         	if (!errorWithServiceCall){
         		errorWithServiceCall = true;
-        		bootbox.alert({size:'small', message: 'Se produjo un error al solicitar la lista de oradores'});
+        		bootbox.alert({size:'small', message: $rootScope.labels.errorGettingPrayerList});
         	}
     	}).finally(function(){
         	self.showLoadingPrayersTable = false;

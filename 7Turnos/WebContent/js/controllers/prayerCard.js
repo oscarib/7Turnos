@@ -9,17 +9,68 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		self.prayer.uid = data.Prayer.uid;
 		self.prayer.name = data.Prayer.name;
 		self.prayer.email = data.Prayer.email
-		self.prayer.country = data.Prayer.ownCountry ? "Sí" : "No";
-		self.prayer.visibility = data.Prayer.hidden ? "Sí" : "No";
+		self.prayer.country = data.Prayer.ownCountry ? $rootScope.labels.yes : $rootScope.labels.no;
+		self.prayer.visibility = data.Prayer.hidden ? $rootScope.labels.yes : $rootScope.labels.no;
 		self.prayer.phone = data.Prayer.phone;
 		self.prayer.optinDate = data.Prayer.optinDate;
 		self.prayer.pseudonym = data.Prayer.pseudonym;
 		self.prayer.chain = data.Prayer.chain;
-		self.prayer.notes = data.Prayer.notes == "" ? "No hay notas que mostrar" : data.Prayer.notes;
+		self.prayer.notes = data.Prayer.notes == "" ? "" : data.Prayer.notes;
 		self.unchangedPrayer = angular.copy(self.prayer);
 		
 		//Turno
 		self.turns = data.turns;
+		self.turns = self.turns.map(function(obj){
+			var rObj = {};
+			rObj.erased = obj.erased;
+			rObj.notes = obj.notes;
+			rObj.pax = obj.pax;
+			rObj.prayer = obj.prayer;
+			rObj.status = obj.status;
+			rObj.turn = obj.turn;
+			rObj.uid = obj.uid;
+			switch(obj.status){
+				case 'accepted':
+					rObj.status = $rootScope.labels.accepted;
+					break;
+				case 'NotCommitted':
+					rObj.status = $rootScope.labels.notCommitted;
+					break;
+				case 'cancelled':
+					rObj.status = $rootScope.labels.cancelled;
+					break;
+				default:
+					rObj.status = $rootScope.labels.errorNotFound;
+					break;
+			}
+			switch(obj.dow) {
+				case 'monday':
+					rObj.dow = $rootScope.labels.monday;
+					break;
+				case 'tuesday':
+					rObj.dow = $rootScope.labels.tuesday;
+					break;
+				case 'wednesday':
+					rObj.dow = $rootScope.labels.wednesday;
+					break;
+				case 'thursday':
+					rObj.dow = $rootScope.labels.thursday;
+					break;
+				case 'friday':
+					rObj.dow = $rootScope.labels.friday;
+					break;
+				case 'saturday':
+					rObj.dow = $rootScope.labels.saturday;
+					break;
+				case 'sunday':
+					rObj.dow = $rootScope.labels.sunday;
+					break;
+				default:
+					rObj.dow = $rootScope.labels.errorNotFound;
+					break;
+			}
+			return rObj;
+		});
 		self.editing = false;
 		self.editingTurn = [];
 		self.creatingNewTurn = false;
@@ -34,13 +85,13 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	function getPrayerAndTurns(){
 		var prayerID = $routeParams.prayerID;
 		if (!prayerID) {
-			bootbox.alert({size:'small', message: 'Esta página debe ser solicitada adjuntando el ID de un orador'});
+			bootbox.alert({size:'small', message: $rootScope.labels.errorMissingPrayerID});
 		} else {
 			var promise = prayerServices.getPrayerAndTurns(prayerID);
 			promise.then(function(dataOut) {
 				inicializarDatos(dataOut.data);
 			}, function(error) {
-				bootbox.alert({size:'small', message: 'Hubo un error al tratar de solicitar los datos del orador de n.' + prayerID});
+				bootbox.alert({size:'small', message: $rootScope.labels.errorGettingPrayer + " " + prayerID});
 			}).finally(function(){
 			});
 
@@ -65,13 +116,13 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	
 	function inicializarDias(){
 		var dias = [];
-		monday = {value:'Lunes',key:'monday'};
-		tuesday = {value:'Martes',key:'tuesday'};
-		wednesday = {value:'Miércoles',key:'wednesday'};
-		thursday = {value:'Jueves',key:'thursday'};
-		friday = {value:'Viernes',key:'friday'};
-		saturday = {value:'Sábado',key:'saturday'};
-		sunday = {value:'Domingo',key:'sunday'};
+		monday = {value:$rootScope.labels.monday,key:'monday'};
+		tuesday = {value:$rootScope.labels.tuesday,key:'tuesday'};
+		wednesday = {value:$rootScope.labels.wednesday,key:'wednesday'};
+		thursday = {value:$rootScope.labels.thursday,key:'thursday'};
+		friday = {value:$rootScope.labels.friday,key:'friday'};
+		saturday = {value:$rootScope.labels.saturday,key:'saturday'};
+		sunday = {value:$rootScope.labels.sunday,key:'sunday'};
 		dias.push(monday);
 		dias.push(tuesday);
 		dias.push(wednesday);
@@ -185,11 +236,11 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	
 	function inicializarStatus(){
 		var statues = [];
-		var stat = {key:'accepted', value:'Aceptado'};
+		var stat = {key:'accepted', value:$rootScope.labels.accepted};
 		statues.push(stat);
-		var stat = {key:'cancelled', value:'Cancelado'};
+		var stat = {key:'cancelled', value:$rootScope.labels.cancelled};
 		statues.push(stat);
-		var stat = {key:'NotCommitted', value:'No Comprometido'};
+		var stat = {key:'NotCommitted', value:$rootScope.labels.notCommitted};
 		statues.push(stat);
 		return statues;
 	};
@@ -204,24 +255,24 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	};
 	
 	self.deletePrayer = function(){
-		bootbox.confirm("¿Estás seguro de querer borrar el orador y todos sus turnos?", 
+		bootbox.confirm($rootScope.labels.removePrayerAndTurnConfirmation, 
 				function(result){ 
 					if (result){
 						self.prayer.erased=true;
 						self.saveChanges();
-						bootbox.alert({size:'small', message: 'Se ha borrado el orador'});
+						bootbox.alert({size:'small', message: $rootScope.labels.prayerRemoved});
 						$rootScope.navigateTo("/");
 					}
 				});
 	};
 	
 	self.deleteTurn = function(index){
-		bootbox.confirm("¿Estás seguro de querer borrar este turno?", 
+		bootbox.confirm($rootScope.labels.removeTurnConfirmation, 
 				function(result){ 
 					if (result){
 						self.turns[index].erased=true;
 						self.saveTurnChanges();
-						bootbox.alert({size:'small', message: 'Se ha borrado el turno'});
+						bootbox.alert({size:'small', message: $rootScope.labels.turnRemoved});
 						$route.reload();
 					}
 				});
@@ -232,9 +283,9 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 			if (angular.toJson(self.prayer) !== angular.toJson(self.unchangedPrayer)){
 				var promise = prayerServices.updatePrayer(prayerBean(self.prayer));
 				promise.then(function(dataOut) {}, function(error) {
-					bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del orador'});
-					console.error("Hubo un error al tratar de actualizar los datos de este orador: " + angular.toJson(self.prayer));
-					console.error("El error fue: " + error.status + ": " + error.statusText);
+					bootbox.alert({size:'small', message: $rootScope.labels.errorSavingPrayer});
+					console.error($rootScope.labels.errorSavingPrayer + ": " + angular.toJson(self.prayer));
+					console.error($rootScope.labels.errorWas + ": " + error.statusText);
 				}).finally(function(){
 					//bootbox.alert({size:'small', message: 'Se guardaron los datos correctamente'});
 					$route.reload();
@@ -273,18 +324,18 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 						self.turns[index].uid='';
 						var promise = prayerServices.addTurn(self.turns[index]);
 						promise.then(function(dataOut) {}, function(error) {
-							bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
-							console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
-							console.error("El error fue: " + error.status + ": " + error.statusText);
+							bootbox.alert({size:'small', message: $rootScope.labels.errorSavingTurn});
+							console.error($rootScope.labels.errorSavingTurn + ": " + angular.toJson(self.turns[index]));
+							console.error($rootScope.labels.errorWas + ": " + error.status + ": " + error.statusText);
 						}).finally(function(){
 							$route.reload();
 						});
 					} else {
 						var promise = prayerServices.updateTurn(self.turns[index]);
 						promise.then(function(dataOut) {}, function(error) {
-							bootbox.alert({size:'small', message: 'Hubo un error al tratar de actualizar los datos del turno'});
-							console.error("Hubo un error al tratar de actualizar los datos de este turno: " + angular.toJson(self.turns[index]));
-							console.error("El error fue: " + error.status + ": " + error.statusText);
+							bootbox.alert({size:'small', message: $rootScope.labels.errorSavingTurn});
+							console.error($rootScope.labels.errorSavingTurn + ": " + angular.toJson(self.turns[index]));
+							console.error($rootScope.labels.errorWas + ": " + error.status + ": " + error.statusText);
 						}).finally(function(){
 							$route.reload();
 						});
@@ -299,7 +350,7 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 	
 	self.addTurn = function(){
 		if (self.alreadyANew){
-			bootbox.alert({size:'small', message: 'Ya está creando un orador. Termine ese proceso para crear más oradores...'});	
+			bootbox.alert({size:'small', message: $rootScope.labels.errorAlreadyCreatingPrayer});	
 		} else {
 			self.alreadyANew = true;
 			self.NewTurn = {uid:'Auto',dow:'',turn:'',status:''};
@@ -314,10 +365,10 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 		prayerEntity.name = dataIn.name;
 		prayerEntity.email = dataIn.email;
 		prayerEntity.phone = dataIn.phone;
-		prayerEntity.ownCountry = dataIn.country=="No" ? false : true;
+		prayerEntity.ownCountry = dataIn.country==$rootScope.labels.no ? false : true;
 		prayerEntity.optinDate = dataIn.optinDate;
 		prayerEntity.notes = dataIn.notes;
-		prayerEntity.hidden = dataIn.visibility == "No" ? false : true;
+		prayerEntity.hidden = dataIn.visibility == $rootScope.labels.no ? false : true;
 		prayerEntity.pseudonym = dataIn.pseudonym;
 		prayerEntity.chain = dataIn.chain;
 		prayerEntity.erased = dataIn.erased;
