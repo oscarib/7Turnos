@@ -80,8 +80,83 @@ public class OtherServicesController {
 	String labelPrayerListDescription;
 	@Value("${label_goTo}")
 	String labelGoTo;
+	@Value("${label_show}")
+	String labelShow;
+	@Value("${label_turnList}")
+	String labelTurnList;
+	@Value("${label_turnListDescription}")
+	String labelTurnListDescription;
+	@Value("${label_sendCalendar}")
+	String labelSendCalendar;
+	@Value("${label_sendCalendarDescription}")
+	String labelSendCalendarDescription;
+	@Value("${label_send}")
+	String labelSend;
+	@Value("${label_stopedPrayers}")
+	String labelStopedPrayers;
+	@Value("${label_stopedPrayersDescription}")
+	String labelStopedPrayersDescription;
+	@Value("${label_emptyTurns}")
+	String labelEmptyTurns;
+	@Value("${label_emptyTurnsDescription}")
+	String labelEmptyTurnsDescription;
+	@Value("${label_prayersInCountry}")
+	String labelPrayersInCountry;
+	@Value("${label_anonymous}")
+	String labelAnonymous;
+	@Value("${label_committed}")
+	String labelCommitted;
+	@Value("${label_turns}")
+	String labelTurns;
+	@Value("${label_covered}")
+	String labelCovered;
+	@Value("${label_empty}")
+	String labelEmpty;
+	
 
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
+
+	
+	@ResponseBody
+	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
+	public Properties getProperties(){
+		Properties properties = new Properties();
+		properties.setProperty("label_name", labelName);
+		properties.setProperty("label_email", labelEmail);
+		properties.setProperty("label_phone", labelPhone);
+		properties.setProperty("label_ownCountry", labelOwnCountry);
+		properties.setProperty("label_hidden", labelHidden);
+		properties.setProperty("label_pseudonym", labelPseudonym);
+		properties.setProperty("label_warning", labelWarning);
+		properties.setProperty("label_there_are", labelThereAre);
+		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
+		properties.setProperty("label_prayer", labelPrayer);
+		properties.setProperty("label_prayers", labelPrayers);
+		properties.setProperty("label_createPrayer", labelCreatePrayer);
+		properties.setProperty("label_createPrayerOneStep", labelCreatePrayerOneStep);
+		properties.setProperty("label_showCalendar", labelShowCalendar);
+		properties.setProperty("label_showCalendarDescription", labelShowCalendarDescription);
+		properties.setProperty("label_prayerList", labelPrayerList);
+		properties.setProperty("label_prayerListDescription", labelPrayerListDescription);
+		properties.setProperty("label_goTo", labelGoTo);
+		properties.setProperty("label_show", labelShow);
+		properties.setProperty("label_turnList", labelTurnList);
+		properties.setProperty("label_turnListDescription", labelTurnListDescription);
+		properties.setProperty("label_sendCalendar", labelSendCalendar);
+		properties.setProperty("label_sendCalendarDescription", labelSendCalendarDescription);
+		properties.setProperty("label_send", labelSend);
+		properties.setProperty("label_stopedPrayers", labelStopedPrayers);
+		properties.setProperty("label_stopedPrayersDescription", labelStopedPrayersDescription);
+		properties.setProperty("label_emptyTurns", labelEmptyTurns);
+		properties.setProperty("label_emptyTurnsDescription", labelEmptyTurnsDescription);
+		properties.setProperty("label_prayersInCountry", labelPrayersInCountry);
+		properties.setProperty("label_anonymous", labelAnonymous);
+		properties.setProperty("label_committed", labelCommitted);
+		properties.setProperty("label_turns", labelTurns);
+		properties.setProperty("label_covered", labelCovered);
+		properties.setProperty("label_empty", labelEmpty);
+		return properties;
+	}
 
 	//CONTROLLER: UPLOADCALENDAR
 	@RequestMapping(path="/uploadCalendar.do", method=RequestMethod.POST)
@@ -121,30 +196,5 @@ public class OtherServicesController {
 		String calendarString = fileService.getCalendarTableString(4);
 		calendar.add(calendarString);
 		return calendar;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
-	public Properties getProperties(){
-		Properties properties = new Properties();
-		properties.setProperty("label_name", labelName);
-		properties.setProperty("label_email", labelEmail);
-		properties.setProperty("label_phone", labelPhone);
-		properties.setProperty("label_ownCountry", labelOwnCountry);
-		properties.setProperty("label_hidden", labelHidden);
-		properties.setProperty("label_pseudonym", labelPseudonym);
-		properties.setProperty("label_warning", labelWarning);
-		properties.setProperty("label_there_are", labelThereAre);
-		properties.setProperty("label_without_assigned_turns", labelWithoutAssignedTurns);
-		properties.setProperty("label_prayer", labelPrayer);
-		properties.setProperty("label_prayers", labelPrayers);
-		properties.setProperty("label_createPrayer", labelCreatePrayer);
-		properties.setProperty("label_createPrayerOneStep", labelCreatePrayerOneStep);
-		properties.setProperty("label_showCalendar", labelShowCalendar);
-		properties.setProperty("label_showCalendarDescription", labelShowCalendarDescription);
-		properties.setProperty("label_prayerList", labelPrayerList);
-		properties.setProperty("label_prayerListDescription", labelPrayerListDescription);
-		properties.setProperty("label_goTo", labelGoTo);
-		return properties;
 	}
 }

@@ -74,7 +74,7 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.there_are = dataOut.data.label_there_are;
 		$rootScope.labels.without_assigned_turns = dataOut.data.label_without_assigned_turns;
 		$rootScope.labels.label_prayer = dataOut.data.label_prayer;
-		$rootScope.labels.label_prayers = dataOut.data.label_prayers;
+		$rootScope.labels.prayers = dataOut.data.label_prayers;
 		$rootScope.labels.createPrayer = dataOut.data.label_createPrayer;
 		$rootScope.labels.createPrayerOneStep = dataOut.data.label_createPrayerOneStep;
 		$rootScope.labels.showCalendar = dataOut.data.label_showCalendar;
@@ -82,6 +82,22 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils', func
 		$rootScope.labels.prayerList = dataOut.data.label_prayerList;
 		$rootScope.labels.prayerListDescription = dataOut.data.label_prayerListDescription;
 		$rootScope.labels.goTo = dataOut.data.label_goTo;
+		$rootScope.labels.show = dataOut.data.label_show;
+		$rootScope.labels.turnList = dataOut.data.label_turnList;
+		$rootScope.labels.turnListDescription = dataOut.data.label_turnListDescription;
+		$rootScope.labels.sendCalendar = dataOut.data.label_sendCalendar;
+		$rootScope.labels.sendCalendarDescription = dataOut.data.label_sendCalendarDescription;
+		$rootScope.labels.send = dataOut.data.label_send;
+		$rootScope.labels.stopedPrayers = dataOut.data.label_stopedPrayers;
+		$rootScope.labels.stopedPrayersDescription = dataOut.data.label_stopedPrayersDescription;
+		$rootScope.labels.emptyTurns = dataOut.data.label_emptyTurns;
+		$rootScope.labels.emptyTurnsDescription = dataOut.data.label_emptyTurnsDescription;
+		$rootScope.labels.prayersInCountry = dataOut.data.label_prayersInCountry;
+		$rootScope.labels.anonymous = dataOut.data.label_anonymous;
+		$rootScope.labels.committed = dataOut.data.label_committed;
+		$rootScope.labels.turns = dataOut.data.label_turns;
+		$rootScope.labels.covered = dataOut.data.label_covered;
+		$rootScope.labels.empty = dataOut.data.label_empty;
 	});
 
     var w = angular.element($window);
