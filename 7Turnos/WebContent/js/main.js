@@ -42,6 +42,11 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 				controllerAs: "vm",
 				templateUrl: "pages/calendar.html"
 			})
+			.when("/configuracion",{
+				controller: "configuration",
+				controllerAs: "vm",
+				templateUrl: "pages/configuration.html"
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
@@ -195,7 +200,28 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','pray
 		$rootScope.labels.updateCalendarShort = dataOut.data.label_updateCalendarShort;
 		$rootScope.labels.configuration = dataOut.data.label_configuration;
 		$rootScope.labels.configurationDescription = dataOut.data.label_configurationDescription;
-		
+		$rootScope.labels.configurationTitle = dataOut.data.label_configurationTitle;
+		$rootScope.labels.chainName = dataOut.data.label_chainName;
+		$rootScope.labels.prayersPerTurn = dataOut.data.label_prayersPerTurn;
+		$rootScope.labels.ftpServerName = dataOut.data.label_ftpServerName;
+		$rootScope.labels.ftpServer = dataOut.data.label_ftpServer;
+		$rootScope.labels.chainSection = dataOut.data.label_chainSection;
+		$rootScope.labels.ftpPort = dataOut.data.label_ftpPort;
+		$rootScope.labels.ftpUser = dataOut.data.label_ftpUser;
+		$rootScope.labels.ftpPwd = dataOut.data.label_ftpPwd;
+		$rootScope.labels.remoteFilePath = dataOut.data.label_remoteFilePath;
+		$rootScope.labels.localFilePath = dataOut.data.label_localFilePath;
+		$rootScope.labels.calendarFileName = dataOut.data.label_calendarFileName;
+		$rootScope.labels.statisticsFileName = dataOut.data.label_statisticsFileName;
+		$rootScope.labels.mailchimpUrlPwd = dataOut.data.label_mailchimpUrlPwd;
+		$rootScope.labels.emailServiceUserPassword = dataOut.data.label_emailServiceUserPassword;
+		$rootScope.labels.emailServiceUserName = dataOut.data.label_emailServiceUserName;
+		$rootScope.labels.emailServiceHostName = dataOut.data.label_emailServiceHostName;
+		$rootScope.labels.isEmailServiceSSL = dataOut.data.label_isEmailServiceSSL;
+		$rootScope.labels.emailServiceSmtpPort = dataOut.data.label_emailServiceSmtpPort;
+		$rootScope.labels.emailStuff = dataOut.data.label_emailStuff;
+		$rootScope.labels.otherConfiguration = dataOut.data.label_otherConfiguration;
+
 		//Una vez cargadas las propiedades, podemos cargar las estadísticas
 		self.loadStatistics();
 	});

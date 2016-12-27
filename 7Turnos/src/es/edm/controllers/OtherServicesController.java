@@ -241,7 +241,50 @@ public class OtherServicesController {
 	@Value("${label_configuration}")
 	String label_configuration;
 	@Value("${label_configurationDescription}")
-	String label_configurationDescription;	
+	String label_configurationDescription;
+	@Value("${label_configurationTitle}")
+	String label_configurationTitle;
+	@Value("${label_chainName}")
+	String label_chainName;
+	@Value("${label_prayersPerTurn}")
+	String label_prayersPerTurn;
+	@Value("${label_ftpServerName}")
+	String label_ftpServerName;
+	@Value("${label_ftpServer}")
+	String label_ftpServer;
+	@Value("${label_chainSection}")
+	String label_chainSection;
+	@Value("${label_ftpPort}")
+	String label_ftpPort;
+	@Value("${label_ftpUser}")
+	String label_ftpUser;
+	@Value("${label_ftpPwd}")
+	String label_ftpPwd;
+	@Value("${label_remoteFilePath}")
+	String label_remoteFilePath;
+	@Value("${label_localFilePath}")
+	String label_localFilePath;
+	@Value("${label_calendarFileName}")
+	String label_calendarFileName;
+	@Value("${label_statisticsFileName}")
+	String label_statisticsFileName;
+	@Value("${label_mailchimpUrlPwd}")
+	String label_mailchimpUrlPwd;
+	@Value("${label_emailServiceUserName}")
+	String label_emailServiceUserName;
+	@Value("${label_emailServiceUserPassword}")
+	String label_emailServiceUserPassword;
+	@Value("${label_emailServiceHostName}")
+	String label_emailServiceHostName;
+	@Value("${label_isEmailServiceSSL}")
+	String label_isEmailServiceSSL;
+	@Value("${label_emailServiceSmtpPort}")
+	String label_emailServiceSmtpPort;
+	@Value("${label_emailStuff}")
+	String label_emailStuff;
+	@Value("${label_otherConfiguration}")
+	String label_otherConfiguration;
+	
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -250,6 +293,20 @@ public class OtherServicesController {
 	@RequestMapping(value="/getProperties.do", method = RequestMethod.POST)
 	public Properties getProperties(){
 		Properties properties = new Properties();
+		properties.setProperty("label_emailStuff", label_emailStuff);
+		properties.setProperty("label_otherConfiguration", label_otherConfiguration);
+		properties.setProperty("label_remoteFilePath", label_remoteFilePath);
+		properties.setProperty("label_localFilePath", label_localFilePath);
+		properties.setProperty("label_calendarFileName", label_calendarFileName);
+		properties.setProperty("label_statisticsFileName", label_statisticsFileName);
+		properties.setProperty("label_mailchimpUrlPwd", label_mailchimpUrlPwd);
+		properties.setProperty("label_emailServiceUserName", label_emailServiceUserName);
+		properties.setProperty("label_emailServiceUserPassword", label_emailServiceUserPassword);
+		properties.setProperty("label_emailServiceHostName", label_emailServiceHostName);
+		properties.setProperty("label_isEmailServiceSSL", label_isEmailServiceSSL);
+		properties.setProperty("label_emailServiceSmtpPort", label_emailServiceSmtpPort);
+		properties.setProperty("label_ftpUser", label_ftpUser);
+		properties.setProperty("label_ftpPwd", label_ftpPwd);
 		properties.setProperty("label_name", labelName);
 		properties.setProperty("label_email", labelEmail);
 		properties.setProperty("label_phone", labelPhone);
@@ -349,6 +406,13 @@ public class OtherServicesController {
 		properties.setProperty("label_updateCalendarShort", label_updateCalendarShort);
 		properties.setProperty("label_configuration", label_configuration);
 		properties.setProperty("label_configurationDescription", label_configurationDescription);
+		properties.setProperty("label_configurationTitle", label_configurationTitle);
+		properties.setProperty("label_chainName", label_chainName);
+		properties.setProperty("label_prayersPerTurn", label_prayersPerTurn);
+		properties.setProperty("label_ftpServerName", label_ftpServerName);
+		properties.setProperty("label_ftpServer", label_ftpServer);
+		properties.setProperty("label_chainSection", label_chainSection);
+		properties.setProperty("label_ftpPort", label_ftpPort);
 
 		return properties;
 	}
