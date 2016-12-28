@@ -39,15 +39,24 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 	};
 	
 	vm.updateConfiguration = function (isValid){
+
 		if (!vm.needSave){
 			bootbox.alert({size:'small', message: $rootScope.labels.noNeedToSave + ". " + $rootScope.labels.noDataHasChanged});
 			return false;
 		}
+
+		$rootScope.batidoraGeneralText = $rootScope.labels.savingConfigurationPleaseWait;
+		$rootScope.batidoraGeneral=true;
+
 		var whenSaved = pcUtils.setConfiguration(vm.configuration);
 		whenSaved.then(function(){
 			bootbox.alert({size:'small', message: $rootScope.labels.configurationSaved});
 			vm.unchagedConfiguration = angular.copy(vm.configuration);
 			vm.needSave = false;
+		}, function(error) {
+			bootbox.alert({size:'small', message: $rootScope.labels.errorSavingConfiguration});
+		}).finally(function(){
+			$rootScope.batidoraGeneral=false;
 		});
 	};
 }]);

@@ -292,6 +292,11 @@ public class OtherServicesController {
 	String label_emailServiceSSL;
 	@Value("${label_configurationSaved}")
 	String label_configurationSaved;
+	@Value("${label_errorSavingConfiguration}")
+	String label_errorSavingConfiguration;
+	@Value("${label_savingConfigurationPleaseWait}")
+	String label_savingConfigurationPleaseWait;
+	
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -424,6 +429,8 @@ public class OtherServicesController {
 		properties.setProperty("label_noNeedToSave", label_noNeedToSave);
 		properties.setProperty("label_emailServiceSSL", label_emailServiceSSL);
 		properties.setProperty("label_configurationSaved", label_configurationSaved);
+		properties.setProperty("label_errorSavingConfiguration", label_errorSavingConfiguration);
+		properties.setProperty("label_savingConfigurationPleaseWait", label_savingConfigurationPleaseWait);
 
 		return properties;
 	}

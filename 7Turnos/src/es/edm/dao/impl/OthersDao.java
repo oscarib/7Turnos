@@ -6,6 +6,9 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,8 @@ public class OthersDao implements IOthersDao {
 	
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
+	private final static Logger logger = LoggerFactory.getLogger(OthersDao.class);
 
 	@Override
 	public ConfigurationEntity getConfiguration(LoginStatus loggedUser) {
@@ -72,7 +77,12 @@ public class OthersDao implements IOthersDao {
 
 	@Override
 	public boolean setChainName(ConfigurationEntity conf) {
-		entityManager.merge(conf);
-		return true;
+		try{
+			entityManager.merge(conf);
+			return true;
+		} catch (ConstraintViolationException e){
+			logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de configuración que no existe." + e.toString());
+			return false;
+		}
 	}
 }

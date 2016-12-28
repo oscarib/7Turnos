@@ -224,6 +224,8 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','pray
 		$rootScope.labels.noNeedToSave = dataOut.data.label_noNeedToSave;
 		$rootScope.labels.emailServiceSSL = dataOut.data.label_emailServiceSSL;
 		$rootScope.labels.configurationSaved = dataOut.data.label_configurationSaved;
+		$rootScope.labels.errorSavingConfiguration = dataOut.data.label_errorSavingConfiguration;
+		$rootScope.labels.savingConfigurationPleaseWait = dataOut.data.label_savingConfigurationPleaseWait;
 
 		//Una vez cargadas las propiedades, podemos cargar las estadísticas
 		self.loadStatistics();
