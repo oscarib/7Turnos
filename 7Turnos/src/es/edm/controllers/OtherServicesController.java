@@ -275,15 +275,18 @@ public class OtherServicesController {
 	String label_emailServiceUserPassword;
 	@Value("${label_emailServiceHostName}")
 	String label_emailServiceHostName;
-	@Value("${label_isEmailServiceSSL}")
-	String label_isEmailServiceSSL;
 	@Value("${label_emailServiceSmtpPort}")
 	String label_emailServiceSmtpPort;
 	@Value("${label_emailStuff}")
 	String label_emailStuff;
 	@Value("${label_otherConfiguration}")
 	String label_otherConfiguration;
-	
+	@Value("${label_noNeedToSave}")
+	String label_noNeedToSave;
+	@Value("${label_noDataHasChanged}")
+	String label_noDataHasChanged;
+	@Value("${label_emailServiceSSL}")
+	String label_emailServiceSSL;
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -302,7 +305,6 @@ public class OtherServicesController {
 		properties.setProperty("label_emailServiceUserName", label_emailServiceUserName);
 		properties.setProperty("label_emailServiceUserPassword", label_emailServiceUserPassword);
 		properties.setProperty("label_emailServiceHostName", label_emailServiceHostName);
-		properties.setProperty("label_isEmailServiceSSL", label_isEmailServiceSSL);
 		properties.setProperty("label_emailServiceSmtpPort", label_emailServiceSmtpPort);
 		properties.setProperty("label_ftpUser", label_ftpUser);
 		properties.setProperty("label_ftpPwd", label_ftpPwd);
@@ -412,6 +414,10 @@ public class OtherServicesController {
 		properties.setProperty("label_ftpServer", label_ftpServer);
 		properties.setProperty("label_chainSection", label_chainSection);
 		properties.setProperty("label_ftpPort", label_ftpPort);
+		properties.setProperty("label_ftpPort", label_ftpPort);
+		properties.setProperty("label_noDataHasChanged", label_noDataHasChanged);
+		properties.setProperty("label_noNeedToSave", label_noNeedToSave);
+		properties.setProperty("label_emailServiceSSL", label_emailServiceSSL);
 
 		return properties;
 	}
@@ -460,5 +466,11 @@ public class OtherServicesController {
 	@RequestMapping(value = "/getConfiguration.do", method = RequestMethod.POST)
 	public ConfigurationEntity getConfiguration(){
 		return conf.getConfigurationEntity();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/setConfiguration.do", method = RequestMethod.POST)
+	public Boolean setConfiguration(ConfigurationEntity conf){
+		return true;
 	}
 }

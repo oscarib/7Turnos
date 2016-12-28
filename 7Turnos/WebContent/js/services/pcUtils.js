@@ -68,6 +68,27 @@
     		return promise;
     	};
 
+    	self.setConfiguration = function(dataIn){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
+    		$http({
+    			url: "./setConfiguration.do",
+    			dataType: 'json',
+    			data: dataIn,
+    			method: 'POST',
+    			headers: {
+    				"Content-Type": "application/json"
+    			}
+    		}).then(function(dataOut) {
+    			defered.resolve(dataOut);
+    		}, function(error) {
+    			defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
     	return self;
     }
 

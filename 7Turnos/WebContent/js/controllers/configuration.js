@@ -1,25 +1,38 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("configuration", ['$scope','pcUtils', function($scope,pcUtils) {
+PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', function($scope,$rootScope,pcUtils) {
 	var vm = this;
+	
+	vm.configuration = {};
+	vm.unchangedConfiguration = {};
+	vm.needSave = false;
 	
 	var configuration = pcUtils.getConfiguration();
 	configuration.then(function(dataOut){
-		vm.calendarFileName = dataOut.data.calendarFileName;
-		vm.chain = dataOut.data.chain;
-		vm.emailServiceHostName = dataOut.data.emailServiceHostName;
-		vm.emailServiceSmtpPort = dataOut.data.emailServiceSmtpPort;
-		vm.emailServiceUserName = dataOut.data.emailServiceUserName;
-		vm.emailServiceUserPassword = dataOut.data.emailServiceUserPassword;
-		vm.ftpPort = dataOut.data.ftpPort;
-		vm.ftpPwd = dataOut.data.ftpPwd;
-		vm.ftpServerName = dataOut.data.ftpServerName;
-		vm.ftpUser = dataOut.data.ftpUser;
-		vm.localFilePath = dataOut.data.localFilePath;
-		vm.MailchimpUrlPwd = dataOut.data.mailchimpUrlPwd;
-		vm.prayersPerTurn = dataOut.data.prayersPerTurn;
-		vm.remoteFilePath = dataOut.data.remoteFilePath;
-		vm.statisticsFileName = dataOut.data.statisticsFileName;
-		vm.uid = dataOut.data.uid;
+		vm.configuration.calendarFileName = dataOut.data.calendarFileName;
+		vm.configuration.chain = dataOut.data.chain;
+		vm.configuration.emailServiceHostName = dataOut.data.emailServiceHostName;
+		vm.configuration.emailServiceSmtpPort = dataOut.data.emailServiceSmtpPort;
+		vm.configuration.emailServiceUserName = dataOut.data.emailServiceUserName;
+		vm.configuration.emailServiceUserPassword = dataOut.data.emailServiceUserPassword;
+		vm.configuration.ftpPort = dataOut.data.ftpPort;
+		vm.configuration.ftpPwd = dataOut.data.ftpPwd;
+		vm.configuration.ftpServerName = dataOut.data.ftpServerName;
+		vm.configuration.ftpUser = dataOut.data.ftpUser;
+		vm.configuration.localFilePath = dataOut.data.localFilePath;
+		vm.configuration.MailchimpUrlPwd = dataOut.data.mailchimpUrlPwd;
+		vm.configuration.prayersPerTurn = dataOut.data.prayersPerTurn;
+		vm.configuration.remoteFilePath = dataOut.data.remoteFilePath;
+		vm.configuration.statisticsFileName = dataOut.data.statisticsFileName;
+		vm.configuration.emailServiceSSL = dataOut.data.emailServiceSSL;
+		vm.configuration.uid = dataOut.data.uid;
+		vm.unchagedConfiguration = angular.copy(vm.configuration);
 	});
+	
+	vm.onChange = function (){
+		vm.needSave = angular.toJson(vm.configuration) !== angular.toJson(vm.unchagedConfiguration);
+	};
+	
+	vm.updateConfiguration = function (isValid){
+	};
 }]);

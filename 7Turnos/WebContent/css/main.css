@@ -243,9 +243,11 @@ div.dataContainer input {
 	font-family: verdana;
 	font-size: 15px;
 }
-#newPrayer label {
-	height: ;
+.dataForm label {
 	width: 90px;
+}
+#configuration.dataForm label {
+	width: 50%;
 }
 div.dataContainer select {
 	width: 100%;
@@ -253,16 +255,19 @@ div.dataContainer select {
 div.iconHeader.dataContainer {
 	margin-top: 0;
 }
-#newPrayer select {
+.dataForm select {
 	height: ;
 	width: 50%;
 }
 div.row.menuRow {
 	margin-left: -30px;
 }
-#newPrayer input {
+.dataForm input {
 	height: ;
 	width: 50%;
+}
+.dataForm input[type="radio"] {
+	width: 20px;
 }
 div#prayerData div.dataHeader {
 	background-color: #939393;
@@ -311,8 +316,9 @@ div.dataContainer.Green {
 div#prayerData {
 	margin-top: 13px;
 }
-#newPrayer .row {
+.dataForm .row {
 	padding-bottom: 10px;
+	padding-left: 10px;
 }
 .GeneralWarning {
 	text-align: center;

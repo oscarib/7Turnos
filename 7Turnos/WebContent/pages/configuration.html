@@ -1,4 +1,4 @@
-<div id="configuration" class="container-fluid">
+<div class="dataForm" id="configuration" class="container-fluid">
 	<div class="row tableRow">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<form ng-submit="vm.updateConfiguration(configurationForm.$valid)" name="configurationForm" novalidate>
@@ -14,16 +14,16 @@
 					</div>
 
 					<div class="row">
-						<label>{{labels.chainName}}</label>
-						<input type="text" name="chain" ng-model="vm.chain" required><br>
+						<label>{{labels.chainName}}</label><br>
+						<input type="text" name="chain" ng-model="vm.configuration.chain" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.chain.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 			
 					<div class="row">
-						<label>{{labels.prayersPerTurn}}</label>
-						<input type="text" name="prayersPerTurn" ng-model="vm.prayersPerTurn" required><br>
+						<label>{{labels.prayersPerTurn}}</label><br>
+						<input type="text" name="prayersPerTurn" ng-model="vm.configuration.prayersPerTurn" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.prayersPerTurn.$error.required">{{labels.fileRequired}}</span>
 						</span>
@@ -34,64 +34,64 @@
 					</div>
 
 					<div class="row">
-						<label>{{labels.ftpServerName}}</label>
-						<input type="text" name="ftpServerName" ng-model="vm.ftpServerName" required><br>
+						<label>{{labels.ftpServerName}}</label><br>
+						<input type="text" name="ftpServerName" ng-model="vm.configuration.ftpServerName" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.ftpServerName.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.ftpPort}}</label>
-						<input type="text" name="ftpPort" ng-model="vm.ftpPort" required><br>
+						<label>{{labels.ftpPort}}</label><br>
+						<input type="text" name="ftpPort" ng-model="vm.configuration.ftpPort" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.ftpPort.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.ftpUser}}</label>
-						<input type="text" name="ftpUser" ng-model="vm.ftpUser" required><br>
+						<label>{{labels.ftpUser}}</label><br>
+						<input type="text" name="ftpUser" ng-model="vm.configuration.ftpUser" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.ftpUser.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.ftpPwd}}</label>
-						<input type="text" name="ftpPwd" ng-model="vm.ftpPwd" required><br>
+						<label>{{labels.ftpPwd}}</label><br>
+						<input type="text" name="ftpPwd" ng-model="vm.configuration.ftpPwd" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.ftpPwd.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.remoteFilePath}}</label>
-						<input type="text" name="remoteFilePath" ng-model="vm.remoteFilePath" required><br>
+						<label>{{labels.remoteFilePath}}</label><br>
+						<input type="text" name="remoteFilePath" ng-model="vm.configuration.remoteFilePath" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.remoteFilePath.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.localFilePath}}</label>
-						<input type="text" name="localFilePath" ng-model="vm.localFilePath" required><br>
+						<label>{{labels.localFilePath}}</label><br>
+						<input type="text" name="localFilePath" ng-model="vm.configuration.localFilePath" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.localFilePath.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.calendarFileName}}</label>
-						<input type="text" name="calendarFileName" ng-model="vm.calendarFileName" required><br>
+						<label>{{labels.calendarFileName}}</label><br>
+						<input type="text" name="calendarFileName" ng-model="vm.configuration.calendarFileName" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.calendarFileName.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.statisticsFileName}}</label>
-						<input type="text" name="statisticsFileName" ng-model="vm.statisticsFileName" required><br>
+						<label>{{labels.statisticsFileName}}</label><br>
+						<input type="text" name="statisticsFileName" ng-model="vm.configuration.statisticsFileName" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.statisticsFileName.$error.required">{{labels.fileRequired}}</span>
 						</span>
@@ -102,40 +102,38 @@
 					</div>
 
 					<div class="row">
-						<label>{{labels.emailServiceUserName}}</label>
-						<input type="text" name="emailServiceUserName" ng-model="vm.emailServiceUserName" required><br>
-						<span class="error-messages" ng-show="configurationForm.$submitted">
-							<span ng-show="configurationForm.emailServiceUserName.$error.required">{{labels.fileRequired}}</span>
-						</span>
-					</div>
-
-					<div class="row">
-						<label>{{labels.emailServiceUserPassword}}</label>
-						<input type="text" name="emailServiceUserPassword" ng-model="vm.emailServiceUserPassword" required><br>
-						<span class="error-messages" ng-show="configurationForm.$submitted">
-							<span ng-show="configurationForm.emailServiceUserPassword.$error.required">{{labels.fileRequired}}</span>
-						</span>
-					</div>
-
-					<div class="row">
-						<label>{{labels.emailServiceHostName}}</label>
-						<input type="text" name="emailServiceHostName" ng-model="vm.emailServiceHostName" required><br>
+						<label>{{labels.emailServiceHostName}}</label><br>
+						<input type="text" name="emailServiceHostName" ng-model="vm.configuration.emailServiceHostName" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.emailServiceHostName.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.isEmailServiceSSL}}</label>
-						<input type="text" name="isEmailServiceSSL" ng-model="vm.isEmailServiceSSL" required><br>
+						<label>{{labels.emailServiceUserName}}</label><br>
+						<input type="text" name="emailServiceUserName" ng-model="vm.configuration.emailServiceUserName" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
-							<span ng-show="configurationForm.isEmailServiceSSL.$error.required">{{labels.fileRequired}}</span>
+							<span ng-show="configurationForm.emailServiceUserName.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 
 					<div class="row">
-						<label>{{labels.emailServiceSmtpPort}}</label>
-						<input type="text" name="emailServiceSmtpPort" ng-model="vm.emailServiceSmtpPort" required><br>
+						<label>{{labels.emailServiceUserPassword}}</label><br>
+						<input type="text" name="emailServiceUserPassword" ng-model="vm.configuration.emailServiceUserPassword" ng-change="vm.onChange()" required><br>
+						<span class="error-messages" ng-show="configurationForm.$submitted">
+							<span ng-show="configurationForm.emailServiceUserPassword.$error.required">{{labels.fileRequired}}</span>
+						</span>
+					</div>
+
+					<div class="row">
+						<label>{{labels.emailServiceSSL}}</label><br>
+						{{labels.yes}}: <input type="radio" name="emailServiceSSL" ng-change="vm.onChange()" ng-model="vm.configuration.emailServiceSSL" ng-value=true>
+						{{labels.no}}: <input type="radio" name="emailServiceSSL" ng-change="vm.onChange()" ng-model="vm.configuration.emailServiceSSL" ng-value=false><br>
+					</div>
+
+					<div class="row">
+						<label>{{labels.emailServiceSmtpPort}}</label><br>
+						<input type="text" name="emailServiceSmtpPort" ng-model="vm.configuration.emailServiceSmtpPort" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.emailServiceSmtpPort.$error.required">{{labels.fileRequired}}</span>
 						</span>
@@ -146,11 +144,15 @@
 					</div>
 
 					<div class="row">
-						<label>{{labels.mailchimpUrlPwd}}</label>
-						<input type="text" name="MailchimpUrlPwd" ng-model="vm.MailchimpUrlPwd" required><br>
+						<label>{{labels.mailchimpUrlPwd}}</label><br>
+						<input type="text" ng-class="vm.needSave" name="MailchimpUrlPwd" ng-model="vm.configuration.MailchimpUrlPwd" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
 							<span ng-show="configurationForm.MailchimpUrlPwd.$error.required">{{labels.fileRequired}}</span>
 						</span>
+					</div>
+
+					<div class="row">
+						<input type="submit" ng-disabled="!vm.needSave"/>
 					</div>
 
 				</div>

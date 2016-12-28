@@ -150,8 +150,8 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','pray
 		$rootScope.labels.notes = dataOut.data.label_notes;
 		$rootScope.labels.visibility = dataOut.data.label_visibility;
 		$rootScope.labels.prayerData = dataOut.data.label_prayerData;
-		$rootScope.labels.yes = dataOut.label_yes;
-		$rootScope.labels.no = dataOut.label_no;
+		$rootScope.labels.yes = dataOut.data.label_yes;
+		$rootScope.labels.no = dataOut.data.label_no;
 		$rootScope.labels.turnsData = dataOut.data.label_turnsData;
 		$rootScope.labels.day = dataOut.data.label_day;
 		$rootScope.labels.status = dataOut.data.label_status;
@@ -217,10 +217,12 @@ PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','pray
 		$rootScope.labels.emailServiceUserPassword = dataOut.data.label_emailServiceUserPassword;
 		$rootScope.labels.emailServiceUserName = dataOut.data.label_emailServiceUserName;
 		$rootScope.labels.emailServiceHostName = dataOut.data.label_emailServiceHostName;
-		$rootScope.labels.isEmailServiceSSL = dataOut.data.label_isEmailServiceSSL;
 		$rootScope.labels.emailServiceSmtpPort = dataOut.data.label_emailServiceSmtpPort;
 		$rootScope.labels.emailStuff = dataOut.data.label_emailStuff;
 		$rootScope.labels.otherConfiguration = dataOut.data.label_otherConfiguration;
+		$rootScope.labels.noDataHasChanged = dataOut.data.label_noDataHasChanged;
+		$rootScope.labels.noNeedToSave = dataOut.data.label_noNeedToSave;
+		$rootScope.labels.emailServiceSSL = dataOut.data.label_emailServiceSSL;
 
 		//Una vez cargadas las propiedades, podemos cargar las estadísticas
 		self.loadStatistics();
