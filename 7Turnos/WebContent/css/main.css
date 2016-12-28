@@ -427,6 +427,11 @@ div#Search {
 	left: 0;
 	top: 0;
 }
+#mainContainer{
+	height: calc(100vh - 107px);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
 div.menuRow {
 	margin-left: -40px;
 	margin-right: -30px;
