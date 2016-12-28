@@ -430,7 +430,7 @@ div#Search {
 	/* Standard syntax */
 	height: 100vh;
 	min-width: 120px;
-	min-height: 600px;
+	min-height: 350px;
 	/*+placement: ;*/
 	position: relative;
 	left: 0;
