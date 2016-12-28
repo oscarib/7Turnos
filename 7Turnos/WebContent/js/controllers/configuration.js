@@ -5,6 +5,7 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 	
 	vm.configuration = {};
 	vm.unchangedConfiguration = {};
+	var oldChainName = "";
 	vm.needSave = false;
 	
 	var configuration = pcUtils.getConfiguration();
@@ -31,11 +32,12 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 		var chainName = pcUtils.getChainName(dataOut.data.chain);
 		chainName.then(function(dataOut){
 			vm.chainName = dataOut.data;
+			oldChainName = vm.chainName;
 		});
 	});
 	
 	vm.onChange = function (){
-		vm.needSave = angular.toJson(vm.configuration) !== angular.toJson(vm.unchagedConfiguration);
+		vm.needSave = (angular.toJson(vm.configuration) !== angular.toJson(vm.unchagedConfiguration)) || oldChainName !== vm.chainName;
 	};
 	
 	vm.updateConfiguration = function (isValid){
@@ -48,11 +50,22 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 		$rootScope.batidoraGeneralText = $rootScope.labels.savingConfigurationPleaseWait;
 		$rootScope.batidoraGeneral=true;
 
-		var whenSaved = pcUtils.setConfiguration(vm.configuration);
-		whenSaved.then(function(){
-			bootbox.alert({size:'small', message: $rootScope.labels.configurationSaved});
-			vm.unchagedConfiguration = angular.copy(vm.configuration);
-			vm.needSave = false;
+		var whenConfigurationSaved = pcUtils.setConfiguration(vm.configuration);
+		whenConfigurationSaved.then(function(){
+			
+			var whenChainNameSaved = pcUtils.saveChainName(vm.configuration.uid, vm.chainName);
+			whenChainNameSaved.then(function(){
+				
+				bootbox.alert({size:'small', message: $rootScope.labels.configurationSaved});
+				vm.unchagedConfiguration = angular.copy(vm.configuration);
+				oldChainName = vm.chainName;
+				vm.needSave = false;
+			}, function(error) {
+				bootbox.alert({size:'small', message: $rootScope.labels.errorSavingConfiguration});
+			}).finally(function(){
+				$rootScope.batidoraGeneral=false;
+			});
+
 		}, function(error) {
 			bootbox.alert({size:'small', message: $rootScope.labels.errorSavingConfiguration});
 		}).finally(function(){

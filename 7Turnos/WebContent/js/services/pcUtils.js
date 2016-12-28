@@ -89,6 +89,30 @@
     		return promise;
     	};
 
+    	self.saveChainName = function(chain, name){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		var bean = {};
+    		bean.chain = chain;
+    		bean.name = name;
+    		
+    		$http({
+    			url: "./saveChainName.do",
+    			data: bean,
+    			method: 'POST',
+    			//This is for avoiding angular to parse to JSON
+				transformResponse: [function(data){
+					return data;
+				}]
+    		}).then(function(dataOut) {
+    			defered.resolve(dataOut);
+    		}, function(error) {
+    			defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
     	self.getChainName = function(chainNumber){
     		var defered = $q.defer();
     		var promise = defered.promise;

@@ -76,12 +76,26 @@ public class OthersDao implements IOthersDao {
 	}
 
 	@Override
-	public boolean setChainName(ConfigurationEntity conf) {
+	public boolean setConfiguration(ConfigurationEntity conf) {
 		try{
 			entityManager.merge(conf);
 			return true;
 		} catch (ConstraintViolationException e){
 			logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de configuración que no existe." + e.toString());
+			return false;
+		}
+	}
+
+	@Override
+	public boolean saveChainName(long chainNumber, String chainName) {
+		ChainEntity chain = new ChainEntity();
+		chain.setChain(chainNumber);
+		chain.setName(chainName);
+		try{
+			entityManager.merge(chain);
+			return true;
+		} catch (ConstraintViolationException e){
+			logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de cadenas que no existe." + e.toString());
 			return false;
 		}
 	}

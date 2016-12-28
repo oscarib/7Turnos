@@ -77,7 +77,13 @@ public class OtherServices implements IOtherServices {
 	}
 
 	@Override
-	public boolean setChainName(ConfigurationEntity conf) {
-		return dao.setChainName(conf);
+	public boolean setConfiguration(ConfigurationEntity conf) {
+		return dao.setConfiguration(conf);
+	}
+
+	@Override
+	public boolean saveChainName(long chainNumber, String chainName) {
+		boolean result = dao.saveChainName(chainNumber, chainName);
+		return result;
 	}
 }

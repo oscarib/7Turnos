@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.edm.domain.entity.ChainEntity;
 import es.edm.domain.entity.ConfigurationEntity;
 import es.edm.domain.entity.StatisticsEntity;
 import es.edm.exceptions.DDBBException;
@@ -484,14 +483,20 @@ public class OtherServicesController {
 	@ResponseBody
 	@RequestMapping(value = "/setConfiguration.do", method = RequestMethod.POST)
 	public Boolean setConfiguration(@RequestBody ConfigurationEntity conf){
-		return otherServices.setChainName(conf);
+		return otherServices.setConfiguration(conf);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getChainName.do", method = RequestMethod.POST)
-	public String getChainName(@RequestBody Integer chainNumber, HttpServletResponse  response){
+	public String getChainName(@RequestBody Integer chainNumber){
 		String chainName = otherServices.getChainName(chainNumber);
-		response.setHeader("Content-Type", "text/html");
 		return chainName;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/saveChainName.do", method = RequestMethod.POST)
+	public boolean saveChainName(@RequestBody ChainEntity chain){
+		boolean result = otherServices.saveChainName(chain.getChain(), chain.getName());
+		return result;
 	}
 }
