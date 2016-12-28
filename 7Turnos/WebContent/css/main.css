@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+.versionRow div.col-lg-12 {
+}
 table#TurnList tr.Cancelado {
 	background-color: #707070;
 	color: #FFFFFF;
@@ -9,17 +11,17 @@ table#TurnList tr.No.Comprometido {
 	color: #FFFFFF;
 }
 div.versionRow {
-	/*+placement: anchor-bottom-right;*/
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	margin-bottom: -11px;
-	margin-right: -12px;
-	color: #00819E;
 }
 div.versionRow span {
 	font-size: 11px;
 	height: ;
+}
+div.row.versionRow {
+	/*+placement: anchor-bottom-right 18px 4px;*/
+	position: absolute;
+	right: 18px;
+	bottom: 4px;
+	color: #54A0B1;
 }
 div.loginFondo {
 	height: 100%;
@@ -33,6 +35,13 @@ div.loginFondo {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+}
+div#mainContainer {
+	margin-left: -5px;
+}
+div .widgetRow {
+	margin-left: -23px !important;
+	margin-right: -4px;
 }
 table#prayerList {
 	word-break: break-all;
@@ -427,7 +436,7 @@ div#Search {
 	left: 0;
 	top: 0;
 }
-#mainContainer{
+#mainContainer {
 	height: calc(100vh - 107px);
 	overflow-y: auto;
 	overflow-x: hidden;
