@@ -89,6 +89,27 @@
     		return promise;
     	};
 
+    	self.getChainName = function(chainNumber){
+    		var defered = $q.defer();
+    		var promise = defered.promise;
+    		
+    		$http({
+    			url: "./getChainName.do",
+    			data: chainNumber,
+    			method: 'POST',
+    			//This is for avoiding angular to parse to JSON
+				transformResponse: [function(data){
+					return data;
+				}]
+    		}).then(function(chainName) {
+    			defered.resolve(chainName);
+    		}, function(error) {
+    			defered.reject(error);
+    		});
+    		
+    		return promise;
+    	};
+
     	return self;
     }
 

@@ -10,7 +10,6 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 	var configuration = pcUtils.getConfiguration();
 	configuration.then(function(dataOut){
 		vm.configuration.calendarFileName = dataOut.data.calendarFileName;
-		vm.configuration.chain = dataOut.data.chain;
 		vm.configuration.emailServiceHostName = dataOut.data.emailServiceHostName;
 		vm.configuration.emailServiceSmtpPort = dataOut.data.emailServiceSmtpPort;
 		vm.configuration.emailServiceUserName = dataOut.data.emailServiceUserName;
@@ -27,6 +26,12 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 		vm.configuration.emailServiceSSL = dataOut.data.emailServiceSSL;
 		vm.configuration.uid = dataOut.data.uid;
 		vm.unchagedConfiguration = angular.copy(vm.configuration);
+		vm.configuration.chain = dataOut.data.chain;
+		
+		var chainName = pcUtils.getChainName(dataOut.data.chain);
+		chainName.then(function(dataOut){
+			vm.chainName = dataOut.data;
+		});
 	});
 	
 	vm.onChange = function (){

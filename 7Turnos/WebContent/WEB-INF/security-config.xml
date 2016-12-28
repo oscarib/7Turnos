@@ -30,6 +30,7 @@
 		<intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/getConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/setConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/getChainName.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/addTurn.do" access="hasRole('ROLE_ADMIN')"/>

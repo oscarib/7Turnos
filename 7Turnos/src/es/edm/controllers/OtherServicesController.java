@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -439,7 +442,7 @@ public class OtherServicesController {
 		} catch (SocketException e) {
 			throw new RuntimeException("Error: " + e);
 		}
-		logger.info("Se subieron los archivos con éxito al sitio FTP.");
+		logger.info("Se subieron los archivos con ï¿½xito al sitio FTP.");
 		return true;
 	}
 	
@@ -472,5 +475,13 @@ public class OtherServicesController {
 	@RequestMapping(value = "/setConfiguration.do", method = RequestMethod.POST)
 	public Boolean setConfiguration(ConfigurationEntity conf){
 		return true;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getChainName.do", method = RequestMethod.POST)
+	public String setConfiguration(@RequestBody Integer chainNumber, HttpServletResponse  response){
+		String chainName = otherServices.getChainName(chainNumber);
+		response.setHeader("Content-Type", "text/html");
+		return chainName;
 	}
 }

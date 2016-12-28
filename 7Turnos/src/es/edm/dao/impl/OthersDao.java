@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.edm.dao.IOthersDao;
+import es.edm.domain.entity.ChainEntity;
 import es.edm.domain.entity.ConfigurationEntity;
 import es.edm.domain.entity.StatisticsEntity;
 import es.edm.domain.entity.UserEntity;
@@ -56,5 +57,16 @@ public class OthersDao implements IOthersDao {
 		objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
 
 		return (StatisticsEntity) objCriteria.uniqueResult();
+	}
+
+	@Override
+	public String getChainName(int chainNumber) {
+		Session session = entityManager.unwrap(Session.class);
+
+		Criteria objCriteria = session.createCriteria(ChainEntity.class);
+
+		objCriteria.add(Restrictions.eq("chain", (long)chainNumber));
+
+		return ((ChainEntity)objCriteria.uniqueResult()).getName();		
 	}
 }

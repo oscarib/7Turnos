@@ -70,4 +70,9 @@ public class OtherServices implements IOtherServices {
 		LoginStatus login = getLoggedUser();
 		return dao.getStatistics(login);
 	}
+
+	@Override
+	public String getChainName(int chainNumber) {
+		return dao.getChainName(chainNumber);
+	}
 }

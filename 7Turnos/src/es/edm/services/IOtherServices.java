@@ -11,4 +11,5 @@ public interface IOtherServices {
 	LoginStatus getLoggedUser();
 	LoginStatus login(LoginCredentials credentials);
 	StatisticsEntity getStatistics();
+	String getChainName(int chainNumber);
 }

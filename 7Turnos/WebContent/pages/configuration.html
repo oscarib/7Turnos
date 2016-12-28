@@ -15,9 +15,10 @@
 
 					<div class="row">
 						<label>{{labels.chainName}}</label><br>
-						<input type="text" name="chain" ng-model="vm.configuration.chain" ng-change="vm.onChange()" required><br>
+						<input type="text" name="chainName" ng-model="vm.chainName" ng-change="vm.onChange()" required><br>
+						<input type="hidden" name="chain" ng-model="vm.configuration.chain"><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
-							<span ng-show="configurationForm.chain.$error.required">{{labels.fileRequired}}</span>
+							<span ng-show="configurationForm.chainName.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 			
