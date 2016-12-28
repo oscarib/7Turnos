@@ -10,4 +10,5 @@ public interface IOthersDao {
 	int getUserChain(String userName);
 	StatisticsEntity getStatistics(LoginStatus loggedUser);
 	String getChainName(int chainNumber);
+	boolean setChainName(ConfigurationEntity conf);
 }

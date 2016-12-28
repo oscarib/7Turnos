@@ -75,4 +75,9 @@ public class OtherServices implements IOtherServices {
 	public String getChainName(int chainNumber) {
 		return dao.getChainName(chainNumber);
 	}
+
+	@Override
+	public boolean setChainName(ConfigurationEntity conf) {
+		return dao.setChainName(conf);
+	}
 }

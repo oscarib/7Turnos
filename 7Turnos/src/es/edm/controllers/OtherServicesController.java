@@ -290,6 +290,8 @@ public class OtherServicesController {
 	String label_noDataHasChanged;
 	@Value("${label_emailServiceSSL}")
 	String label_emailServiceSSL;
+	@Value("${label_configurationSaved}")
+	String label_configurationSaved;
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -421,6 +423,7 @@ public class OtherServicesController {
 		properties.setProperty("label_noDataHasChanged", label_noDataHasChanged);
 		properties.setProperty("label_noNeedToSave", label_noNeedToSave);
 		properties.setProperty("label_emailServiceSSL", label_emailServiceSSL);
+		properties.setProperty("label_configurationSaved", label_configurationSaved);
 
 		return properties;
 	}
@@ -473,13 +476,13 @@ public class OtherServicesController {
 
 	@ResponseBody
 	@RequestMapping(value = "/setConfiguration.do", method = RequestMethod.POST)
-	public Boolean setConfiguration(ConfigurationEntity conf){
-		return true;
+	public Boolean setConfiguration(@RequestBody ConfigurationEntity conf){
+		return otherServices.setChainName(conf);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getChainName.do", method = RequestMethod.POST)
-	public String setConfiguration(@RequestBody Integer chainNumber, HttpServletResponse  response){
+	public String getChainName(@RequestBody Integer chainNumber, HttpServletResponse  response){
 		String chainName = otherServices.getChainName(chainNumber);
 		response.setHeader("Content-Type", "text/html");
 		return chainName;

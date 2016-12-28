@@ -146,9 +146,9 @@
 
 					<div class="row">
 						<label>{{labels.mailchimpUrlPwd}}</label><br>
-						<input type="text" ng-class="vm.needSave" name="MailchimpUrlPwd" ng-model="vm.configuration.MailchimpUrlPwd" ng-change="vm.onChange()" required><br>
+						<input type="text" ng-class="vm.needSave" name="mailchimpUrlPwd" ng-model="vm.configuration.mailchimpUrlPwd" ng-change="vm.onChange()" required><br>
 						<span class="error-messages" ng-show="configurationForm.$submitted">
-							<span ng-show="configurationForm.MailchimpUrlPwd.$error.required">{{labels.fileRequired}}</span>
+							<span ng-show="configurationForm.mailchimpUrlPwd.$error.required">{{labels.fileRequired}}</span>
 						</span>
 					</div>
 

@@ -44,7 +44,7 @@ public class ConfigurationEntity {
 	private String statisticsFileName;
 	
 	@Column
-	private String MailchimpUrlPwd;
+	private String mailchimpUrlPwd;
 	
 	@Column
 	private String emailServiceUserName;
@@ -128,10 +128,10 @@ public class ConfigurationEntity {
 		this.statisticsFileName = statisticsFileName;
 	}
 	public String getMailchimpUrlPwd() {
-		return MailchimpUrlPwd;
+		return mailchimpUrlPwd;
 	}
 	public void setMailchimpUrlPwd(String mailchimpUrlPwd) {
-		MailchimpUrlPwd = mailchimpUrlPwd;
+		this.mailchimpUrlPwd = mailchimpUrlPwd;
 	}
 	public String getEmailServiceUserName() {
 		return emailServiceUserName;

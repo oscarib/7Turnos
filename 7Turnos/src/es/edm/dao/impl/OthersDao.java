@@ -69,4 +69,10 @@ public class OthersDao implements IOthersDao {
 
 		return ((ChainEntity)objCriteria.uniqueResult()).getName();		
 	}
+
+	@Override
+	public boolean setChainName(ConfigurationEntity conf) {
+		entityManager.merge(conf);
+		return true;
+	}
 }

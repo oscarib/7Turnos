@@ -19,7 +19,7 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 		vm.configuration.ftpServerName = dataOut.data.ftpServerName;
 		vm.configuration.ftpUser = dataOut.data.ftpUser;
 		vm.configuration.localFilePath = dataOut.data.localFilePath;
-		vm.configuration.MailchimpUrlPwd = dataOut.data.mailchimpUrlPwd;
+		vm.configuration.mailchimpUrlPwd = dataOut.data.mailchimpUrlPwd;
 		vm.configuration.prayersPerTurn = dataOut.data.prayersPerTurn;
 		vm.configuration.remoteFilePath = dataOut.data.remoteFilePath;
 		vm.configuration.statisticsFileName = dataOut.data.statisticsFileName;
@@ -39,5 +39,15 @@ PrayingChain.controller("configuration", ['$scope','$rootScope','pcUtils', funct
 	};
 	
 	vm.updateConfiguration = function (isValid){
+		if (!vm.needSave){
+			bootbox.alert({size:'small', message: $rootScope.labels.noNeedToSave + ". " + $rootScope.labels.noDataHasChanged});
+			return false;
+		}
+		var whenSaved = pcUtils.setConfiguration(vm.configuration);
+		whenSaved.then(function(){
+			bootbox.alert({size:'small', message: $rootScope.labels.configurationSaved});
+			vm.unchagedConfiguration = angular.copy(vm.configuration);
+			vm.needSave = false;
+		});
 	};
 }]);
