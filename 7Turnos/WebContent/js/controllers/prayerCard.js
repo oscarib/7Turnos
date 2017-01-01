@@ -29,46 +29,53 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 			rObj.status = obj.status;
 			rObj.turn = obj.turn;
 			rObj.uid = obj.uid;
+			rObj.status = obj.status;
+			rObj.dow = obj.dow;
+			
+			//For labeling statues
 			switch(obj.status){
 				case 'accepted':
-					rObj.status = $rootScope.labels.accepted;
+					rObj.statusLabel = $rootScope.labels.accepted;
 					break;
 				case 'NotCommitted':
-					rObj.status = $rootScope.labels.notCommitted;
+					rObj.statusLabel = $rootScope.labels.notCommitted;
 					break;
 				case 'cancelled':
-					rObj.status = $rootScope.labels.cancelled;
+					rObj.statusLabel = $rootScope.labels.cancelled;
 					break;
 				default:
-					rObj.status = $rootScope.labels.errorNotFound;
+					rObj.statusLabel = $rootScope.labels.errorNotFound;
 					break;
 			}
+			
+			//for labeling dow's
 			switch(obj.dow) {
 				case 'monday':
-					rObj.dow = $rootScope.labels.monday;
+					rObj.dowLabel = $rootScope.labels.monday;
 					break;
 				case 'tuesday':
-					rObj.dow = $rootScope.labels.tuesday;
+					rObj.dowLabel = $rootScope.labels.tuesday;
 					break;
 				case 'wednesday':
-					rObj.dow = $rootScope.labels.wednesday;
+					rObj.dowLabel = $rootScope.labels.wednesday;
 					break;
 				case 'thursday':
-					rObj.dow = $rootScope.labels.thursday;
+					rObj.dowLabel = $rootScope.labels.thursday;
 					break;
 				case 'friday':
-					rObj.dow = $rootScope.labels.friday;
+					rObj.dowLabel = $rootScope.labels.friday;
 					break;
 				case 'saturday':
-					rObj.dow = $rootScope.labels.saturday;
+					rObj.dowLabel = $rootScope.labels.saturday;
 					break;
 				case 'sunday':
-					rObj.dow = $rootScope.labels.sunday;
+					rObj.dowLabel = $rootScope.labels.sunday;
 					break;
 				default:
-					rObj.dow = $rootScope.labels.errorNotFound;
+					rObj.dowLabel = $rootScope.labels.errorNotFound;
 					break;
 			}
+			
 			return rObj;
 		});
 		self.editing = false;
@@ -331,7 +338,16 @@ PrayingChain.controller("prayerCard", ['prayerServices', '$location', 'prayerSer
 							$route.reload();
 						});
 					} else {
-						var promise = prayerServices.updateTurn(self.turns[index]);
+						
+						//Removes labels from objet to be sent
+						var turns = self.turns.map(function(obj){
+							var rObj = obj;
+							delete rObj.statusLabel;
+							delete rObj.dowLabel;
+							return rObj
+						});
+						
+						var promise = prayerServices.updateTurn(turns[index]);
 						promise.then(function(dataOut) {}, function(error) {
 							bootbox.alert({size:'small', message: $rootScope.labels.errorSavingTurn});
 							console.error($rootScope.labels.errorSavingTurn + ": " + angular.toJson(self.turns[index]));
