@@ -21,7 +21,10 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 //FUNCIONES PRIVADAS -->
     
     function loadCharts(){
-        //Committed / Non committed pie chart
+		$rootScope.batidoraGeneralText=$rootScope.labels.loadingStatistics;
+		$rootScope.batidoraGeneral=true;
+
+		//Committed / Non committed pie chart
         var labels= [$rootScope.labels.committed, $rootScope.labels.notCommittedPlural];
         var pieChartData = [$rootScope.CommittedPrayers,$rootScope.NonCommittedPrayers];
         var borderColor = ['rgba(54, 162, 235, 0.2)','rgba(255, 99, 132, 0.2)'];
@@ -55,6 +58,8 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         var borderColor = ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'];
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
+
+        $rootScope.batidoraGeneral=false;
     };
     
     //Solicitar las estadísticas a main.js
