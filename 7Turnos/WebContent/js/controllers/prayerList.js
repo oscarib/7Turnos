@@ -12,7 +12,7 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         		   var rObj = {};
         		   rObj.name = obj.name;
         		   rObj.email = obj.email;
-        		   rObj.ownCountry = obj.ownCountry ? '' : $rootScope.labels.label_foreign;
+        		   rObj.ownCountry = obj.ownCountry ? '' : $rootScope.labels.foreign;
         		   rObj.hidden = obj.hidden ? 'X' : '-';
         		   rObj.phone = obj.phone;
         		   rObj.pseudonym = obj.pseudonym;

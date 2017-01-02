@@ -135,7 +135,7 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
 			$rootScope.labels.errorRepetitiveID = dataOut.data.label_errorRepetitiveID;
 			$rootScope.labels.errorCreatingPrayer = dataOut.data.label_errorCreatingPrayer;
 			$rootScope.labels.otherCountry = dataOut.data.label_otherCountry;
-			$rootScope.labels.label_foreign = dataOut.data.label_foreign;
+			$rootScope.labels.foreign = dataOut.data.label_foreign;
 			$rootScope.labels.errorGettingPrayerList = dataOut.data.label_errorGettingPrayerList;
 			$rootScope.labels.gettingPrayerList = dataOut.data.label_gettingPrayerList;
 			$rootScope.labels.calendarUpdated = dataOut.data.label_calendarUpdated;
