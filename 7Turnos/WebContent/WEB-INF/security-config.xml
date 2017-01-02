@@ -47,7 +47,7 @@
 		<intercept-url pattern="/createTurn.html" access="isAnonymous()"/>
 		<intercept-url pattern="/**" access="hasAnyRole([role1,role2])" />-->
  
-		<http-basic/> <!-- Esto para evitar tener que definir un formulario de login -->
+		<http-basic entry-point-ref="myBasicAuthenticationEntryPoint"/>
 		
 		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="csrfHeaderFilter" /> <!-- Para añadir el token CSRF a las respuestas del servidor -->
 	</http>
@@ -55,7 +55,7 @@
 	<beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
 	<!-- Authentication rules -->
-	<authentication-manager alias="edmAuthenticator">
+	<authentication-manager id="edmAuthenticator" alias="edmAuthenticator">
 		<authentication-provider>
 			<password-encoder ref="bcryptEncoder"/>  
 			<jdbc-user-service data-source-ref="DataSource" 
@@ -63,5 +63,15 @@
 							   role-prefix="ROLE_"/>
 		</authentication-provider>
 	</authentication-manager>
+	
+	<!-- Authorization management beans 
+	<beans:bean id="basicAuthenticationFilter" class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
+	    <beans:constructor-arg name="authenticationManager" ref="edmAuthenticator"/>
+	    <beans:constructor-arg name="authenticationEntryPoint" ref="myBasicAuthenticationEntryPoint"/>
+	</beans:bean>-->
+	 
+	<beans:bean id="myBasicAuthenticationEntryPoint" class="es.edm.filters.MyBasicAuthenticationEntryPoint">
+	    <beans:property name="realmName" value="es.7turnos"/>
+	</beans:bean>
 
-</beans:beans>	
+</beans:beans>

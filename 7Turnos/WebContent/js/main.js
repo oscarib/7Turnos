@@ -59,6 +59,28 @@ PrayingChain.config(function($routeProvider,$httpProvider){
 });
 
 PrayingChain.controller("main", ['$scope','$rootScope','$window','pcUtils','prayerServices', function($scope,$rootScope,$window,pcUtils,prayerServices) {
+PrayingChain.factory('httpInterceptor', function ($q, $rootScope, $log) {
+    return {
+        request: function (config) {
+            return config || $q.when(config)
+        },
+        response: function (response) {
+            return response || $q.when(response);
+        },
+        responseError: function (response) {
+        	//Do nothing if it has been any http error
+//            if (response.status === 401) {
+//                console.error("Ha habido un error 401");
+//            }
+//            return $q.reject(response);
+        }
+    };
+})
+.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('httpInterceptor');
+});	
+
+PrayingChain.controller("main", ['$scope','$rootScope','$window', function($scope,$rootScope,$window) {
 	var self = this;
 	
     self.loadStatistics = function(){
