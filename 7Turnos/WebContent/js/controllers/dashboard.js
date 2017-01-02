@@ -1,10 +1,9 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices', function($rootScope, chartService, prayerServices) {
+PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices','$timeout', function($rootScope, chartService, prayerServices,$timeout) {
 	var self = this;
 	
 	var errorWithServiceCall = false;
-	$rootScope.batidoraGeneral=false;
 	$rootScope.uploadCalendar = function(){
 		$rootScope.batidoraGeneralText=$rootScope.labels.uploadingCalendar;
 		$rootScope.batidoraGeneral=true;
@@ -21,8 +20,6 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 //FUNCIONES PRIVADAS -->
     
     function loadCharts(){
-		$rootScope.batidoraGeneralText=$rootScope.labels.loadingStatistics;
-		$rootScope.batidoraGeneral=true;
 
 		//Committed / Non committed pie chart
         var labels= [$rootScope.labels.committed, $rootScope.labels.notCommittedPlural];
@@ -59,16 +56,14 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
         var backgroundColor = ['rgba(54, 162, 235, 1)','rgba(255,99,132,1)'];
         chartService.setPieChart("localForeignRatio", labels, pieChartData, backgroundColor, borderColor);
 
-        $rootScope.batidoraGeneral=false;
     };
-    
-    //Solicitar las estadísticas a main.js
-    $rootScope.$emit('needStatistics');
-    
-    //Cuando main.js carga las estadísticas, lanza un evento que se escucha aquí...
-    $rootScope.$on('statisticsLoaded', function(){
-    	loadCharts();
-    });
+
+	$rootScope.batidoraGeneral=true;
+	$rootScope.batidoraGeneralText="";
+    $timeout(function(){
+        loadCharts();
+        $rootScope.batidoraGeneral=false;
+    },1000);
 
 //<-- Fin de FUNCIONES PRIVADAS
 }]);

@@ -44,7 +44,7 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
     			bootbox.alert({size:'small', message: $rootScope.labels.errorLoadingStatistics});
     		}
     	}).finally(function(){
-    		$rootScope.batidoraGeneral=false;
+    		//$rootScope.batidoraGeneral=false;
     	});
     };
     
@@ -185,10 +185,7 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
 		});
 	};
 	
-	//Si alguien solicita las estadísticas, se ejecuta la carga
-	$rootScope.$on('needStatistics', function(){
-		self.loadProperties();
-	});
+	self.loadProperties();
 	
     self.openMenu = function(menuItem){
     	if (self.hideMenu[menuItem]){
