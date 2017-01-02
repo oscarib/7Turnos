@@ -67,11 +67,10 @@ PrayingChain.factory('httpInterceptor', function ($q, $rootScope, $log) {
             return response || $q.when(response);
         },
         responseError: function (response) {
-        	//Do nothing if it has been any http error
-//            if (response.status === 401) {
-//                console.error("Ha habido un error 401");
-//            }
-//            return $q.reject(response);
+            if (response.status !== 401) {
+                console.error("Ha habido un error " + response.status);
+            }
+            return $q.reject(response);
         }
     };
 })
