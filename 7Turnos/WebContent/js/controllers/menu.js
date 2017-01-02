@@ -176,6 +176,7 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
 		$rootScope.labels.configurationSaved = dataOut.data.label_configurationSaved;
 		$rootScope.labels.errorSavingConfiguration = dataOut.data.label_errorSavingConfiguration;
 		$rootScope.labels.savingConfigurationPleaseWait = dataOut.data.label_savingConfigurationPleaseWait;
+		$rootScope.labels.version = dataOut.data.label_version;
 
 		//Una vez cargadas las propiedades, podemos cargar las estadísticas
 		self.loadStatistics();

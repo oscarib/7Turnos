@@ -295,7 +295,8 @@ public class OtherServicesController {
 	String label_errorSavingConfiguration;
 	@Value("${label_savingConfigurationPleaseWait}")
 	String label_savingConfigurationPleaseWait;
-	
+	@Value("${label_version}")
+	String label_version;
 	
 	private final static Logger logger = LoggerFactory.getLogger(OtherServicesController.class);
 
@@ -430,6 +431,7 @@ public class OtherServicesController {
 		properties.setProperty("label_configurationSaved", label_configurationSaved);
 		properties.setProperty("label_errorSavingConfiguration", label_errorSavingConfiguration);
 		properties.setProperty("label_savingConfigurationPleaseWait", label_savingConfigurationPleaseWait);
+		properties.setProperty("label_version", label_version);
 
 		return properties;
 	}
