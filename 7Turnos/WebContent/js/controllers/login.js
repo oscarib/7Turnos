@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope', function($location,$rootScope,prayerServices,$rootScope) {
+PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope','pcUtils', function($location,$rootScope,prayerServices,$rootScope,pcUtils) {
 	var self = this;
 
 	self.initialize = function(){
@@ -31,16 +31,19 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 		
 		$rootScope.authenticated = false;
 
-		var promise = prayerServices.login(self.credentials);
-		promise.then(function(dataOut) {
-			if (dataOut.data.username) {
-				$rootScope.authenticated = true;
-				$rootScope.getLoggedUser();
-			} else {
-				bootbox.alert({size:'small', message: $rootScope.labels.loginError});
-			}
-		}, function(error) {
-			bootbox.alert({size:'small', message: $rootScope.labels.errorCheckingCredentials});
+		var whenPropertiesLoaded = pcUtils.getProperties();
+		whenPropertiesLoaded.then(function(properties){
+			var whenCredentialsLoaded = prayerServices.login(self.credentials);
+			whenCredentialsLoaded.then(function(credentials) {
+				if (credentials.data.username) {
+					$rootScope.authenticated = true;
+					$rootScope.getLoggedUser();
+				} else {
+					bootbox.alert({size:'small', message: properties.data.label_loginError});
+				}
+			}, function(error) {
+				bootbox.alert({size:'small', message: properties.data.label_errorCheckingCredentials});
+			});
 		});
 	};
 	
