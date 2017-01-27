@@ -83,6 +83,8 @@ public class TurnDao implements ITurnDao {
 
 		Criteria objCriteria = session.createCriteria(TurnEntity.class);
 		objCriteria.add(Restrictions.ne("erased", true));
+		objCriteria.createCriteria("prayer")
+			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
 
 		return objCriteria.list();
 	}

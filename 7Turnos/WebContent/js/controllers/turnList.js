@@ -20,7 +20,7 @@ PrayingChain.controller("turnList", ['$rootScope', 'chartService', 'prayerServic
         		   if (obj.dow==='sunday') rObj.day=$rootScope.labels.sunday;
         		   rObj.turn = obj.turn;
         		   rObj.name = obj.prayer.name;
-        		   rObj.uid = obj.prayer.uid;
+        		   rObj.prayerId = obj.prayer.uid;
         		   rObj.email = obj.prayer.email
         		   if (obj.status==='NotCommitted') rObj.status=$rootScope.labels.notCommitted;
         		   if (obj.status==='accepted') rObj.status=$rootScope.labels.accepted;
