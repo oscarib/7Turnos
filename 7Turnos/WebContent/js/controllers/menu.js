@@ -186,16 +186,12 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
 	
 	self.loadProperties();
 	
-    self.openMenu = function(menuItem){
-    	if (self.hideMenu[menuItem]){
-    		self.hideMenu[menuItem] = false;
-    		for (var i=0; i<self.hideMenu.length; i++){
-    			if (i!==menuItem){
-    				self.hideMenu[i] = true;
-    			}
+    $rootScope.openMenu = function(menuItem){
+    	self.hideMenu[menuItem] = false;
+    	for (var i=0; i<self.hideMenu.length; i++){
+    		if (i!==menuItem){
+    			self.hideMenu[i] = true;
     		}
-    	} else {
-    		self.hideMenu[menuItem] = true;
     	}
     };
 }]);
