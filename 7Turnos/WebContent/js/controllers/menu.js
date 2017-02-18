@@ -9,12 +9,12 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
     self.hideMenu[3] = true;
     self.hideMenu[4] = true;
     self.pcName = "EspañaDeMaria.ES";
-	self.showPrayersList = undefined;
-	self.showHead = "activeMenuItem";
-	self.showDashBoard = "activeMenuItem";
-	self.showNewPrayer = false;
+    $rootScope.activateMenu=[];
+	$rootScope.activateMenu['/']="activeMenuItem";
 	
 	$rootScope.navigateTo = function(path){
+		$rootScope.activateMenu=[];
+		$rootScope.activateMenu[path]="activeMenuItem";
 		$location.path(path);
 	};
 
