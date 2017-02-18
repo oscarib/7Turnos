@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$rootScope','pcUtils', function($location,$rootScope,prayerServices,$rootScope,pcUtils) {
+PrayingChain.controller("login", ['$location','prayerServices','$rootScope','pcUtils', function($location,prayerServices,$rootScope,pcUtils) {
 	var self = this;
 
 	self.initialize = function(){
@@ -21,6 +21,14 @@ PrayingChain.controller("login", ['$location','$rootScope','prayerServices','$ro
 				$rootScope.authenticated = true;
 				$rootScope.maxUserRole = getMaxUserRole(dataOut.data.authorities);
 				$rootScope.userName = dataOut.data.username;
+				
+				//Get The Chain Name
+	        	var whenPcName = pcUtils.getChainName(dataOut.data.chain);
+	        	whenPcName.then(function(dataOut){
+	        		$rootScope.pcName = dataOut.data;
+	        	}, function(){
+	        		$rootScope.pcName = "Query Failed";
+	        	});
 			}
 		});
 	};

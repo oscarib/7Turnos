@@ -8,7 +8,6 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
     self.hideMenu[2] = true;
     self.hideMenu[3] = true;
     self.hideMenu[4] = true;
-    self.pcName = "EspañaDeMaria.ES";
     $rootScope.activateMenu=[];
 	$rootScope.activateMenu['/']="activeMenuItem";
 	
@@ -199,5 +198,4 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
     		self.hideMenu[menuItem] = true;
     	}
     };
-	
 }]);
