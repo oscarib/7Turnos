@@ -85,7 +85,8 @@ public class TurnDao implements ITurnDao {
 		objCriteria.add(Restrictions.ne("erased", true));
 		objCriteria.createCriteria("prayer")
 			.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
-			.add(Restrictions.ne("erased", true));
+			.add(Restrictions.ne("erased", true))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
 		return objCriteria.list();
 	}
