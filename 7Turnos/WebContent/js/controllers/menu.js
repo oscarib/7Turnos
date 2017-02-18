@@ -63,6 +63,7 @@ PrayingChain.controller("menu", ['$rootScope','$location','pcUtils','prayerServi
 			$rootScope.labels.without_assigned_turns = dataOut.data.label_without_assigned_turns;
 			$rootScope.labels.label_prayer = dataOut.data.label_prayer;
 			$rootScope.labels.prayers = dataOut.data.label_prayers;
+			$rootScope.labels.prayer = dataOut.data.label_prayer;
 			$rootScope.labels.createPrayer = dataOut.data.label_createPrayer;
 			$rootScope.labels.createPrayerOneStep = dataOut.data.label_createPrayerOneStep;
 			$rootScope.labels.showCalendar = dataOut.data.label_showCalendar;
