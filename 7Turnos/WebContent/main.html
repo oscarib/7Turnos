@@ -38,7 +38,7 @@
 <div class="container-fluid" ng-controller="main as vm">
 	<div class="row">
  
-		<div class="loginFondo" ng-if="!authenticated">
+		<div class="loginFondo" ng-show="!authenticated">
 			<div ng-include="'./pages/login.html'" ng-controller='login as vm'></div>
 		</div>
 
