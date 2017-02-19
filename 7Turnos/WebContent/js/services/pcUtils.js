@@ -32,18 +32,23 @@
     		var defered = $q.defer();
     		var promise = defered.promise;
     		
-    		$http({
-    			url: "./getProperties.do",
-    			dataType: 'json',
-    			method: 'POST',
-    			headers: {
-    				"Content-Type": "application/json"
-    			}
-    		}).then(function(dataOut) {
-    			defered.resolve(dataOut);
-    		}, function(error) {
-    			defered.reject(error);
-    		});
+    		if (!self.dataProperties){
+    			$http({
+    				url: "./getProperties.do",
+    				dataType: 'json',
+    				method: 'POST',
+    				headers: {
+    					"Content-Type": "application/json"
+    				}
+    			}).then(function(dataOut) {
+    				self.dataProperties = dataOut
+    				defered.resolve(dataOut);
+    			}, function(error) {
+    				defered.reject(error);
+    			});
+    		} else {
+    			defered.resolve(self.dataProperties);
+    		}
     		
     		return promise;
     	};
