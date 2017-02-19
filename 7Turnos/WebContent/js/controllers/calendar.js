@@ -5,6 +5,11 @@ PrayingChain.controller("calendar", ['prayerServices','$location','$sce','$rootS
 	$rootScope.batidoraGeneralText='Construyendo el calendario. Por favor, espere...';
 	$rootScope.batidoraGeneral=true;
 
+    //Activates menu
+    $rootScope.activateMenu=[];
+	$rootScope.activateMenu['/calendar']="activeMenuItem";
+	$rootScope.openMenu(2);
+
 	var promise = prayerServices.getCalendarHtml();
 	promise.then(function(dataOut) {
 		self.calendar = $sce.trustAsHtml(dataOut.data[0]);

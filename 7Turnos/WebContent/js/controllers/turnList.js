@@ -1,9 +1,8 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("turnList", ['$rootScope', 'chartService', 'prayerServices','$location', 'NgTableParams', function($rootScope, chartService, prayerServices,$location,NgTableParams) {
+PrayingChain.controller("turnList", ['$rootScope', 'chartService', 'prayerServices','$location', 'NgTableParams', 'pcUtils', function($rootScope, chartService, prayerServices,$location,NgTableParams,pcUtils) {
 	var self = this;
-	$rootScope.batidoraGeneral=true;
-	$rootScope.batidoraGeneralText=$rootScope.labels.gettingPrayerList;
+	
 	self.loadPrayerList = function(){
         //Cargamos la lista de oradores
         var turnsList = prayerServices.getTurnsList();
@@ -39,6 +38,16 @@ PrayingChain.controller("turnList", ['$rootScope', 'chartService', 'prayerServic
     		$rootScope.batidoraGeneral=false;
         });
     };
-    
-    self.loadPrayerList();
+
+    //Activates menu
+    $rootScope.activateMenu=[];
+	$rootScope.activateMenu['/turnos']="activeMenuItem";
+	$rootScope.openMenu(2);
+
+    var whenProperties = pcUtils.getProperties();
+	whenProperties.then(function(){
+		$rootScope.batidoraGeneral=true;
+		$rootScope.batidoraGeneralText=$rootScope.labels.gettingPrayerList;
+	    self.loadPrayerList();
+	});
 }]);

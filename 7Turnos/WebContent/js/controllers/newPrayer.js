@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$location', function($scope,$rootScope,prayerServices,$location) {
+PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$location', 'pcUtils', function($scope,$rootScope,prayerServices,$location, pcUtils) {
 	var self = this;
 	
 	inicializarDatos();
@@ -50,24 +50,38 @@ PrayingChain.controller("newPrayer", ['$scope','$rootScope','prayerServices','$l
 	
 	//FUNCIONES PRIVADAS
 	function inicializarDatos(){
-		self.nombre = undefined;
-		self.dia = "";
-		self.turno = "";
-		self.email = "";
-		self.telefono = "";
-		self.pais = "";
-		self.notas = "";
-		self.visibilidad = "";
-		self.seudonimo = "";
-		self.visibilidades = [$rootScope.labels.hidden,$rootScope.labels.publico];
-		self.daysOfWeek = [$rootScope.labels.monday, $rootScope.labels.tuesday, $rootScope.labels.wednesday,
-		                   $rootScope.labels.thursday, $rootScope.labels.friday, $rootScope.labels.saturday, $rootScope.labels.sunday];
-		self.paises = [$rootScope.labels.ownCountry, $rootScope.labels.otherCountry];
-		self.turnos = ["00:00am","00:30am","01:00am","01:30am","02:00am","02:30am","03:00am","03:30am","04:00am","04:30am",
-		               "05:00am","05:30am","06:00am","06:30am","07:00am","07:30am","08:00am","08:30am","09:00am", "09:30am", "10:00am","10:30am",
-		               "11:00am","11:30am","12:00pm","12:30pm","13:00pm","13:30pm","14:00pm","14:30pm","15:00pm","15:30pm",
-		               "16:00pm","16:30pm","17:00pm","17:30pm","18:00pm","18:30pm","19:00pm","19:30pm","20:00pm","20:30pm",
-		               "21:00pm","21:30pm","22:00pm","22:30pm","23:00pm","23:30pm"];
+
+		//Activates menu
+	    $rootScope.activateMenu=[];
+		$rootScope.activateMenu['/crearOrador']="activeMenuItem";
+		$rootScope.openMenu(3);
+
+		var whenProperties = pcUtils.getProperties();
+		whenProperties.then(function(){
+			$rootScope.batidoraGeneral=true;
+			$rootScope.batidoraGeneralText=$rootScope.labels.gettingPrayerList;
+			
+			self.nombre = undefined;
+			self.dia = "";
+			self.turno = "";
+			self.email = "";
+			self.telefono = "";
+			self.pais = "";
+			self.notas = "";
+			self.visibilidad = "";
+			self.seudonimo = "";
+			self.visibilidades = [$rootScope.labels.hidden,$rootScope.labels.publico];
+			self.daysOfWeek = [$rootScope.labels.monday, $rootScope.labels.tuesday, $rootScope.labels.wednesday,
+			                   $rootScope.labels.thursday, $rootScope.labels.friday, $rootScope.labels.saturday, $rootScope.labels.sunday];
+			self.paises = [$rootScope.labels.ownCountry, $rootScope.labels.otherCountry];
+			self.turnos = ["00:00am","00:30am","01:00am","01:30am","02:00am","02:30am","03:00am","03:30am","04:00am","04:30am",
+			               "05:00am","05:30am","06:00am","06:30am","07:00am","07:30am","08:00am","08:30am","09:00am", "09:30am", "10:00am","10:30am",
+			               "11:00am","11:30am","12:00pm","12:30pm","13:00pm","13:30pm","14:00pm","14:30pm","15:00pm","15:30pm",
+			               "16:00pm","16:30pm","17:00pm","17:30pm","18:00pm","18:30pm","19:00pm","19:30pm","20:00pm","20:30pm",
+			               "21:00pm","21:30pm","22:00pm","22:30pm","23:00pm","23:30pm"];
+		}).finally(function(){
+			$rootScope.batidoraGeneral=false;
+		});
 	};
 	
 	$rootScope.resetNewPrayerForm = function(){

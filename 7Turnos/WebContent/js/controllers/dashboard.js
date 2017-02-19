@@ -1,6 +1,6 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices','$timeout', function($rootScope, chartService, prayerServices,$timeout) {
+PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServices','$timeout', 'pcUtils', function($rootScope, chartService, prayerServices,$timeout,pcUtils) {
 	var self = this;
 	
 	var errorWithServiceCall = false;
@@ -58,12 +58,15 @@ PrayingChain.controller("dashboard", ['$rootScope', 'chartService', 'prayerServi
 
     };
 
-	$rootScope.batidoraGeneral=true;
-	$rootScope.batidoraGeneralText="";
-    $timeout(function(){
-        loadCharts();
-        $rootScope.batidoraGeneral=false;
-    },1000);
+	var whenProperties = pcUtils.getProperties();
+	whenProperties.then(function(){
+		$rootScope.batidoraGeneral=true;
+		$rootScope.batidoraGeneralText=$rootScope.labels.loadingStatistics;
+	    $timeout(function(){
+	        loadCharts();
+	        $rootScope.batidoraGeneral=false;
+	    },1000);
+	});
 
 //<-- Fin de FUNCIONES PRIVADAS
 }]);

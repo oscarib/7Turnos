@@ -27,8 +27,19 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         	}
     	}).finally(function(){
         	self.showLoadingPrayersTable = false;
+        	$rootScope.batidoraGeneral=false;
         });
     };
     
-    self.loadPrayerList();
+    //Activates menu
+    $rootScope.activateMenu=[];
+	$rootScope.activateMenu['/oradores']="activeMenuItem";
+	$rootScope.openMenu(2);
+
+	var whenProperties = pcUtils.getProperties();
+	whenProperties.then(function(){
+		$rootScope.batidoraGeneral=true;
+		$rootScope.batidoraGeneralText=$rootScope.labels.gettingPrayerList;
+	    self.loadPrayerList();
+	});
 }]);
