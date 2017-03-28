@@ -3,124 +3,124 @@ package es.edm.domain;
 import es.edm.exceptions.TurnException;
 
 public class JSPSimpleTurn {
-	public String uid;
-	public String prayer_id;
-	public String dow;
-	public String turn;
-	//For managing turns by its number counterpart
-	public int turnInt;
-	public String status;
-	public String notes;
-	public boolean firstCall;
-	public String prayerName;
-	public String pax;
+    public String uid;
+    public String prayer_id;
+    public String dow;
+    public String turn;
+    //For managing turns by its number counterpart
+    public int turnInt;
+    public String status;
+    public String notes;
+    public boolean firstCall;
+    public String prayerName;
+    public String pax;
 
-	public JSPSimpleTurn(SimpleTurn turn) throws TurnException{
-		this.uid = Integer.toString(turn.getUid());
-		this.prayer_id = Integer.toString(turn.getPrayer_id());
-		this.dow = turn.getDow().toString();
-		this.turn = SimpleTurn.getHourByTurn(turn.getTurn());
-		this.turnInt = turn.getTurn();
-		this.status = turn.getStatus().toString();
-		this.notes = turn.getNotes();
-		this.pax = Integer.toString(turn.getPax());
-		this.firstCall = true;
-	}
-	
-	public String getPrayerName() {
-		return prayerName;
-	}
+    public JSPSimpleTurn(SimpleTurn turn) throws TurnException {
+        this.uid = Integer.toString(turn.getUid());
+        this.prayer_id = Integer.toString(turn.getPrayer_id());
+        this.dow = turn.getDow().toString();
+        this.turn = SimpleTurn.getHourByTurn(turn.getTurn());
+        this.turnInt = turn.getTurn();
+        this.status = turn.getStatus().toString();
+        this.notes = turn.getNotes();
+        this.pax = Integer.toString(turn.getPax());
+        this.firstCall = true;
+    }
 
-	public void setPrayerName(String prayerName) {
-		this.prayerName = prayerName;
-	}
+    public JSPSimpleTurn() {
+    }
 
-	public int getTurnInt() {
-		return turnInt;
-	}
+    public String getPrayerName() {
+        return prayerName;
+    }
 
-	public boolean isFirstCall() {
-		return firstCall;
-	}
+    public void setPrayerName(String prayerName) {
+        this.prayerName = prayerName;
+    }
 
-	public void setFirstCall(boolean firstCall) {
-		this.firstCall = firstCall;
-	}
+    public int getTurnInt() {
+        return turnInt;
+    }
 
-	public JSPSimpleTurn(){
-	}
+    public boolean isFirstCall() {
+        return firstCall;
+    }
 
-	public String getUid() {
-		return uid;
-	}
+    public void setFirstCall(boolean firstCall) {
+        this.firstCall = firstCall;
+    }
 
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
+    public String getUid() {
+        return uid;
+    }
 
-	public String getPrayer_id() {
-		return prayer_id;
-	}
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
-	public void setPrayer_id(String prayer_id) {
-		this.prayer_id = prayer_id;
-	}
+    public String getPrayer_id() {
+        return prayer_id;
+    }
 
-	public String getDow() {
-		return dow;
-	}
+    public void setPrayer_id(String prayer_id) {
+        this.prayer_id = prayer_id;
+    }
 
-	public void setDow(String dow) {
-		this.dow = dow;
-	}
+    public String getDow() {
+        return dow;
+    }
 
-	public String getTurn() {
-		return turn;
-	}
+    public void setDow(String dow) {
+        this.dow = dow;
+    }
 
-	public void setTurn(String turn) {
-		this.turn = turn;
-		if (!turn.equals("") && !turn.equals("NotSelected")){
-			this.turnInt = Integer.parseInt(turn);
-		}
-	}
+    public String getTurn() {
+        return turn;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setTurn(String turn) {
+        this.turn = turn;
+        if (!turn.equals("") && !turn.equals("NotSelected")) {
+            this.turnInt = Integer.parseInt(turn);
+        }
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public String getNotes() {
-		return notes;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    public String getNotes() {
+        return notes;
+    }
 
-	public String getPax() {
-		return pax;
-	}
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
-	public void setPax(String pax) {
-		this.pax = pax;
-	}
+    public String getPax() {
+        return pax;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		JSPSimpleTurn other = (JSPSimpleTurn) obj;
-		if (!uid.equals(other.getUid()))
-			return false;
-		return true;
-	}
+    public void setPax(String pax) {
+        this.pax = pax;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        JSPSimpleTurn other = (JSPSimpleTurn) obj;
+        if (!uid.equals(other.getUid()))
+            return false;
+        return true;
+    }
 
 }

@@ -1,214 +1,204 @@
 package es.edm.domain.entity;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="prayers")
+@Table(name = "prayers")
 public class PrayerEntity {
 
-	@Id	
-	@Column
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer uid;
-	
-	@Column
-	private boolean erased;
-	
-	@Column
-	private String name;
-	
-	@Column
-	private Integer chain;
-	
-	@Column
-	private String email;
-	
-	@Column
-	private String phone;
-	
-	@Column(name="own_country")
-	private Boolean ownCountry;
-	
-	@Column(name="optin_date")
-	private Date optinDate;
-	
-	@Column(name="Notes")
-	private String notes;
-	
-	@Column
-	private Boolean hidden;
-	
-	@Column
-	private String pseudonym;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer uid;
 
-    @OneToMany(mappedBy="prayer", cascade = CascadeType.ALL)
+    @Column
+    private boolean erased;
+
+    @Column
+    private String name;
+
+    @Column
+    private Integer chain;
+
+    @Column
+    private String email;
+
+    @Column
+    private String phone;
+
+    @Column(name = "own_country")
+    private Boolean ownCountry;
+
+    @Column(name = "optin_date")
+    private Date optinDate;
+
+    @Column(name = "Notes")
+    private String notes;
+
+    @Column
+    private Boolean hidden;
+
+    @Column
+    private String pseudonym;
+
+    @OneToMany(mappedBy = "prayer", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
-	@JsonBackReference //Para evitar que la serializaci�n a JSON entre en un bucle infinito
-	private List<TurnEntity> turns;
-    
-	/**
-	 * @return the uid
-	 */
-	public Integer getUid() {
-		return uid;
-	}
+    @JsonBackReference //Para evitar que la serializaci�n a JSON entre en un bucle infinito
+    private List<TurnEntity> turns;
 
-	/**
-	 * @param uid the uid to set
-	 */
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
+    /**
+     * @return the uid
+     */
+    public Integer getUid() {
+        return uid;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param uid the uid to set
+     */
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
 
-	/**
-	 * @return the ownCountry
-	 */
-	public Boolean getOwnCountry() {
-		return ownCountry;
-	}
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	/**
-	 * @param ownCountry the ownCountry to set
-	 */
-	public void setOwnCountry(Boolean ownCountry) {
-		this.ownCountry = ownCountry;
-	}
+    /**
+     * @return the ownCountry
+     */
+    public Boolean getOwnCountry() {
+        return ownCountry;
+    }
 
-	/**
-	 * @return the optinDate
-	 */
-	public Date getOptinDate() {
-		return optinDate;
-	}
+    /**
+     * @param ownCountry the ownCountry to set
+     */
+    public void setOwnCountry(Boolean ownCountry) {
+        this.ownCountry = ownCountry;
+    }
 
-	/**
-	 * @param optinDate the optinDate to set
-	 */
-	public void setOptinDate(Date optinDate) {
-		this.optinDate = optinDate;
-	}
+    /**
+     * @return the optinDate
+     */
+    public Date getOptinDate() {
+        return optinDate;
+    }
 
-	/**
-	 * @return the notes
-	 */
-	public String getNotes() {
-		return notes;
-	}
+    /**
+     * @param optinDate the optinDate to set
+     */
+    public void setOptinDate(Date optinDate) {
+        this.optinDate = optinDate;
+    }
 
-	/**
-	 * @param notes the notes to set
-	 */
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
 
-	/**
-	 * @return the hidden
-	 */
-	public Boolean getHidden() {
-		return hidden;
-	}
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
-	/**
-	 * @param hidden the hidden to set
-	 */
-	public void setHidden(Boolean hidden) {
-		this.hidden = hidden;
-	}
+    /**
+     * @return the hidden
+     */
+    public Boolean getHidden() {
+        return hidden;
+    }
 
-	/**
-	 * @return the pseudonym
-	 */
-	public String getPseudonym() {
-		return pseudonym;
-	}
+    /**
+     * @param hidden the hidden to set
+     */
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
+    }
 
-	/**
-	 * @param pseudonym the pseudonym to set
-	 */
-	public void setPseudonym(String pseudonym) {
-		this.pseudonym = pseudonym;
-	}
+    /**
+     * @return the pseudonym
+     */
+    public String getPseudonym() {
+        return pseudonym;
+    }
 
-	public List<TurnEntity> getTurns() {
-		return turns;
-	}
+    /**
+     * @param pseudonym the pseudonym to set
+     */
+    public void setPseudonym(String pseudonym) {
+        this.pseudonym = pseudonym;
+    }
 
-	public void setTurns(List<TurnEntity> turns) {
-		this.turns = turns;
-	}
+    public List<TurnEntity> getTurns() {
+        return turns;
+    }
 
-	public boolean isErased() {
-		return erased;
-	}
+    public void setTurns(List<TurnEntity> turns) {
+        this.turns = turns;
+    }
 
-	public void setErased(boolean erased) {
-		this.erased = erased;
-	}
+    public boolean isErased() {
+        return erased;
+    }
 
-	public Integer getChain() {
-		return chain;
-	}
+    public void setErased(boolean erased) {
+        this.erased = erased;
+    }
 
-	public void setChain(Integer chain) {
-		this.chain = chain;
-	}
+    public Integer getChain() {
+        return chain;
+    }
+
+    public void setChain(Integer chain) {
+        this.chain = chain;
+    }
 }

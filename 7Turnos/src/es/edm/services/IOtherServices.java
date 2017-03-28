@@ -7,11 +7,17 @@ import es.edm.domain.middle.LoginStatus;
 
 public interface IOtherServices {
 
-	ConfigurationEntity getConfiguration();
-	LoginStatus getLoggedUser();
-	LoginStatus login(LoginCredentials credentials);
-	StatisticsEntity getStatistics();
-	String getChainName(int chainNumber);
-	boolean setConfiguration(ConfigurationEntity conf);
-	boolean saveChainName(long chainNumber, String chainName);
+    ConfigurationEntity getConfiguration();
+
+    LoginStatus getLoggedUser();
+
+    LoginStatus login(LoginCredentials credentials);
+
+    StatisticsEntity getStatistics();
+
+    String getChainName(int chainNumber);
+
+    boolean setConfiguration(ConfigurationEntity conf);
+
+    boolean saveChainName(long chainNumber, String chainName);
 }

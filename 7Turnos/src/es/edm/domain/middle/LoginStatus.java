@@ -1,8 +1,8 @@
 package es.edm.domain.middle;
 
-import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 
 public class LoginStatus {
     private final boolean loggedIn;
@@ -11,29 +11,29 @@ public class LoginStatus {
     private final List<GrantedAuthority> authorities;
 
     public LoginStatus(boolean loggedIn, String userName, int chain, List<GrantedAuthority> authorities) {
-      this.loggedIn = loggedIn;
-      this.userName = userName;
-      this.chain = chain;
-      this.authorities = authorities;
+        this.loggedIn = loggedIn;
+        this.userName = userName;
+        this.chain = chain;
+        this.authorities = authorities;
     }
 
     public boolean isLoggedIn() {
-      return loggedIn;
+        return loggedIn;
     }
 
     public String getUsername() {
-      return userName;
+        return userName;
     }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public List<GrantedAuthority> getAuthorities() {
-		return authorities;
-	}
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
 
-	public int getChain() {
-		return chain;
-	}
+    public int getChain() {
+        return chain;
+    }
 }

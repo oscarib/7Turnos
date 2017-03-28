@@ -2,27 +2,27 @@ package es.edm.exceptions;
 
 public class TurnAlreadyExistsException extends RuntimeException {
 
-	public TurnAlreadyExistsException() {
-		super();
-	}
+    private static final long serialVersionUID = 275099808120377371L;
 
-	public TurnAlreadyExistsException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+    public TurnAlreadyExistsException() {
+        super();
+    }
 
-	public TurnAlreadyExistsException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public TurnAlreadyExistsException(String message, Throwable cause, boolean enableSuppression,
+                                      boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 
-	public TurnAlreadyExistsException(String message) {
-		super(message);
-	}
+    public TurnAlreadyExistsException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public TurnAlreadyExistsException(Throwable cause) {
-		super(cause);
-	}
+    public TurnAlreadyExistsException(String message) {
+        super(message);
+    }
 
-	private static final long serialVersionUID = 275099808120377371L;
+    public TurnAlreadyExistsException(Throwable cause) {
+        super(cause);
+    }
 
 }
