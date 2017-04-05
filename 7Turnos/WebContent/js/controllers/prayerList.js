@@ -1,11 +1,15 @@
 var PrayingChain = angular.module("PrayingChain");
 
-PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServices', '$location', 'NgTableParams', 'pcUtils', function ($rootScope, chartService, prayerServices, $location, NgTableParams, pcUtils) {
+PrayingChain.controller("prayerList",
+    ['$rootScope', 'chartService', 'prayerServices', '$location', 'NgTableParams', 'pcUtils', '$routeParams',
+        function ($rootScope, chartService, prayerServices, $location, NgTableParams, pcUtils, $routeParams) {
+
     var self = this;
 
     self.loadPrayerList = function () {
+
         //Cargamos la lista de oradores
-        var prayerList = prayerServices.getPrayerList();
+        var prayerList = prayerServices.getPrayerList($routeParams.filterString);
         prayerList.then(function (dataOut) {
             var originalArray = dataOut.data;
             var reformattedArray = originalArray.map(function (obj) {
@@ -42,4 +46,4 @@ PrayingChain.controller("prayerList", ['$rootScope', 'chartService', 'prayerServ
         $rootScope.batidoraGeneralText = $rootScope.labels.gettingPrayerList;
         self.loadPrayerList();
     });
-}]);
+        }])

@@ -8,11 +8,17 @@
     function prayerServices($q, pcUtils, $http) {
         var self = this;
 
-        self.getPrayerList = function (requestData) {
-            var defered = $q.defer();
-            var promise = defered.promise;
+        self.getPrayerList = function (filter) {
 
-            var utilsPromise = pcUtils.getBackendData("./getAllPrayers.do");
+            var url;
+
+            url = filter === 'filterOrphans' ? "./getOrphanPrayers.do" : "./getAllPrayers.do";
+
+            var utilsPromise = pcUtils.getBackendData(url);
+
+            var defered = $q.defer();
+
+            var promise = defered.promise;
 
             utilsPromise.then(function (dataOut) {
                 defered.resolve(dataOut);
