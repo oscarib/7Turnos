@@ -10,6 +10,8 @@ public interface IPrayerService {
 
     List<PrayerEntity> getPrayers();
 
+    List<PrayerEntity> getOrphanPrayers();
+
     void addPrayer(PrayerEntity prayer);
 
     void removePrayer(PrayerEntity prayer);

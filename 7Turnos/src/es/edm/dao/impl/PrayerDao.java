@@ -1,6 +1,7 @@
 package es.edm.dao.impl;
 
 import es.edm.dao.IPrayerDao;
+import es.edm.domain.entity.OrphanPrayerEntity;
 import es.edm.domain.entity.PrayerEntity;
 import es.edm.domain.entity.TurnEntity;
 import es.edm.services.IOtherServices;
@@ -28,8 +29,10 @@ import java.util.List;
 public class PrayerDao implements IPrayerDao {
 
     private final static Logger logger = LoggerFactory.getLogger(PrayerDao.class);
+
     @PersistenceContext
     protected EntityManager entityManager;
+
     @Autowired
     IOtherServices otherServices;
 
@@ -222,17 +225,9 @@ public class PrayerDao implements IPrayerDao {
     public List<PrayerEntity> getOrphanPrayers() {
         Session session = entityManager.unwrap(Session.class);
 
-        Criteria objCriteria = session.createCriteria(PrayerEntity.class);
-
-        objCriteria
-                .add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()))
-                .add(Restrictions.ne("erased", true));
-
-        objCriteria.createCriteria("turns")
-                .add(Restrictions.disjunction()
-                        .add(Restrictions.isNull("status"))
-                        .add(Restrictions.eq("status", TurnStatus.cancelled))
-                        .add(Restrictions.eq("erased", true)));
+        Criteria objCriteria = session.createCriteria(OrphanPrayerEntity.class);
+        objCriteria.add(Restrictions.eq("chain", otherServices.getLoggedUser().getChain()));
+        objCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
         return objCriteria.list();
     }

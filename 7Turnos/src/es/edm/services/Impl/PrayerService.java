@@ -25,6 +25,11 @@ public class PrayerService implements IPrayerService {
     }
 
     @Override
+    public List<PrayerEntity> getOrphanPrayers() {
+        return prayerDao.getOrphanPrayers();
+    }
+
+    @Override
     public void addPrayer(PrayerEntity prayer) {
         prayerDao.addPrayer(prayer);
     }

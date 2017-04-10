@@ -44,6 +44,13 @@ public class PrayerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/getOrphanPrayers.do", method = RequestMethod.POST)
+    public List<PrayerEntity> getOrphanPrayers() {
+        List<PrayerEntity> prayers2Return = prayerService.getOrphanPrayers();
+        return prayers2Return;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getAllTurns.do", method = RequestMethod.POST)
     public List<TurnEntity> getAllTurns() {
         List<TurnEntity> turns2Return = turnService.getAllTurns();

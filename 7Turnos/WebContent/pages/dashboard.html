@@ -74,8 +74,8 @@
             </div>
         </div>
         <div ng-if="maxUserRole>=1" class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-            <div class="widget">
-                <div class="WidgetDeshabilitado"></div>
+            <div class="widget" ng-click="navigateTo('/oradores/filterOrphans');openMenu(3)">
+                <div class="WidgetDeshabilitado" ng-if="OrphanPrayers==0"></div>
                 <div class="WarningFlag" ng-if="OrphanPrayers>0">
                     <span>{{OrphanPrayers}}</span>
                 </div>
