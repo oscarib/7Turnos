@@ -1,8 +1,11 @@
 package es.edm.dao.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import es.edm.dao.IOthersDao;
+import es.edm.domain.entity.ChainEntity;
+import es.edm.domain.entity.ConfigurationEntity;
+import es.edm.domain.entity.StatisticsEntity;
+import es.edm.domain.entity.UserEntity;
+import es.edm.domain.middle.LoginStatus;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -13,90 +16,85 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.edm.dao.IOthersDao;
-import es.edm.domain.entity.ChainEntity;
-import es.edm.domain.entity.ConfigurationEntity;
-import es.edm.domain.entity.StatisticsEntity;
-import es.edm.domain.entity.UserEntity;
-import es.edm.domain.middle.LoginStatus;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public class OthersDao implements IOthersDao {
-	
-	@PersistenceContext
-	protected EntityManager entityManager;
-	
-	private final static Logger logger = LoggerFactory.getLogger(OthersDao.class);
 
-	@Override
-	public ConfigurationEntity getConfiguration(LoginStatus loggedUser) {
-		Session session = entityManager.unwrap(Session.class);
+    private final static Logger logger = LoggerFactory.getLogger(OthersDao.class);
+    @PersistenceContext
+    protected EntityManager entityManager;
 
-		Criteria objCriteria = session.createCriteria(ConfigurationEntity.class);
+    @Override
+    public ConfigurationEntity getConfiguration(LoginStatus loggedUser) {
+        Session session = entityManager.unwrap(Session.class);
 
-		objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
+        Criteria objCriteria = session.createCriteria(ConfigurationEntity.class);
 
-		return (ConfigurationEntity) objCriteria.uniqueResult();
-	}
+        objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
 
-	@Override
-	public int getUserChain(String userName) {
-		Session session = entityManager.unwrap(Session.class);
+        return (ConfigurationEntity) objCriteria.uniqueResult();
+    }
 
-		Criteria objCriteria = session.createCriteria(UserEntity.class);
+    @Override
+    public int getUserChain(String userName) {
+        Session session = entityManager.unwrap(Session.class);
 
-		objCriteria.add(Restrictions.eq("username", userName));
-		
-		UserEntity user = (UserEntity)objCriteria.uniqueResult(); 
+        Criteria objCriteria = session.createCriteria(UserEntity.class);
 
-		return user.getChain();
-	}
+        objCriteria.add(Restrictions.eq("username", userName));
 
-	@Override
-	public StatisticsEntity getStatistics(LoginStatus loggedUser) {
-		Session session = entityManager.unwrap(Session.class);
+        UserEntity user = (UserEntity) objCriteria.uniqueResult();
 
-		Criteria objCriteria = session.createCriteria(StatisticsEntity.class);
+        return user.getChain();
+    }
 
-		objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
+    @Override
+    public StatisticsEntity getStatistics(LoginStatus loggedUser) {
+        Session session = entityManager.unwrap(Session.class);
 
-		return (StatisticsEntity) objCriteria.uniqueResult();
-	}
+        Criteria objCriteria = session.createCriteria(StatisticsEntity.class);
 
-	@Override
-	public String getChainName(int chainNumber) {
-		Session session = entityManager.unwrap(Session.class);
+        objCriteria.add(Restrictions.eq("chain", loggedUser.getChain()));
 
-		Criteria objCriteria = session.createCriteria(ChainEntity.class);
+        return (StatisticsEntity) objCriteria.uniqueResult();
+    }
 
-		objCriteria.add(Restrictions.eq("chain", (long)chainNumber));
+    @Override
+    public String getChainName(int chainNumber) {
+        Session session = entityManager.unwrap(Session.class);
 
-		return ((ChainEntity)objCriteria.uniqueResult()).getName();		
-	}
+        Criteria objCriteria = session.createCriteria(ChainEntity.class);
 
-	@Override
-	public boolean setConfiguration(ConfigurationEntity conf) {
-		try{
-			entityManager.merge(conf);
-			return true;
-		} catch (ConstraintViolationException e){
-			logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de configuración que no existe." + e.toString());
-			return false;
-		}
-	}
+        objCriteria.add(Restrictions.eq("chain", (long) chainNumber));
 
-	@Override
-	public boolean saveChainName(long chainNumber, String chainName) {
-		ChainEntity chain = new ChainEntity();
-		chain.setChain(chainNumber);
-		chain.setName(chainName);
-		try{
-			entityManager.merge(chain);
-			return true;
-		} catch (ConstraintViolationException e){
-			logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de cadenas que no existe." + e.toString());
-			return false;
-		}
-	}
+        return ((ChainEntity) objCriteria.uniqueResult()).getName();
+    }
+
+    @Override
+    public boolean setConfiguration(ConfigurationEntity conf) {
+        try {
+            entityManager.merge(conf);
+            return true;
+        } catch (ConstraintViolationException e) {
+            logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de configuración que no existe." + e.toString());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean saveChainName(long chainNumber, String chainName) {
+        ChainEntity chain = new ChainEntity();
+        chain.setChain(chainNumber);
+        chain.setName(chainName);
+        try {
+            entityManager.merge(chain);
+            return true;
+        } catch (ConstraintViolationException e) {
+            logger.error("Alerta: Se ha tratado de actualizar una entrada en la tabla de cadenas que no existe." + e.toString());
+            return false;
+        }
+    }
 }

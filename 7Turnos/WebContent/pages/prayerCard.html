@@ -1,148 +1,160 @@
 <div id="prayerData" class="container-fluid">
-	<div class="row">
-		<div class="colSection col-lg-7 col-md-8 col-sm-12 col-xs-12">
-			<div class="row rowBorder">
-				<div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
-					<span>{{labels.prayerData}}</span>
-				</div>
-				<div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<img ng-show="!vm.editing" ng-click="vm.editPrayer()" src="./images/edit.svg" alt="Edit Prayer" height="24" width="24">
-					<img ng-show="!vm.editing" ng-click="vm.deletePrayer()" src="./images/delete.svg" alt="Delete Prayer" height="24" width="24">
-					<img ng-show="vm.editing" ng-click="vm.saveChanges()" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
-					<img ng-show="vm.editing" ng-click="vm.cancelEditing()" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-1 col-xs-2">
-					<span>ID</span>
-				</div>
-				<div class="dataHeader col-lg-3 col-md-4 col-sm-4 col-xs-4">
-					<span>{{labels.name}}</span>
-				</div>
-				<div class="dataHeader col-lg-7 col-md-6 col-sm-7 col-xs-6">
-					<span>Email</span>
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="dataContainer col-lg-2 col-md-2 col-sm-1 col-xs-2">
-					<span>{{vm.prayer.uid}}</span>
-				</div>
-				<div class="dataContainer col-lg-3 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayer.name}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.name">
-				</div>
-				<div class="dataContainer col-lg-7 col-md-6 col-sm-7 col-xs-6">
-					<span ng-show="!vm.editing">{{vm.prayer.email}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.email">
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{labels.ownCountry}}</span>
-				</div>
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{labels.hidden}}</span>
-				</div>
-				<div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>{{labels.phone}}</span>
-				</div>
-				<div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>{{labels.pseudonym}}</span>
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="{{vm.prayer.country == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span ng-show="!vm.editing" >{{vm.prayer.country}}</span>
-					<select ng-show="vm.editing" ng-model="vm.prayer.country">
-					  <option value="Sí">{{labels.yes}}</option>
-					  <option value="No">{{labels.no}}</option>
-					</select>
-				</div>
-				<div class="{{vm.prayer.visibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span ng-show="!vm.editing" >{{vm.prayer.visibility}}</span>
-					<select ng-show="vm.editing" ng-model="vm.prayer.visibility">
-					  <option value="Sí">{{labels.yes}}</option>
-					  <option value="No">{{labels.no}}</option>
-					</select>
-				</div>
-				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayer.phone}}</span>
-					<input ng-show="vm.editing" class="editing" type="text" ng-model="vm.prayer.phone">
-				</div>
-				<div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span ng-show="!vm.editing">{{vm.prayer.pseudonym}}</span>
-					<input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.pseudonym">
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
-					<span>{{labels.turnsData}}</span>
-				</div>
-				<div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<img ng-show="!vm.creatingNewTurn" ng-click="vm.addTurn()" src="./images/add.svg" alt="Edit Turn" height="24" width="24">
-					<img ng-show="vm.creatingNewTurn" ng-click="vm.saveNewTurn()" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
-					<img ng-show="vm.creatingNewTurn" ng-click="vm.cancelNewTurn()" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
-				</div>
-			</div>
-			<div class="row rowBorder">
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>ID</span>
-				</div>
-				<div class="dataHeader col-lg-2 col-md-3 col-sm-3 col-xs-3">
-					<span>{{labels.day}}</span>
-				</div>
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{labels.turn}}</span>
-				</div>
-				<div class="dataHeader col-lg-4 col-md-3 col-sm-3 col-xs-3">
-					<span>{{labels.status}}</span>
-				</div>
-				<div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{labels.actions}}</span>
-				</div>
-			</div>
-			<div ng-repeat="turn in vm.turns" class="row rowBorder">
-				<div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span>{{turn.uid}}</span>
-				</div>
-				<div class="{{turn.status}} dataContainer col-lg-2 col-md-3 col-sm-3 col-xs-3">
-					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.dowLabel}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.dow">
-					  <option ng-repeat="dia in vm.DayOfWeek" value="{{dia.key}}">{{dia.value}}</option>
-					</select>
-				</div>
-				<div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<span ng-show="!vm.editingTurn[turn.uid]" >{{turn.turn}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.turn">
-					  <option ng-repeat="hora in vm.horas" value="{{hora.key}}">{{hora.value}}</option>
-					</select>
-				</div>
-				<div class="{{turn.status}} dataContainer col-lg-4 col-md-3 col-sm-3 col-xs-3">
-					<span ng-show="!vm.editingTurn[turn.uid]">{{turn.statusLabel}}</span>
-					<select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.status">
-					  <option ng-repeat="status in vm.status" value="{{status.key}}">{{status.value}}</option>
-					</select>
-				</div>
-				<div class="{{turn.status}} iconHeader dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.editTurn(turn.uid)" src="./images/edit.svg" alt="Edit Turn" height="24" width="24">
-					<img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.deleteTurn(vm.turns.indexOf(turn))" src="./images/delete.svg" alt="Edit Turn" height="24" width="24">
-					<img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.saveTurnChanges(turn.uid)" src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
-					<img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.cancelEditingTurn(turn.uid)" src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
-				</div>
-			</div>
-		</div>
-		<div class="colSection col-lg-5 col-md-4 col-sm-12 col-xs-12">
-			<div class="row rowBorder">
-				<div class="groupHeader col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>Notas</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="dataContainer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span ng-show="!vm.editing" >{{vm.prayer.notes}}</span>
-					<textarea class="editing" ng-show="vm.editing" rows="4" cols="50" ng-model="vm.prayer.notes"></textarea>
-				</div>
-			</div>
-		</div>	
-	</div>
+    <div class="row">
+        <div class="colSection col-lg-7 col-md-8 col-sm-12 col-xs-12">
+            <div class="row rowBorder">
+                <div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <span>{{labels.prayerData}}</span>
+                </div>
+                <div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img ng-show="!vm.editing" ng-click="vm.editPrayer()" src="./images/edit.svg" alt="Edit Prayer"
+                         height="24" width="24">
+                    <img ng-show="!vm.editing" ng-click="vm.deletePrayer()" src="./images/delete.svg"
+                         alt="Delete Prayer" height="24" width="24">
+                    <img ng-show="vm.editing" ng-click="vm.saveChanges()" src="./images/accept.svg"
+                         alt="Aceptar cambios" height="24" width="24">
+                    <img ng-show="vm.editing" ng-click="vm.cancelEditing()" src="./images/cancel.svg"
+                         alt="Cancelar edición" height="24" width="24">
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-1 col-xs-2">
+                    <span>ID</span>
+                </div>
+                <div class="dataHeader col-lg-3 col-md-4 col-sm-4 col-xs-4">
+                    <span>{{labels.name}}</span>
+                </div>
+                <div class="dataHeader col-lg-7 col-md-6 col-sm-7 col-xs-6">
+                    <span>Email</span>
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="dataContainer col-lg-2 col-md-2 col-sm-1 col-xs-2">
+                    <span>{{vm.prayer.uid}}</span>
+                </div>
+                <div class="dataContainer col-lg-3 col-md-4 col-sm-4 col-xs-4">
+                    <span ng-show="!vm.editing">{{vm.prayer.name}}</span>
+                    <input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.name">
+                </div>
+                <div class="dataContainer col-lg-7 col-md-6 col-sm-7 col-xs-6">
+                    <span ng-show="!vm.editing">{{vm.prayer.email}}</span>
+                    <input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.email">
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>{{labels.ownCountry}}</span>
+                </div>
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>{{labels.hidden}}</span>
+                </div>
+                <div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <span>{{labels.phone}}</span>
+                </div>
+                <div class="dataHeader col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <span>{{labels.pseudonym}}</span>
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="{{vm.prayer.country == 'Sí' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span ng-show="!vm.editing">{{vm.prayer.country}}</span>
+                    <select ng-show="vm.editing" ng-model="vm.prayer.country">
+                        <option value="Sí">{{labels.yes}}</option>
+                        <option value="No">{{labels.no}}</option>
+                    </select>
+                </div>
+                <div class="{{vm.prayer.visibility == 'No' ? 'Green' : 'Red'}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span ng-show="!vm.editing">{{vm.prayer.visibility}}</span>
+                    <select ng-show="vm.editing" ng-model="vm.prayer.visibility">
+                        <option value="Sí">{{labels.yes}}</option>
+                        <option value="No">{{labels.no}}</option>
+                    </select>
+                </div>
+                <div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <span ng-show="!vm.editing">{{vm.prayer.phone}}</span>
+                    <input ng-show="vm.editing" class="editing" type="text" ng-model="vm.prayer.phone">
+                </div>
+                <div class="dataContainer col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <span ng-show="!vm.editing">{{vm.prayer.pseudonym}}</span>
+                    <input class="editing" ng-show="vm.editing" type="text" ng-model="vm.prayer.pseudonym">
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="groupHeader col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <span>{{labels.turnsData}}</span>
+                </div>
+                <div class="iconHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img ng-show="!vm.creatingNewTurn" ng-click="vm.addTurn()" src="./images/add.svg" alt="Edit Turn"
+                         height="24" width="24">
+                    <img ng-show="vm.creatingNewTurn" ng-click="vm.saveNewTurn()" src="./images/accept.svg"
+                         alt="Aceptar cambios" height="24" width="24">
+                    <img ng-show="vm.creatingNewTurn" ng-click="vm.cancelNewTurn()" src="./images/cancel.svg"
+                         alt="Cancelar edición" height="24" width="24">
+                </div>
+            </div>
+            <div class="row rowBorder">
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>ID</span>
+                </div>
+                <div class="dataHeader col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                    <span>{{labels.day}}</span>
+                </div>
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>{{labels.turn}}</span>
+                </div>
+                <div class="dataHeader col-lg-4 col-md-3 col-sm-3 col-xs-3">
+                    <span>{{labels.status}}</span>
+                </div>
+                <div class="dataHeader col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>{{labels.actions}}</span>
+                </div>
+            </div>
+            <div ng-repeat="turn in vm.turns" class="row rowBorder">
+                <div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span>{{turn.uid}}</span>
+                </div>
+                <div class="{{turn.status}} dataContainer col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                    <span ng-show="!vm.editingTurn[turn.uid]">{{turn.dowLabel}}</span>
+                    <select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.dow">
+                        <option ng-repeat="dia in vm.DayOfWeek" value="{{dia.key}}">{{dia.value}}</option>
+                    </select>
+                </div>
+                <div class="{{turn.status}} dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span ng-show="!vm.editingTurn[turn.uid]">{{turn.turn}}</span>
+                    <select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.turn">
+                        <option ng-repeat="hora in vm.horas" value="{{hora.key}}">{{hora.value}}</option>
+                    </select>
+                </div>
+                <div class="{{turn.status}} dataContainer col-lg-4 col-md-3 col-sm-3 col-xs-3">
+                    <span ng-show="!vm.editingTurn[turn.uid]">{{turn.statusLabel}}</span>
+                    <select ng-show="vm.editingTurn[turn.uid]" ng-model="turn.status">
+                        <option ng-repeat="status in vm.status" value="{{status.key}}">{{status.value}}</option>
+                    </select>
+                </div>
+                <div class="{{turn.status}} iconHeader dataContainer col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.editTurn(turn.uid)" src="./images/edit.svg"
+                         alt="Edit Turn" height="24" width="24">
+                    <img ng-show="!vm.editingTurn[turn.uid]" ng-click="vm.deleteTurn(vm.turns.indexOf(turn))"
+                         src="./images/delete.svg" alt="Edit Turn" height="24" width="24">
+                    <img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.saveTurnChanges(turn.uid)"
+                         src="./images/accept.svg" alt="Aceptar cambios" height="24" width="24">
+                    <img ng-show="vm.editingTurn[turn.uid]" ng-click="vm.cancelEditingTurn(turn.uid)"
+                         src="./images/cancel.svg" alt="Cancelar edición" height="24" width="24">
+                </div>
+            </div>
+        </div>
+        <div class="colSection col-lg-5 col-md-4 col-sm-12 col-xs-12">
+            <div class="row rowBorder">
+                <div class="groupHeader col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <span>Notas</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="dataContainer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <span ng-show="!vm.editing">{{vm.prayer.notes}}</span>
+                    <textarea class="editing" ng-show="vm.editing" rows="4" cols="50"
+                              ng-model="vm.prayer.notes"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

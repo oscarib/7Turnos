@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-	    <layout class="ch.qos.logback.classic.PatternLayout">
-		<Pattern>
-			%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
-		</Pattern>
-	    </layout>
-	</appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
 
-	<logger name="es.edm" level="DEBUG" additivity="false">
-		<appender-ref ref="STDOUT" />
-	</logger>
+    <logger name="es.edm" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
 
-<!---->
- 	
-	<logger name="org.hibernate" level="OFF" /> <!-- Log everything. This is a lot of information but it is useful for troubleshooting -->
-	<logger name="org.hibernate.SQL" level="OFF"/> 	<!-- Registra todas las sentencias DML de SQL -SELECT, INSERT, ETC- -->
-	<logger name="org.hibernate.type" level="OFF"/> <!-- Registra todos los parámetros JDBC -->
-	<logger name="org.hibernate.tool.hbm2ddl" level="OFF"/> <!-- Registra todas las sentencias DDL de SQL -CREATE TABLE, CREATE VIEW, ETC- -->
-	<logger name="org.hibernate.pretty" level="OFF"/> <!-- Registra el estado de todas las entidades (máximo de 20 entidades) asociadas con la sesión en tiempo de limpieza (flush) -->
-	<logger name="org.hibernate.cache" level="OFF"/> <!-- Registra toda la actividad del caché de segundo nivel -->
-	<logger name="org.hibernate.transaction" level="OFF"/> <!-- Registra la actividad relacionada con la transacción -->
-	<logger name="org.hibernate.jdbc" level="OFF" /> <!--  -->
-	<logger name="org.hibernate.hql.ast" level="OFF" /> <!-- Regista los ASTs de HQL y SQL, así como otra información sobre análisis de consultas. -->
-	<logger name="org.hibernate.secure" level="OFF" /> <!-- Registra todas las peticiones de autorización JAAS -->
-	
-	<root level="WARN">
-		<appender-ref ref="STDOUT" />
-	</root>
+    <!---->
+
+    <logger name="org.hibernate"
+            level="OFF"/> <!-- Log everything. This is a lot of information but it is useful for troubleshooting -->
+    <logger name="org.hibernate.SQL"
+            level="OFF"/>    <!-- Registra todas las sentencias DML de SQL -SELECT, INSERT, ETC- -->
+    <logger name="org.hibernate.type" level="OFF"/> <!-- Registra todos los parámetros JDBC -->
+    <logger name="org.hibernate.tool.hbm2ddl"
+            level="OFF"/> <!-- Registra todas las sentencias DDL de SQL -CREATE TABLE, CREATE VIEW, ETC- -->
+    <logger name="org.hibernate.pretty"
+            level="OFF"/> <!-- Registra el estado de todas las entidades (máximo de 20 entidades) asociadas con la sesión en tiempo de limpieza (flush) -->
+    <logger name="org.hibernate.cache" level="OFF"/> <!-- Registra toda la actividad del caché de segundo nivel -->
+    <logger name="org.hibernate.transaction" level="OFF"/> <!-- Registra la actividad relacionada con la transacción -->
+    <logger name="org.hibernate.jdbc" level="OFF"/> <!--  -->
+    <logger name="org.hibernate.hql.ast"
+            level="OFF"/> <!-- Regista los ASTs de HQL y SQL, así como otra información sobre análisis de consultas. -->
+    <logger name="org.hibernate.secure" level="OFF"/> <!-- Registra todas las peticiones de autorización JAAS -->
+
+    <root level="WARN">
+        <appender-ref ref="STDOUT"/>
+    </root>
 
 </configuration>

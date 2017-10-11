@@ -6,10 +6,15 @@ import es.edm.domain.middle.LoginStatus;
 
 public interface IOthersDao {
 
-	ConfigurationEntity getConfiguration(LoginStatus loggedUser);
-	int getUserChain(String userName);
-	StatisticsEntity getStatistics(LoginStatus loggedUser);
-	String getChainName(int chainNumber);
-	boolean setConfiguration(ConfigurationEntity conf);
-	boolean saveChainName(long chainNumber, String chainName);
+    ConfigurationEntity getConfiguration(LoginStatus loggedUser);
+
+    int getUserChain(String userName);
+
+    StatisticsEntity getStatistics(LoginStatus loggedUser);
+
+    String getChainName(int chainNumber);
+
+    boolean setConfiguration(ConfigurationEntity conf);
+
+    boolean saveChainName(long chainNumber, String chainName);
 }

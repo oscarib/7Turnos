@@ -1,77 +1,79 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"   
-	 
-    xsi:schemaLocation="
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/security"
+
+             xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/security 
         http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http pattern="/css/**" security="none"/>
-	<http pattern="/fonts/**" security="none"/>
-	<http pattern="/images/**" security="none"/>
-	<http pattern="/js/**" security="none"/>
-	<http pattern="/js/**/**" security="none"/>
-	<http pattern="/pages/**" security="none"/>
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/fonts/**" security="none"/>
+    <http pattern="/images/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/js/**/**" security="none"/>
+    <http pattern="/pages/**" security="none"/>
 
-	<!-- Authorization rules -->
-	<http>
+    <!-- Authorization rules -->
+    <http>
 
-		<csrf disabled="false"/>
-		<intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/createNewPrayer.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getStatistics.do" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/getProperties.do" access="permitAll"/>
-		<intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
-		<intercept-url pattern="/getAllPrayers.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getAllTurns.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/setConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/saveChainName.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getChainName.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/addTurn.do" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/getLoggedUser.do" access="permitAll"/>
-		<intercept-url pattern="/login.do" access="permitAll"/>
-		<intercept-url pattern="/logout.do" access="isAuthenticated()"/>
-		<intercept-url pattern="/main.html" access="permitAll"/>
-		<intercept-url pattern="**" access="denyAll"/>
+        <csrf disabled="false"/>
+        <intercept-url pattern="/uploadCalendar.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/createNewPrayer.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getStatistics.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/getCalendarHtml.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/getProperties.do" access="permitAll"/>
+        <intercept-url pattern="/logout.do" access="isFullyAuthenticated()"/>
+        <intercept-url pattern="/getAllPrayers.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getAllTurns.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getOrphanPrayers.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getPrayerAndTurns.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/setConfiguration.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/saveChainName.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getChainName.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/updatePrayer.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/updateTurn.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/addTurn.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/getLoggedUser.do" access="permitAll"/>
+        <intercept-url pattern="/login.do" access="permitAll"/>
+        <intercept-url pattern="/logout.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/main.html" access="permitAll"/>
+        <intercept-url pattern="**" access="denyAll"/>
 
-<!--	Ejemplos de interceptores
- 		<intercept-url pattern="/Login.jsp" access="permitAll"/>
-		<intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
-		<intercept-url pattern="/createTurn.html" access="isAnonymous()"/>
-		<intercept-url pattern="/**" access="hasAnyRole([role1,role2])" />-->
- 
-		<http-basic entry-point-ref="myBasicAuthenticationEntryPoint"/>
-		
-		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="csrfHeaderFilter" /> <!-- Para añadir el token CSRF a las respuestas del servidor -->
-	</http>
-	
-	<beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-	
-	<!-- Authentication rules -->
-	<authentication-manager id="edmAuthenticator" alias="edmAuthenticator">
-		<authentication-provider>
-			<password-encoder ref="bcryptEncoder"/>  
-			<jdbc-user-service data-source-ref="DataSource" 
-							   users-by-username-query="select username,password,enabled from users where username = ? and enabled=1"
-							   role-prefix="ROLE_"/>
-		</authentication-provider>
-	</authentication-manager>
-	
-	<!-- Authorization management beans 
-	<beans:bean id="basicAuthenticationFilter" class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
-	    <beans:constructor-arg name="authenticationManager" ref="edmAuthenticator"/>
-	    <beans:constructor-arg name="authenticationEntryPoint" ref="myBasicAuthenticationEntryPoint"/>
-	</beans:bean>-->
-	 
-	<beans:bean id="myBasicAuthenticationEntryPoint" class="es.edm.filters.MyBasicAuthenticationEntryPoint">
-	    <beans:property name="realmName" value="es.7turnos"/>
-	</beans:bean>
+        <!--	Ejemplos de interceptores
+                 <intercept-url pattern="/Login.jsp" access="permitAll"/>
+                <intercept-url pattern="/createUserAccount.html" access="hasRole('ROLE_SU')"/>
+                <intercept-url pattern="/createTurn.html" access="isAnonymous()"/>
+                <intercept-url pattern="/**" access="hasAnyRole([role1,role2])" />-->
+
+        <http-basic entry-point-ref="myBasicAuthenticationEntryPoint"/>
+
+        <custom-filter before="FILTER_SECURITY_INTERCEPTOR"
+                       ref="csrfHeaderFilter"/> <!-- Para añadir el token CSRF a las respuestas del servidor -->
+    </http>
+
+    <beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <!-- Authentication rules -->
+    <authentication-manager id="edmAuthenticator" alias="edmAuthenticator">
+        <authentication-provider>
+            <password-encoder ref="bcryptEncoder"/>
+            <jdbc-user-service data-source-ref="DataSource"
+                               users-by-username-query="select username,password,enabled from users where username = ? and enabled=1"
+                               role-prefix="ROLE_"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- Authorization management beans
+    <beans:bean id="basicAuthenticationFilter" class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
+        <beans:constructor-arg name="authenticationManager" ref="edmAuthenticator"/>
+        <beans:constructor-arg name="authenticationEntryPoint" ref="myBasicAuthenticationEntryPoint"/>
+    </beans:bean>-->
+
+    <beans:bean id="myBasicAuthenticationEntryPoint" class="es.edm.filters.MyBasicAuthenticationEntryPoint">
+        <beans:property name="realmName" value="es.7turnos"/>
+    </beans:bean>
 
 </beans:beans>

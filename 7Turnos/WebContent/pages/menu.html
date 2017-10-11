@@ -1,88 +1,90 @@
 <div class="container-fluid">
-	<div class="row menuRow">
-		<div id="UserInformation" class="col-lg-12">
-			<span id="UserName">{{userName}}</span><br>
-			<span id="UserGroup">{{pcName}}</span><br>
-			<div>
-				<hr>
-				<span ng-click="logout()">{{labels.logout}}</span>
-			</div>
-		</div>
-	</div>
+    <div class="row menuRow">
+        <div id="UserInformation" class="col-lg-12">
+            <span id="UserName">{{userName}}</span><br>
+            <span id="UserGroup">{{pcName}}</span><br>
+            <div>
+                <hr>
+                <span ng-click="logout()">{{labels.logout}}</span>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid">
-	<div class="row menuRow" ng-class="activateMenu['/']" ng-click="navigateTo('/');openMenu(1)">
-		<div class="col-lg-12">
-			<span>{{labels.dashboard}}</span>
-		</div>
-	</div>
+    <div class="row menuRow" ng-class="activateMenu['/']" ng-click="navigateTo('/');openMenu(1)">
+        <div class="col-lg-12">
+            <span>{{labels.dashboard}}</span>
+        </div>
+    </div>
 </div>
 <div class="container-fluid">
-	<div class="row menuRow">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-2" ng-click="openMenu(2)">
-					<img class="GroupOpener" src="./images/GroupOpener.gif"> <span
-						class="menu-group">{{labels.listings}}</span>
-				</div>
-			</div>
-			<div class="fadeAnimate" ng-if="!vm.hideMenu[2]">
-				<div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/oradores']">
-					<div class="col-lg-2" ng-click="navigateTo('/oradores')">
-						<span class="menu-item">{{labels.prayers}}</span>
-					</div>
-				</div>
-				<div class="row" ng-if="maxUserRole>=0" ng-class="activateMenu['/turnos']">
-					<div class="col-lg-2" ng-click="navigateTo('/turnos')">
-						<span class="menu-item">{{labels.turns}}</span>
-					</div>
-				</div>
-				<div class="row" ng-if="maxUserRole>=0" ng-class="activateMenu['/calendar']" >
-					<div class="col-lg-2" ng-click="navigateTo('/calendar')">
-						<span class="menu-item">{{labels.calendar}}</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row menuRow">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2" ng-click="openMenu(2)">
+                    <img class="GroupOpener" src="./images/GroupOpener.gif"> <span
+                        class="menu-group">{{labels.listings}}</span>
+                </div>
+            </div>
+            <div class="fadeAnimate" ng-if="!vm.hideMenu[2]">
+                <div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/oradores']">
+                    <div class="col-lg-2" ng-click="navigateTo('/oradores')">
+                        <span class="menu-item">{{labels.prayers}}</span>
+                    </div>
+                </div>
+                <div class="row" ng-if="maxUserRole>=0" ng-class="activateMenu['/turnos']">
+                    <div class="col-lg-2" ng-click="navigateTo('/turnos')">
+                        <span class="menu-item">{{labels.turns}}</span>
+                    </div>
+                </div>
+                <div class="row" ng-if="maxUserRole>=0" ng-class="activateMenu['/calendar']">
+                    <div class="col-lg-2" ng-click="navigateTo('/calendar')">
+                        <span class="menu-item">{{labels.calendar}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid">
-	<div class="row menuRow">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-1">
-					<img ng-click="openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif"> 
-					<span ng-click="openMenu(3)" class="menu-group">Acciones</span>
-				</div>
-			</div>
-			<div class="fadeAnimate" ng-if="!vm.hideMenu[3]">
-				<div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/crearOrador']" ng-click="navigateTo('/crearOrador')">
-						<div class="col-lg-2">
-							<span class="menu-item">{{labels.createPrayer}}</span>
-						</div>
-					</a>
-				</div>
-				<div ng-if="maxUserRole>=1" class="row">
-					<div class="col-lg-2">
-						<span ng-click="uploadCalendar()" class="menu-item">{{labels.updateCalendarShort}}</span>
-					</div>
-				</div>
-				<div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/configuracion']" ng-click="navigateTo('/configuracion')">
-						<div class="col-lg-2">
-							<span class="menu-item">{{labels.configuration}}</span>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row menuRow">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-1">
+                    <img ng-click="openMenu(3)" class="GroupOpener" src="./images/GroupOpener.gif">
+                    <span ng-click="openMenu(3)" class="menu-group">Acciones</span>
+                </div>
+            </div>
+            <div class="fadeAnimate" ng-if="!vm.hideMenu[3]">
+                <div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/crearOrador']"
+                     ng-click="navigateTo('/crearOrador')">
+                    <div class="col-lg-2">
+                        <span class="menu-item">{{labels.createPrayer}}</span>
+                    </div>
+                    </a>
+                </div>
+                <div ng-if="maxUserRole>=1" class="row">
+                    <div class="col-lg-2">
+                        <span ng-click="uploadCalendar()" class="menu-item">{{labels.updateCalendarShort}}</span>
+                    </div>
+                </div>
+                <div ng-if="maxUserRole>=1" class="row" ng-class="activateMenu['/configuracion']"
+                     ng-click="navigateTo('/configuracion')">
+                    <div class="col-lg-2">
+                        <span class="menu-item">{{labels.configuration}}</span>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid">
-	<div class="row versionRow">
-		<div class="col-lg-12">
-			<span>{{labels.version}}</span>
-		</div>
-	</div>
+    <div class="row versionRow">
+        <div class="col-lg-12">
+            <span>{{labels.version}}</span>
+        </div>
+    </div>
 </div>
 <!--
 <div class="container-fluid">

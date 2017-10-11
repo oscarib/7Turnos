@@ -3,27 +3,27 @@ package es.edm.exceptions;
 public class MoreThanOnePrayerException extends RuntimeException {
 
 
-	public MoreThanOnePrayerException() {
-		super();
-	}
+    private static final long serialVersionUID = -5121995054527897994L;
 
-	public MoreThanOnePrayerException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+    public MoreThanOnePrayerException() {
+        super();
+    }
 
-	public MoreThanOnePrayerException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public MoreThanOnePrayerException(String message, Throwable cause, boolean enableSuppression,
+                                      boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 
-	public MoreThanOnePrayerException(String message) {
-		super(message);
-	}
+    public MoreThanOnePrayerException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public MoreThanOnePrayerException(Throwable cause) {
-		super(cause);
-	}
+    public MoreThanOnePrayerException(String message) {
+        super(message);
+    }
 
-	private static final long serialVersionUID = -5121995054527897994L;
+    public MoreThanOnePrayerException(Throwable cause) {
+        super(cause);
+    }
 
 }

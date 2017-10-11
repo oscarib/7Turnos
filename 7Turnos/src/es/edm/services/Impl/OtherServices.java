@@ -1,7 +1,11 @@
 package es.edm.services.Impl;
 
-import java.util.List;
-
+import es.edm.dao.IOthersDao;
+import es.edm.domain.entity.ConfigurationEntity;
+import es.edm.domain.entity.StatisticsEntity;
+import es.edm.domain.middle.LoginCredentials;
+import es.edm.domain.middle.LoginStatus;
+import es.edm.services.IOtherServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,76 +18,71 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.edm.dao.IOthersDao;
-import es.edm.domain.entity.ConfigurationEntity;
-import es.edm.domain.entity.StatisticsEntity;
-import es.edm.domain.middle.LoginCredentials;
-import es.edm.domain.middle.LoginStatus;
-import es.edm.services.IOtherServices;
+import java.util.List;
 
 @Service
 @Transactional
 public class OtherServices implements IOtherServices {
 
-	@Autowired
-	IOthersDao dao;
-	
-	@Autowired
-	@Qualifier("edmAuthenticator")
-	AuthenticationManager authenticationManager;
-	  
-	@Override
-	public ConfigurationEntity getConfiguration() {
-		ConfigurationEntity conf = dao.getConfiguration(getLoggedUser()); 
-		return conf;
-	}
+    @Autowired
+    IOthersDao dao;
 
-	@Override
-	public LoginStatus getLoggedUser() {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
-	    	@SuppressWarnings("unchecked")
-			List<GrantedAuthority> authorities = (List<GrantedAuthority>)auth.getAuthorities();
-	    	UserDetails userDetail = (UserDetails) auth.getPrincipal();
-	    	int userChain = dao.getUserChain(userDetail.getUsername());
-	    	return new LoginStatus(true, auth.getName(), userChain, authorities);
-	    } else {
-	    	return new LoginStatus(false, null, -1, null);
-	    }
-	}
+    @Autowired
+    @Qualifier("edmAuthenticator")
+    AuthenticationManager authenticationManager;
 
-	@Override
-	public LoginStatus login(LoginCredentials credentials) {
-	    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getUserName(), credentials.getUserPwd());
+    @Override
+    public ConfigurationEntity getConfiguration() {
+        ConfigurationEntity conf = dao.getConfiguration(getLoggedUser());
+        return conf;
+    }
 
-	    try {
-	      Authentication auth = authenticationManager.authenticate(token);
-	      SecurityContextHolder.getContext().setAuthentication(auth);
-	      return getLoggedUser();
-	    } catch (BadCredentialsException e) {
-	      return new LoginStatus(false, null, -1, null);
-	    }
-	}
+    @Override
+    public LoginStatus getLoggedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
+            @SuppressWarnings("unchecked")
+            List<GrantedAuthority> authorities = (List<GrantedAuthority>) auth.getAuthorities();
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            int userChain = dao.getUserChain(userDetail.getUsername());
+            return new LoginStatus(true, auth.getName(), userChain, authorities);
+        } else {
+            return new LoginStatus(false, null, -1, null);
+        }
+    }
 
-	@Override
-	public StatisticsEntity getStatistics() {
-		LoginStatus login = getLoggedUser();
-		return dao.getStatistics(login);
-	}
+    @Override
+    public LoginStatus login(LoginCredentials credentials) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getUserName(), credentials.getUserPwd());
 
-	@Override
-	public String getChainName(int chainNumber) {
-		return dao.getChainName(chainNumber);
-	}
+        try {
+            Authentication auth = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            return getLoggedUser();
+        } catch (BadCredentialsException e) {
+            return new LoginStatus(false, null, -1, null);
+        }
+    }
 
-	@Override
-	public boolean setConfiguration(ConfigurationEntity conf) {
-		return dao.setConfiguration(conf);
-	}
+    @Override
+    public StatisticsEntity getStatistics() {
+        LoginStatus login = getLoggedUser();
+        return dao.getStatistics(login);
+    }
 
-	@Override
-	public boolean saveChainName(long chainNumber, String chainName) {
-		boolean result = dao.saveChainName(chainNumber, chainName);
-		return result;
-	}
+    @Override
+    public String getChainName(int chainNumber) {
+        return dao.getChainName(chainNumber);
+    }
+
+    @Override
+    public boolean setConfiguration(ConfigurationEntity conf) {
+        return dao.setConfiguration(conf);
+    }
+
+    @Override
+    public boolean saveChainName(long chainNumber, String chainName) {
+        boolean result = dao.saveChainName(chainNumber, chainName);
+        return result;
+    }
 }

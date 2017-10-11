@@ -1,5 +1,5 @@
 package es.edm.util;
 
 public enum TurnStatus {
-	received, accepted, rejected, cancelled, NotCommitted
+    received, accepted, rejected, cancelled, NotCommitted
 }

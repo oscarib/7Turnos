@@ -1,16 +1,11 @@
 package es.edm.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "prayers")
-public class PrayerEntity {
+@Table(name = "detailedorphanprayers_prayers")
+public class OrphanPrayerEntity {
 
     @Id
     @Column
@@ -46,11 +41,6 @@ public class PrayerEntity {
 
     @Column
     private String pseudonym;
-
-    @OneToMany(mappedBy = "prayer", cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
-    @JsonBackReference //Para evitar que la serializaci�n a JSON entre en un bucle infinito
-    private List<TurnEntity> turns;
 
     /**
      * @return the uid
@@ -176,14 +166,6 @@ public class PrayerEntity {
      */
     public void setPseudonym(String pseudonym) {
         this.pseudonym = pseudonym;
-    }
-
-    public List<TurnEntity> getTurns() {
-        return turns;
-    }
-
-    public void setTurns(List<TurnEntity> turns) {
-        this.turns = turns;
     }
 
     public boolean isErased() {

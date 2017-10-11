@@ -1,34 +1,33 @@
-
 <div class="container-fluid">
-	<div id="warnings" class="row" ng-if="OrphanPrayers>0">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div id="warnings" class="row" ng-if="OrphanPrayers>0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<span ng-if="OrphanPrayers>0">
 				{{labels.warning}}: {{labels.there_are}} {{OrphanPrayersText}} {{labels.without_assigned_turns}}
 			</span>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid">
-	<div id="header" class="row">
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
-			<span class="NofPrayers">{{TotalPrayers}}</span><br>
-			<span class="labelNoPrayers">{{labels.prayers}}</span>
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" ng-show="EmptyTurns>0">
-			<div class="EmptyTurns">
-				<span class="EmptyTurnsNumber">{{EmptyTurns}}</span><br>
-				<span class="EmptyTurnsLabel">{{labels.emptyTurns}}</span>
-			</div>
-		</div>
-		<div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
-			<span>Total {{labels.turns}}: {{TotalTurns}}</span><br>
-			<span>{{labels.turns}} disponibles: {{AvailableTurns}}</span><br>
-			<span>{{labels.prayers}} {{labels.committed}}: {{CommittedPrayers}}</span><br>
-			<span>{{labels.nonCommittedPrayers}}: {{NonCommittedPrayers}}</span>
-		</div>
-		<div id="headerSearchPrayer" class="col-lg-7 col-md-6 col-sm-6 col-xs-6" ng-show="EmptyTurns==0">
-			<input type="text" class="form-control" id="searchText" ng-model="vm.searchString"> 
-			<img ng-click="vm.searchPrayer()" id="magnifierIcon" src="./images/magnifier.gif" height="32" width="32">
-		</div>
-	</div>
+    <div id="header" class="row">
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 NofPrayersDiv">
+            <span class="NofPrayers">{{TotalPrayers}}</span><br>
+            <span class="labelNoPrayers">{{labels.prayers}}</span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" ng-show="EmptyTurns>0">
+            <div class="EmptyTurns">
+                <span class="EmptyTurnsNumber">{{EmptyTurns}}</span><br>
+                <span class="EmptyTurnsLabel">{{labels.emptyTurns}}</span>
+            </div>
+        </div>
+        <div id="PrayerStatistics" class="col-lg-3 col-md-4 col-sm-3 col-xs-3">
+            <span>Total {{labels.turns}}: {{TotalTurns}}</span><br>
+            <span>{{labels.turns}} disponibles: {{AvailableTurns}}</span><br>
+            <span>{{labels.prayers}} {{labels.committed}}: {{CommittedPrayers}}</span><br>
+            <span>{{labels.nonCommittedPrayers}}: {{NonCommittedPrayers}}</span>
+        </div>
+        <div id="headerSearchPrayer" class="col-lg-7 col-md-6 col-sm-6 col-xs-6" ng-show="EmptyTurns==0">
+            <input type="text" class="form-control" id="searchText" ng-model="vm.searchString">
+            <img ng-click="vm.searchPrayer()" id="magnifierIcon" src="./images/magnifier.gif" height="32" width="32">
+        </div>
+    </div>
 </div>
