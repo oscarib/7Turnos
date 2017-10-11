@@ -12,6 +12,7 @@ import es.edm.services.ITurnService;
 import es.edm.util.DayOfWeek;
 import es.edm.util.TurnStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +29,15 @@ public class PrayerController {
     @Autowired
     Configuration conf;
     @Autowired
-    ResourceBundleMessageSource properties;
-    @Autowired
     private IPrayerService prayerService;
     @Autowired
     private ITurnService turnService;
     @Autowired
     private IOtherServices otherServices;
+    @Value("${label_ownCountry}")
+    String labelOwnCountry;
+    @Value("${label_hidden}")
+    String hiddenString;
 
     @ResponseBody
     @RequestMapping(value = "/getAllPrayers.do", method = RequestMethod.POST)
@@ -113,13 +116,11 @@ public class PrayerController {
                 newPrayer.setEmail(newPrayerAndTurn.getEmail());
                 newPrayer.setPhone(newPrayerAndTurn.getTelefono());
                 newPrayer.setChain(otherServices.getLoggedUser().getChain());
-                String ownCountryString = properties.getMessage("prayer.ownCountry", null, Locale.getDefault());
-                boolean ownCountry = (ownCountryString.equals(newPrayerAndTurn.getPais()) ? true : false);
+                boolean ownCountry = (labelOwnCountry.equals(newPrayerAndTurn.getPais()) ? true : false);
                 newPrayer.setOwnCountry(ownCountry);
                 newPrayer.setOptinDate(new Date());
                 newPrayer.setNotes(newPrayerAndTurn.getNotas());
                 newPrayer.setPseudonym(newPrayerAndTurn.getSeudonimo());
-                String hiddenString = properties.getMessage("turn.hidden", null, Locale.getDefault());
                 boolean hidden = (hiddenString.equals(newPrayerAndTurn.getVisibilidad()) ? true : false);
                 newPrayer.setHidden(hidden);
 
@@ -193,12 +194,10 @@ public class PrayerController {
         foundPrayer.setChain(otherServices.getLoggedUser().getChain());
         foundPrayer.setEmail(newData.getEmail());
         foundPrayer.setErased(false);
-        String hiddenString = properties.getMessage("turn.hidden", null, Locale.getDefault());
         foundPrayer.setHidden(hiddenString.equals(newData.getVisibilidad()) ? true : false);
         foundPrayer.setName(newData.getNombre());
         foundPrayer.setNotes(newData.getNotas());
-        String ownCountryString = properties.getMessage("prayer.ownCountry", null, Locale.getDefault());
-        boolean ownCountry = (ownCountryString.equals(newData.getPais()) ? true : false);
+        boolean ownCountry = (labelOwnCountry.equals(newData.getPais()) ? true : false);
         foundPrayer.setOwnCountry(ownCountry);
         foundPrayer.setPhone(newData.getTelefono());
         foundPrayer.setPseudonym(newData.getSeudonimo());
