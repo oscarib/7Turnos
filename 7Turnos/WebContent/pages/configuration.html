@@ -37,6 +37,13 @@
                     </div>
 
                     <div class="row">
+                        <label>{{labels.useSecureFtp}}</label><br>
+                        {{labels.yes}}: <input type="radio" name="secureFTP" ng-change="vm.onChange()"
+                                               ng-model="vm.configuration.secureFTP" ng-value=true>
+                        {{labels.no}}: <input type="radio" name="secureFTP" ng-change="vm.onChange()"
+                                              ng-model="vm.configuration.secureFTP" ng-value=false><br>
+                    </div>
+                    <div class="row">
                         <label>{{labels.ftpServerName}}</label><br>
                         <input type="text" name="ftpServerName" ng-model="vm.configuration.ftpServerName"
                                ng-change="vm.onChange()" required><br>

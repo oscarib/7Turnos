@@ -4,35 +4,37 @@ import es.edm.domain.entity.ConfigurationEntity;
 
 public interface Configuration {
 
-    public String getFtpServerName();
+    String getFtpServerName();
 
-    public int getPrayersPerTurn();
+    int getPrayersPerTurn();
 
-    public int getFtpPort();
+    int getFtpPort();
 
-    public String getFtpUser();
+    String getFtpUser();
 
-    public String getFtpPwd();
+    String getFtpPwd();
 
-    public String getCalendarFile2UploadURI();
+    String getCalendarFile2UploadURI();
 
-    public String getCalendarRemoteFileURI();
+    String getCalendarRemoteFileURI();
 
-    public String getStatisticsFile2UploadURI();
+    String getStatisticsFile2UploadURI();
 
-    public String getStatisticsRemoteFileURI();
+    String getStatisticsRemoteFileURI();
 
-    public String getMailchimpUrlPwd();
+    String getMailchimpUrlPwd();
 
-    public String getEmailServiceUserName();
+    String getEmailServiceUserName();
 
-    public String getEmailServiceUserPassword();
+    String getEmailServiceUserPassword();
 
-    public String getEmailServiceHostName();
+    String getEmailServiceHostName();
 
-    public boolean isEmailServiceSSL();
+    boolean isSecureFTP();
 
-    public int getEmailServiceSmtpPort();
+    boolean isEmailServiceSSL();
 
-    public ConfigurationEntity getConfigurationEntity();
+    int getEmailServiceSmtpPort();
+
+    ConfigurationEntity getConfigurationEntity();
 }

@@ -83,6 +83,12 @@ public class Configuration_DDBB_Impl implements Configuration {
     }
 
     @Override
+    public boolean isSecureFTP() {
+        ConfigurationEntity conf = otherServices.getConfiguration();
+        return conf.isSecureFTP();
+    }
+
+    @Override
     public boolean isEmailServiceSSL() {
         ConfigurationEntity conf = otherServices.getConfiguration();
         return conf.isEmailServiceSSL();
