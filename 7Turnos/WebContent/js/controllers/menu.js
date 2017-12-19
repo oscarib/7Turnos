@@ -156,6 +156,7 @@ PrayingChain.controller("menu", ['$rootScope', '$location', 'pcUtils', 'prayerSe
             $rootScope.labels.chainName = dataOut.data.label_chainName;
             $rootScope.labels.prayersPerTurn = dataOut.data.label_prayersPerTurn;
             $rootScope.labels.ftpServerName = dataOut.data.label_ftpServerName;
+            $rootScope.labels.useSecureFtp = dataOut.data.label_useSecureFtp;
             $rootScope.labels.ftpServer = dataOut.data.label_ftpServer;
             $rootScope.labels.chainSection = dataOut.data.label_chainSection;
             $rootScope.labels.ftpPort = dataOut.data.label_ftpPort;

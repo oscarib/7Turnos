@@ -22,6 +22,9 @@ public class ConfigurationEntity {
     @Column
     private String ftpServerName;
 
+    @Column(name="secureFTP")
+    private boolean secureFTP;
+
     @Column
     private Integer ftpPort;
 
@@ -195,5 +198,13 @@ public class ConfigurationEntity {
 
     public void setEmailServiceSSL(boolean isEmailServiceSSL) {
         this.isEmailServiceSSL = isEmailServiceSSL;
+    }
+
+    public boolean isSecureFTP() {
+        return secureFTP;
+    }
+
+    public void setSecureFTP(boolean secureFTP) {
+        this.secureFTP = secureFTP;
     }
 }

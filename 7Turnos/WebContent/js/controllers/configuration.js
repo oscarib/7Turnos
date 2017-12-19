@@ -30,6 +30,7 @@ PrayingChain.controller("configuration", ['$scope', '$rootScope', 'pcUtils', fun
             vm.configuration.ftpPort = dataOut.data.ftpPort;
             vm.configuration.ftpPwd = dataOut.data.ftpPwd;
             vm.configuration.ftpServerName = dataOut.data.ftpServerName;
+            vm.configuration.secureFTP = dataOut.data.secureFTP;
             vm.configuration.ftpUser = dataOut.data.ftpUser;
             vm.configuration.localFilePath = dataOut.data.localFilePath;
             vm.configuration.mailchimpUrlPwd = dataOut.data.mailchimpUrlPwd;

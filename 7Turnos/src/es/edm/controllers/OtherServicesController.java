@@ -238,6 +238,8 @@ public class OtherServicesController {
     String label_prayersPerTurn;
     @Value("${label_ftpServerName}")
     String label_ftpServerName;
+    @Value("${label_useSecureFtp}")
+    String label_useSecureFtp;
     @Value("${label_ftpServer}")
     String label_ftpServer;
     @Value("${label_chainSection}")
@@ -405,6 +407,7 @@ public class OtherServicesController {
         properties.setProperty("label_chainName", label_chainName);
         properties.setProperty("label_prayersPerTurn", label_prayersPerTurn);
         properties.setProperty("label_ftpServerName", label_ftpServerName);
+        properties.setProperty("label_useSecureFtp", label_useSecureFtp);
         properties.setProperty("label_ftpServer", label_ftpServer);
         properties.setProperty("label_chainSection", label_chainSection);
         properties.setProperty("label_ftpPort", label_ftpPort);
@@ -425,13 +428,19 @@ public class OtherServicesController {
     @ResponseBody
     public boolean UploadCalendar() throws IOException, DDBBException {
         try {
+            boolean secureFTP = conf.isSecureFTP();
             fileService.WriteFile(fileService.getCalendarTableString(1), conf.getCalendarFile2UploadURI());
             logger.info("Generando el archivo del calendario...");
             fileService.WriteFile(fileService.getStatisticsString(), conf.getStatisticsFile2UploadURI());
             logger.info("Generando el archivo de estadísticas...");
-            fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
             logger.info("Subiendo los archivos al sitio FTP...");
-            fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+            if (secureFTP) {
+                fileService.UploadFileSFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
+                fileService.UploadFileSFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+            } else {
+                fileService.UploadFileFTP(conf.getCalendarFile2UploadURI(), conf.getCalendarRemoteFileURI());
+                fileService.UploadFileFTP(conf.getStatisticsFile2UploadURI(), conf.getStatisticsRemoteFileURI());
+            }
         } catch (UnknownHostException e) {
             throw new RuntimeException("Error: " + e);
         } catch (SocketException e) {
