@@ -94,7 +94,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <!-- Starts 10 seconds before App runs-->
         <property name="startDelay" value="10000" />
         <!-- Takes place once per 1h-->
-        <property name="repeatInterval" value="3600000" />
+        <property name="repeatInterval" value="10000" />
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
