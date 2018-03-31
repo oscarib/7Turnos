@@ -5,6 +5,12 @@
     <artifactId>7Turnos</artifactId>
     <version>2.70.03</version>
     <packaging>war</packaging>
+    <name>7Turnos</name>
+    <url>control.españademaria.es</url>
+    <organization>
+        <name>EspañaDeMaria.ES</name>
+        <url>españademaria.es</url>
+    </organization>
 
     <properties>
         <spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
@@ -235,11 +241,37 @@
             <version>${spring-data-jpa.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
     </dependencies>
-    <name>7Turnos</name>
-    <url>control.españademaria.es</url>
-    <organization>
-        <name>EspañaDeMaria.ES</name>
-        <url>españademaria.es</url>
-    </organization>
+
+    <profiles>
+        <profile>
+            <id>liquibase</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>3.5.3</version>
+                        <configuration>
+                            <changeLogFile>resources/liquibase/db.changelog.xml</changeLogFile>
+                            <propertyFile>resources/liquibase/liquibase.properties</propertyFile>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
