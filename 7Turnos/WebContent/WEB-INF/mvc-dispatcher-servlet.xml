@@ -80,4 +80,35 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
     <context:component-scan base-package="es.edm.dao.impl"/>
     <context:component-scan base-package="es.edm.filters"/>
 
+    <!-- QUARTZ-->
+    <!-- For times when you just need to invoke a method on a specific object -->
+    <!-- For times when you need more complex processing, passing data to the scheduled job -->
+    <bean name="EmailSchedulerJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="es.edm.quartz.EmailSchedulerJob" />
+        <property name="durability" value="true" />
+    </bean>
+
+    <!-- Run the job every 2 seconds with initial delay of 1 second -->
+    <bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="EmailSchedulerJob" />
+        <!-- Starts 10 seconds before App runs-->
+        <property name="startDelay" value="10000" />
+        <!-- Takes place once per 1h-->
+        <property name="repeatInterval" value="3600000" />
+    </bean>
+
+    <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+    <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="EmailSchedulerJob" />
+            </list>
+        </property>
+
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger" />
+            </list>
+        </property>
+    </bean>
 </beans>

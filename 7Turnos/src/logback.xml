@@ -9,12 +9,13 @@
         </layout>
     </appender>
 
+    <logger name="org.quartz.core.QuartzSchedulerThread" level="WARN" />
+
     <logger name="es.edm" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <!---->
-
     <logger name="org.hibernate"
             level="OFF"/> <!-- Log everything. This is a lot of information but it is useful for troubleshooting -->
     <logger name="org.hibernate.SQL"
