@@ -9,14 +9,9 @@
         </layout>
     </appender>
 
-    <logger name="org.quartz.core.QuartzSchedulerThread" level="WARN" />
+    <root level="WARN"><appender-ref ref="STDOUT"/></root>
 
-    <logger name="es.edm" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <root level="WARN">
-        <appender-ref ref="STDOUT"/>
-    </root>
+    <logger name="o.quartz.core.QuartzSchedulerThread" level="INFO"/>
+    <logger name="es.edm" level="INFO"/>
 
 </configuration>
