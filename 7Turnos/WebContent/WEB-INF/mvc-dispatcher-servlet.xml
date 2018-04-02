@@ -88,13 +88,15 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <property name="durability" value="true" />
     </bean>
 
-    <!-- Run the job every 2 seconds with initial delay of 1 second -->
-    <bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+    <bean id="cronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="EmailSchedulerJob" />
-        <!-- Starts 10 seconds before App runs-->
-        <property name="startDelay" value="10000" />
-        <!-- Takes place once per 1h-->
-        <property name="repeatInterval" value="10000" />
+
+        <!-- Every 1h -->
+        <!--<property name="cronExpression" value="0 0 0/1 1/1 * ? *" />-->
+
+        <!-- Every 1min -->
+        <property name="cronExpression" value="0 0/1 * 1/1 * ? *" />
+
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
@@ -107,7 +109,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
         <property name="triggers">
             <list>
-                <ref bean="simpleTrigger" />
+                <ref bean="cronTrigger" />
             </list>
         </property>
     </bean>
